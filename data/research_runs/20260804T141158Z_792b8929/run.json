@@ -1,0 +1,13 @@
+{
+  "created_at": "2026-08-04T14:11:59.236112+00:00",
+  "dataset_snapshot_id": "sha256:fbe9e4365b5c07895ee998dbabec1e2d229a7a18d0c31e859364de160cd9c878",
+  "observations": 65,
+  "outcomes": 325,
+  "rule_semantic_hash": "sha256:0cb3281cb8829d69b375e7af756eeddfed73eb82247c302d05b9b1a0bdfb86e6",
+  "run_id": "20260804T141158Z_792b8929",
+  "skipped_symbols": [
+    "000003"
+  ],
+  "symbols_loaded": 4,
+  "symbols_requested": 5
+}

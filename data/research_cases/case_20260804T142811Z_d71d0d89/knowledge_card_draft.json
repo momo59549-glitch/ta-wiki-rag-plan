@@ -1,0 +1,11 @@
+{
+  "candidate_horizons": [],
+  "claim": "待人工复核的经验候选，不构成投资建议。",
+  "limitations": [
+    "未做显著性检验",
+    "未模拟涨跌停/停牌",
+    "规则参数尚未进行训练-验证隔离"
+  ],
+  "rule": "hammer@1.0.0",
+  "status": "draft"
+}

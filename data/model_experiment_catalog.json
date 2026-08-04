@@ -1,0 +1,6076 @@
+{
+  "schema_version": "model-experiment-catalog/v1",
+  "root": "H:\\股票模型\\Model\\data\\experiments",
+  "entries": [
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "baseline.json",
+      "source_sha256": "e00019a629a3c6b8c4729b21b4e51913f56715e4884eb03c81b1af7ffa2def62",
+      "imported_at": "2026-08-04T14:59:43.046474+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "Baseline-等权5因子",
+      "configuration": {
+        "stop_loss": 0.1,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "value": {
+            "weight": 0.2,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.2,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.2,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.2,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.2,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 120,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 300,
+        "single_position": 0.25,
+        "take_profit": 0.3
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "e10_extreme_momentum.json",
+      "source_sha256": "d9017680d7789981c5594e4f57ae4a6a451eaa72fc082c448fb0d496823ae908",
+      "imported_at": "2026-08-04T14:59:43.048474+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "E10-极限动量",
+      "configuration": {
+        "stop_loss": 0.1,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 3,
+        "factors": {
+          "momentum": {
+            "weight": 0.5,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "bollinger": {
+            "weight": 0.25,
+            "period": 20,
+            "std": 2.0
+          },
+          "value": {
+            "weight": 0.15,
+            "ma_period": 200
+          },
+          "meanrev": {
+            "weight": 0.1,
+            "rsi_period": 14,
+            "rsi_max": 50
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 120,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 1000,
+        "single_position": 0.4,
+        "take_profit": 0.25
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "e11_momentum_fund.json",
+      "source_sha256": "2084ad503a5d234e4b9001a88bf3a7e4fb7609cfc8c641146f9e63c346f83178",
+      "imported_at": "2026-08-04T14:59:43.048474+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "E11-动量+基本面",
+      "configuration": {
+        "stop_loss": 0.1,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 4,
+        "factors": {
+          "momentum": {
+            "weight": 0.45,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "bollinger": {
+            "weight": 0.25,
+            "period": 20,
+            "std": 2.0
+          },
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "multi_mom": {
+            "weight": 0.1,
+            "periods": [
+              21,
+              63,
+              126
+            ]
+          },
+          "low_vol": {
+            "weight": 0.1
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 120,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 500,
+        "single_position": 0.35,
+        "take_profit": 0.25
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "e12_balanced_tech_fund.json",
+      "source_sha256": "8dbbb7bae493fea88d16cfb9495e4f91ee8ffe005191aac0fedab8329a104d1d",
+      "imported_at": "2026-08-04T14:59:43.049473+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "E12-均衡技术基本面",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "momentum": {
+            "weight": 0.3,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "bollinger": {
+            "weight": 0.2,
+            "period": 20,
+            "std": 2.0
+          },
+          "value": {
+            "weight": 0.2,
+            "ma_period": 200
+          },
+          "multi_mom": {
+            "weight": 0.15,
+            "periods": [
+              21,
+              63
+            ]
+          },
+          "low_vol": {
+            "weight": 0.15
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 120,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 500,
+        "single_position": 0.25,
+        "take_profit": 0.2
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "e13_value_fund_heavy.json",
+      "source_sha256": "b2ce850cdda2fad43be97ef81ff385f48d4612c277075c3c35281e07efce8614",
+      "imported_at": "2026-08-04T14:59:43.049473+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "E13-价值基本面主导",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "momentum": {
+            "weight": 0.4,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "bollinger": {
+            "weight": 0.3,
+            "period": 20,
+            "std": 2.0
+          },
+          "value": {
+            "weight": 0.3,
+            "ma_period": 200
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 180,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 500,
+        "single_position": 0.25,
+        "take_profit": 0.15
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "e14_multi_momentum_fund.json",
+      "source_sha256": "ab19441b14435377702af66e7e5cd64933b67378c8d3dcd0b8738220cc470fb5",
+      "imported_at": "2026-08-04T14:59:43.050473+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "E14-多周期动量+基本面",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 4,
+        "factors": {
+          "momentum": {
+            "weight": 0.3,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "multi_mom": {
+            "weight": 0.25,
+            "periods": [
+              21,
+              63,
+              126
+            ]
+          },
+          "bollinger": {
+            "weight": 0.2,
+            "period": 20,
+            "std": 2.0
+          },
+          "low_vol": {
+            "weight": 0.1
+          },
+          "meanrev": {
+            "weight": 0.1,
+            "rsi_period": 14,
+            "rsi_max": 50
+          },
+          "value": {
+            "weight": 0.05,
+            "ma_period": 200
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 100,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 500,
+        "single_position": 0.35,
+        "take_profit": 0.2
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "e15_momentum_market_timing.json",
+      "source_sha256": "d3ead39403a5c0ee90a8ec20d1b5e686197b01ef83ee2121e67fd166c66a5ab2",
+      "imported_at": "2026-08-04T14:59:43.050990+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "E15-动量+大盘择时",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 3,
+        "factors": {
+          "momentum": {
+            "weight": 0.5,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "bollinger": {
+            "weight": 0.25,
+            "period": 20,
+            "std": 2.0
+          },
+          "value": {
+            "weight": 0.15,
+            "ma_period": 200
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 4,
+            "max_days": 10
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 60,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 500,
+        "single_position": 0.4,
+        "take_profit": 0.25
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "e16_momentum_fund_timing.json",
+      "source_sha256": "c4f578ff11104c06b3b04d9ab6e2e3a2f46fc2b700b3d21f8467e8816e800089",
+      "imported_at": "2026-08-04T14:59:43.051514+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "E16-动量基本+择时",
+      "configuration": {
+        "stop_loss": 0.1,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 4,
+        "factors": {
+          "momentum": {
+            "weight": 0.45,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "bollinger": {
+            "weight": 0.25,
+            "period": 20,
+            "std": 2.0
+          },
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "multi_mom": {
+            "weight": 0.1,
+            "periods": [
+              21,
+              63,
+              126
+            ]
+          },
+          "low_vol": {
+            "weight": 0.1
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 120,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 500,
+        "single_position": 0.35,
+        "take_profit": 0.25
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "e1_momentum_heavy.json",
+      "source_sha256": "829d9aa457c032f316f07e3994742ec11cbdb93ef898549769bd106dcb2a8d7c",
+      "imported_at": "2026-08-04T14:59:43.051514+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "E1-动量主导",
+      "configuration": {
+        "stop_loss": 0.1,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 3,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.4,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.25,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 120,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 500,
+        "single_position": 0.4,
+        "take_profit": 0.3
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "e2_meanrev_heavy.json",
+      "source_sha256": "87db57c6b051b398a6c5a38f15bac02dfaf36a217c26b09594ef860bbbe9e457",
+      "imported_at": "2026-08-04T14:59:43.052508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "E2-均值回归主导",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 3,
+        "factors": {
+          "value": {
+            "weight": 0.05,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.05,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.4,
+            "rsi_period": 14,
+            "rsi_max": 40
+          },
+          "bollinger": {
+            "weight": 0.25,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.25,
+            "min_days": 2,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 500,
+        "single_position": 0.4,
+        "take_profit": 0.2
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "e3_value_momentum.json",
+      "source_sha256": "e054ca262a4b4ee9bab1e4e04cd771723e1b22792141748b943e4e21191ab00b",
+      "imported_at": "2026-08-04T14:59:43.053507+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "E3-价值动量双轮",
+      "configuration": {
+        "stop_loss": 0.1,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 3,
+        "factors": {
+          "value": {
+            "weight": 0.35,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.35,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          },
+          "meanrev": {
+            "weight": 0.05,
+            "rsi_period": 14,
+            "rsi_max": 45
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 120,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 500,
+        "single_position": 0.4,
+        "take_profit": 0.25
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "e4_pure_momentum.json",
+      "source_sha256": "bfa877a7f87c1a13f4f6ab890dc110752dc1cb3ce27c4c65e1f25dba55232f3f",
+      "imported_at": "2026-08-04T14:59:43.054510+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "E4-动量突破",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 3,
+        "factors": {
+          "momentum": {
+            "weight": 0.5,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "bollinger": {
+            "weight": 0.3,
+            "period": 20,
+            "std": 2.0
+          },
+          "value": {
+            "weight": 0.15,
+            "ma_period": 200
+          },
+          "decline": {
+            "weight": 0.05,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 60,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 500,
+        "single_position": 0.4,
+        "take_profit": 0.25
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "e5_decline_bounce.json",
+      "source_sha256": "6ccc9cc1f3604ac411e0c49c2a2dbfc3bf9356a069cc617c976d9711eeb054f7",
+      "imported_at": "2026-08-04T14:59:43.054510+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "E5-超跌反弹",
+      "configuration": {
+        "stop_loss": 0.07,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 3,
+        "factors": {
+          "decline": {
+            "weight": 0.35,
+            "min_days": 2,
+            "max_days": 8
+          },
+          "meanrev": {
+            "weight": 0.35,
+            "rsi_period": 14,
+            "rsi_max": 35
+          },
+          "bollinger": {
+            "weight": 0.2,
+            "period": 20,
+            "std": 2.0
+          },
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 60,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 500,
+        "single_position": 0.35,
+        "take_profit": 0.15
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "e6_balanced.json",
+      "source_sha256": "f6274a2c0480371124d5a0d43e35fd6d287b14d1f76203bb199dd81013a1ebca",
+      "imported_at": "2026-08-04T14:59:43.055508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "E6-均衡优化",
+      "configuration": {
+        "stop_loss": 0.1,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 3,
+        "factors": {
+          "value": {
+            "weight": 0.15,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.3,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.3,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 120,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 500,
+        "single_position": 0.4,
+        "take_profit": 0.25
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "e7_momentum_enhanced.json",
+      "source_sha256": "120a74ad18f3b9ff35d1ad58e23ec69e4874cfb50ff919f5be5e7a0a8e824641",
+      "imported_at": "2026-08-04T14:59:43.055508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "E7-动量强化",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 3,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.45,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.15,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.2,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.2
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "e8_momentum_monthly.json",
+      "source_sha256": "8b21a8173b44cf0ae8c0ed63a78335858b456638cdf6abe3218076e881c1e81e",
+      "imported_at": "2026-08-04T14:59:43.056508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "E8-动量月频",
+      "configuration": {
+        "stop_loss": 0.07,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 4,
+        "factors": {
+          "momentum": {
+            "weight": 0.55,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "bollinger": {
+            "weight": 0.25,
+            "period": 20,
+            "std": 2.0
+          },
+          "value": {
+            "weight": 0.15,
+            "ma_period": 200
+          },
+          "decline": {
+            "weight": 0.05,
+            "min_days": 4,
+            "max_days": 10
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 60,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 500,
+        "single_position": 0.3,
+        "take_profit": 0.15
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "e9_momentum_meanrev_mix.json",
+      "source_sha256": "8665c287e77a23cfc18a803bac54b69144b73d0d490dda5fed8d76998ac53a41",
+      "imported_at": "2026-08-04T14:59:43.056508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "E9-动量均值混合",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 4,
+        "factors": {
+          "momentum": {
+            "weight": 0.35,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.25,
+            "rsi_period": 14,
+            "rsi_max": 50
+          },
+          "value": {
+            "weight": 0.15,
+            "ma_period": 200
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.5
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 2,
+            "max_days": 7
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 100,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 500,
+        "single_position": 0.35,
+        "take_profit": 0.2
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "full_backtest.json",
+      "source_sha256": "364be248936c7276f67a1a41260d42d6bfc32f251c04cab451a6924cdbf8b419",
+      "imported_at": "2026-08-04T14:59:43.057508+00:00",
+      "artifact_type": "backtest_result",
+      "experiment_name": "full_backtest",
+      "configuration": {},
+      "metrics": {
+        "total_trades": 24,
+        "annual_returns": {
+          "2015": -6.8,
+          "2016": 0.7,
+          "2017": 4.7,
+          "2018": -0.6,
+          "2019": 11.9,
+          "2020": -6.7,
+          "2021": 3.2,
+          "2022": -5.1,
+          "2023": -2.0,
+          "2024": -1.0,
+          "2025": 5.9,
+          "2026": -8.5
+        },
+        "end": "2026-07-24",
+        "max_drawdown": -21.3,
+        "start": "2015-01-26",
+        "avg_loss": NaN,
+        "final_value": 8797.0,
+        "total_return": -12.0,
+        "annual_return": -1.2,
+        "capital": 10000,
+        "years": 11.0,
+        "win_rate": 100.0,
+        "avg_win": 15.7
+      }
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_001_GS-0.35_B0.15_R0.15_TP0.20_SL0.08_N3_M.json",
+      "source_sha256": "099d11398001c4843b9b2b199853b1fc54d73114f928dfa41902459d1ea5ab18",
+      "imported_at": "2026-08-04T14:59:43.058508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.35_B0.15_R0.15_TP0.20_SL0.08_N3_M",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 3,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.35,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.15,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.2
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_002_GS-0.40_B0.15_R0.10_TP0.30_SL0.08_N5_Q.json",
+      "source_sha256": "4ab5a3db2468fb7ec678699efa3f6f8f9de4ceb68cd41e6b4a5e68f2870f37c9",
+      "imported_at": "2026-08-04T14:59:43.059508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.40_B0.15_R0.10_TP0.30_SL0.08_N5_Q",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.4,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.1,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.3
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_003_GS-0.35_B0.20_R0.20_TP0.25_SL0.10_N3_M.json",
+      "source_sha256": "af4b34b1bbe20f535031d63f4e3dd553aad2341ff0914808a67f53d0c28b5d3b",
+      "imported_at": "2026-08-04T14:59:43.060508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.35_B0.20_R0.20_TP0.25_SL0.10_N3_M",
+      "configuration": {
+        "stop_loss": 0.1,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 3,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.35,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.2,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.2,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.25
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_004_GS-0.45_B0.15_R0.05_TP0.30_SL0.05_N4_Q.json",
+      "source_sha256": "1d164290b1f6117f1b1f6ac2929b6f5eb7b3c53c127a62a13ab2e59c55d95277",
+      "imported_at": "2026-08-04T14:59:43.061508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.45_B0.15_R0.05_TP0.30_SL0.05_N4_Q",
+      "configuration": {
+        "stop_loss": 0.05,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 4,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.45,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.05,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.3
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_005_GS-0.45_B0.15_R0.10_TP0.15_SL0.12_N4_Q.json",
+      "source_sha256": "a247f60ad020f1bc17dc4b8c281f7f45086cf6bc20d623a3b16359dbde437438",
+      "imported_at": "2026-08-04T14:59:43.061508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.45_B0.15_R0.10_TP0.15_SL0.12_N4_Q",
+      "configuration": {
+        "stop_loss": 0.12,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 4,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.45,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.1,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.15
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_006_GS-0.45_B0.20_R0.15_TP0.25_SL0.08_N4_M.json",
+      "source_sha256": "944739229a20b569085c9695cb2d3a841a312c6035433153a6f3cda0b751f0d6",
+      "imported_at": "2026-08-04T14:59:43.062508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.45_B0.20_R0.15_TP0.25_SL0.08_N4_M",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 4,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.45,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.15,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.2,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.25
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_007_GS-0.50_B0.25_R0.05_TP0.20_SL0.10_N3_Q.json",
+      "source_sha256": "3b792d0f57986cb082cf321f7b75634d2dd25f8dde661e7d7221543b56692728",
+      "imported_at": "2026-08-04T14:59:43.062508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.50_B0.25_R0.05_TP0.20_SL0.10_N3_Q",
+      "configuration": {
+        "stop_loss": 0.1,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 3,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.5,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.05,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.25,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.2
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_008_GS-0.35_B0.15_R0.05_TP0.20_SL0.08_N5_M.json",
+      "source_sha256": "833f758f59539e1c7afac555f465df3e6e2531f2021c303bc8eafaada4766fa6",
+      "imported_at": "2026-08-04T14:59:43.063508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.35_B0.15_R0.05_TP0.20_SL0.08_N5_M",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.35,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.05,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.2
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_009_GS-0.45_B0.15_R0.15_TP0.30_SL0.08_N5_M.json",
+      "source_sha256": "f56d5d32f27177d86658055466bbb08348e0963de9d12564ddf71ef6f150c6e6",
+      "imported_at": "2026-08-04T14:59:43.063508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.45_B0.15_R0.15_TP0.30_SL0.08_N5_M",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.45,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.15,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.3
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_010_GS-0.45_B0.20_R0.05_TP0.25_SL0.08_N3_Q.json",
+      "source_sha256": "33c4fc67ef07e6d7dbb460c44b80a105adcf7f461ceaa8a47be4a9b1963312da",
+      "imported_at": "2026-08-04T14:59:43.064507+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.45_B0.20_R0.05_TP0.25_SL0.08_N3_Q",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 3,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.45,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.05,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.2,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.25
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_011_GS-0.40_B0.15_R0.15_TP0.30_SL0.05_N2_Q.json",
+      "source_sha256": "1f1d21b3b6934e031b6e6eec8daccf464e2b105e889d4bb4ebe8dfaec908fdfb",
+      "imported_at": "2026-08-04T14:59:43.064507+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.40_B0.15_R0.15_TP0.30_SL0.05_N2_Q",
+      "configuration": {
+        "stop_loss": 0.05,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 2,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.4,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.15,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.3
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_012_GS-0.45_B0.20_R0.05_TP0.20_SL0.05_N2_Q.json",
+      "source_sha256": "d56b8a3387f9b1fba974775e4063f2add6b776e9f3b94cba51529e98bc361bcc",
+      "imported_at": "2026-08-04T14:59:43.065506+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.45_B0.20_R0.05_TP0.20_SL0.05_N2_Q",
+      "configuration": {
+        "stop_loss": 0.05,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 2,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.45,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.05,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.2,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.2
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_013_GS-0.35_B0.20_R0.10_TP0.30_SL0.08_N4_Q.json",
+      "source_sha256": "e28f23f82dcf0539072c6199ab6cc582a44c1e7f34f7a69c03f2439a47d900e5",
+      "imported_at": "2026-08-04T14:59:43.066508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.35_B0.20_R0.10_TP0.30_SL0.08_N4_Q",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 4,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.35,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.1,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.2,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.3
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_014_GS-0.40_B0.20_R0.15_TP0.30_SL0.10_N5_Q.json",
+      "source_sha256": "2b27d8dc8728c3823c697f6e5b6d128d46fdfbca655045742980b0f3b44b7997",
+      "imported_at": "2026-08-04T14:59:43.066508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.40_B0.20_R0.15_TP0.30_SL0.10_N5_Q",
+      "configuration": {
+        "stop_loss": 0.1,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.4,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.15,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.2,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.3
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_015_GS-0.35_B0.20_R0.10_TP0.15_SL0.10_N2_M.json",
+      "source_sha256": "75d928c748ff8eee095384b5dbb89820d3ed8b24d2f26bace0757c562fdafc64",
+      "imported_at": "2026-08-04T14:59:43.067508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.35_B0.20_R0.10_TP0.15_SL0.10_N2_M",
+      "configuration": {
+        "stop_loss": 0.1,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 2,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.35,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.1,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.2,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.15
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_016_GS-0.55_B0.20_R0.05_TP0.15_SL0.05_N3_M.json",
+      "source_sha256": "5f7c55300c508746fc1d9d3bfc1bb2abf71126a199f02e9b9e54e53928478621",
+      "imported_at": "2026-08-04T14:59:43.067508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.55_B0.20_R0.05_TP0.15_SL0.05_N3_M",
+      "configuration": {
+        "stop_loss": 0.05,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 3,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.55,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.05,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.2,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.15
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_017_GS-0.35_B0.25_R0.05_TP0.20_SL0.10_N5_M.json",
+      "source_sha256": "85cf66a8eeebcd5256754ad9b712a91a425efb480eee12c482890dd95b1d4d97",
+      "imported_at": "2026-08-04T14:59:43.068507+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.35_B0.25_R0.05_TP0.20_SL0.10_N5_M",
+      "configuration": {
+        "stop_loss": 0.1,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.35,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.05,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.25,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.2
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_018_GS-0.35_B0.15_R0.20_TP0.25_SL0.12_N5_Q.json",
+      "source_sha256": "64a5052a661c536b5b8047f7e01400e60767776513b2285afc1c4961662daa82",
+      "imported_at": "2026-08-04T14:59:43.069508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.35_B0.15_R0.20_TP0.25_SL0.12_N5_Q",
+      "configuration": {
+        "stop_loss": 0.12,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.35,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.2,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.25
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_019_GS-0.35_B0.15_R0.05_TP0.30_SL0.10_N2_M.json",
+      "source_sha256": "363fa341dfa53f2ee28801085247876443821bdedede71c9de7b93077e266d75",
+      "imported_at": "2026-08-04T14:59:43.069508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.35_B0.15_R0.05_TP0.30_SL0.10_N2_M",
+      "configuration": {
+        "stop_loss": 0.1,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 2,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.35,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.05,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.3
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_020_GS-0.40_B0.20_R0.20_TP0.20_SL0.12_N3_Q.json",
+      "source_sha256": "a8c600d59272a7a817597eda3fac2a7ca43b0519083e0cd9ec098a8f9140be3d",
+      "imported_at": "2026-08-04T14:59:43.070507+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.40_B0.20_R0.20_TP0.20_SL0.12_N3_Q",
+      "configuration": {
+        "stop_loss": 0.12,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 3,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.4,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.2,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.2,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.2
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_021_GS-0.50_B0.20_R0.05_TP0.30_SL0.05_N2_M.json",
+      "source_sha256": "7afa5fc13ac872501057bc0ac8a90f4a3e85492b4877e757802aa608775e8c32",
+      "imported_at": "2026-08-04T14:59:43.071508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.50_B0.20_R0.05_TP0.30_SL0.05_N2_M",
+      "configuration": {
+        "stop_loss": 0.05,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 2,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.5,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.05,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.2,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.3
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_022_GS-0.35_B0.20_R0.10_TP0.30_SL0.12_N5_M.json",
+      "source_sha256": "3fcf693e62cefaf14cf074b8ad32d292a12223712c2f3f6de8432e868a8be15e",
+      "imported_at": "2026-08-04T14:59:43.071508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.35_B0.20_R0.10_TP0.30_SL0.12_N5_M",
+      "configuration": {
+        "stop_loss": 0.12,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.35,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.1,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.2,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.3
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_023_GS-0.50_B0.15_R0.10_TP0.30_SL0.05_N5_Q.json",
+      "source_sha256": "52a7aaf767dee43c590d1e3963a93e273eb230060e7bed4c94f3ff7f56da3ef9",
+      "imported_at": "2026-08-04T14:59:43.072510+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.50_B0.15_R0.10_TP0.30_SL0.05_N5_Q",
+      "configuration": {
+        "stop_loss": 0.05,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.5,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.1,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.3
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_024_GS-0.40_B0.15_R0.05_TP0.25_SL0.05_N2_Q.json",
+      "source_sha256": "7802fd13902686781cf7a49c94fe1528aaadfa0bf1e85b93a765e9af84dd4e92",
+      "imported_at": "2026-08-04T14:59:43.072510+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.40_B0.15_R0.05_TP0.25_SL0.05_N2_Q",
+      "configuration": {
+        "stop_loss": 0.05,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 2,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.4,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.05,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.25
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_025_GS-0.55_B0.20_R0.05_TP0.15_SL0.08_N2_M.json",
+      "source_sha256": "87af8f17ae553a371442f10c84a024d3bf9d9d5f67979172d1fbcbc4634fd9a7",
+      "imported_at": "2026-08-04T14:59:43.073508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.55_B0.20_R0.05_TP0.15_SL0.08_N2_M",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 2,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.55,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.05,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.2,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.15
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_026_GS-0.40_B0.30_R0.05_TP0.20_SL0.05_N2_Q.json",
+      "source_sha256": "9204cfdf9e29fde0e62dbfe43277ae17133624749caf032184e6718d88d9ac31",
+      "imported_at": "2026-08-04T14:59:43.073508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.40_B0.30_R0.05_TP0.20_SL0.05_N2_Q",
+      "configuration": {
+        "stop_loss": 0.05,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 2,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.4,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.05,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.3,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.2
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_027_GS-0.50_B0.15_R0.05_TP0.20_SL0.10_N3_Q.json",
+      "source_sha256": "cbb68465ae941c24b39ee4c3bd4b5928d815fe6d83e70e5dd96765330e346124",
+      "imported_at": "2026-08-04T14:59:43.074508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.50_B0.15_R0.05_TP0.20_SL0.10_N3_Q",
+      "configuration": {
+        "stop_loss": 0.1,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 3,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.5,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.05,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.2
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_028_GS-0.35_B0.20_R0.15_TP0.25_SL0.08_N5_Q.json",
+      "source_sha256": "f840b8245c124e2c15dbdba67b7facc379809b321a7b0369a023ef017915938d",
+      "imported_at": "2026-08-04T14:59:43.075508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.35_B0.20_R0.15_TP0.25_SL0.08_N5_Q",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.35,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.15,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.2,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.25
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_029_GS-0.35_B0.20_R0.15_TP0.25_SL0.08_N4_M.json",
+      "source_sha256": "a419dcc2b81d816519db56a05a738792f5b5580a947ea3c2422e85d87eac8e86",
+      "imported_at": "2026-08-04T14:59:43.075508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.35_B0.20_R0.15_TP0.25_SL0.08_N4_M",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 4,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.35,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.15,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.2,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.25
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_030_GS-0.35_B0.15_R0.15_TP0.20_SL0.10_N3_Q.json",
+      "source_sha256": "f47e5e4887c7ca186834f0d4c52e7e66620cbd5729a7f291651c96f9b41cd35c",
+      "imported_at": "2026-08-04T14:59:43.076508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.35_B0.15_R0.15_TP0.20_SL0.10_N3_Q",
+      "configuration": {
+        "stop_loss": 0.1,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 3,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.35,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.15,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.2
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_031_GS-0.35_B0.25_R0.10_TP0.20_SL0.05_N4_Q.json",
+      "source_sha256": "9f938512cae1ddea5a41f229785d67a4eb2fb8d23057a34d3d4c977cd9ca2e90",
+      "imported_at": "2026-08-04T14:59:43.076508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.35_B0.25_R0.10_TP0.20_SL0.05_N4_Q",
+      "configuration": {
+        "stop_loss": 0.05,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 4,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.35,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.1,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.25,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.2
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_032_GS-0.45_B0.20_R0.10_TP0.15_SL0.08_N5_Q.json",
+      "source_sha256": "81ea8f2b60fd2050b96ee347814e8fff24bf2bf3fc7bc6b3423748c3be15a876",
+      "imported_at": "2026-08-04T14:59:43.077508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.45_B0.20_R0.10_TP0.15_SL0.08_N5_Q",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.45,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.1,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.2,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.15
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_033_GS-0.45_B0.15_R0.15_TP0.25_SL0.12_N4_M.json",
+      "source_sha256": "0cd2ba25347adc8bee0e2e5b36a8444b537087a10f14342e07636c6a91e223c4",
+      "imported_at": "2026-08-04T14:59:43.078511+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.45_B0.15_R0.15_TP0.25_SL0.12_N4_M",
+      "configuration": {
+        "stop_loss": 0.12,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 4,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.45,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.15,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.25
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_034_GS-0.35_B0.25_R0.10_TP0.25_SL0.05_N2_Q.json",
+      "source_sha256": "369c969de79104b2d7de5a22a5547fc1d43073dfe54a1adfaba45985f8e5bb72",
+      "imported_at": "2026-08-04T14:59:43.078511+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.35_B0.25_R0.10_TP0.25_SL0.05_N2_Q",
+      "configuration": {
+        "stop_loss": 0.05,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 2,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.35,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.1,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.25,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.25
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_035_GS-0.35_B0.30_R0.05_TP0.20_SL0.10_N5_M.json",
+      "source_sha256": "b9f08a3e24e20761286e8750cda598951d7d1992f9719218ad996d1cf221b196",
+      "imported_at": "2026-08-04T14:59:43.079508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.35_B0.30_R0.05_TP0.20_SL0.10_N5_M",
+      "configuration": {
+        "stop_loss": 0.1,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.35,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.05,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.3,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.2
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_036_GS-0.45_B0.25_R0.05_TP0.25_SL0.10_N5_Q.json",
+      "source_sha256": "717c66f24206f2b8cf30dde11a524a6bc0688f7e5bf2ff6907f9ce25c8a97de7",
+      "imported_at": "2026-08-04T14:59:43.079508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.45_B0.25_R0.05_TP0.25_SL0.10_N5_Q",
+      "configuration": {
+        "stop_loss": 0.1,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.45,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.05,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.25,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.25
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_037_GS-0.40_B0.15_R0.15_TP0.25_SL0.05_N3_Q.json",
+      "source_sha256": "7970a270e77cf561f16ed06e02e1d6210c5e99ce57d715acff2945e695e4b604",
+      "imported_at": "2026-08-04T14:59:43.080508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.40_B0.15_R0.15_TP0.25_SL0.05_N3_Q",
+      "configuration": {
+        "stop_loss": 0.05,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 3,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.4,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.15,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.25
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_038_GS-0.40_B0.20_R0.10_TP0.15_SL0.05_N3_Q.json",
+      "source_sha256": "fef359370f8b89f6fe4e7fe59214d31dc1ff7383d941f2e99a20a7f35546616d",
+      "imported_at": "2026-08-04T14:59:43.080508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.40_B0.20_R0.10_TP0.15_SL0.05_N3_Q",
+      "configuration": {
+        "stop_loss": 0.05,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 3,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.4,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.1,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.2,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.15
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_039_GS-0.50_B0.20_R0.10_TP0.15_SL0.05_N5_M.json",
+      "source_sha256": "961b603f91ed7e9815f47f507ebf6258441a88a9f9d0f8d068754c1f9e6b0663",
+      "imported_at": "2026-08-04T14:59:43.081508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.50_B0.20_R0.10_TP0.15_SL0.05_N5_M",
+      "configuration": {
+        "stop_loss": 0.05,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.5,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.1,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.2,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.15
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_040_GS-0.40_B0.30_R0.05_TP0.20_SL0.05_N5_M.json",
+      "source_sha256": "e60c604b8a53b37208893cea2740d27fcfc21ed6685c0a29bd74d26071b1013e",
+      "imported_at": "2026-08-04T14:59:43.082508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.40_B0.30_R0.05_TP0.20_SL0.05_N5_M",
+      "configuration": {
+        "stop_loss": 0.05,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.4,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.05,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.3,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.2
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_041_GS-0.50_B0.15_R0.15_TP0.20_SL0.10_N4_Q.json",
+      "source_sha256": "b49d80a4d07494fbaffd869f2301bfc53cb071649a2973648086fa06a01a5127",
+      "imported_at": "2026-08-04T14:59:43.082508+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.50_B0.15_R0.15_TP0.20_SL0.10_N4_Q",
+      "configuration": {
+        "stop_loss": 0.1,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 4,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.5,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.15,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.2
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_042_GS-0.55_B0.15_R0.10_TP0.20_SL0.08_N5_M.json",
+      "source_sha256": "41d4fa2152906c835635aeb6367e815b36039c239721d23615188b4b26b66190",
+      "imported_at": "2026-08-04T14:59:43.084062+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.55_B0.15_R0.10_TP0.20_SL0.08_N5_M",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.55,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.1,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.2
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_043_GS-0.40_B0.15_R0.20_TP0.30_SL0.10_N5_Q.json",
+      "source_sha256": "c5720667aefc6d9e97c75ccd9714d1a1f343717e7ec6c62b5ed66782b16f121d",
+      "imported_at": "2026-08-04T14:59:43.084062+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.40_B0.15_R0.20_TP0.30_SL0.10_N5_Q",
+      "configuration": {
+        "stop_loss": 0.1,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.4,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.2,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.3
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_044_GS-0.35_B0.20_R0.20_TP0.30_SL0.05_N5_Q.json",
+      "source_sha256": "80aca37232f35759f8526b482e4ac74ff583c314356a588e8b6e824da18c3da8",
+      "imported_at": "2026-08-04T14:59:43.085061+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.35_B0.20_R0.20_TP0.30_SL0.05_N5_Q",
+      "configuration": {
+        "stop_loss": 0.05,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.35,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.2,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.2,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.3
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_045_GS-0.35_B0.25_R0.15_TP0.30_SL0.12_N3_Q.json",
+      "source_sha256": "2944ce46410e28edc4c5cbfd06f1a1453cfb63b4a155e071b4e142b93a870484",
+      "imported_at": "2026-08-04T14:59:43.085061+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.35_B0.25_R0.15_TP0.30_SL0.12_N3_Q",
+      "configuration": {
+        "stop_loss": 0.12,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 3,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.35,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.15,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.25,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.3
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_046_GS-0.35_B0.30_R0.10_TP0.30_SL0.08_N2_Q.json",
+      "source_sha256": "2c25ed2c2905044c6a25338104f1ee644ee7d0df624798fa120741eb1dfdc9f1",
+      "imported_at": "2026-08-04T14:59:43.086061+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.35_B0.30_R0.10_TP0.30_SL0.08_N2_Q",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 2,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.35,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.1,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.3,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.3
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_047_GS-0.45_B0.20_R0.05_TP0.15_SL0.05_N3_M.json",
+      "source_sha256": "1e65830ddc31360a2f431ef146303b6a0098b95454eb661caaf0b3772db8b58a",
+      "imported_at": "2026-08-04T14:59:43.087058+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.45_B0.20_R0.05_TP0.15_SL0.05_N3_M",
+      "configuration": {
+        "stop_loss": 0.05,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 3,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.45,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.05,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.2,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.15
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_048_GS-0.35_B0.20_R0.10_TP0.20_SL0.12_N2_M.json",
+      "source_sha256": "f13367fed1fdf3452d1ee37ef6cc110565f56233ceab03001d4ac74739403a9b",
+      "imported_at": "2026-08-04T14:59:43.087058+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.35_B0.20_R0.10_TP0.20_SL0.12_N2_M",
+      "configuration": {
+        "stop_loss": 0.12,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 2,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.35,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.1,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.2,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.2
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_049_GS-0.35_B0.15_R0.15_TP0.30_SL0.12_N3_M.json",
+      "source_sha256": "c9a68c7e233cef09b06b45ccdde742aa768ae0eb6359cfedbec49a80e5201a37",
+      "imported_at": "2026-08-04T14:59:43.088060+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.35_B0.15_R0.15_TP0.30_SL0.12_N3_M",
+      "configuration": {
+        "stop_loss": 0.12,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 3,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.35,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.15,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.3
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_050_GS-0.55_B0.20_R0.05_TP0.25_SL0.05_N2_Q.json",
+      "source_sha256": "3709e8b1bfdb931ad739d2964be8c7eec020ae4eba5314778e3935191a1a8516",
+      "imported_at": "2026-08-04T14:59:43.088060+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.55_B0.20_R0.05_TP0.25_SL0.05_N2_Q",
+      "configuration": {
+        "stop_loss": 0.05,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 2,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.55,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.05,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.2,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.25
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_051_GS-0.40_B0.15_R0.15_TP0.30_SL0.08_N5_Q.json",
+      "source_sha256": "7c597236f4e679245a0161d9afb6d07e69a3b6a421f41593c709365bee8d5225",
+      "imported_at": "2026-08-04T14:59:43.089064+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.40_B0.15_R0.15_TP0.30_SL0.08_N5_Q",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.4,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.15,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.3
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_052_GS-0.45_B0.15_R0.20_TP0.25_SL0.08_N5_M.json",
+      "source_sha256": "ea986817bd2be8207d9032ec03364f39cce34493de81148b62f66ca2d7747fac",
+      "imported_at": "2026-08-04T14:59:43.090059+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.45_B0.15_R0.20_TP0.25_SL0.08_N5_M",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.45,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.2,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.25
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_053_GS-0.35_B0.20_R0.20_TP0.30_SL0.08_N5_Q.json",
+      "source_sha256": "3039806aa98cc533a5916ab83c9b69b508f7b2a87da7f89e509dac07deba26af",
+      "imported_at": "2026-08-04T14:59:43.090059+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.35_B0.20_R0.20_TP0.30_SL0.08_N5_Q",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.35,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.2,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.2,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.3
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_054_GS-0.50_B0.15_R0.05_TP0.25_SL0.08_N5_M.json",
+      "source_sha256": "cca6230ea091ff69d6d9a66a6c54ba378b94d835951f2d06781dc7045b403866",
+      "imported_at": "2026-08-04T14:59:43.091059+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.50_B0.15_R0.05_TP0.25_SL0.08_N5_M",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.5,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.05,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.25
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_055_GS-0.45_B0.15_R0.10_TP0.20_SL0.08_N5_Q.json",
+      "source_sha256": "55c1d8f41613289461bff7ff36f54bf89e0dae6e2657f33c0acae90349ccff97",
+      "imported_at": "2026-08-04T14:59:43.091059+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.45_B0.15_R0.10_TP0.20_SL0.08_N5_Q",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.45,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.1,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.2
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_056_GS-0.40_B0.25_R0.05_TP0.20_SL0.10_N2_M.json",
+      "source_sha256": "8d41e850e0986053554489f179385f3d30f6bbff294f74dc83111eb8bf812cd8",
+      "imported_at": "2026-08-04T14:59:43.092062+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.40_B0.25_R0.05_TP0.20_SL0.10_N2_M",
+      "configuration": {
+        "stop_loss": 0.1,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 2,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.4,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.05,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.25,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.2
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_057_GS-0.50_B0.15_R0.05_TP0.30_SL0.12_N2_M.json",
+      "source_sha256": "61f7834ba96982b099babf15537d4c5d142f04a6d0046a172c070104efed69e9",
+      "imported_at": "2026-08-04T14:59:43.092062+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.50_B0.15_R0.05_TP0.30_SL0.12_N2_M",
+      "configuration": {
+        "stop_loss": 0.12,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 2,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.5,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.05,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.3
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_058_GS-0.40_B0.20_R0.15_TP0.15_SL0.08_N2_Q.json",
+      "source_sha256": "4de8ce9c4d9ea56fb2bb9bcd47d24cdcc7cd1b44b5b06c552fad9275831ed56f",
+      "imported_at": "2026-08-04T14:59:43.093058+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.40_B0.20_R0.15_TP0.15_SL0.08_N2_Q",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 2,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.4,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.15,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.2,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.15
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_059_GS-0.45_B0.15_R0.05_TP0.20_SL0.08_N4_M.json",
+      "source_sha256": "70e4debab0442469585e520d09feb5f8462629f60fb3134db7a677903c7e3bcc",
+      "imported_at": "2026-08-04T14:59:43.093058+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.45_B0.15_R0.05_TP0.20_SL0.08_N4_M",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 4,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.45,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.05,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.2
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_060_GS-0.40_B0.20_R0.10_TP0.15_SL0.08_N2_Q.json",
+      "source_sha256": "5a193cf8ec62f855cc46f7b70c00cf1225c13abf8c26b37fbcb69c012fc1b8da",
+      "imported_at": "2026-08-04T14:59:43.094059+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.40_B0.20_R0.10_TP0.15_SL0.08_N2_Q",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 2,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.4,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.1,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.2,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.15
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_061_GS-0.50_B0.15_R0.10_TP0.25_SL0.08_N5_M.json",
+      "source_sha256": "733bdd9be9598f95fc10b800699030156a512b094f7936c6815f8044bf6255b6",
+      "imported_at": "2026-08-04T14:59:43.095061+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.50_B0.15_R0.10_TP0.25_SL0.08_N5_M",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.5,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.1,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.25
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_062_GS-0.40_B0.25_R0.15_TP0.30_SL0.05_N5_Q.json",
+      "source_sha256": "b1abf04bc14c8dfd9c167f206924ce50a1325339b4e293bbc04baa74ce4249b8",
+      "imported_at": "2026-08-04T14:59:43.095061+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.40_B0.25_R0.15_TP0.30_SL0.05_N5_Q",
+      "configuration": {
+        "stop_loss": 0.05,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.4,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.15,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.25,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.3
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_063_GS-0.45_B0.25_R0.05_TP0.15_SL0.08_N2_Q.json",
+      "source_sha256": "3725c504787d39093def60505d5657bb8480f5e2561393d6121943bdd91a6fa7",
+      "imported_at": "2026-08-04T14:59:43.096060+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.45_B0.25_R0.05_TP0.15_SL0.08_N2_Q",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 2,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.45,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.05,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.25,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.15
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "grid_configs/grid_064_GS-0.55_B0.15_R0.10_TP0.30_SL0.12_N4_M.json",
+      "source_sha256": "7e2a3f14163d8d2cb0e8404f861d4490d0df3470c8684da96ac10a4a3d2cd28f",
+      "imported_at": "2026-08-04T14:59:43.096060+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "GS-0.55_B0.15_R0.10_TP0.30_SL0.12_N4_M",
+      "configuration": {
+        "stop_loss": 0.12,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 4,
+        "factors": {
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "momentum": {
+            "weight": 0.55,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.1,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.15,
+            "period": 20,
+            "std": 2.0
+          },
+          "decline": {
+            "weight": 0.1,
+            "min_days": 3,
+            "max_days": 8
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "M",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 800,
+        "single_position": 0.4,
+        "take_profit": 0.3
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "micro_etf/research_result.json",
+      "source_sha256": "49dda8b8f4d82f293dc7fbb2c2c846757b4d590f300df1ea3e69a45e3f5a087b",
+      "imported_at": "2026-08-04T14:59:43.098062+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "research_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "micro_etf_final/research_result.json",
+      "source_sha256": "2e39cd438f430e1e375384765afcef3af7da085293294d5935e8fb521d08f61f",
+      "imported_at": "2026-08-04T14:59:43.099060+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "research_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "micro_etf_v2/research_result.json",
+      "source_sha256": "4b244f5ecc45cd182e7fa67cac2749fe5b16bad3d377145e15da18ae826d1558",
+      "imported_at": "2026-08-04T14:59:43.100060+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "research_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "micro_etf_v3/research_result.json",
+      "source_sha256": "2adbb9e81015ccd8a391fcb86f40141380d3641dd39584296ce8b868f69c2315",
+      "imported_at": "2026-08-04T14:59:43.101062+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "research_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "micro_etf_v4/research_result.json",
+      "source_sha256": "fdecb88e9cf5f642562bfec7608074b563eb54ff4b3e7b9985994bf053b25e3a",
+      "imported_at": "2026-08-04T14:59:43.103059+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "research_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "n1_cs_mom_vol_ic.json",
+      "source_sha256": "31d32b65ba6d311a5074e9b372304ea5e6b8350fd3e3710aac47c1f4ed0c8240",
+      "imported_at": "2026-08-04T14:59:43.103059+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "N1-截面动量+量价+IC",
+      "configuration": {
+        "stop_loss": 0.1,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "momentum": {
+            "weight": 0.2,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "cs_momentum": {
+            "weight": 0.25,
+            "periods": [
+              21,
+              63,
+              126
+            ]
+          },
+          "volume_factor": {
+            "weight": 0.2,
+            "vol_ma_period": 20,
+            "breakout_threshold": 2.0,
+            "ma_period": 10
+          },
+          "improved_vol": {
+            "weight": 0.15,
+            "vol_period": 20,
+            "high_vol_threshold": 0.035
+          },
+          "meanrev": {
+            "weight": 0.1,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.1,
+            "period": 20,
+            "std": 2.0
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 120,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 500,
+        "single_position": 0.25,
+        "take_profit": 0.3
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "n2_new_factors_only_ic.json",
+      "source_sha256": "73f3f728ebe6acece24cdbc44d001f37bc00f917e1e4bb2fb999b7cc7a565157",
+      "imported_at": "2026-08-04T14:59:43.104059+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "N2-三新因子+IC",
+      "configuration": {
+        "stop_loss": 0.1,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "cs_momentum": {
+            "weight": 0.35,
+            "periods": [
+              21,
+              63,
+              126
+            ]
+          },
+          "volume_factor": {
+            "weight": 0.35,
+            "vol_ma_period": 20,
+            "breakout_threshold": 2.0,
+            "ma_period": 10
+          },
+          "improved_vol": {
+            "weight": 0.3,
+            "vol_period": 20,
+            "high_vol_threshold": 0.035
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 120,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 500,
+        "single_position": 0.25,
+        "take_profit": 0.3
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "n3_all_factors_ic.json",
+      "source_sha256": "f00cc9843192ca89ec9d18f5a5c78cd0eeff44fcfdbb27736bce17ec1cc0d68b",
+      "imported_at": "2026-08-04T14:59:43.104059+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "N3-全因子IC加权",
+      "configuration": {
+        "stop_loss": 0.1,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "factors": {
+          "momentum": {
+            "weight": 0.15,
+            "breakout_period": 20,
+            "ma_short": 5,
+            "ma_long": 20
+          },
+          "meanrev": {
+            "weight": 0.1,
+            "rsi_period": 14,
+            "rsi_max": 45
+          },
+          "bollinger": {
+            "weight": 0.1,
+            "period": 20,
+            "std": 2.0
+          },
+          "value": {
+            "weight": 0.1,
+            "ma_period": 200
+          },
+          "decline": {
+            "weight": 0.05,
+            "min_days": 3,
+            "max_days": 8
+          },
+          "multi_mom": {
+            "weight": 0.1,
+            "periods": [
+              21,
+              63,
+              126
+            ]
+          },
+          "low_vol": {
+            "weight": 0.05
+          },
+          "cs_momentum": {
+            "weight": 0.15,
+            "periods": [
+              21,
+              63,
+              126
+            ]
+          },
+          "volume_factor": {
+            "weight": 0.1,
+            "vol_ma_period": 20,
+            "breakout_threshold": 2.0,
+            "ma_period": 10
+          },
+          "improved_vol": {
+            "weight": 0.1,
+            "vol_period": 20,
+            "high_vol_threshold": 0.035
+          }
+        },
+        "t_plus_1": true,
+        "max_hold_days": 120,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 500,
+        "single_position": 0.25,
+        "take_profit": 0.3
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "paper_signals/paper_signal_20260731.json",
+      "source_sha256": "9a3be0794b3979a5202c620c050f671358184acd856291f66c776cfd7052c6f1",
+      "imported_at": "2026-08-04T14:59:43.105058+00:00",
+      "artifact_type": "backtest_result",
+      "experiment_name": "paper_signal_20260731",
+      "configuration": {},
+      "metrics": {
+        "capital": 30000.0
+      }
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "pattern/P1-双模式基线_20260712_144534_score.json",
+      "source_sha256": "f68bb355a68a879bfc3fcd68780ef73bc17618c9abac481ed43d701cedf76f97",
+      "imported_at": "2026-08-04T14:59:43.106059+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "P1-双模式基线",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "pattern/P2-纯突破模式_20260712_144540_score.json",
+      "source_sha256": "7e0284bc2621269ad1e0761b2cd4599cc60ce5953f6efcc25be7c10c52080976",
+      "imported_at": "2026-08-04T14:59:43.106059+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "P2-纯突破模式",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "s1_sector_default.json",
+      "source_sha256": "99b079ad6b3290d8fdf38377258444e25224383e645022c35e473a21aac33fad",
+      "imported_at": "2026-08-04T14:59:43.109060+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "S1-行业默认权重",
+      "configuration": {
+        "stop_loss": 0.08,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "t_plus_1": true,
+        "max_hold_days": 120,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 500,
+        "single_position": 0.25,
+        "take_profit": 0.2
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "s2_sector_momentum_boost.json",
+      "source_sha256": "1b7ed8fe3fa8510b0b20f3e35ded4a4d2552266e7150e60999ee33bab21ccc73",
+      "imported_at": "2026-08-04T14:59:43.109060+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "S2-行业动量增强",
+      "configuration": {
+        "stop_loss": 0.1,
+        "start_date": "20190101",
+        "end_date": "20251231",
+        "next_open": true,
+        "top_n": 5,
+        "t_plus_1": true,
+        "max_hold_days": 90,
+        "rebalance_freq": "Q",
+        "limit_check": true,
+        "init_cash": 20000,
+        "pool_size": 500,
+        "single_position": 0.25,
+        "take_profit": 0.25
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "sector_etf_20260731/research_result.json",
+      "source_sha256": "d4722b5816de293105019cd4ec1bf70c3fd2f96ad65747945417dd17c9566cbd",
+      "imported_at": "2026-08-04T14:59:43.110060+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "research_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "sector_etf_adjusted/research_result.json",
+      "source_sha256": "8bd8f7bcf0cfcb636fa90f54b1d09b5479865e2a81f668dcf4d3c059ec281914",
+      "imported_at": "2026-08-04T14:59:43.111060+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "research_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "sector_etf_band55/research_result.json",
+      "source_sha256": "72f5dd540ac1d7403c3a35cc9fcdd846c8cf9babc7cc76460ef3bb9f8c5d9581",
+      "imported_at": "2026-08-04T14:59:43.112059+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "research_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "sector_etf_cash/research_result.json",
+      "source_sha256": "b977ed29f932e3c03196b2eeba0672a8005f3842c9d423b6095442eb5bfc7c9d",
+      "imported_at": "2026-08-04T14:59:43.113061+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "research_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "sector_etf_cash_persistent/research_result.json",
+      "source_sha256": "af30632138a0c150bb559a64bde62551bae08e5e49b71d1cea6c441a205c9001",
+      "imported_at": "2026-08-04T14:59:43.114060+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "research_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "sector_etf_exit12/research_result.json",
+      "source_sha256": "13e14bbecfa828eed01ce835a7bda290d86b53d29e9e5b1131f9e7401e0bdfee",
+      "imported_at": "2026-08-04T14:59:43.116059+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "research_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "sector_etf_final/research_result.json",
+      "source_sha256": "7828e735e477e56628cdb144482864dda599ba01230cff7d78a55a0fee71a2f7",
+      "imported_at": "2026-08-04T14:59:43.117052+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "research_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "sector_etf_final_locked/research_result.json",
+      "source_sha256": "6f493af882ae366bc9621b13b2477b55b7c6a81dd85445fa1afc460d5d1d2a85",
+      "imported_at": "2026-08-04T14:59:43.118050+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "research_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "sector_etf_initial/research_result.json",
+      "source_sha256": "b2500167a2d6ee2fdd025c26f12a47074f1d1379b137cdcf2f41a17dc55aec28",
+      "imported_at": "2026-08-04T14:59:43.119051+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "research_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "sector_etf_point_in_time/research_result.json",
+      "source_sha256": "6f493af882ae366bc9621b13b2477b55b7c6a81dd85445fa1afc460d5d1d2a85",
+      "imported_at": "2026-08-04T14:59:43.120050+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "research_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "sector_etf_rebalanced/research_result.json",
+      "source_sha256": "16ef6158fea3d0393e6ce223bd060e6f111b9048bc04c1c6ac53e85fd440731b",
+      "imported_at": "2026-08-04T14:59:43.121050+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "research_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "sector_etf_structural/research_result.json",
+      "source_sha256": "4e5f1f54dbabe8eff54bbe83a0eeef9316afedbe37c703a90d7b88f617b70db1",
+      "imported_at": "2026-08-04T14:59:43.122050+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "research_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "sector_etf_weight_audit/research_result.json",
+      "source_sha256": "c242b820a4b097fff33af05e3efb725daf6fe8919b55ff640b722bff2889e26f",
+      "imported_at": "2026-08-04T14:59:43.124051+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "research_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "sim2025_result.json",
+      "source_sha256": "c9a28b06e8ea14a30fe35e12d8ddc54c645021350d6d2fc0be7aa6ca6d91d2fb",
+      "imported_at": "2026-08-04T14:59:43.124051+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "sim2025_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "sim_cta_result.json",
+      "source_sha256": "bba0fe26f77cb05ac0d2d7bf8769d99cd604afeccea4c9661de267935989ca47",
+      "imported_at": "2026-08-04T14:59:43.125050+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "sim_cta_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "simv2_result.json",
+      "source_sha256": "ece6caa3a75edd2019d3549579f0788da35c4ae8666e9568d01ccc0c6c2a9d09",
+      "imported_at": "2026-08-04T14:59:43.125050+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "simv2_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "staged_sector_etf/result.json",
+      "source_sha256": "051203e5c5cbc9e8507456c4416258ef19e8c9375179d11d6d6fa33caaba4fe0",
+      "imported_at": "2026-08-04T14:59:43.126051+00:00",
+      "artifact_type": "backtest_result",
+      "experiment_name": "result",
+      "configuration": {},
+      "metrics": {
+        "annual_returns": {
+          "2023": -0.084538,
+          "2024": 0.188453,
+          "2025": -0.066819,
+          "2026": 0.0
+        },
+        "end": "2026-07-29",
+        "max_drawdown": -0.13223,
+        "start": "2023-01-03",
+        "avg_loss": -0.040649,
+        "final_value": 30458.55,
+        "total_return": 0.015285,
+        "win_rate": 0.2222,
+        "calmar": 0.0322,
+        "sharpe": 0.0966,
+        "avg_win": 0.144208
+      }
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "stock_aggressive_final/research_result.json",
+      "source_sha256": "79af15f5afb12a1385278e5f395d411d2445cdebba6fca8fd5eb1611b3ce5f63",
+      "imported_at": "2026-08-04T14:59:43.127051+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "research_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "stock_aggressive_full/research_result.json",
+      "source_sha256": "cbc51b27395b2f3a59f5d9a54b3e10aff87b74fe6ff6d3eba2bfa2f0d3ab5758",
+      "imported_at": "2026-08-04T14:59:43.128050+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "research_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "stock_aggressive_smoke/research_result.json",
+      "source_sha256": "121faca9c54722654a639298b1085208cf40903b3cd006e96ca007bb28b23095",
+      "imported_at": "2026-08-04T14:59:43.129051+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "research_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "stock_aggressive_structural_fix/research_result.json",
+      "source_sha256": "fcbe2a5d70b2ebb2cfbc250a166a4128dbcf2a9f20ec68d7346f27b7cab9c695",
+      "imported_at": "2026-08-04T14:59:43.131050+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "research_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "strategy_40k/research_result.json",
+      "source_sha256": "d9152eac7411d9b47c6745f68b7ea87675270828fb3eb93f5bea3ba291d2f5d6",
+      "imported_at": "2026-08-04T14:59:43.132050+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "research_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "strategy_40k_smoke/research_result.json",
+      "source_sha256": "255d974b34d20a5551bd7bcbe98b710ffb380566621e83e238d169cf7095e5c7",
+      "imported_at": "2026-08-04T14:59:43.133050+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "research_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "strategy_40k_smoke_v2/research_result.json",
+      "source_sha256": "2836d6a1ffa6fadd886eed7c94e7a5c26299719df311a3607c5fbbc047a73181",
+      "imported_at": "2026-08-04T14:59:43.134051+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "research_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "strategy_40k_smoke_v3/research_result.json",
+      "source_sha256": "086b7fb790eb8df5a5018ab8f1c238ab3288f5f8d3b6c6d65c2229d3e32ee5b9",
+      "imported_at": "2026-08-04T14:59:43.136051+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "research_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "strategy_40k_v2/research_result.json",
+      "source_sha256": "4067d20da062db47e85efc80b3c383fc00f32bda9e024779a1ede0ee8e462575",
+      "imported_at": "2026-08-04T14:59:43.137051+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "research_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "strategy_40k_v3/research_result.json",
+      "source_sha256": "f033cc9ecfe7f4d36c0afcfdd2e6f3dc78fd3d92f556acb87116bf6189e406c7",
+      "imported_at": "2026-08-04T14:59:43.139050+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "research_result",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "tech_timing/TE1-技术择时基线_20260712_142146_score.json",
+      "source_sha256": "d9bfd16ba96c5792ca9574e070ba4471fa5f3795d6d5d89acac27ddb7bc5c2c9",
+      "imported_at": "2026-08-04T14:59:43.140051+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "TE1-技术择时基线",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "tech_timing/TE2-严格择时_20260712_142246_score.json",
+      "source_sha256": "92cea296cbd9daf9f8a2d56810ad5ec6b201d0e2aa198e45b982dc3f3779c4a3",
+      "imported_at": "2026-08-04T14:59:43.141052+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "TE2-严格择时",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "tech_timing/TE3-激进择时_20260712_142541_score.json",
+      "source_sha256": "7fe16e668ec22ebbec7ee36b490c9758a009079eb0511106a3eec07dcf140429",
+      "imported_at": "2026-08-04T14:59:43.142050+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "TE3-激进择时",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "tech_timing/TV1-精选+自适应基线_20260712_144059_score.json",
+      "source_sha256": "a9f48f977e659f2ebe9dd2e7465a38138c9467687e0bc1b674e7d986295c4e11",
+      "imported_at": "2026-08-04T14:59:43.142050+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "TV1-精选+自适应基线",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "tech_timing/TV2-超精选+高门槛_20260712_144101_score.json",
+      "source_sha256": "92bdf06b5718907bb7e8b245a606fab24eb333b224014bfc80fab1256ed919e4",
+      "imported_at": "2026-08-04T14:59:43.143050+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "TV2-超精选+高门槛",
+      "configuration": {},
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "top_results_grid.json",
+      "source_sha256": "1124b9d534366489ca44cc4bacd5988cac20e316f7893f2b1666758e093cda3f",
+      "imported_at": "2026-08-04T14:59:43.145052+00:00",
+      "artifact_type": "experiment_configuration",
+      "experiment_name": "top_results_grid",
+      "configuration": {
+        "top_n": [
+          {
+            "name": "GS-0.35_B0.30_R0.05_TP0.20_SL0.10_N5_M",
+            "total_score": 42.71,
+            "annual_return": 6.17,
+            "sharpe": 0.41,
+            "max_drawdown": -16.62,
+            "calmar": 0.37,
+            "win_rate": 62.1,
+            "total_return": 52.0,
+            "final_value": 30399.0,
+            "trade_count": 336,
+            "verdict": "及格 -",
+            "scores": {
+              "return": 9.57,
+              "sharpe": 11.75,
+              "drawdown": 10.7,
+              "calmar": 1.85,
+              "winrate": 8.84
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "52.00%",
+              "年化收益率": "6.17%",
+              "最大回撤": "-16.62%",
+              "年化波动率": "10.17%",
+              "夏普比率": 0.41,
+              "总交易次数": 336,
+              "总交易成本": "0元",
+              "最终资金": "30399元"
+            },
+            "params": {
+              "momentum_weight": 0.35,
+              "bollinger_weight": 0.3,
+              "meanrev_weight": 0.05,
+              "take_profit": 0.2,
+              "stop_loss": 0.1,
+              "top_n": 5,
+              "rebalance_freq": "M"
+            }
+          },
+          {
+            "name": "GS-0.40_B0.15_R0.20_TP0.30_SL0.10_N5_Q",
+            "total_score": 36.04,
+            "annual_return": 1.31,
+            "sharpe": -0.1,
+            "max_drawdown": -8.92,
+            "calmar": 0.15,
+            "win_rate": 53.8,
+            "total_return": 9.5,
+            "final_value": 21900.0,
+            "trade_count": 96,
+            "verdict": "及格 -",
+            "scores": {
+              "return": 5.41,
+              "sharpe": 7.5,
+              "drawdown": 16.86,
+              "calmar": 0.75,
+              "winrate": 5.52
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "9.50%",
+              "年化收益率": "1.31%",
+              "最大回撤": "-8.92%",
+              "年化波动率": "6.93%",
+              "夏普比率": -0.1,
+              "总交易次数": 96,
+              "总交易成本": "0元",
+              "最终资金": "21900元"
+            },
+            "params": {
+              "momentum_weight": 0.4,
+              "bollinger_weight": 0.15,
+              "meanrev_weight": 0.2,
+              "take_profit": 0.3,
+              "stop_loss": 0.1,
+              "top_n": 5,
+              "rebalance_freq": "Q"
+            }
+          },
+          {
+            "name": "GS-0.35_B0.25_R0.05_TP0.20_SL0.10_N5_M",
+            "total_score": 35.37,
+            "annual_return": 5.21,
+            "sharpe": 0.32,
+            "max_drawdown": -22.17,
+            "calmar": 0.24,
+            "win_rate": 60.4,
+            "total_return": 42.63,
+            "final_value": 28525.0,
+            "trade_count": 328,
+            "verdict": "及格 -",
+            "scores": {
+              "return": 8.75,
+              "sharpe": 11.0,
+              "drawdown": 6.26,
+              "calmar": 1.2,
+              "winrate": 8.16
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "42.63%",
+              "年化收益率": "5.21%",
+              "最大回撤": "-22.17%",
+              "年化波动率": "10.06%",
+              "夏普比率": 0.32,
+              "总交易次数": 328,
+              "总交易成本": "0元",
+              "最终资金": "28525元"
+            },
+            "params": {
+              "momentum_weight": 0.35,
+              "bollinger_weight": 0.25,
+              "meanrev_weight": 0.05,
+              "take_profit": 0.2,
+              "stop_loss": 0.1,
+              "top_n": 5,
+              "rebalance_freq": "M"
+            }
+          },
+          {
+            "name": "GS-0.35_B0.15_R0.20_TP0.25_SL0.12_N5_Q",
+            "total_score": 34.96,
+            "annual_return": 1.05,
+            "sharpe": -0.13,
+            "max_drawdown": -9.05,
+            "calmar": 0.12,
+            "win_rate": 52.9,
+            "total_return": 7.58,
+            "final_value": 21517.0,
+            "trade_count": 93,
+            "verdict": "不及格 ✗",
+            "scores": {
+              "return": 5.19,
+              "sharpe": 7.25,
+              "drawdown": 16.76,
+              "calmar": 0.6,
+              "winrate": 5.16
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "7.58%",
+              "年化收益率": "1.05%",
+              "最大回撤": "-9.05%",
+              "年化波动率": "7.23%",
+              "夏普比率": -0.13,
+              "总交易次数": 93,
+              "总交易成本": "0元",
+              "最终资金": "21517元"
+            },
+            "params": {
+              "momentum_weight": 0.35,
+              "bollinger_weight": 0.15,
+              "meanrev_weight": 0.2,
+              "take_profit": 0.25,
+              "stop_loss": 0.12,
+              "top_n": 5,
+              "rebalance_freq": "Q"
+            }
+          },
+          {
+            "name": "GS-0.45_B0.15_R0.20_TP0.25_SL0.08_N5_M",
+            "total_score": 34.48,
+            "annual_return": 4.62,
+            "sharpe": 0.28,
+            "max_drawdown": -21.76,
+            "calmar": 0.21,
+            "win_rate": 59.8,
+            "total_return": 37.16,
+            "final_value": 27432.0,
+            "trade_count": 331,
+            "verdict": "不及格 ✗",
+            "scores": {
+              "return": 8.25,
+              "sharpe": 10.67,
+              "drawdown": 6.59,
+              "calmar": 1.05,
+              "winrate": 7.92
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "37.16%",
+              "年化收益率": "4.62%",
+              "最大回撤": "-21.76%",
+              "年化波动率": "9.43%",
+              "夏普比率": 0.28,
+              "总交易次数": 331,
+              "总交易成本": "0元",
+              "最终资金": "27432元"
+            },
+            "params": {
+              "momentum_weight": 0.45,
+              "bollinger_weight": 0.15,
+              "meanrev_weight": 0.2,
+              "take_profit": 0.25,
+              "stop_loss": 0.08,
+              "top_n": 5,
+              "rebalance_freq": "M"
+            }
+          },
+          {
+            "name": "GS-0.35_B0.15_R0.15_TP0.20_SL0.08_N3_M",
+            "total_score": 32.64,
+            "annual_return": 5.22,
+            "sharpe": 0.27,
+            "max_drawdown": -24.1,
+            "calmar": 0.22,
+            "win_rate": 58.7,
+            "total_return": 42.72,
+            "final_value": 28544.0,
+            "trade_count": 246,
+            "verdict": "不及格 ✗",
+            "scores": {
+              "return": 8.76,
+              "sharpe": 10.58,
+              "drawdown": 4.72,
+              "calmar": 1.1,
+              "winrate": 7.48
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "42.72%",
+              "年化收益率": "5.22%",
+              "最大回撤": "-24.10%",
+              "年化波动率": "11.98%",
+              "夏普比率": 0.27,
+              "总交易次数": 246,
+              "总交易成本": "0元",
+              "最终资金": "28544元"
+            },
+            "params": {
+              "momentum_weight": 0.35,
+              "bollinger_weight": 0.15,
+              "meanrev_weight": 0.15,
+              "take_profit": 0.2,
+              "stop_loss": 0.08,
+              "top_n": 3,
+              "rebalance_freq": "M"
+            }
+          },
+          {
+            "name": "GS-0.40_B0.15_R0.15_TP0.30_SL0.08_N5_Q",
+            "total_score": 32.16,
+            "annual_return": 0.51,
+            "sharpe": -0.24,
+            "max_drawdown": -9.73,
+            "calmar": 0.05,
+            "win_rate": 51.6,
+            "total_return": 3.61,
+            "final_value": 20722.0,
+            "trade_count": 96,
+            "verdict": "不及格 ✗",
+            "scores": {
+              "return": 4.72,
+              "sharpe": 6.33,
+              "drawdown": 16.22,
+              "calmar": 0.25,
+              "winrate": 4.64
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "3.61%",
+              "年化收益率": "0.51%",
+              "最大回撤": "-9.73%",
+              "年化波动率": "6.31%",
+              "夏普比率": -0.24,
+              "总交易次数": 96,
+              "总交易成本": "0元",
+              "最终资金": "20722元"
+            },
+            "params": {
+              "momentum_weight": 0.4,
+              "bollinger_weight": 0.15,
+              "meanrev_weight": 0.15,
+              "take_profit": 0.3,
+              "stop_loss": 0.08,
+              "top_n": 5,
+              "rebalance_freq": "Q"
+            }
+          },
+          {
+            "name": "GS-0.40_B0.20_R0.20_TP0.20_SL0.12_N3_Q",
+            "total_score": 31.19,
+            "annual_return": 2.76,
+            "sharpe": 0.07,
+            "max_drawdown": -19.01,
+            "calmar": 0.15,
+            "win_rate": 55.2,
+            "total_return": 20.97,
+            "final_value": 24193.0,
+            "trade_count": 88,
+            "verdict": "不及格 ✗",
+            "scores": {
+              "return": 6.65,
+              "sharpe": 8.92,
+              "drawdown": 8.79,
+              "calmar": 0.75,
+              "winrate": 6.08
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "20.97%",
+              "年化收益率": "2.76%",
+              "最大回撤": "-19.01%",
+              "年化波动率": "10.63%",
+              "夏普比率": 0.07,
+              "总交易次数": 88,
+              "总交易成本": "0元",
+              "最终资金": "24193元"
+            },
+            "params": {
+              "momentum_weight": 0.4,
+              "bollinger_weight": 0.2,
+              "meanrev_weight": 0.2,
+              "take_profit": 0.2,
+              "stop_loss": 0.12,
+              "top_n": 3,
+              "rebalance_freq": "Q"
+            }
+          },
+          {
+            "name": "GS-0.40_B0.20_R0.15_TP0.30_SL0.10_N5_Q",
+            "total_score": 31.18,
+            "annual_return": 0.6,
+            "sharpe": -0.2,
+            "max_drawdown": -11.53,
+            "calmar": 0.05,
+            "win_rate": 51.7,
+            "total_return": 4.26,
+            "final_value": 20852.0,
+            "trade_count": 100,
+            "verdict": "不及格 ✗",
+            "scores": {
+              "return": 4.8,
+              "sharpe": 6.67,
+              "drawdown": 14.78,
+              "calmar": 0.25,
+              "winrate": 4.68
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "4.26%",
+              "年化收益率": "0.60%",
+              "最大回撤": "-11.53%",
+              "年化波动率": "7.06%",
+              "夏普比率": -0.2,
+              "总交易次数": 100,
+              "总交易成本": "0元",
+              "最终资金": "20852元"
+            },
+            "params": {
+              "momentum_weight": 0.4,
+              "bollinger_weight": 0.2,
+              "meanrev_weight": 0.15,
+              "take_profit": 0.3,
+              "stop_loss": 0.1,
+              "top_n": 5,
+              "rebalance_freq": "Q"
+            }
+          },
+          {
+            "name": "GS-0.45_B0.15_R0.10_TP0.20_SL0.08_N5_Q",
+            "total_score": 30.22,
+            "annual_return": 0.96,
+            "sharpe": -0.16,
+            "max_drawdown": -14.3,
+            "calmar": 0.07,
+            "win_rate": 53.0,
+            "total_return": 6.9,
+            "final_value": 21381.0,
+            "trade_count": 100,
+            "verdict": "不及格 ✗",
+            "scores": {
+              "return": 5.11,
+              "sharpe": 7.0,
+              "drawdown": 12.56,
+              "calmar": 0.35,
+              "winrate": 5.2
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "6.90%",
+              "年化收益率": "0.96%",
+              "最大回撤": "-14.30%",
+              "年化波动率": "6.43%",
+              "夏普比率": -0.16,
+              "总交易次数": 100,
+              "总交易成本": "0元",
+              "最终资金": "21381元"
+            },
+            "params": {
+              "momentum_weight": 0.45,
+              "bollinger_weight": 0.15,
+              "meanrev_weight": 0.1,
+              "take_profit": 0.2,
+              "stop_loss": 0.08,
+              "top_n": 5,
+              "rebalance_freq": "Q"
+            }
+          },
+          {
+            "name": "GS-0.35_B0.20_R0.15_TP0.25_SL0.08_N5_Q",
+            "total_score": 29.7,
+            "annual_return": 0.86,
+            "sharpe": -0.18,
+            "max_drawdown": -14.41,
+            "calmar": 0.06,
+            "win_rate": 52.7,
+            "total_return": 6.16,
+            "final_value": 21233.0,
+            "trade_count": 102,
+            "verdict": "不及格 ✗",
+            "scores": {
+              "return": 5.02,
+              "sharpe": 6.83,
+              "drawdown": 12.47,
+              "calmar": 0.3,
+              "winrate": 5.08
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "6.16%",
+              "年化收益率": "0.86%",
+              "最大回撤": "-14.41%",
+              "年化波动率": "6.43%",
+              "夏普比率": -0.18,
+              "总交易次数": 102,
+              "总交易成本": "0元",
+              "最终资金": "21233元"
+            },
+            "params": {
+              "momentum_weight": 0.35,
+              "bollinger_weight": 0.2,
+              "meanrev_weight": 0.15,
+              "take_profit": 0.25,
+              "stop_loss": 0.08,
+              "top_n": 5,
+              "rebalance_freq": "Q"
+            }
+          },
+          {
+            "name": "GS-0.40_B0.30_R0.05_TP0.20_SL0.05_N5_M",
+            "total_score": 29.27,
+            "annual_return": 2.67,
+            "sharpe": 0.08,
+            "max_drawdown": -21.83,
+            "calmar": 0.12,
+            "win_rate": 56.4,
+            "total_return": 20.25,
+            "final_value": 24051.0,
+            "trade_count": 326,
+            "verdict": "不及格 ✗",
+            "scores": {
+              "return": 6.57,
+              "sharpe": 9.0,
+              "drawdown": 6.54,
+              "calmar": 0.6,
+              "winrate": 6.56
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "20.25%",
+              "年化收益率": "2.67%",
+              "最大回撤": "-21.83%",
+              "年化波动率": "8.28%",
+              "夏普比率": 0.08,
+              "总交易次数": 326,
+              "总交易成本": "0元",
+              "最终资金": "24051元"
+            },
+            "params": {
+              "momentum_weight": 0.4,
+              "bollinger_weight": 0.3,
+              "meanrev_weight": 0.05,
+              "take_profit": 0.2,
+              "stop_loss": 0.05,
+              "top_n": 5,
+              "rebalance_freq": "M"
+            }
+          },
+          {
+            "name": "GS-0.45_B0.15_R0.10_TP0.15_SL0.12_N4_Q",
+            "total_score": 28.62,
+            "annual_return": 1.11,
+            "sharpe": -0.11,
+            "max_drawdown": -16.84,
+            "calmar": 0.07,
+            "win_rate": 52.7,
+            "total_return": 8.05,
+            "final_value": 21610.0,
+            "trade_count": 90,
+            "verdict": "不及格 ✗",
+            "scores": {
+              "return": 5.24,
+              "sharpe": 7.42,
+              "drawdown": 10.53,
+              "calmar": 0.35,
+              "winrate": 5.08
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "8.05%",
+              "年化收益率": "1.11%",
+              "最大回撤": "-16.84%",
+              "年化波动率": "8.08%",
+              "夏普比率": -0.11,
+              "总交易次数": 90,
+              "总交易成本": "0元",
+              "最终资金": "21610元"
+            },
+            "params": {
+              "momentum_weight": 0.45,
+              "bollinger_weight": 0.15,
+              "meanrev_weight": 0.1,
+              "take_profit": 0.15,
+              "stop_loss": 0.12,
+              "top_n": 4,
+              "rebalance_freq": "Q"
+            }
+          },
+          {
+            "name": "GS-0.35_B0.20_R0.10_TP0.30_SL0.12_N5_M",
+            "total_score": 28.4,
+            "annual_return": 2.9,
+            "sharpe": 0.09,
+            "max_drawdown": -23.03,
+            "calmar": 0.13,
+            "win_rate": 55.8,
+            "total_return": 22.13,
+            "final_value": 24425.0,
+            "trade_count": 322,
+            "verdict": "不及格 ✗",
+            "scores": {
+              "return": 6.77,
+              "sharpe": 9.08,
+              "drawdown": 5.58,
+              "calmar": 0.65,
+              "winrate": 6.32
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "22.13%",
+              "年化收益率": "2.90%",
+              "最大回撤": "-23.03%",
+              "年化波动率": "9.95%",
+              "夏普比率": 0.09,
+              "总交易次数": 322,
+              "总交易成本": "0元",
+              "最终资金": "24425元"
+            },
+            "params": {
+              "momentum_weight": 0.35,
+              "bollinger_weight": 0.2,
+              "meanrev_weight": 0.1,
+              "take_profit": 0.3,
+              "stop_loss": 0.12,
+              "top_n": 5,
+              "rebalance_freq": "M"
+            }
+          },
+          {
+            "name": "GS-0.35_B0.20_R0.20_TP0.30_SL0.08_N5_Q",
+            "total_score": 28.3,
+            "annual_return": 0.48,
+            "sharpe": -0.23,
+            "max_drawdown": -14.46,
+            "calmar": 0.03,
+            "win_rate": 51.5,
+            "total_return": 3.42,
+            "final_value": 20685.0,
+            "trade_count": 106,
+            "verdict": "不及格 ✗",
+            "scores": {
+              "return": 4.7,
+              "sharpe": 6.42,
+              "drawdown": 12.43,
+              "calmar": 0.15,
+              "winrate": 4.6
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "3.42%",
+              "年化收益率": "0.48%",
+              "最大回撤": "-14.46%",
+              "年化波动率": "6.55%",
+              "夏普比率": -0.23,
+              "总交易次数": 106,
+              "总交易成本": "0元",
+              "最终资金": "20685元"
+            },
+            "params": {
+              "momentum_weight": 0.35,
+              "bollinger_weight": 0.2,
+              "meanrev_weight": 0.2,
+              "take_profit": 0.3,
+              "stop_loss": 0.08,
+              "top_n": 5,
+              "rebalance_freq": "Q"
+            }
+          },
+          {
+            "name": "GS-0.45_B0.25_R0.05_TP0.25_SL0.10_N5_Q",
+            "total_score": 26.54,
+            "annual_return": -0.05,
+            "sharpe": -0.3,
+            "max_drawdown": -14.36,
+            "calmar": -0.0,
+            "win_rate": 49.9,
+            "total_return": -0.35,
+            "final_value": 19929.0,
+            "trade_count": 96,
+            "verdict": "不及格 ✗",
+            "scores": {
+              "return": 4.24,
+              "sharpe": 5.83,
+              "drawdown": 12.51,
+              "calmar": 0,
+              "winrate": 3.96
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "-0.35%",
+              "年化收益率": "-0.05%",
+              "最大回撤": "-14.36%",
+              "年化波动率": "6.88%",
+              "夏普比率": -0.3,
+              "总交易次数": 96,
+              "总交易成本": "0元",
+              "最终资金": "19929元"
+            },
+            "params": {
+              "momentum_weight": 0.45,
+              "bollinger_weight": 0.25,
+              "meanrev_weight": 0.05,
+              "take_profit": 0.25,
+              "stop_loss": 0.1,
+              "top_n": 5,
+              "rebalance_freq": "Q"
+            }
+          },
+          {
+            "name": "GS-0.45_B0.20_R0.10_TP0.15_SL0.08_N5_Q",
+            "total_score": 26.23,
+            "annual_return": 0.61,
+            "sharpe": -0.23,
+            "max_drawdown": -17.44,
+            "calmar": 0.03,
+            "win_rate": 52.0,
+            "total_return": 4.34,
+            "final_value": 20868.0,
+            "trade_count": 106,
+            "verdict": "不及格 ✗",
+            "scores": {
+              "return": 4.81,
+              "sharpe": 6.42,
+              "drawdown": 10.05,
+              "calmar": 0.15,
+              "winrate": 4.8
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "4.34%",
+              "年化收益率": "0.61%",
+              "最大回撤": "-17.44%",
+              "年化波动率": "6.10%",
+              "夏普比率": -0.23,
+              "总交易次数": 106,
+              "总交易成本": "0元",
+              "最终资金": "20868元"
+            },
+            "params": {
+              "momentum_weight": 0.45,
+              "bollinger_weight": 0.2,
+              "meanrev_weight": 0.1,
+              "take_profit": 0.15,
+              "stop_loss": 0.08,
+              "top_n": 5,
+              "rebalance_freq": "Q"
+            }
+          },
+          {
+            "name": "GS-0.35_B0.20_R0.20_TP0.25_SL0.10_N3_M",
+            "total_score": 25.99,
+            "annual_return": 4.14,
+            "sharpe": 0.17,
+            "max_drawdown": -28.61,
+            "calmar": 0.14,
+            "win_rate": 56.5,
+            "total_return": 32.83,
+            "final_value": 26566.0,
+            "trade_count": 250,
+            "verdict": "不及格 ✗",
+            "scores": {
+              "return": 7.83,
+              "sharpe": 9.75,
+              "drawdown": 1.11,
+              "calmar": 0.7,
+              "winrate": 6.6
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "32.83%",
+              "年化收益率": "4.14%",
+              "最大回撤": "-28.61%",
+              "年化波动率": "12.69%",
+              "夏普比率": 0.17,
+              "总交易次数": 250,
+              "总交易成本": "0元",
+              "最终资金": "26566元"
+            },
+            "params": {
+              "momentum_weight": 0.35,
+              "bollinger_weight": 0.2,
+              "meanrev_weight": 0.2,
+              "take_profit": 0.25,
+              "stop_loss": 0.1,
+              "top_n": 3,
+              "rebalance_freq": "M"
+            }
+          },
+          {
+            "name": "GS-0.45_B0.20_R0.05_TP0.25_SL0.08_N3_Q",
+            "total_score": 25.67,
+            "annual_return": -0.29,
+            "sharpe": -0.27,
+            "max_drawdown": -15.21,
+            "calmar": -0.02,
+            "win_rate": 49.3,
+            "total_return": -2.0,
+            "final_value": 19600.0,
+            "trade_count": 76,
+            "verdict": "不及格 ✗",
+            "scores": {
+              "return": 4.04,
+              "sharpe": 6.08,
+              "drawdown": 11.83,
+              "calmar": 0,
+              "winrate": 3.72
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "-2.00%",
+              "年化收益率": "-0.29%",
+              "最大回撤": "-15.21%",
+              "年化波动率": "8.38%",
+              "夏普比率": -0.27,
+              "总交易次数": 76,
+              "总交易成本": "0元",
+              "最终资金": "19600元"
+            },
+            "params": {
+              "momentum_weight": 0.45,
+              "bollinger_weight": 0.2,
+              "meanrev_weight": 0.05,
+              "take_profit": 0.25,
+              "stop_loss": 0.08,
+              "top_n": 3,
+              "rebalance_freq": "Q"
+            }
+          },
+          {
+            "name": "GS-0.50_B0.20_R0.10_TP0.15_SL0.05_N5_M",
+            "total_score": 24.95,
+            "annual_return": 0.94,
+            "sharpe": -0.13,
+            "max_drawdown": -20.7,
+            "calmar": 0.05,
+            "win_rate": 52.3,
+            "total_return": 6.75,
+            "final_value": 21349.0,
+            "trade_count": 330,
+            "verdict": "不及格 ✗",
+            "scores": {
+              "return": 5.09,
+              "sharpe": 7.25,
+              "drawdown": 7.44,
+              "calmar": 0.25,
+              "winrate": 4.92
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "6.75%",
+              "年化收益率": "0.94%",
+              "最大回撤": "-20.70%",
+              "年化波动率": "8.28%",
+              "夏普比率": -0.13,
+              "总交易次数": 330,
+              "总交易成本": "0元",
+              "最终资金": "21349元"
+            },
+            "params": {
+              "momentum_weight": 0.5,
+              "bollinger_weight": 0.2,
+              "meanrev_weight": 0.1,
+              "take_profit": 0.15,
+              "stop_loss": 0.05,
+              "top_n": 5,
+              "rebalance_freq": "M"
+            }
+          },
+          {
+            "name": "GS-0.35_B0.15_R0.05_TP0.20_SL0.08_N5_M",
+            "total_score": 24.94,
+            "annual_return": 2.35,
+            "sharpe": 0.04,
+            "max_drawdown": -25.65,
+            "calmar": 0.09,
+            "win_rate": 55.1,
+            "total_return": 17.66,
+            "final_value": 23533.0,
+            "trade_count": 320,
+            "verdict": "不及格 ✗",
+            "scores": {
+              "return": 6.3,
+              "sharpe": 8.67,
+              "drawdown": 3.48,
+              "calmar": 0.45,
+              "winrate": 6.04
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "17.66%",
+              "年化收益率": "2.35%",
+              "最大回撤": "-25.65%",
+              "年化波动率": "9.18%",
+              "夏普比率": 0.04,
+              "总交易次数": 320,
+              "总交易成本": "0元",
+              "最终资金": "23533元"
+            },
+            "params": {
+              "momentum_weight": 0.35,
+              "bollinger_weight": 0.15,
+              "meanrev_weight": 0.05,
+              "take_profit": 0.2,
+              "stop_loss": 0.08,
+              "top_n": 5,
+              "rebalance_freq": "M"
+            }
+          },
+          {
+            "name": "GS-0.35_B0.15_R0.15_TP0.20_SL0.10_N3_Q",
+            "total_score": 24.55,
+            "annual_return": -0.31,
+            "sharpe": -0.27,
+            "max_drawdown": -16.59,
+            "calmar": -0.02,
+            "win_rate": 49.3,
+            "total_return": -2.12,
+            "final_value": 19576.0,
+            "trade_count": 74,
+            "verdict": "不及格 ✗",
+            "scores": {
+              "return": 4.02,
+              "sharpe": 6.08,
+              "drawdown": 10.73,
+              "calmar": 0,
+              "winrate": 3.72
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "-2.12%",
+              "年化收益率": "-0.31%",
+              "最大回撤": "-16.59%",
+              "年化波动率": "8.67%",
+              "夏普比率": -0.27,
+              "总交易次数": 74,
+              "总交易成本": "0元",
+              "最终资金": "19576元"
+            },
+            "params": {
+              "momentum_weight": 0.35,
+              "bollinger_weight": 0.15,
+              "meanrev_weight": 0.15,
+              "take_profit": 0.2,
+              "stop_loss": 0.1,
+              "top_n": 3,
+              "rebalance_freq": "Q"
+            }
+          },
+          {
+            "name": "GS-0.45_B0.15_R0.15_TP0.30_SL0.08_N5_M",
+            "total_score": 23.98,
+            "annual_return": 1.57,
+            "sharpe": -0.05,
+            "max_drawdown": -24.15,
+            "calmar": 0.07,
+            "win_rate": 53.5,
+            "total_return": 11.49,
+            "final_value": 22298.0,
+            "trade_count": 310,
+            "verdict": "不及格 ✗",
+            "scores": {
+              "return": 5.63,
+              "sharpe": 7.92,
+              "drawdown": 4.68,
+              "calmar": 0.35,
+              "winrate": 5.4
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "11.49%",
+              "年化收益率": "1.57%",
+              "最大回撤": "-24.15%",
+              "年化波动率": "9.06%",
+              "夏普比率": -0.05,
+              "总交易次数": 310,
+              "总交易成本": "0元",
+              "最终资金": "22298元"
+            },
+            "params": {
+              "momentum_weight": 0.45,
+              "bollinger_weight": 0.15,
+              "meanrev_weight": 0.15,
+              "take_profit": 0.3,
+              "stop_loss": 0.08,
+              "top_n": 5,
+              "rebalance_freq": "M"
+            }
+          },
+          {
+            "name": "GS-0.50_B0.15_R0.10_TP0.30_SL0.05_N5_Q",
+            "total_score": 23.91,
+            "annual_return": 0.29,
+            "sharpe": -0.27,
+            "max_drawdown": -18.95,
+            "calmar": 0.02,
+            "win_rate": 50.9,
+            "total_return": 2.03,
+            "final_value": 20405.0,
+            "trade_count": 106,
+            "verdict": "不及格 ✗",
+            "scores": {
+              "return": 4.53,
+              "sharpe": 6.08,
+              "drawdown": 8.84,
+              "calmar": 0.1,
+              "winrate": 4.36
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "2.03%",
+              "年化收益率": "0.29%",
+              "最大回撤": "-18.95%",
+              "年化波动率": "6.43%",
+              "夏普比率": -0.27,
+              "总交易次数": 106,
+              "总交易成本": "0元",
+              "最终资金": "20405元"
+            },
+            "params": {
+              "momentum_weight": 0.5,
+              "bollinger_weight": 0.15,
+              "meanrev_weight": 0.1,
+              "take_profit": 0.3,
+              "stop_loss": 0.05,
+              "top_n": 5,
+              "rebalance_freq": "Q"
+            }
+          },
+          {
+            "name": "GS-0.35_B0.15_R0.15_TP0.30_SL0.12_N3_M",
+            "total_score": 22.87,
+            "annual_return": 3.44,
+            "sharpe": 0.1,
+            "max_drawdown": -31.67,
+            "calmar": 0.11,
+            "win_rate": 54.8,
+            "total_return": 26.72,
+            "final_value": 25343.0,
+            "trade_count": 254,
+            "verdict": "不及格 ✗",
+            "scores": {
+              "return": 7.23,
+              "sharpe": 9.17,
+              "drawdown": 0,
+              "calmar": 0.55,
+              "winrate": 5.92
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "26.72%",
+              "年化收益率": "3.44%",
+              "最大回撤": "-31.67%",
+              "年化波动率": "14.46%",
+              "夏普比率": 0.1,
+              "总交易次数": 254,
+              "总交易成本": "0元",
+              "最终资金": "25343元"
+            },
+            "params": {
+              "momentum_weight": 0.35,
+              "bollinger_weight": 0.15,
+              "meanrev_weight": 0.15,
+              "take_profit": 0.3,
+              "stop_loss": 0.12,
+              "top_n": 3,
+              "rebalance_freq": "M"
+            }
+          },
+          {
+            "name": "GS-0.55_B0.20_R0.05_TP0.15_SL0.08_N2_M",
+            "total_score": 22.81,
+            "annual_return": 1.2,
+            "sharpe": -0.07,
+            "max_drawdown": -24.13,
+            "calmar": 0.05,
+            "win_rate": 52.0,
+            "total_return": 8.69,
+            "final_value": 21738.0,
+            "trade_count": 176,
+            "verdict": "不及格 ✗",
+            "scores": {
+              "return": 5.31,
+              "sharpe": 7.75,
+              "drawdown": 4.7,
+              "calmar": 0.25,
+              "winrate": 4.8
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "8.69%",
+              "年化收益率": "1.20%",
+              "最大回撤": "-24.13%",
+              "年化波动率": "11.93%",
+              "夏普比率": -0.07,
+              "总交易次数": 176,
+              "总交易成本": "0元",
+              "最终资金": "21738元"
+            },
+            "params": {
+              "momentum_weight": 0.55,
+              "bollinger_weight": 0.2,
+              "meanrev_weight": 0.05,
+              "take_profit": 0.15,
+              "stop_loss": 0.08,
+              "top_n": 2,
+              "rebalance_freq": "M"
+            }
+          },
+          {
+            "name": "GS-0.40_B0.20_R0.10_TP0.15_SL0.05_N3_Q",
+            "total_score": 22.59,
+            "annual_return": 0.47,
+            "sharpe": -0.21,
+            "max_drawdown": -21.63,
+            "calmar": 0.02,
+            "win_rate": 51.3,
+            "total_return": 3.33,
+            "final_value": 20666.0,
+            "trade_count": 82,
+            "verdict": "不及格 ✗",
+            "scores": {
+              "return": 4.69,
+              "sharpe": 6.58,
+              "drawdown": 6.7,
+              "calmar": 0.1,
+              "winrate": 4.52
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "3.33%",
+              "年化收益率": "0.47%",
+              "最大回撤": "-21.63%",
+              "年化波动率": "7.36%",
+              "夏普比率": -0.21,
+              "总交易次数": 82,
+              "总交易成本": "0元",
+              "最终资金": "20666元"
+            },
+            "params": {
+              "momentum_weight": 0.4,
+              "bollinger_weight": 0.2,
+              "meanrev_weight": 0.1,
+              "take_profit": 0.15,
+              "stop_loss": 0.05,
+              "top_n": 3,
+              "rebalance_freq": "Q"
+            }
+          },
+          {
+            "name": "GS-0.40_B0.25_R0.05_TP0.20_SL0.10_N2_M",
+            "total_score": 22.52,
+            "annual_return": 1.78,
+            "sharpe": -0.02,
+            "max_drawdown": -26.31,
+            "calmar": 0.07,
+            "win_rate": 53.1,
+            "total_return": 13.14,
+            "final_value": 22627.0,
+            "trade_count": 176,
+            "verdict": "不及格 ✗",
+            "scores": {
+              "return": 5.81,
+              "sharpe": 8.17,
+              "drawdown": 2.95,
+              "calmar": 0.35,
+              "winrate": 5.24
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "13.14%",
+              "年化收益率": "1.78%",
+              "最大回撤": "-26.31%",
+              "年化波动率": "11.44%",
+              "夏普比率": -0.02,
+              "总交易次数": 176,
+              "总交易成本": "0元",
+              "最终资金": "22627元"
+            },
+            "params": {
+              "momentum_weight": 0.4,
+              "bollinger_weight": 0.25,
+              "meanrev_weight": 0.05,
+              "take_profit": 0.2,
+              "stop_loss": 0.1,
+              "top_n": 2,
+              "rebalance_freq": "M"
+            }
+          },
+          {
+            "name": "GS-0.35_B0.20_R0.15_TP0.25_SL0.08_N4_M",
+            "total_score": 22.13,
+            "annual_return": 1.78,
+            "sharpe": -0.02,
+            "max_drawdown": -26.95,
+            "calmar": 0.07,
+            "win_rate": 53.4,
+            "total_return": 13.1,
+            "final_value": 22620.0,
+            "trade_count": 290,
+            "verdict": "不及格 ✗",
+            "scores": {
+              "return": 5.81,
+              "sharpe": 8.17,
+              "drawdown": 2.44,
+              "calmar": 0.35,
+              "winrate": 5.36
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "13.10%",
+              "年化收益率": "1.78%",
+              "最大回撤": "-26.95%",
+              "年化波动率": "10.43%",
+              "夏普比率": -0.02,
+              "总交易次数": 290,
+              "总交易成本": "0元",
+              "最终资金": "22620元"
+            },
+            "params": {
+              "momentum_weight": 0.35,
+              "bollinger_weight": 0.2,
+              "meanrev_weight": 0.15,
+              "take_profit": 0.25,
+              "stop_loss": 0.08,
+              "top_n": 4,
+              "rebalance_freq": "M"
+            }
+          },
+          {
+            "name": "GS-0.50_B0.15_R0.05_TP0.25_SL0.08_N5_M",
+            "total_score": 21.23,
+            "annual_return": -0.25,
+            "sharpe": -0.21,
+            "max_drawdown": -21.53,
+            "calmar": -0.01,
+            "win_rate": 49.5,
+            "total_return": -1.74,
+            "final_value": 19652.0,
+            "trade_count": 326,
+            "verdict": "不及格 ✗",
+            "scores": {
+              "return": 4.07,
+              "sharpe": 6.58,
+              "drawdown": 6.78,
+              "calmar": 0,
+              "winrate": 3.8
+            },
+            "stats": {
+              "回测天数": 2555,
+              "回测年数": 7.0,
+              "总收益率": "-1.74%",
+              "年化收益率": "-0.25%",
+              "最大回撤": "-21.53%",
+              "年化波动率": "10.47%",
+              "夏普比率": -0.21,
+              "总交易次数": 326,
+              "总交易成本": "0元",
+              "最终资金": "19652元"
+            },
+            "params": {
+              "momentum_weight": 0.5,
+              "bollinger_weight": 0.15,
+              "meanrev_weight": 0.05,
+              "take_profit": 0.25,
+              "stop_loss": 0.08,
+              "top_n": 5,
+              "rebalance_freq": "M"
+            }
+          }
+        ]
+      },
+      "metrics": {}
+    },
+    {
+      "schema_version": "model-experiment-import/v1",
+      "source_path": "top_results_sector.json",
+      "source_sha256": "60480f72bc879531b02fbda01b57ee7b7d77fc6c18a8a05892a7ca93bb0901af",
+      "imported_at": "2026-08-04T14:59:43.145052+00:00",
+      "artifact_type": "unknown_json_artifact",
+      "experiment_name": "top_results_sector",
+      "configuration": {},
+      "metrics": {}
+    }
+  ],
+  "failures": [
+    {
+      "source_path": "bb_grid_search_20260712_152341.json",
+      "error": "ModelExperimentImportError: experiment artifact must contain a JSON object"
+    },
+    {
+      "source_path": "full_sweep.json",
+      "error": "ModelExperimentImportError: experiment artifact must contain a JSON object"
+    },
+    {
+      "source_path": "ma_cross_sweep.json",
+      "error": "ModelExperimentImportError: experiment artifact must contain a JSON object"
+    },
+    {
+      "source_path": "pipeline_sweep.json",
+      "error": "ModelExperimentImportError: experiment artifact must contain a JSON object"
+    },
+    {
+      "source_path": "universal_eval.json",
+      "error": "ModelExperimentImportError: experiment artifact must contain a JSON object"
+    }
+  ],
+  "note": "只读目录；未执行任何历史策略。"
+}

@@ -1,0 +1,37 @@
+{
+  "candidate_horizons": [],
+  "horizon_summary": [
+    {
+      "horizon_bars": 1,
+      "mean_net_excess_return": -0.002047150151865763,
+      "observations": 230
+    },
+    {
+      "horizon_bars": 3,
+      "mean_net_excess_return": -0.00044277612375653695,
+      "observations": 230
+    },
+    {
+      "horizon_bars": 5,
+      "mean_net_excess_return": -0.005032817995367716,
+      "observations": 226
+    },
+    {
+      "horizon_bars": 10,
+      "mean_net_excess_return": -0.006350364611036641,
+      "observations": 226
+    },
+    {
+      "horizon_bars": 20,
+      "mean_net_excess_return": -0.02011412747727531,
+      "observations": 216
+    }
+  ],
+  "limitations": [
+    "未做显著性检验",
+    "未模拟涨跌停/停牌",
+    "规则参数尚未进行训练-验证隔离"
+  ],
+  "status": "draft",
+  "summary": "样本外候选 0 个；最小样本门槛 300"
+}

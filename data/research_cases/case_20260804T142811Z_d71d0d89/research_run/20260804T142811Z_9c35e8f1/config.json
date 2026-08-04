@@ -1,0 +1,152 @@
+{
+  "benchmark_dataset": "etf_cache",
+  "benchmark_snapshot_id": "sha256:4616a235ec2b071fc71e71734c76175fa7039becc7cc5f095bafe40c59be5522",
+  "benchmark_symbol": "000001",
+  "commission_bps_per_side": 3.0,
+  "dataset": "trend_cache",
+  "end": "2026-07-24",
+  "horizons": [
+    1,
+    3,
+    5,
+    10,
+    20
+  ],
+  "market_regime_window": 60,
+  "min_signal_amount": 50000000.0,
+  "out_of_sample_start": "2024-01-01",
+  "rule": {
+    "executable_from": "next_bar_open",
+    "expression": {
+      "all": [
+        {
+          "gte": [
+            {
+              "safe_div": [
+                {
+                  "metric": {
+                    "name": "lower_shadow",
+                    "offset": 0
+                  }
+                },
+                {
+                  "max": [
+                    {
+                      "metric": {
+                        "name": "body",
+                        "offset": 0
+                      }
+                    },
+                    0.01
+                  ]
+                }
+              ]
+            },
+            {
+              "param": "min_lower_shadow_body"
+            }
+          ]
+        },
+        {
+          "lte": [
+            {
+              "safe_div": [
+                {
+                  "metric": {
+                    "name": "upper_shadow",
+                    "offset": 0
+                  }
+                },
+                {
+                  "max": [
+                    {
+                      "metric": {
+                        "name": "range",
+                        "offset": 0
+                      }
+                    },
+                    0.01
+                  ]
+                }
+              ]
+            },
+            {
+              "param": "max_upper_shadow_range"
+            }
+          ]
+        },
+        {
+          "context": {
+            "min_count": 3,
+            "name": "lower_close_count",
+            "window": 5
+          }
+        }
+      ]
+    },
+    "id": "hammer",
+    "name_zh": "锤子线（工程近似）",
+    "observed_at": "bar_close",
+    "parameters": {
+      "max_upper_shadow_range": 0.15,
+      "min_lower_shadow_body": 2.0
+    },
+    "version": "1.0.0",
+    "warmup_bars": 5
+  },
+  "slippage_bps_per_side": 5.0,
+  "source_root": "H:\\股票模型\\Model\\data",
+  "start": "2020-01-01",
+  "symbols": [
+    "000001",
+    "000002",
+    "000003",
+    "000004",
+    "000005",
+    "000006",
+    "000007",
+    "000008",
+    "000009",
+    "000010",
+    "000011",
+    "000012",
+    "000013",
+    "000014",
+    "000015",
+    "000016",
+    "000017",
+    "000018",
+    "000019",
+    "000020",
+    "000021",
+    "000023",
+    "000024",
+    "000025",
+    "000026",
+    "000027",
+    "000028",
+    "000029",
+    "000030",
+    "000031",
+    "000032",
+    "000033",
+    "000034",
+    "000035",
+    "000036",
+    "000037",
+    "000038",
+    "000039",
+    "000040",
+    "000042",
+    "000045",
+    "000046",
+    "000047",
+    "000048",
+    "000049",
+    "000050",
+    "000055",
+    "000056",
+    "000058",
+    "000059"
+  ]
+}

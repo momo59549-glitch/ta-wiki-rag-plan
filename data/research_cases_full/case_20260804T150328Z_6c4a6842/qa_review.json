@@ -1,0 +1,15 @@
+{
+  "checks": {
+    "costs_recorded": true,
+    "dataset_snapshot_present": true,
+    "no_auto_publish": true,
+    "outcomes_present": true,
+    "required_artifacts": true,
+    "rule_hash_present": true,
+    "statistics_present": true
+  },
+  "minimum_oos_observations": 300,
+  "research_candidates": 0,
+  "status": "passed",
+  "summary": "结构化 QA 通过；规则仍需人工批准"
+}

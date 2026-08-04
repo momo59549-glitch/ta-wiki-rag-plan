@@ -1,0 +1,170 @@
+{
+  "candidate_horizons": [],
+  "candidate_hypotheses": [],
+  "disclaimer": "该草稿只整理统计证据；不是投资建议或自动发布指令。",
+  "limitations": [
+    "统计为正态近似，未做多重检验",
+    "日线可成交性为保守近似",
+    "候选仍需人工审批"
+  ],
+  "minimum_samples": 300,
+  "publication": "blocked_until_human_approval",
+  "rejected_groups": [
+    {
+      "confidence_interval": {
+        "lower": -0.003578887333496615,
+        "upper": 0.0005915604082245146
+      },
+      "horizon_bars": 1,
+      "market_regime": "bearish",
+      "mean_net_excess_return": -0.0014936634626360502,
+      "rejection_reasons": [
+        "insufficient_sample",
+        "non_positive_mean",
+        "confidence_interval_not_above_zero"
+      ],
+      "sample_size": 286,
+      "t_statistic": -1.4039387485919514
+    },
+    {
+      "confidence_interval": {
+        "lower": -0.00669377360175956,
+        "upper": -0.0026830680575781257
+      },
+      "horizon_bars": 1,
+      "market_regime": "bullish",
+      "mean_net_excess_return": -0.004688420829668843,
+      "rejection_reasons": [
+        "non_positive_mean",
+        "confidence_interval_not_above_zero"
+      ],
+      "sample_size": 331,
+      "t_statistic": -4.582303970855975
+    },
+    {
+      "confidence_interval": {
+        "lower": -0.006957957954788145,
+        "upper": 0.0014210561197660209
+      },
+      "horizon_bars": 3,
+      "market_regime": "bearish",
+      "mean_net_excess_return": -0.002768450917511062,
+      "rejection_reasons": [
+        "insufficient_sample",
+        "non_positive_mean",
+        "confidence_interval_not_above_zero"
+      ],
+      "sample_size": 275,
+      "t_statistic": -1.2951557409998171
+    },
+    {
+      "confidence_interval": {
+        "lower": -0.011145399301218353,
+        "upper": -0.003118431444720333
+      },
+      "horizon_bars": 3,
+      "market_regime": "bullish",
+      "mean_net_excess_return": -0.007131915372969343,
+      "rejection_reasons": [
+        "non_positive_mean",
+        "confidence_interval_not_above_zero"
+      ],
+      "sample_size": 331,
+      "t_statistic": -3.482833747862014
+    },
+    {
+      "confidence_interval": {
+        "lower": -0.00983846169258697,
+        "upper": 0.0016576862336145992
+      },
+      "horizon_bars": 5,
+      "market_regime": "bearish",
+      "mean_net_excess_return": -0.004090387729486185,
+      "rejection_reasons": [
+        "insufficient_sample",
+        "non_positive_mean",
+        "confidence_interval_not_above_zero"
+      ],
+      "sample_size": 276,
+      "t_statistic": -1.3947302494821636
+    },
+    {
+      "confidence_interval": {
+        "lower": -0.01772375833261287,
+        "upper": -0.007171370989940288
+      },
+      "horizon_bars": 5,
+      "market_regime": "bullish",
+      "mean_net_excess_return": -0.01244756466127658,
+      "rejection_reasons": [
+        "non_positive_mean",
+        "confidence_interval_not_above_zero"
+      ],
+      "sample_size": 332,
+      "t_statistic": -4.623935350189047
+    },
+    {
+      "confidence_interval": {
+        "lower": -0.019520948002751823,
+        "upper": -0.00013053457903848716
+      },
+      "horizon_bars": 10,
+      "market_regime": "bearish",
+      "mean_net_excess_return": -0.009825741290895154,
+      "rejection_reasons": [
+        "insufficient_sample",
+        "non_positive_mean",
+        "confidence_interval_not_above_zero"
+      ],
+      "sample_size": 267,
+      "t_statistic": -1.986352599167491
+    },
+    {
+      "confidence_interval": {
+        "lower": -0.014295387390945897,
+        "upper": 0.002759008415695166
+      },
+      "horizon_bars": 10,
+      "market_regime": "bullish",
+      "mean_net_excess_return": -0.005768189487625365,
+      "rejection_reasons": [
+        "non_positive_mean",
+        "confidence_interval_not_above_zero"
+      ],
+      "sample_size": 330,
+      "t_statistic": -1.3258099295837698
+    },
+    {
+      "confidence_interval": {
+        "lower": -0.00967430131996942,
+        "upper": 0.017172903212605693
+      },
+      "horizon_bars": 20,
+      "market_regime": "bearish",
+      "mean_net_excess_return": 0.0037493009463181355,
+      "rejection_reasons": [
+        "insufficient_sample",
+        "confidence_interval_not_above_zero"
+      ],
+      "sample_size": 266,
+      "t_statistic": 0.5474309113315076
+    },
+    {
+      "confidence_interval": {
+        "lower": -0.026339936815420687,
+        "upper": -0.0017105223908390303
+      },
+      "horizon_bars": 20,
+      "market_regime": "bullish",
+      "mean_net_excess_return": -0.014025229603129859,
+      "rejection_reasons": [
+        "non_positive_mean",
+        "confidence_interval_not_above_zero"
+      ],
+      "sample_size": 313,
+      "t_statistic": -2.23220450337657
+    }
+  ],
+  "status": "draft",
+  "summary": "统计候选 0 个；最小样本门槛 300"
+}

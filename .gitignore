@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+dist/
+build/
+
+# Local source books and generated run logs are not repository source files.
+data/books/*
+data/batch_logs/

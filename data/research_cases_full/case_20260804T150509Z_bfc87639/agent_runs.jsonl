@@ -1,0 +1,9 @@
+{"agent": "Coordinator", "artifacts": ["case.json"], "at": "2026-08-04T15:05:09.803285+00:00", "status": "completed", "summary": "研究案例已创建；规则发布权限关闭"}
+{"agent": "Data", "artifacts": ["research_run/20260804T150510Z_4d083587/config.json", "research_run/20260804T150510Z_4d083587/run.json"], "at": "2026-08-04T15:05:46.235903+00:00", "status": "completed", "summary": "已载入 96 个标的并冻结快照"}
+{"agent": "Scanner", "artifacts": ["research_run/20260804T150510Z_4d083587/observations.jsonl"], "at": "2026-08-04T15:05:46.235903+00:00", "status": "completed", "summary": "生成 1674 条 Observation"}
+{"agent": "Reviewer", "artifacts": ["research_run/20260804T150510Z_4d083587/outcomes.jsonl"], "at": "2026-08-04T15:05:46.235903+00:00", "status": "completed", "summary": "生成 8154 条 Outcome"}
+{"agent": "Research", "artifacts": ["hypothesis_draft.json", "statistics_out_of_sample.json"], "at": "2026-08-04T15:05:46.235903+00:00", "status": "completed", "summary": "统计候选 0 个；最小样本门槛 300"}
+{"agent": "Backtest", "artifacts": ["backtest_review.json"], "at": "2026-08-04T15:05:46.235903+00:00", "status": "completed", "summary": "已核对规则、快照和 Outcome 身份"}
+{"agent": "Knowledge", "artifacts": ["knowledge_card_draft.json"], "at": "2026-08-04T15:05:46.235903+00:00", "status": "draft", "summary": "仅生成草稿，不发布到规则库"}
+{"agent": "Report", "artifacts": ["research_run/20260804T150510Z_4d083587/report.md"], "at": "2026-08-04T15:05:46.235903+00:00", "status": "completed", "summary": "已生成含成本、基准和样本外分段的报告"}
+{"agent": "QA", "artifacts": ["qa_review.json"], "at": "2026-08-04T15:05:46.235903+00:00", "status": "passed", "summary": "结构化 QA 通过；规则仍需人工批准"}

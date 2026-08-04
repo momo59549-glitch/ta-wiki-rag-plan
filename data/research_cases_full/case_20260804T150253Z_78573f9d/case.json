@@ -1,0 +1,14 @@
+{
+  "case_id": "case_20260804T150253Z_78573f9d",
+  "created_at": "2026-08-04T15:03:28.156346+00:00",
+  "dataset_snapshot_id": "sha256:65ad9b0d4d7cf14510c3126e2351ed04e6087cf381e06d4ba41e3e2b7ca05869",
+  "publication": "blocked_until_human_approval",
+  "qa_status": "passed",
+  "research_run": "research_run/20260804T150253Z_bf290351",
+  "rule": {
+    "id": "hammer",
+    "semantic_hash": "sha256:0cb3281cb8829d69b375e7af756eeddfed73eb82247c302d05b9b1a0bdfb86e6",
+    "version": "1.0.0"
+  },
+  "state": "needs_more_evidence"
+}

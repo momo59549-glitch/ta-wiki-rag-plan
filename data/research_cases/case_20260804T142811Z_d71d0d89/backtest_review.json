@@ -1,0 +1,8 @@
+{
+  "dataset_snapshot_id": "sha256:b774e38966b95854223422c7bd19cc8471e8441187536acf5168b73cb93d1201",
+  "engine": "file_outcome_evaluator",
+  "note": "本阶段以预定义 Outcome 协议验证，复杂持仓回测仍待接入。",
+  "outcomes_checked": 2563,
+  "rule_semantic_hash": "sha256:0cb3281cb8829d69b375e7af756eeddfed73eb82247c302d05b9b1a0bdfb86e6",
+  "status": "completed"
+}

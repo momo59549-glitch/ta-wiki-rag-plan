@@ -1,0 +1,8 @@
+fastapi<1.0,>=0.115
+pydantic<3.0,>=2.0
+uvicorn[standard]<1.0,>=0.30
+pandas<4.0,>=2.2
+pyarrow<26,>=16
+
+[dev]
+pytest<9.0,>=8.0

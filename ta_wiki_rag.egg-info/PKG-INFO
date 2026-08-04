@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: ta-wiki-rag
+Version: 0.1.0
+Summary: 可追溯、可解释、可验证的技术分析知识与研究平台
+Requires-Python: >=3.12
+Requires-Dist: fastapi<1.0,>=0.115
+Requires-Dist: pydantic<3.0,>=2.0
+Requires-Dist: uvicorn[standard]<1.0,>=0.30
+Requires-Dist: pandas<4.0,>=2.2
+Requires-Dist: pyarrow<26,>=16
+Provides-Extra: dev
+Requires-Dist: pytest<9.0,>=8.0; extra == "dev"
