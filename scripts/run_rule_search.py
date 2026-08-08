@@ -33,6 +33,7 @@ def main() -> int:
     parser.add_argument("--stress-multipliers", type=str, default="2,3")
     parser.add_argument("--min-horizons", type=int, default=2)
     parser.add_argument("--dedup-jaccard", type=float, default=0.85)
+    parser.add_argument("--require-both-regimes", action="store_true")
     args = parser.parse_args()
 
     horizons = tuple(int(item) for item in args.horizons.split(",") if item.strip())
@@ -50,6 +51,7 @@ def main() -> int:
         cost_stress_multipliers=tuple(float(item) for item in args.stress_multipliers.split(",") if item.strip()),
         require_multiple_horizons=args.min_horizons,
         dedup_jaccard=args.dedup_jaccard,
+        require_both_regimes=args.require_both_regimes,
     )
     active, universe_meta = load_point_in_time_universe(args.universe_manifest, args.end)
     symbols = active[: args.symbol_limit]
@@ -77,7 +79,7 @@ def main() -> int:
         f"- 开发股票池：{summary['loaded_symbols']} 只载入，{summary['skipped_symbols']} 只跳过",
         f"- 研究期：`{args.start}` → `{args.end}`，验证期：`{args.oos_start}` 起",
         f"- 最终锁箱：`{args.lockbox_start}` 起（本轮未读取）",
-        f"- 筛选口径：2×/3× 成本压力 + 至少 {args.min_horizons} 个周期 + 相关性去重（Jaccard {args.dedup_jaccard}）",
+        f"- 筛选口径：2×/3× 成本压力 + 至少 {args.min_horizons} 个周期 + 相关性去重（Jaccard {args.dedup_jaccard}）" + (" + 双市场状态一致" if args.require_both_regimes else ""),
         "", "## 通过筛选的候选（按样本外平均净超额排序）", "",
         "| 规则 | 参数 | 最佳周期 | 市场状态 | 样本外均值 | 样本 | FDR p | 通过周期数 | 信号数 |", "|---|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]

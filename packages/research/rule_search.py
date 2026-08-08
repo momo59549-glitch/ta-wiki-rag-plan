@@ -53,6 +53,7 @@ class SearchConfig:
     cost_stress_multipliers: tuple[float, ...] = (2.0, 3.0)
     require_multiple_horizons: int = 2
     dedup_jaccard: float = 0.85
+    require_both_regimes: bool = False
 
     def __post_init__(self) -> None:
         if not self.horizons or any(item < 1 for item in self.horizons):
@@ -607,7 +608,12 @@ def screen_candidates(
             "statistics": statistics,
             "stress_statistics": stress_statistics,
         }
-    _apply_cross_candidate_fdr(results, config.min_out_of_sample_observations, min_horizons=config.require_multiple_horizons)
+    _apply_cross_candidate_fdr(
+        results,
+        config.min_out_of_sample_observations,
+        min_horizons=config.require_multiple_horizons,
+        require_both_regimes=config.require_both_regimes,
+    )
     for multiplier in config.cost_stress_multipliers:
         _apply_cross_candidate_fdr(results, config.min_out_of_sample_observations, stress_key=str(multiplier))
     if config.dedup_jaccard > 0.0:
@@ -650,6 +656,7 @@ def screen_candidates(
             "cost_stress_multipliers": list(config.cost_stress_multipliers),
             "require_multiple_horizons": config.require_multiple_horizons,
             "dedup_jaccard": config.dedup_jaccard,
+            "require_both_regimes": config.require_both_regimes,
         },
         "loaded_symbols": loaded,
         "skipped_symbols": skipped,
@@ -683,7 +690,14 @@ def _base_columns(frame: pd.DataFrame) -> dict[str, pd.Series]:
     }
 
 
-def _apply_cross_candidate_fdr(results: dict[str, Any], min_samples: int, *, stress_key: str | None = None, min_horizons: int = 1) -> None:
+def _apply_cross_candidate_fdr(
+    results: dict[str, Any],
+    min_samples: int,
+    *,
+    stress_key: str | None = None,
+    min_horizons: int = 1,
+    require_both_regimes: bool = False,
+) -> None:
     all_groups: list[tuple[str, dict[str, Any]]] = []
     stats_key = "statistics" if stress_key is None else "stress_statistics"
     for semantic_hash, record in results.items():
@@ -741,11 +755,19 @@ def _apply_cross_candidate_fdr(results: dict[str, Any], min_samples: int, *, str
             else None
         )
         distinct_horizons = len({item["horizon_bars"] for item in passing})
-        if passing and distinct_horizons >= min_horizons:
+        regimes = {item["market_regime"] for item in passing}
+        regime_ok = (not require_both_regimes) or ({"bullish", "bearish"} <= regimes)
+        if passing and distinct_horizons >= min_horizons and regime_ok:
             record["status"] = "passed_screen"
         else:
             record["status"] = "rejected"
-            record["rejection_reason"] = "insufficient_multiple_horizons" if passing else "no_passing_group"
+            record["rejection_reason"] = (
+                "insufficient_both_regimes"
+                if passing and not regime_ok
+                else "insufficient_multiple_horizons"
+                if passing
+                else "no_passing_group"
+            )
 
 
 def _group_passes(group: dict[str, Any], min_samples: int) -> bool:
@@ -884,6 +906,7 @@ def build_search_protocol(
             "cost_stress_multipliers": list(config.cost_stress_multipliers),
             "require_multiple_horizons": config.require_multiple_horizons,
             "dedup_jaccard": config.dedup_jaccard,
+            "require_both_regimes": config.require_both_regimes,
         },
         "publication": "blocked_until_human_approval_and_final_lockbox",
     }
