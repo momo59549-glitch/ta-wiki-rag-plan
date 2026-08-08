@@ -81,6 +81,10 @@ powershell -ExecutionPolicy Bypass -File scripts\start_local_stack.ps1 -PromptFo
 - 见 `docs/VALIDATION_AND_ENGINE_REFACTOR.md`。
 - 若要取得可发布级别的股票池证据，使用 `--universe-manifest data/universes/a_share_history.jsonl --universe-as-of YYYY-MM-DD`；不提供清单时 QA 会标记为 `passed_with_limitations`，不能进入批准流程。
 
+## 自动规则搜索（受控）
+
+框架新增有界、可审计的自动规则搜索筛选层：预登记 178 个候选（蜡烛形态、均线金叉死叉、MACD、RSI、布林带、动量、突破、放量），使用与正式流水线一致的向量化求值和跨候选 FDR 校正，产出试错台账。**筛选通过不等于规则有效**，任何候选晋升都必须走冻结 Campaign、最终锁箱与人工审批。详见 `docs/RULE_SEARCH.md`。
+
 ## 不可绕过的门禁
 
 - LLM 不直接执行任意代码或发布规则；

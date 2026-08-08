@@ -22,3 +22,4 @@ data/tushare_sync/
 data/runtime/
 data/batch_checkpoints/*.log
 data/universes/*.log
+data/rule_search/

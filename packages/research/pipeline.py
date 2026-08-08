@@ -10,6 +10,7 @@ from packages.contracts import Candle
 from packages.market_data import LocalParquetMarketData, active_on, load_universe_memberships
 from packages.research.json_store import write_json, write_jsonl
 from packages.research.execution import ExecutionConfig, assess_execution
+from packages.research.indicators import candles_to_frame, compute_indicators
 from packages.research.models import Observation, Outcome, ResearchRun
 from packages.rule_dsl import CompiledRule
 from packages.rule_engine import evaluate
@@ -175,8 +176,12 @@ class FileResearchPipeline:
                 series = []
             if series:
                 loaded += 1
+                indicators = None
+                if rule.required_indicators:
+                    columns = compute_indicators(candles_to_frame(series), needs=rule.required_indicators)
+                    indicators = {key: columns[key].tolist() for key in rule.required_indicators}
                 for index in range(rule.max_lookback, len(series) - 1):
-                    result = evaluate(series, index, rule)
+                    result = evaluate(series, index, rule, indicators=indicators)
                     if result.status != "matched" or result.executable_from is None:
                         continue
                     # Membership must be true on the actual observation date, not
