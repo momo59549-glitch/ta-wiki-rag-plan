@@ -30,6 +30,7 @@ def main() -> int:
     parser.add_argument("--timeout", type=float, default=30)
     parser.add_argument("--retries", type=int, default=3)
     parser.add_argument("--delay", type=float, default=0.2)
+    parser.add_argument("--st-manifest", type=Path)
     args = parser.parse_args()
     result = sync_missing_tushare_daily(
         manifest_path=args.manifest, existing_dataset_dir=args.model_data / args.existing_dataset,
@@ -37,7 +38,7 @@ def main() -> int:
         checkpoint_path=Path("data/tushare_sync/a_share_daily.checkpoint.json"),
         progress_path=Path("data/tushare_sync/a_share_daily.progress.json"),
         start=args.start, end=args.end, limit=args.limit, timeout_seconds=args.timeout,
-        max_retries=args.retries, delay_seconds=args.delay,
+        max_retries=args.retries, delay_seconds=args.delay, st_manifest=args.st_manifest,
     )
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0

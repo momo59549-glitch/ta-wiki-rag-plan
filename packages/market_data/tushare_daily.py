@@ -15,12 +15,14 @@ from typing import Any
 import pandas as pd
 import requests
 
+from packages.market_data.universe import active_on, load_universe_memberships
+
 
 def sync_missing_tushare_daily(
     *, manifest_path: Path, existing_dataset_dir: Path, output_dataset_dir: Path,
     checkpoint_path: Path, progress_path: Path, start: date, end: date,
     token: str | None = None, limit: int | None = None, timeout_seconds: float = 30,
-    max_retries: int = 3, delay_seconds: float = 0.2,
+    max_retries: int = 3, delay_seconds: float = 0.2, st_manifest: Path | None = None,
 ) -> dict[str, Any]:
     """Fetch missing L/D/P symbols and write compatible Parquet files.
 
@@ -31,6 +33,7 @@ def sync_missing_tushare_daily(
     token = token or os.environ.get("TUSHARE_TOKEN")
     if not token:
         raise RuntimeError("未设置 TUSHARE_TOKEN；请通过环境变量提供")
+    st_timeline = load_universe_memberships(st_manifest) if st_manifest else None
     if not manifest_path.is_file() or not existing_dataset_dir.is_dir():
         raise FileNotFoundError("股票池清单或现有行情目录不存在")
     output_dataset_dir.mkdir(parents=True, exist_ok=True)
@@ -56,7 +59,7 @@ def sync_missing_tushare_daily(
             "failed": len(failed), "current_symbol": symbol, "queue_position": offset, "output_dataset": str(output_dataset_dir), "updated_at": _now(),
         })
         try:
-            frame = _fetch_symbol_frame(token, row, max(start, date.fromisoformat(row["active_from"])), end, timeout_seconds, max_retries)
+            frame = _fetch_symbol_frame(token, row, max(start, date.fromisoformat(row["active_from"])), end, timeout_seconds, max_retries, st_timeline=st_timeline)
             if frame.empty:
                 raise RuntimeError("无日线数据")
             temporary = output_dataset_dir / f"{symbol}.parquet.tmp"
@@ -74,6 +77,7 @@ def sync_missing_tushare_daily(
         "status": "completed", "total": len(targets),
         "completed": len(completed & {row["symbol"] for row in targets}), "failed": len(failed),
         "output_dataset": str(output_dataset_dir), "checkpoint": str(checkpoint_path),
+        "is_st_source": "namechange_timeline" if st_timeline else "unvalidated_false",
     }
     _write_json(progress_path, {**result, "current_symbol": None, "updated_at": _now()})
     return result
@@ -83,11 +87,13 @@ def sync_tushare_incremental(
     *, manifest_path: Path, output_dataset_dir: Path, checkpoint_path: Path,
     progress_path: Path, start: date, end: date, token: str | None = None,
     timeout_seconds: float = 30, max_retries: int = 3, delay_seconds: float = 0.2,
+    st_manifest: Path | None = None,
 ) -> dict[str, Any]:
     """Fetch open trade dates into a raw-price overlay without touching base data."""
     token = token or os.environ.get("TUSHARE_TOKEN")
     if not token:
         raise RuntimeError("未设置 TUSHARE_TOKEN；请通过环境变量提供")
+    st_timeline = load_universe_memberships(st_manifest) if st_manifest else None
     if start > end:
         raise ValueError("start 不能晚于 end")
     rows = [json.loads(line) for line in manifest_path.read_text(encoding="utf-8").splitlines() if line.strip()]
@@ -110,7 +116,7 @@ def sync_tushare_incremental(
                 adj_factor = factor_by_code.get(item.get("ts_code"))
                 if not record or adj_factor is None:
                     continue
-                _merge_incremental_row(output_dataset_dir / f"{record['symbol']}.parquet", record, item, adj_factor)
+                _merge_incremental_row(output_dataset_dir / f"{record['symbol']}.parquet", record, item, adj_factor, st_timeline=st_timeline)
             completed.add(trade_date)
             failed.pop(trade_date, None)
         except Exception as exc:
@@ -118,20 +124,26 @@ def sync_tushare_incremental(
         _write_json(checkpoint_path, {"completed_trade_dates": sorted(completed), "failed_trade_dates": failed, "updated_at": _now()})
         if delay_seconds:
             time.sleep(delay_seconds)
-    result = {"status": "completed", "total": len(trade_dates), "completed": len(completed & set(trade_dates)), "failed": len({key: value for key, value in failed.items() if key in trade_dates}), "output_dataset": str(output_dataset_dir)}
+    result = {
+        "status": "completed", "total": len(trade_dates), "completed": len(completed & set(trade_dates)),
+        "failed": len({key: value for key, value in failed.items() if key in trade_dates}),
+        "output_dataset": str(output_dataset_dir),
+        "is_st_source": "namechange_timeline" if st_timeline else "unvalidated_false",
+    }
     _write_json(progress_path, {**result, "current_trade_date": None, "updated_at": _now()})
     return result
 
 
-def _merge_incremental_row(path: Path, record: dict[str, Any], item: dict[str, Any], adj_factor: Any) -> None:
+def _merge_incremental_row(path: Path, record: dict[str, Any], item: dict[str, Any], adj_factor: Any, *, st_timeline: dict[str, Any] | None = None) -> None:
     index = pd.to_datetime([str(item["trade_date"])])
     factor = float(adj_factor)
+    is_st = bool(active_on(st_timeline, record["symbol"], date.fromisoformat(str(item["trade_date"])))) if st_timeline else False
     row = pd.DataFrame({
         "name": [record.get("name", "")], "raw_open": [item.get("open")], "raw_high": [item.get("high")],
         "raw_low": [item.get("low")], "raw_close": [item.get("close")], "raw_prev_close": [item.get("pre_close")],
         "volume": [item.get("vol")], "amount_thousand": [item.get("amount")], "adj_factor": [factor],
         "open": [float(item["open"])], "high": [float(item["high"])], "low": [float(item["low"])], "close": [float(item["close"])],
-        "amount": [float(item.get("amount") or 0) * 1000], "is_st": [False], "_trend_cache_version": ["tushare_incremental_v1"],
+        "amount": [float(item.get("amount") or 0) * 1000], "is_st": [is_st], "_trend_cache_version": ["tushare_incremental_v1"],
     }, index=index)
     row.index.name = "trade_date"
     if path.is_file():
@@ -142,7 +154,10 @@ def _merge_incremental_row(path: Path, record: dict[str, Any], item: dict[str, A
     temporary.replace(path)
 
 
-def _fetch_symbol_frame(token: str, record: dict[str, Any], start: date, end: date, timeout_seconds: float, max_retries: int) -> pd.DataFrame:
+def _fetch_symbol_frame(
+    token: str, record: dict[str, Any], start: date, end: date, timeout_seconds: float, max_retries: int,
+    *, st_timeline: dict[str, Any] | None = None,
+) -> pd.DataFrame:
     params = {"ts_code": record["ts_code"], "start_date": start.strftime("%Y%m%d"), "end_date": end.strftime("%Y%m%d")}
     daily = _request(token, "daily", params, timeout_seconds, max_retries)
     factors = _request(token, "adj_factor", params, timeout_seconds, max_retries)
@@ -167,7 +182,10 @@ def _fetch_symbol_frame(token: str, record: dict[str, Any], start: date, end: da
     for column in ("open", "high", "low", "close"):
         result[column] = result[f"raw_{column}"] * result["adj_factor"] / scale
     result["amount"] = result["amount_thousand"] * 1000
-    result["is_st"] = False
+    result["is_st"] = [
+        bool(active_on(st_timeline, record["symbol"], item.date())) if st_timeline else False
+        for item in frame.index
+    ]
     result["_trend_cache_version"] = "tushare_daily_v1"
     return result.dropna(subset=["open", "high", "low", "close"])
 

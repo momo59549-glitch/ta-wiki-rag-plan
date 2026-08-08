@@ -1,0 +1,28 @@
+{
+  "audited_at": "2026-08-08T07:13:00.563625+00:00",
+  "bars_checked_against_timeline": 0,
+  "mismatch_bars": 0,
+  "mismatch_rate": null,
+  "note": "timeline 来自 Tushare namechange（名称含 ST/*ST 的区间）；未提供 st-manifest 时只能报告缓存覆盖，不能视为已验证。",
+  "per_dataset": {
+    "trend_cache": {
+      "is_st_true_bars": 211425,
+      "symbols_with_column": 200,
+      "total_bars": 1319588
+    },
+    "tushare_daily_cache": {
+      "is_st_true_bars": 0,
+      "symbols_with_column": 0,
+      "total_bars": 0
+    },
+    "tushare_incremental_cache": {
+      "is_st_true_bars": 0,
+      "symbols_with_column": 160,
+      "total_bars": 160
+    }
+  },
+  "schema_version": "is-st-audit/v1",
+  "st_manifest": null,
+  "status": "unvalidated",
+  "symbols_audited": 200
+}
