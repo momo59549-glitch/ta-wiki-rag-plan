@@ -50,10 +50,89 @@ BREAKOUT_60D_V1 = RuleDefinition(
     ]},
 )
 
+DONCHIAN_MAIN_V1 = RuleDefinition(
+    id="donchian_main",
+    version="1.0.0",
+    name_zh="Donchian 趋势跟踪入场（Model 主策略）",
+    warmup_bars=210,
+    parameters={"breakout_threshold": 0.97},
+    expression={"all": [
+        {"gte": [
+            {"metric": {"name": "close", "offset": 0}},
+            {"mul": [
+                {"metric": {"name": "max_high", "offset": 0, "window": 20}},
+                {"param": "breakout_threshold"},
+            ]},
+        ]},
+        {"gt": [
+            {"metric": {"name": "sma", "offset": 0, "window": 20}},
+            {"metric": {"name": "sma", "offset": 0, "window": 60}},
+        ]},
+        {"gt": [
+            {"metric": {"name": "close", "offset": 0}},
+            {"metric": {"name": "sma", "offset": 0, "window": 20}},
+        ]},
+        {"gt": [
+            {"metric": {"name": "close", "offset": 0}},
+            {"metric": {"name": "sma", "offset": 0, "window": 200}},
+        ]},
+    ]},
+)
+
+MOMENTUM_BREAKOUT_V1 = RuleDefinition(
+    id="momentum_breakout",
+    version="1.0.0",
+    name_zh="动量突破入场（Model momentum_config）",
+    warmup_bars=40,
+    parameters={"breakout_threshold": 0.95},
+    expression={"all": [
+        {"gt": [
+            {"metric": {"name": "close", "offset": 0}},
+            {"mul": [
+                {"metric": {"name": "max_high", "offset": 0, "window": 20}},
+                {"param": "breakout_threshold"},
+            ]},
+        ]},
+        {"gt": [
+            {"metric": {"name": "sma", "offset": 0, "window": 5}},
+            {"metric": {"name": "sma", "offset": 0, "window": 20}},
+        ]},
+        {"lt": [
+            {"metric": {"name": "rsi", "offset": 0, "window": 14}},
+            70.0,
+        ]},
+        {"gt": [
+            {"metric": {"name": "volume_ratio", "offset": 0, "window": 20}},
+            1.2,
+        ]},
+    ]},
+)
+
+MEANREV_RSI_V1 = RuleDefinition(
+    id="meanrev_rsi",
+    version="1.0.0",
+    name_zh="RSI 超卖反弹入场（Model meanrev_config）",
+    warmup_bars=30,
+    parameters={},
+    expression={"all": [
+        {"lt": [
+            {"metric": {"name": "rsi", "offset": 0, "window": 14}},
+            30.0,
+        ]},
+        {"lt": [
+            {"metric": {"name": "close", "offset": 0}},
+            {"metric": {"name": "sma", "offset": 0, "window": 20}},
+        ]},
+    ]},
+)
+
 _RULES = {
     HAMMER_V1.id: HAMMER_V1,
     RSI_OVERSOLD_V1.id: RSI_OVERSOLD_V1,
     BREAKOUT_60D_V1.id: BREAKOUT_60D_V1,
+    DONCHIAN_MAIN_V1.id: DONCHIAN_MAIN_V1,
+    MOMENTUM_BREAKOUT_V1.id: MOMENTUM_BREAKOUT_V1,
+    MEANREV_RSI_V1.id: MEANREV_RSI_V1,
 }
 
 

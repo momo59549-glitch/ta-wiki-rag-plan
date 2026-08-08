@@ -8,6 +8,7 @@ from pathlib import Path
 from packages.market_data import LocalParquetMarketData, load_point_in_time_universe
 from packages.research.json_store import write_json
 from packages.research.rule_search import SearchConfig, build_search_protocol, build_search_space, screen_candidates, search_space_summary
+from packages.rules import get_rule
 
 
 def _date(value: str) -> date:
@@ -34,6 +35,7 @@ def main() -> int:
     parser.add_argument("--min-horizons", type=int, default=2)
     parser.add_argument("--dedup-jaccard", type=float, default=0.85)
     parser.add_argument("--require-both-regimes", action="store_true")
+    parser.add_argument("--include-rules", type=str, default="", help="逗号分隔的 catalog 规则 id，附加到本轮搜索空间")
     args = parser.parse_args()
 
     horizons = tuple(int(item) for item in args.horizons.split(",") if item.strip())
@@ -56,7 +58,13 @@ def main() -> int:
     active, universe_meta = load_point_in_time_universe(args.universe_manifest, args.end)
     symbols = active[: args.symbol_limit]
     definitions = build_search_space()
-    print(f"搜索空间：{search_space_summary(definitions)['candidates']} 个候选，覆盖 {len(search_space_summary(definitions)['families'])} 个规则族")
+    existing_ids = {item.id for item in definitions}
+    for rule_id in [item.strip() for item in args.include_rules.split(",") if item.strip()]:
+        if rule_id in existing_ids:
+            continue
+        definitions.append(get_rule(rule_id))
+        existing_ids.add(rule_id)
+    print(f"搜索空间：{len(definitions)} 个候选，覆盖 {len(search_space_summary(definitions)['families'])} 个规则族" + (f"（含附加规则 {args.include_rules}）" if args.include_rules else ""))
     print(f"开发股票池：{len(symbols)} 只（{universe_meta['as_of']} 点时有效）")
     protocol = build_search_protocol(definitions, symbols, config, args.output_root, universe_manifest=args.universe_manifest)
     round_path = args.output_root / "round.json"
