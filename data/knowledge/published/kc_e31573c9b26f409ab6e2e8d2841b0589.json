@@ -1,0 +1,38 @@
+{
+  "card_id": "kc_e31573c9b26f409ab6e2e8d2841b0589",
+  "claim": "头肩形态由中间更高或更低的头部及两侧肩部组成，但只有在此前存在显著价格趋势且颈线被确认突破后，才视为完成形态。",
+  "content_sha256": "sha256:449dbac2365185fe6efcd47df8ab2257953842cc9ab211a5bdc4b582e78c4b1a",
+  "created_at": "2026-08-06T02:19:01.450545+00:00",
+  "evidence_refs": [
+    {
+      "citation": "[Getting Started in Technical Analysis，PDF 第 108 页]",
+      "kind": "pdf_page",
+      "locator": "107",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f.pdf.json",
+      "source_sha256": "d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f"
+    },
+    {
+      "citation": "[Getting Started in Technical Analysis，PDF 第 112 页]",
+      "kind": "pdf_page",
+      "locator": "111",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f.pdf.json",
+      "source_sha256": "d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f"
+    }
+  ],
+  "limitations": [
+    "未突破颈线只能标记候选观察。",
+    "肩部对称性不应事后优化。"
+  ],
+  "publication": "published",
+  "research_artifacts": [],
+  "review": {
+    "comment": "已逐页核对定义、确认条件与限制；仅作为可复验规则起点，统计结论不得直接外推至 A 股。",
+    "decision": "publish",
+    "reviewed_at": "2026-08-06T02:19:01.456538+00:00",
+    "reviewer": "Codex Knowledge QA"
+  },
+  "schema_version": "knowledge-card/v1",
+  "source_case_id": null,
+  "status": "published",
+  "title": "头肩形态的完成条件"
+}

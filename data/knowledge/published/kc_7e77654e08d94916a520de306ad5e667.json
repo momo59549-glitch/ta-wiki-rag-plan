@@ -1,0 +1,32 @@
+{
+  "card_id": "kc_7e77654e08d94916a520de306ad5e667",
+  "claim": "乌云盖顶是上涨背景中的两蜡烛线看跌反转警告：先出现较强白色实体，随后黑色实体高开后回落，并深入前一白色实体；通常收盘深入超过前一实体中点时信号更典型，刺入越深负面含义越强。",
+  "content_sha256": "sha256:ad1abd902144ada31b0d1b048c7ebc5797bc91f38bcbed0cad0cc8a9a311bc6b",
+  "created_at": "2026-08-05T14:53:55.050877+00:00",
+  "evidence_refs": [
+    {
+      "citation": "[日本蜡烛图技术（“K线之父”史蒂夫·尼森畅销30年炒股“圣经”！全新修订超20万字，中国知名金融学者丁圣元倾情翻译。），章节 乌云盖顶形态]",
+      "kind": "epub_chapter",
+      "locator": "OEBPS/Text/part0021.xhtml",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\57ab30fd44b05b8c6013643628a9cac9de7289ebc4b33c16f06a76e6ee0dfde8.epub.json",
+      "source_sha256": "57ab30fd44b05b8c6013643628a9cac9de7289ebc4b33c16f06a76e6ee0dfde8"
+    }
+  ],
+  "limitations": [
+    "必须有此前上涨背景。",
+    "未达到典型深入程度时只能降低置信度，不能强行归类。",
+    "后续突破形态高点会削弱或否定看跌解释。"
+  ],
+  "publication": "published",
+  "research_artifacts": [],
+  "review": {
+    "comment": "已核验乌云盖顶章节：上涨前提、第二根回落、实体中点和失效限制一致。",
+    "decision": "publish",
+    "reviewed_at": "2026-08-05T14:58:26.951513+00:00",
+    "reviewer": "codex-content-reviewer-2026-08-05"
+  },
+  "schema_version": "knowledge-card/v1",
+  "source_case_id": null,
+  "status": "published",
+  "title": "乌云盖顶形态"
+}

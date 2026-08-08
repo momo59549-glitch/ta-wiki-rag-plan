@@ -1,0 +1,44 @@
+{
+  "card_id": "kc_b3c126edcd7c40a0a2371dabf08557a5",
+  "claim": "突破后的回抽或反抽并非必然增强形态，书中样本显示它可能伴随较弱表现；系统应把是否回抽、耗时和回抽完成条件作为可检验变量，而非主观加分项。",
+  "content_sha256": "sha256:f4b58f90ca476ed94bc529d31899a5e4af1b6d4479ec9db2bfe32c6b7bb96d10",
+  "created_at": "2026-08-06T02:19:01.676821+00:00",
+  "evidence_refs": [
+    {
+      "citation": "[Encyclopedia of Chart Patterns，PDF 第 31 页]",
+      "kind": "pdf_page",
+      "locator": "30",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\a92c020b93d09d758ddde33a5ad1de906ae4e05b9334bdd80f428e7ce99973b0.pdf.json",
+      "source_sha256": "a92c020b93d09d758ddde33a5ad1de906ae4e05b9334bdd80f428e7ce99973b0"
+    },
+    {
+      "citation": "[Encyclopedia of Chart Patterns，PDF 第 34 页]",
+      "kind": "pdf_page",
+      "locator": "33",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\a92c020b93d09d758ddde33a5ad1de906ae4e05b9334bdd80f428e7ce99973b0.pdf.json",
+      "source_sha256": "a92c020b93d09d758ddde33a5ad1de906ae4e05b9334bdd80f428e7ce99973b0"
+    },
+    {
+      "citation": "[Encyclopedia of Chart Patterns，PDF 第 42 页]",
+      "kind": "pdf_page",
+      "locator": "41",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\a92c020b93d09d758ddde33a5ad1de906ae4e05b9334bdd80f428e7ce99973b0.pdf.json",
+      "source_sha256": "a92c020b93d09d758ddde33a5ad1de906ae4e05b9334bdd80f428e7ce99973b0"
+    }
+  ],
+  "limitations": [
+    "原书统计必须用 A 股点时样本复验。"
+  ],
+  "publication": "published",
+  "research_artifacts": [],
+  "review": {
+    "comment": "已逐页核对定义、确认条件与限制；仅作为可复验规则起点，统计结论不得直接外推至 A 股。",
+    "decision": "publish",
+    "reviewed_at": "2026-08-06T02:19:01.681821+00:00",
+    "reviewer": "Codex Knowledge QA"
+  },
+  "schema_version": "knowledge-card/v1",
+  "source_case_id": null,
+  "status": "published",
+  "title": "回抽反抽是条件变量而非必然确认"
+}

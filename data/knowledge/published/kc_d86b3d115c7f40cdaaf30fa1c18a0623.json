@@ -1,0 +1,31 @@
+{
+  "card_id": "kc_d86b3d115c7f40cdaaf30fa1c18a0623",
+  "claim": "吞没形态由颜色相反的相邻实体构成，第二根较长实体覆盖第一根较小实体。下跌趋势后的看涨吞没与上涨趋势后的看跌吞没，分别提示原趋势可能失去主导；覆盖程度、此前趋势及附近支撑阻力决定其意义。",
+  "content_sha256": "sha256:7ffbf8b38a083e41798aa045ca24783593970c27b631e70e349db5b05fbe7688",
+  "created_at": "2026-08-05T14:53:55.047877+00:00",
+  "evidence_refs": [
+    {
+      "citation": "[日本蜡烛图技术（“K线之父”史蒂夫·尼森畅销30年炒股“圣经”！全新修订超20万字，中国知名金融学者丁圣元倾情翻译。），章节 吞没形态（抱线形态）]",
+      "kind": "epub_chapter",
+      "locator": "OEBPS/Text/part0020.xhtml",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\57ab30fd44b05b8c6013643628a9cac9de7289ebc4b33c16f06a76e6ee0dfde8.epub.json",
+      "source_sha256": "57ab30fd44b05b8c6013643628a9cac9de7289ebc4b33c16f06a76e6ee0dfde8"
+    }
+  ],
+  "limitations": [
+    "比较的是实体而不是必须覆盖全部上下影线。",
+    "需结合趋势背景和后续价格行为，不能单独作为交易指令。"
+  ],
+  "publication": "published",
+  "research_artifacts": [],
+  "review": {
+    "comment": "已核验吞没形态章节：实体覆盖、颜色关系、趋势前提及非交易指令限制一致。",
+    "decision": "publish",
+    "reviewed_at": "2026-08-05T14:58:26.953513+00:00",
+    "reviewer": "codex-content-reviewer-2026-08-05"
+  },
+  "schema_version": "knowledge-card/v1",
+  "source_case_id": null,
+  "status": "published",
+  "title": "吞没形态（抱线形态）"
+}

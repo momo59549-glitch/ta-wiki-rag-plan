@@ -1,0 +1,32 @@
+{
+  "card_id": "kc_1d634949b67246a6806dc6cd6dbeef2f",
+  "claim": "刺透形态是下降背景中的两蜡烛线看涨反转警告：先出现较强黑色实体，随后白色实体低开后反弹，收盘深入前一黑色实体；典型形态要求收盘超过前一实体中点，深入程度越高，看涨含义通常越强。",
+  "content_sha256": "sha256:15fa9b56491e1fe9d5f9694023ab54004cc55a628350d3b9df5fee2e4a25275b",
+  "created_at": "2026-08-05T14:53:55.054877+00:00",
+  "evidence_refs": [
+    {
+      "citation": "[日本蜡烛图技术（“K线之父”史蒂夫·尼森畅销30年炒股“圣经”！全新修订超20万字，中国知名金融学者丁圣元倾情翻译。），章节 刺透形态]",
+      "kind": "epub_chapter",
+      "locator": "OEBPS/Text/part0022.xhtml",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\57ab30fd44b05b8c6013643628a9cac9de7289ebc4b33c16f06a76e6ee0dfde8.epub.json",
+      "source_sha256": "57ab30fd44b05b8c6013643628a9cac9de7289ebc4b33c16f06a76e6ee0dfde8"
+    }
+  ],
+  "limitations": [
+    "必须有此前下降背景。",
+    "若反弹未超过前一实体中点，应降低置信度并与其他信号区分。",
+    "后续跌破形态低点会削弱或否定看涨解释。"
+  ],
+  "publication": "published",
+  "research_artifacts": [],
+  "review": {
+    "comment": "已核验刺透形态章节：下降前提、第二根反弹、实体中点和失效限制一致。",
+    "decision": "publish",
+    "reviewed_at": "2026-08-05T14:58:26.949515+00:00",
+    "reviewer": "codex-content-reviewer-2026-08-05"
+  },
+  "schema_version": "knowledge-card/v1",
+  "source_case_id": null,
+  "status": "published",
+  "title": "刺透形态"
+}

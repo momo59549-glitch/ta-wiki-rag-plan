@@ -1,0 +1,30 @@
+{
+  "card_id": "kc_b82260cb9987485c981b333a65055f4a",
+  "claim": "双顶候选只有在价格收盘跌破两顶之间的谷底确认线后才完成；两个相似高点本身不足以确认反转。",
+  "content_sha256": "sha256:befbd9631968018162d61e029624d0d15a76fb7497759367d6d5e2781e291859",
+  "created_at": "2026-08-06T02:19:01.601519+00:00",
+  "evidence_refs": [
+    {
+      "citation": "[Encyclopedia of Chart Patterns，PDF 第 300 页]",
+      "kind": "pdf_page",
+      "locator": "299",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\a92c020b93d09d758ddde33a5ad1de906ae4e05b9334bdd80f428e7ce99973b0.pdf.json",
+      "source_sha256": "a92c020b93d09d758ddde33a5ad1de906ae4e05b9334bdd80f428e7ce99973b0"
+    }
+  ],
+  "limitations": [
+    "确认可能明显滞后，应同时评估风险报偿。"
+  ],
+  "publication": "published",
+  "research_artifacts": [],
+  "review": {
+    "comment": "已逐页核对定义、确认条件与限制；仅作为可复验规则起点，统计结论不得直接外推至 A 股。",
+    "decision": "publish",
+    "reviewed_at": "2026-08-06T02:19:01.602353+00:00",
+    "reviewer": "Codex Knowledge QA"
+  },
+  "schema_version": "knowledge-card/v1",
+  "source_case_id": null,
+  "status": "published",
+  "title": "双顶须收盘跌破确认线"
+}

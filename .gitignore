@@ -4,7 +4,21 @@ __pycache__/
 .pytest_cache/
 dist/
 build/
+.env
+.env.*
+!.env.example
 
 # Local source books and generated run logs are not repository source files.
 data/books/*
 data/batch_logs/
+
+# Generated research/strategy run outputs are not repository source files.
+data/research_cases_full/
+data/research_cases_pit_2026/
+data/research_cases_pit_smoke/
+data/strategy_test_campaigns/
+data/strategy_test_executions/
+data/tushare_sync/
+data/runtime/
+data/batch_checkpoints/*.log
+data/universes/*.log

@@ -1,0 +1,31 @@
+{
+  "card_id": "kc_20c6565ce40b49d1aafc7d4c028b8dce",
+  "claim": "三角形至少应区分对称、上升和下降三类。收敛外形本身不是方向确认，研究信号应在价格以预定口径突破边界后产生。",
+  "content_sha256": "sha256:c8189182c58aaf332b3d0c480bda10bd938776f7d2fce02f57a89fc42978caca",
+  "created_at": "2026-08-06T02:19:01.412469+00:00",
+  "evidence_refs": [
+    {
+      "citation": "[Getting Started in Technical Analysis，PDF 第 97 页]",
+      "kind": "pdf_page",
+      "locator": "96",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f.pdf.json",
+      "source_sha256": "d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f"
+    }
+  ],
+  "limitations": [
+    "不得使用突破后的数据反向调整趋势线。",
+    "不同三角形的统计表现必须在目标市场重新验证。"
+  ],
+  "publication": "published",
+  "research_artifacts": [],
+  "review": {
+    "comment": "已逐页核对定义、确认条件与限制；仅作为可复验规则起点，统计结论不得直接外推至 A 股。",
+    "decision": "publish",
+    "reviewed_at": "2026-08-06T02:19:01.417476+00:00",
+    "reviewer": "Codex Knowledge QA"
+  },
+  "schema_version": "knowledge-card/v1",
+  "source_case_id": null,
+  "status": "published",
+  "title": "三角形必须分类并等待突破"
+}

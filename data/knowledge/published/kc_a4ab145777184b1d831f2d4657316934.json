@@ -1,0 +1,31 @@
+{
+  "card_id": "kc_a4ab145777184b1d831f2d4657316934",
+  "claim": "两者均有位于价格区间下端的小实体和较长上影线。上涨后出现时为潜在看跌的流星线；下降后出现时为潜在看涨的倒锤子线。倒锤子线需要随后开盘或尤其收盘高于其实体的看涨验证。",
+  "content_sha256": "sha256:42d225db1755d97ea24de87aec3818f22e15c9990c40dc0375fc9449e49007fb",
+  "created_at": "2026-08-05T14:53:55.062879+00:00",
+  "evidence_refs": [
+    {
+      "citation": "[日本蜡烛图技术（“K线之父”史蒂夫·尼森畅销30年炒股“圣经”！全新修订超20万字，中国知名金融学者丁圣元倾情翻译。），章节 流星形态与倒锤子形态]",
+      "kind": "epub_chapter",
+      "locator": "OEBPS/Text/part0027.xhtml",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\57ab30fd44b05b8c6013643628a9cac9de7289ebc4b33c16f06a76e6ee0dfde8.epub.json",
+      "source_sha256": "57ab30fd44b05b8c6013643628a9cac9de7289ebc4b33c16f06a76e6ee0dfde8"
+    }
+  ],
+  "limitations": [
+    "相同外形不能脱离此前趋势命名。",
+    "单根流星线通常只是警告；形态高点被有效突破后应重估看跌观点。"
+  ],
+  "publication": "published",
+  "research_artifacts": [],
+  "review": {
+    "comment": "已核验对应章节：相同外形的趋势区分、倒锤子验证及流星失效限制一致。",
+    "decision": "publish",
+    "reviewed_at": "2026-08-05T14:58:26.942529+00:00",
+    "reviewer": "codex-content-reviewer-2026-08-05"
+  },
+  "schema_version": "knowledge-card/v1",
+  "source_case_id": null,
+  "status": "published",
+  "title": "流星线与倒锤子线"
+}

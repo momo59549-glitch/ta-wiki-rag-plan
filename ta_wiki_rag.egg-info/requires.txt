@@ -6,3 +6,10 @@ pyarrow<26,>=16
 
 [dev]
 pytest<9.0,>=8.0
+
+[research]
+vectorbt<0.28,>=0.26
+skfolio<1.0,>=0.10
+statsmodels<0.15,>=0.14
+backtrader<2.0,>=1.9.78.123
+tushare<2.0,>=1.4

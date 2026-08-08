@@ -1,0 +1,30 @@
+{
+  "card_id": "kc_4916a21e26df4f6fbffa83dbc4d9f671",
+  "claim": "在性能没有实质恶化时，应优先选择参数更少、结构更简单的策略；增加确认条件或修饰规则会扩大搜索空间，必须计入多重试验风险。",
+  "content_sha256": "sha256:b37df1086759c8ffd1df8ff5f3812923985724041100279e0620f59e65e6f7bf",
+  "created_at": "2026-08-06T02:19:01.503212+00:00",
+  "evidence_refs": [
+    {
+      "citation": "[Getting Started in Technical Analysis，PDF 第 266 页]",
+      "kind": "pdf_page",
+      "locator": "265",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f.pdf.json",
+      "source_sha256": "d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f"
+    }
+  ],
+  "limitations": [
+    "不能为了简单而删除有明确经济含义的必要约束。"
+  ],
+  "publication": "published",
+  "research_artifacts": [],
+  "review": {
+    "comment": "已逐页核对定义、确认条件与限制；仅作为可复验规则起点，统计结论不得直接外推至 A 股。",
+    "decision": "publish",
+    "reviewed_at": "2026-08-06T02:19:01.508212+00:00",
+    "reviewer": "Codex Knowledge QA"
+  },
+  "schema_version": "knowledge-card/v1",
+  "source_case_id": null,
+  "status": "published",
+  "title": "策略优先采用较少参数"
+}

@@ -76,6 +76,13 @@ def evaluate(series: list[Candle], as_of_index: int, rule: CompiledRule, paramet
     try:
         if as_of_index < rule.max_lookback:
             raise IndexError("warmup 数据不足")
+        # Every candle used by the rule must have been available by the
+        # decision time.  ``None`` remains a compatibility default equal to
+        # the bar timestamp; production adapters always populate it.
+        for candle in series[as_of_index - rule.max_lookback:as_of_index + 1]:
+            visible_at = candle.available_at or candle.timestamp
+            if visible_at > observed:
+                raise ValueError(f"未来数据不可见: {visible_at.isoformat()} > {observed.isoformat()}")
         conditions = tuple(_conditions(rule.normalized_expression, series, as_of_index, params))
         matched = bool(_value(rule.normalized_expression, series, as_of_index, params))
         return RuleEvaluation(matched, "matched" if matched else "not_matched", observed, executable, conditions, rule.semantic_hash)

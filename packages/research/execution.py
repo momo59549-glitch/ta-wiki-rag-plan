@@ -10,7 +10,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import date, datetime
 from math import isfinite
-from typing import Any, Mapping, Optional
+from typing import Any, Literal, Mapping, Optional
 
 
 def _number(value: Any) -> Optional[float]:
@@ -86,40 +86,48 @@ def assess_execution(
     *,
     symbol: str,
     side: str = "buy",
+    price_at: Literal["open", "close"] = "close",
+    require_session_liquidity: bool = True,
     config: ExecutionConfig = ExecutionConfig(),
 ) -> ExecutionAssessment:
     """Assess whether a daily bar is usable as an execution price.
 
-    Required bar fields are ``date``, ``open`` and ``close``.  ``pre_close``
-    (or ``prev_close``) allows daily-limit detection.  A zero/missing price,
-    explicit suspension flag, or zero volume/amount is deemed non-tradeable.
+    ``price_at`` is an information boundary, not merely a pricing choice.
+    For an order filled at the next open, use ``price_at="open"`` and
+    ``require_session_liquidity=False``: that check must not inspect that
+    day's close, volume, or amount.  For an end-of-day close fill, the full
+    bar can be used.  This distinction prevents outcome filtering with data
+    that was unavailable when an opening order was placed.
     """
     side = side.lower()
     if side not in {"buy", "sell"}:
         raise ValueError("side must be 'buy' or 'sell'")
+    if price_at not in {"open", "close"}:
+        raise ValueError("price_at 必须为 open 或 close")
 
     reasons: list[str] = []
     open_price = _number(bar.get("open"))
-    close_price = _number(bar.get("close"))
+    close_price = _number(bar.get("close")) if price_at == "close" else None
     volume = _number(bar.get("volume", bar.get("vol")))
     amount = _number(bar.get("amount", bar.get("turnover")))
     if bool(bar.get("suspended", False)):
         reasons.append("suspended")
-    if open_price is None or close_price is None:
+    execution_price = open_price if price_at == "open" else close_price
+    if execution_price is None:
         reasons.append("missing_or_invalid_price")
     # Vendors may omit volume/amount.  Only an explicit zero is a suspension
     # signal; a missing field is handled by the price checks above.
-    if "volume" in bar or "vol" in bar:
+    if require_session_liquidity and ("volume" in bar or "vol" in bar):
         if volume is None:
             reasons.append("zero_or_invalid_volume")
-    if "amount" in bar or "turnover" in bar:
+    if require_session_liquidity and ("amount" in bar or "turnover" in bar):
         if amount is None:
             reasons.append("zero_or_invalid_amount")
 
     prior = _number(bar.get("pre_close", bar.get("prev_close")))
     limit = limit_pct_for(symbol, bar.get("date"), is_st=bool(bar.get("is_st", False)), config=config)
-    if prior is not None and close_price is not None:
-        change = close_price / prior - 1
+    if prior is not None and execution_price is not None:
+        change = execution_price / prior - 1
         at_up = change >= limit - config.limit_tolerance
         at_down = change <= -limit + config.limit_tolerance
         if side == "buy" and at_up:
@@ -131,5 +139,5 @@ def assess_execution(
         executable=not reasons,
         reason_codes=tuple(reasons),
         limit_pct=limit,
-        metadata={"side": side, "open": open_price, "close": close_price, "prior_close": prior},
+        metadata={"side": side, "price_at": price_at, "execution_price": execution_price, "prior_close": prior},
     )

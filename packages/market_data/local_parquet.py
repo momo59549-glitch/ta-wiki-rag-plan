@@ -65,6 +65,11 @@ class LocalParquetMarketData:
     ) -> list[Candle]:
         path = self.source_path(symbol)
         frame = pd.read_parquet(path)
+        return candles_from_frame(frame, symbol=symbol, start=start, end=end)
+
+
+def candles_from_frame(frame: pd.DataFrame, *, symbol: str, start: date | None = None, end: date | None = None) -> list[Candle]:
+        """Validate one normalized frame and convert it to domain candles."""
         missing = set(_REQUIRED) - set(frame.columns)
         if missing:
             raise DataQualityError(f"{symbol} 缺少列: {sorted(missing)}")
@@ -87,8 +92,9 @@ class LocalParquetMarketData:
         valid &= numeric["low"] <= numeric[["open", "close"]].min(axis=1)
         frame = frame.loc[valid]
         numeric = numeric.loc[valid]
+        previous_closes = numeric["close"].shift(1)
         candles: list[Candle] = []
-        for ts, row in numeric.iterrows():
+        for position, (ts, row) in enumerate(numeric.iterrows()):
             stamp = datetime.combine(ts.date(), time(15, 0), timezone.utc)
             volume = frame.at[ts, "volume"] if "volume" in frame.columns else None
             volume_value = None if pd.isna(volume) else float(volume)
@@ -97,11 +103,16 @@ class LocalParquetMarketData:
             amount_value = None if pd.isna(amount) else float(amount)
             # OHLC is adjusted in trend_cache while raw_prev_close is not;
             # daily-limit checks must compare prices on one adjustment basis.
-            previous = frame.loc[:ts, "close"].iloc[-2] if frame.index.get_loc(ts) > 0 else None
+            # Precompute once. Re-slicing the complete frame for every row is
+            # quadratic and makes full-market preflight unnecessarily slow.
+            previous = previous_closes.iloc[position]
             previous_value = None if pd.isna(previous) else float(previous)
             is_st = bool(frame.at[ts, "is_st"]) if "is_st" in frame.columns else False
             candles.append(Candle(
                 timestamp=stamp, open=float(row.open), high=float(row.high), low=float(row.low), close=float(row.close),
                 volume=volume_value, amount=amount_value, prev_close=previous_value, is_st=is_st,
+                # Daily OHLCV becomes eligible for a close-based decision only
+                # after this bar has closed.  The rule engine enforces this.
+                available_at=stamp,
             ))
         return candles

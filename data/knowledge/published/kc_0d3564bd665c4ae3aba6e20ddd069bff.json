@@ -1,0 +1,37 @@
+{
+  "card_id": "kc_0d3564bd665c4ae3aba6e20ddd069bff",
+  "claim": "双顶或双底不能只凭两个相似峰谷命名；它应出现在既有趋势之后，并具有足够的中间回撤以及对转换结构的确认。浅回撤的相邻峰谷应避免强行归类。",
+  "content_sha256": "sha256:4ad09b9200bb7c906ae7757cba58f557f7bbcd86aa7254996e15b0f2ae06e2b6",
+  "created_at": "2026-08-06T02:19:01.440779+00:00",
+  "evidence_refs": [
+    {
+      "citation": "[Getting Started in Technical Analysis，PDF 第 106 页]",
+      "kind": "pdf_page",
+      "locator": "105",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f.pdf.json",
+      "source_sha256": "d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f"
+    },
+    {
+      "citation": "[Getting Started in Technical Analysis，PDF 第 107 页]",
+      "kind": "pdf_page",
+      "locator": "106",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f.pdf.json",
+      "source_sha256": "d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f"
+    }
+  ],
+  "limitations": [
+    "峰谷相似度和最小回撤幅度必须固定。"
+  ],
+  "publication": "published",
+  "research_artifacts": [],
+  "review": {
+    "comment": "已逐页核对定义、确认条件与限制；仅作为可复验规则起点，统计结论不得直接外推至 A 股。",
+    "decision": "publish",
+    "reviewed_at": "2026-08-06T02:19:01.442641+00:00",
+    "reviewer": "Codex Knowledge QA"
+  },
+  "schema_version": "knowledge-card/v1",
+  "source_case_id": null,
+  "status": "published",
+  "title": "双顶双底需要趋势转换证据"
+}

@@ -22,6 +22,8 @@ class OutcomeStatisticsTests(unittest.TestCase):
         self.assertIsNotNone(bullish["standard_error"])
         self.assertLess(bullish["confidence_interval"]["lower"], 0.02)
         self.assertGreater(bullish["confidence_interval"]["upper"], 0.02)
+        self.assertIn("multiple_testing", summary)
+        self.assertIn("adjusted_p_value", bullish)
         self.assertEqual(summary["disclaimer"], NOT_INVESTMENT_ADVICE)
 
     def test_excludes_invalid_returns_and_marks_singleton_as_insufficient(self):

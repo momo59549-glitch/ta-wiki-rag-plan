@@ -54,12 +54,19 @@ def summarize_outcomes(
         _group_summary(horizon, regime, values, confidence_level)
         for (horizon, regime), values in sorted(grouped.items())
     ]
+    _apply_multiple_testing(groups)
     return {
         "return_field": return_field,
         "confidence_level": confidence_level,
         "outcomes_received": received,
         "outcomes_excluded": excluded,
         "groups": groups,
+        "multiple_testing": {
+            "engine": "statsmodels.stats.multitest.multipletests",
+            "method": "fdr_bh",
+            "alpha": 0.05,
+            "note": "对同一份统计摘要中所有有效分组统一校正；这不是独立性假设的替代品。",
+        },
         "disclaimer": NOT_INVESTMENT_ADVICE,
     }
 
@@ -99,3 +106,24 @@ def _group_summary(
         "confidence_interval": {"lower": average - margin, "upper": average + margin},
         "evidence_status": "descriptive_only",
     }
+
+
+def _apply_multiple_testing(groups: list[dict[str, Any]]) -> None:
+    """Attach two-sided raw/adjusted p-values without selecting on them."""
+    eligible = [group for group in groups if group.get("t_statistic") is not None]
+    for group in groups:
+        group["raw_p_value"] = None
+        group["adjusted_p_value"] = None
+        group["multiple_testing_reject"] = False
+    if not eligible:
+        return
+    raw = [2 * (1 - NormalDist().cdf(abs(float(group["t_statistic"])))) for group in eligible]
+    try:
+        from statsmodels.stats.multitest import multipletests
+    except ImportError as exc:  # pragma: no cover - exercised in deployment
+        raise RuntimeError("缺少研究依赖 statsmodels；请安装项目的 research extra") from exc
+    rejected, adjusted, _, _ = multipletests(raw, alpha=0.05, method="fdr_bh")
+    for group, raw_value, adjusted_value, reject in zip(eligible, raw, adjusted, rejected):
+        group["raw_p_value"] = float(raw_value)
+        group["adjusted_p_value"] = float(adjusted_value)
+        group["multiple_testing_reject"] = bool(reject)

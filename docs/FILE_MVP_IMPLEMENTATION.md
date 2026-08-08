@@ -32,21 +32,32 @@ data/research_runs/<run_id>/
 
 当前 `dataset_snapshot_id` 基于 dataset、证券代码、文件大小和修改时间生成，适合快速本地迭代。规则使用 canonical JSON 的 SHA-256 语义哈希。正式发布或共享研究结果前，应建立全量 manifest 哈希和数据授权卡。
 
-## 当前能力与限制
+## 当前能力
 
 - 默认以 `etf_cache/000001.parquet` 计算同日开盘到收盘的基准和净超额收益；
 - 默认扣除单边 3 bps 佣金、5 bps 滑点，可通过 CLI 修改；
 - `--oos-start` 将结果隔离成样本内与样本外汇总，不将二者混写为一个结论；
 
-- 尚未模拟停牌、涨跌停和成交量容量；
-- Outcome 仍是描述性结果，尚未加入行业基准和显著性检验；
-- 只有锤子线 v1 规则；
-- 尚未实现 Hypothesis 审批、样本外切分和 MLflow；
-- JSONL 是可迁移的权威文件，当前不需要 PostgreSQL。
+- 已有停牌、涨跌停、T+1 开盘可见性和非法价格门禁；
+- 已有 Research Case 状态机、9 Agent 审计记录、Job/Event/Outbox/Dead-letter；
+- 已有 Hypothesis 与 Rule Version 两道独立人工审批；
+- 已有 FastAPI、Streamlit、文件 Worker、Prefect 适配、LangGraph interrupt/checkpoint 适配；
+- 已有 KnowledgeCard 的 claim-evidence 校验和本地 BM25 检索；
+- 已有 Tushare 历史补缺缓存及每日增量覆盖层，均不覆盖 `trend_cache`；
+- JSONL/JSON/Parquet 是当前可迁移权威文件，不需要 PostgreSQL。
+
+## 当前限制
+
+- 策略验证按当前要求冻结；保留既有安全测试，不继续寻找收益参数；
+- 文件控制面适合单机/小团队；多人高并发达到门槛后再迁移 PostgreSQL；
+- Docker 未在当前工作站安装，Compose 已提供但尚未完成本机容器运行验收；
+- Prefect Server 的常驻部署需在实际运行环境完成验收；无 Prefect 时文件 Worker 可独立执行；
+- MLflow、MinIO、Qdrant、Celery、Kafka、DVC 均未达到引入门槛。
 
 ## 下一实施切片
 
-1. 增加市场状态和流动性分层；
-3. 把现有 `Model` 策略包装成统一 Rule/Experiment adapter；
-4. 实现文件型 Hypothesis/Approval；
-5. 最后才评估是否需要数据库和 LangGraph。
+1. 增加 Job payload 的逐类型契约与端到端验收；
+2. 增加 Worker 租约心跳、审计校验 CLI 与备份恢复演练；
+3. 更新全部架构/Prompt/Backlog 文档中的实现状态；
+4. 在不执行策略验证的前提下完成启动栈烟雾测试；
+5. 最后按并发量、数据量和团队规模评估是否需要 PostgreSQL。

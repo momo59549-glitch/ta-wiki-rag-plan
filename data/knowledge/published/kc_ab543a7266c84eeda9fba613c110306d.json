@@ -1,0 +1,30 @@
+{
+  "card_id": "kc_ab543a7266c84eeda9fba613c110306d",
+  "claim": "上升趋势线连接一系列抬高的相对低点，下降趋势线连接一系列降低的相对高点。跌破或突破趋势线只表示原结构受到挑战，应结合收盘确认和后续价格行为判断失效。",
+  "content_sha256": "sha256:f2a1a3c45f6e0f9706116637f211e9c06b37f2fcf33bece922245b4427e6e6e5",
+  "created_at": "2026-08-06T02:19:01.398262+00:00",
+  "evidence_refs": [
+    {
+      "citation": "[Getting Started in Technical Analysis，PDF 第 43 页]",
+      "kind": "pdf_page",
+      "locator": "42",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f.pdf.json",
+      "source_sha256": "d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f"
+    }
+  ],
+  "limitations": [
+    "趋势线选点存在主观性，量化时必须固定触点、容差和确认口径。"
+  ],
+  "publication": "published",
+  "research_artifacts": [],
+  "review": {
+    "comment": "已逐页核对定义、确认条件与限制；仅作为可复验规则起点，统计结论不得直接外推至 A 股。",
+    "decision": "publish",
+    "reviewed_at": "2026-08-06T02:19:01.398262+00:00",
+    "reviewer": "Codex Knowledge QA"
+  },
+  "schema_version": "knowledge-card/v1",
+  "source_case_id": null,
+  "status": "published",
+  "title": "趋势线的连接与失效"
+}

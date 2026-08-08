@@ -7,7 +7,7 @@ from pathlib import Path
 from uuid import uuid4
 
 from packages.contracts import Candle
-from packages.market_data import LocalParquetMarketData
+from packages.market_data import LocalParquetMarketData, active_on, load_universe_memberships
 from packages.research.json_store import write_json, write_jsonl
 from packages.research.execution import ExecutionConfig, assess_execution
 from packages.research.models import Observation, Outcome, ResearchRun
@@ -28,6 +28,8 @@ class PipelineConfig:
     market_regime_window: int = 60
     min_signal_amount: float | None = None
     skip_untradeable: bool = True
+    universe_manifest: str | None = None
+    lockbox_start: date | None = None
 
     def __post_init__(self) -> None:
         if not self.horizons or any(item < 1 for item in self.horizons):
@@ -38,6 +40,8 @@ class PipelineConfig:
             raise ValueError("市场状态窗口至少为 2")
         if self.min_signal_amount is not None and self.min_signal_amount <= 0:
             raise ValueError("最小成交额必须为正")
+        if self.end and self.lockbox_start and self.end >= self.lockbox_start:
+            raise ValueError("end 必须早于 lockbox_start，禁止读取最终锁箱")
 
 
 class FileResearchPipeline:
@@ -75,8 +79,19 @@ class FileResearchPipeline:
             if candle.amount is not None:
                 bar["amount"] = candle.amount
             return bar
-        entry_check = assess_execution(execution_bar(window[0]), symbol=observation.symbol, side="buy", config=ExecutionConfig(skip_untradeable=config.skip_untradeable))
-        exit_check = assess_execution(execution_bar(window[-1]), symbol=observation.symbol, side="sell", config=ExecutionConfig(skip_untradeable=config.skip_untradeable))
+        # The opening order may only use information known at the open.  In
+        # particular, do not use the entry day's close/volume/amount to filter
+        # an opening fill: that would be a look-ahead selection bias.
+        entry_check = assess_execution(
+            execution_bar(window[0]), symbol=observation.symbol, side="buy",
+            price_at="open", require_session_liquidity=False,
+            config=ExecutionConfig(skip_untradeable=config.skip_untradeable),
+        )
+        exit_check = assess_execution(
+            execution_bar(window[-1]), symbol=observation.symbol, side="sell",
+            price_at="close", require_session_liquidity=True,
+            config=ExecutionConfig(skip_untradeable=config.skip_untradeable),
+        )
         if config.skip_untradeable and (entry_check.should_skip or exit_check.should_skip):
             return None
         exit_price = window[-1].close
@@ -106,8 +121,9 @@ class FileResearchPipeline:
             tuple(f"entry:{reason}" for reason in entry_check.reason_codes) + tuple(f"exit:{reason}" for reason in exit_check.reason_codes),
         )
 
-    def run(self, symbols: list[str], rule: CompiledRule, config: PipelineConfig = PipelineConfig()) -> Path:
+    def run(self, symbols: list[str], rule: CompiledRule, config: PipelineConfig = PipelineConfig(), *, dataset_snapshot_id: str | None = None, dataset_snapshot_manifest: str | None = None, experiment_protocol_id: str | None = None) -> Path:
         symbols = sorted(set(symbols))
+        memberships = load_universe_memberships(Path(config.universe_manifest)) if config.universe_manifest else None
         benchmark_by_time: dict[datetime, Candle] = {}
         regime_by_time: dict[datetime, str] = {}
         benchmark_id = None
@@ -122,42 +138,80 @@ class FileResearchPipeline:
                 moving_average = sum(row.close for row in benchmark[index + 1 - config.market_regime_window:index + 1]) / config.market_regime_window
                 regime_by_time[item.timestamp] = "bullish" if item.close >= moving_average else "bearish"
             benchmark_id = benchmark_source.snapshot_id([config.benchmark_symbol])
-        snapshot_id = self.source.snapshot_id(symbols)
-        if benchmark_id:
+        snapshot_id = dataset_snapshot_id or self.source.snapshot_id(symbols)
+        if benchmark_id and dataset_snapshot_id is None:
             snapshot_id = "sha256:" + sha256(f"{snapshot_id}|{benchmark_id}".encode()).hexdigest()
         run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "_" + uuid4().hex[:8]
         run_dir = self.output_root / run_id
+        started_at = datetime.now(timezone.utc)
+        progress_path = run_dir / "progress.json"
         observations: list[Observation] = []
         outcomes: list[Outcome] = []
         skipped: list[str] = []
         loaded = 0
-        for symbol in symbols:
+        progress_every = max(1, len(symbols) // 100)
+        write_json(progress_path, {
+            "schema_version": "research-progress/v1",
+            "run_id": run_id,
+            "status": "running",
+            "started_at": started_at,
+            "updated_at": started_at,
+            "symbols_total": len(symbols),
+            "symbols_processed": 0,
+            "symbols_loaded": 0,
+            "observations": 0,
+            "outcomes": 0,
+            "percent": 0.0,
+            "current_symbol": None,
+        })
+        for position, symbol in enumerate(symbols, start=1):
             try:
                 series = self.source.load(symbol, config.start, config.end)
             except (FileNotFoundError, ValueError):
                 skipped.append(symbol)
-                continue
-            if len(series) <= rule.max_lookback + max(config.horizons):
+                series = []
+            if series and len(series) <= rule.max_lookback + max(config.horizons):
                 skipped.append(symbol)
-                continue
-            loaded += 1
-            for index in range(rule.max_lookback, len(series) - 1):
-                result = evaluate(series, index, rule)
-                if result.status != "matched" or result.executable_from is None:
-                    continue
-                if config.min_signal_amount is not None and (series[index].amount is None or series[index].amount < config.min_signal_amount):
-                    continue
-                observation = Observation(
-                    self._observation_id(symbol, result.observed_at, result.semantic_hash, snapshot_id),
-                    symbol, result.observed_at, result.executable_from,
-                    rule.definition.id, rule.definition.version, result.semantic_hash,
-                    snapshot_id, tuple(asdict(item) for item in result.conditions),
-                )
-                observations.append(observation)
-                for horizon in config.horizons:
-                    outcome = self._outcome(observation, series, index, horizon, benchmark_by_time, regime_by_time, config)
-                    if outcome:
-                        outcomes.append(outcome)
+                series = []
+            if series:
+                loaded += 1
+                for index in range(rule.max_lookback, len(series) - 1):
+                    result = evaluate(series, index, rule)
+                    if result.status != "matched" or result.executable_from is None:
+                        continue
+                    # Membership must be true on the actual observation date, not
+                    # merely on the run's end date.  This prevents delisted names
+                    # and future listings from leaking into historical samples.
+                    if memberships is not None and not active_on(memberships, symbol, result.observed_at.date()):
+                        continue
+                    if config.min_signal_amount is not None and (series[index].amount is None or series[index].amount < config.min_signal_amount):
+                        continue
+                    observation = Observation(
+                        self._observation_id(symbol, result.observed_at, result.semantic_hash, snapshot_id),
+                        symbol, result.observed_at, result.executable_from,
+                        rule.definition.id, rule.definition.version, result.semantic_hash,
+                        snapshot_id, tuple(asdict(item) for item in result.conditions),
+                    )
+                    observations.append(observation)
+                    for horizon in config.horizons:
+                        outcome = self._outcome(observation, series, index, horizon, benchmark_by_time, regime_by_time, config)
+                        if outcome:
+                            outcomes.append(outcome)
+            if position == len(symbols) or position % progress_every == 0:
+                write_json(progress_path, {
+                    "schema_version": "research-progress/v1",
+                    "run_id": run_id,
+                    "status": "running",
+                    "started_at": started_at,
+                    "updated_at": datetime.now(timezone.utc),
+                    "symbols_total": len(symbols),
+                    "symbols_processed": position,
+                    "symbols_loaded": loaded,
+                    "observations": len(observations),
+                    "outcomes": len(outcomes),
+                    "percent": round(position / len(symbols) * 100, 2) if symbols else 100.0,
+                    "current_symbol": symbol,
+                })
         summary = ResearchRun(
             run_id, datetime.now(timezone.utc), snapshot_id, rule.semantic_hash,
             len(symbols), loaded, len(observations), len(outcomes), tuple(skipped),
@@ -175,18 +229,41 @@ class FileResearchPipeline:
             "benchmark_symbol": config.benchmark_symbol,
             "benchmark_dataset": config.benchmark_dataset if config.benchmark_symbol else None,
             "benchmark_snapshot_id": benchmark_id,
+            "dataset_snapshot_manifest": dataset_snapshot_manifest,
+            "experiment_protocol_id": experiment_protocol_id,
             "commission_bps_per_side": config.commission_bps_per_side,
             "slippage_bps_per_side": config.slippage_bps_per_side,
             "out_of_sample_start": config.out_of_sample_start,
+            "lockbox_start": config.lockbox_start,
             "market_regime_window": config.market_regime_window,
             "min_signal_amount": config.min_signal_amount,
             "skip_untradeable": config.skip_untradeable,
+            "universe": {
+                "status": "point_in_time" if config.universe_manifest else "survivorship_unsafe",
+                "manifest": config.universe_manifest,
+                "enforcement": "per_observation_date" if config.universe_manifest else "none",
+                "note": "未提供历史股票池清单时，当前 Parquet 文件列表只能用于探索性研究。",
+            },
             "rule": asdict(rule.definition),
         })
         (run_dir / "report.md").write_text(
             self._report(summary, rule, config, outcomes),
             encoding="utf-8",
         )
+        write_json(progress_path, {
+            "schema_version": "research-progress/v1",
+            "run_id": run_id,
+            "status": "completed",
+            "started_at": started_at,
+            "updated_at": datetime.now(timezone.utc),
+            "symbols_total": len(symbols),
+            "symbols_processed": len(symbols),
+            "symbols_loaded": loaded,
+            "observations": len(observations),
+            "outcomes": len(outcomes),
+            "percent": 100.0,
+            "current_symbol": None,
+        })
         return run_dir
 
     @staticmethod

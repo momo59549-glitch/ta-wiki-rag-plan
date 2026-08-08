@@ -1,0 +1,38 @@
+{
+  "card_id": "kc_017de032fbfc4907bc7155029c48b3e7",
+  "claim": "保护性止损应优先放在能够否定入场逻辑的近期结构点之外；若结构止损距离造成不可接受的资金风险，可以放弃交易或使用预先定义的资金止损，但不能事后扩大风险。",
+  "content_sha256": "sha256:823e2ca61886761b03376d08192d8d053f30b908b39a580f970fd4740bc1042a",
+  "created_at": "2026-08-06T02:19:01.468472+00:00",
+  "evidence_refs": [
+    {
+      "citation": "[Getting Started in Technical Analysis，PDF 第 143 页]",
+      "kind": "pdf_page",
+      "locator": "142",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f.pdf.json",
+      "source_sha256": "d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f"
+    },
+    {
+      "citation": "[Getting Started in Technical Analysis，PDF 第 149 页]",
+      "kind": "pdf_page",
+      "locator": "148",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f.pdf.json",
+      "source_sha256": "d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f"
+    }
+  ],
+  "limitations": [
+    "需计入跳空、涨跌停和滑点导致的止损失效。",
+    "仓位大小应由止损距离反推。"
+  ],
+  "publication": "published",
+  "research_artifacts": [],
+  "review": {
+    "comment": "已逐页核对定义、确认条件与限制；仅作为可复验规则起点，统计结论不得直接外推至 A 股。",
+    "decision": "publish",
+    "reviewed_at": "2026-08-06T02:19:01.468472+00:00",
+    "reviewer": "Codex Knowledge QA"
+  },
+  "schema_version": "knowledge-card/v1",
+  "source_case_id": null,
+  "status": "published",
+  "title": "止损应对应结构失效"
+}

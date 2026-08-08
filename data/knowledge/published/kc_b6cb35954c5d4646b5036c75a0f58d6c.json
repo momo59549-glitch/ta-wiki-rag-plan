@@ -1,0 +1,31 @@
+{
+  "card_id": "kc_b6cb35954c5d4646b5036c75a0f58d6c",
+  "claim": "黄昏星是上涨趋势后的三蜡烛线顶部反转警告：长白实体之后出现体现犹豫的小实体，第三根为较强黑色实体并回落至第一根白色实体内部。中间星线实体颜色不是核心，第三根下压的深度越明显，形态通常越有意义。",
+  "content_sha256": "sha256:8be86c9e6a3c7d547ac9ddf447f04ede78e898196550689cf244c291aecd51c1",
+  "created_at": "2026-08-05T14:53:55.060877+00:00",
+  "evidence_refs": [
+    {
+      "citation": "[日本蜡烛图技术（“K线之父”史蒂夫·尼森畅销30年炒股“圣经”！全新修订超20万字，中国知名金融学者丁圣元倾情翻译。），章节 黄昏星形态]",
+      "kind": "epub_chapter",
+      "locator": "OEBPS/Text/part0025.xhtml",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\57ab30fd44b05b8c6013643628a9cac9de7289ebc4b33c16f06a76e6ee0dfde8.epub.json",
+      "source_sha256": "57ab30fd44b05b8c6013643628a9cac9de7289ebc4b33c16f06a76e6ee0dfde8"
+    }
+  ],
+  "limitations": [
+    "不同市场的跳空特征不同。",
+    "必须结合上涨趋势、第三根确认、阻力位置和形态高点失效条件。"
+  ],
+  "publication": "published",
+  "research_artifacts": [],
+  "review": {
+    "comment": "已核验黄昏星章节：三线结构、趋势前提、第三根回落及失效限制一致。",
+    "decision": "publish",
+    "reviewed_at": "2026-08-05T14:58:26.944528+00:00",
+    "reviewer": "codex-content-reviewer-2026-08-05"
+  },
+  "schema_version": "knowledge-card/v1",
+  "source_case_id": null,
+  "status": "published",
+  "title": "黄昏星形态"
+}

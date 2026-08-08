@@ -2,6 +2,8 @@
 
 ## 1. 通用 Prompt
 
+当前九 Agent 的核心节点是确定性代码；以下 Prompt 只在未来启用 LLM 辅助的 Research/Knowledge/Report 时使用，Prompt 输出不能直接改变状态或发布内容。
+
 ```text
 你是 {agent_type}，只能执行声明的职责和工具。
 输出必须符合 {output_schema_version}。
@@ -129,21 +131,22 @@ approval:
 
 ```json
 {
-  "event_id": "uuidv7",
-  "event_type": "backtest.completed.v1",
+  "schema_version": "event-envelope/v1",
+  "event_id": "evt_<stable-id>",
+  "event_type": "job.succeeded",
   "occurred_at": "ISO-8601 UTC",
-  "producer": "backtest-agent",
-  "tenant_id": "uuid",
-  "correlation_id": "research-case-id",
-  "causation_id": "event-id",
-  "schema_version": 1,
+  "job_id": "job_<id>",
+  "case_id": "case_<id>|null",
+  "correlation_id": "job-or-case-id",
+  "causation_id": "event-id|null",
   "idempotency_key": "string",
-  "payload": {"backtest_run_id": "uuid"},
-  "payload_sha256": "hex"
+  "payload": {},
+  "payload_sha256": "sha256:<hex>",
+  "delivery_status": "pending",
+  "delivery_attempts": 0
 }
 ```
 
 ## 8. 报告目录
 
 问题；审批状态；数据快照与样本；Rule/Protocol；预注册方法；样本内/外与 walk-forward；成本/参数敏感性；失败与反证；限制；事实/推断结论；Rule 决定；引用与复现 Manifest。
-

@@ -1,0 +1,31 @@
+{
+  "card_id": "kc_349f3477259a4939b0f114563bdec4d9",
+  "claim": "孕线由前一根较长实体包住后一根较小实体构成，要求包含的是实体，后者影线可以超出前者范围；两根实体不必颜色相反。它提示原趋势动能减弱而非保证反向，第二根若为十字线则形成更强的十字孕线警告。",
+  "content_sha256": "sha256:78cd74400806ba93d9b6bfba4e17083115a4b13ff2af9d8360235a29a6ce16c3",
+  "created_at": "2026-08-05T14:53:55.065879+00:00",
+  "evidence_refs": [
+    {
+      "citation": "[日本蜡烛图技术（“K线之父”史蒂夫·尼森畅销30年炒股“圣经”！全新修订超20万字，中国知名金融学者丁圣元倾情翻译。），章节 孕线形态]",
+      "kind": "epub_chapter",
+      "locator": "OEBPS/Text/part0029.xhtml",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\57ab30fd44b05b8c6013643628a9cac9de7289ebc4b33c16f06a76e6ee0dfde8.epub.json",
+      "source_sha256": "57ab30fd44b05b8c6013643628a9cac9de7289ebc4b33c16f06a76e6ee0dfde8"
+    }
+  ],
+  "limitations": [
+    "孕线可能把趋势从上升或下降转为横向，而非必然反转。",
+    "实体大小带有相对性，应使用预先固定的量化口径并结合位置验证。"
+  ],
+  "publication": "published",
+  "research_artifacts": [],
+  "review": {
+    "comment": "已核验孕线章节：实体包含、影线例外、颜色条件及横向变化限制一致。",
+    "decision": "publish",
+    "reviewed_at": "2026-08-05T14:58:26.939528+00:00",
+    "reviewer": "codex-content-reviewer-2026-08-05"
+  },
+  "schema_version": "knowledge-card/v1",
+  "source_case_id": null,
+  "status": "published",
+  "title": "孕线与十字孕线"
+}

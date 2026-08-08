@@ -1,0 +1,37 @@
+{
+  "card_id": "kc_270457dea20e4c23b8e76272bd86b93a",
+  "claim": "测量幅度可以形成情景目标，但图表形态对目标价的可靠性通常低于其作为入场或趋势变化线索的可靠性；目标位不应作为保证收益或唯一退出条件。",
+  "content_sha256": "sha256:a9efadd8ea748195e62a51cf41256824dbb7db9d0fd4f853ccf3ad8b10248b54",
+  "created_at": "2026-08-06T02:19:01.477343+00:00",
+  "evidence_refs": [
+    {
+      "citation": "[Getting Started in Technical Analysis，PDF 第 153 页]",
+      "kind": "pdf_page",
+      "locator": "152",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f.pdf.json",
+      "source_sha256": "d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f"
+    },
+    {
+      "citation": "[Getting Started in Technical Analysis，PDF 第 154 页]",
+      "kind": "pdf_page",
+      "locator": "153",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f.pdf.json",
+      "source_sha256": "d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f"
+    }
+  ],
+  "limitations": [
+    "目标位命中率必须独立统计。"
+  ],
+  "publication": "published",
+  "research_artifacts": [],
+  "review": {
+    "comment": "已逐页核对定义、确认条件与限制；仅作为可复验规则起点，统计结论不得直接外推至 A 股。",
+    "decision": "publish",
+    "reviewed_at": "2026-08-06T02:19:01.482344+00:00",
+    "reviewer": "Codex Knowledge QA"
+  },
+  "schema_version": "knowledge-card/v1",
+  "source_case_id": null,
+  "status": "published",
+  "title": "形态目标位低于入场信号可信度"
+}

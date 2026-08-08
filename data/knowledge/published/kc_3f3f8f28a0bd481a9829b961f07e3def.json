@@ -1,0 +1,38 @@
+{
+  "card_id": "kc_3f3f8f28a0bd481a9829b961f07e3def",
+  "claim": "以形态高度投射目标价的测量规则只能产生研究目标：向上突破时加到突破参考价，向下突破时扣除；实际结果必须统计目标命中率和失败分布。",
+  "content_sha256": "sha256:193bc539ef15c3c75b0414fd2f4d24bc0a2dfc00bd7e2b1109569909f531d416",
+  "created_at": "2026-08-06T02:19:01.712662+00:00",
+  "evidence_refs": [
+    {
+      "citation": "[Encyclopedia of Chart Patterns，PDF 第 46 页]",
+      "kind": "pdf_page",
+      "locator": "45",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\a92c020b93d09d758ddde33a5ad1de906ae4e05b9334bdd80f428e7ce99973b0.pdf.json",
+      "source_sha256": "a92c020b93d09d758ddde33a5ad1de906ae4e05b9334bdd80f428e7ce99973b0"
+    },
+    {
+      "citation": "[Encyclopedia of Chart Patterns，PDF 第 47 页]",
+      "kind": "pdf_page",
+      "locator": "46",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\a92c020b93d09d758ddde33a5ad1de906ae4e05b9334bdd80f428e7ce99973b0.pdf.json",
+      "source_sha256": "a92c020b93d09d758ddde33a5ad1de906ae4e05b9334bdd80f428e7ce99973b0"
+    }
+  ],
+  "limitations": [
+    "不同形态的基准点不同，不得套用同一公式。",
+    "目标不能替代止损。"
+  ],
+  "publication": "published",
+  "research_artifacts": [],
+  "review": {
+    "comment": "已逐页核对定义、确认条件与限制；仅作为可复验规则起点，统计结论不得直接外推至 A 股。",
+    "decision": "publish",
+    "reviewed_at": "2026-08-06T02:19:01.712662+00:00",
+    "reviewer": "Codex Knowledge QA"
+  },
+  "schema_version": "knowledge-card/v1",
+  "source_case_id": null,
+  "status": "published",
+  "title": "测量规则只是目标假设"
+}

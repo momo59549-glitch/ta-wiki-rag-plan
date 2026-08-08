@@ -1,0 +1,30 @@
+{
+  "card_id": "kc_a9dc4a4dafaa48829f92130d56c6abb4",
+  "claim": "参数选择应寻找邻近参数都表现稳健的宽阔平台，而不是历史结果最好的孤立单点；单点尖峰更可能是样本偶然性。",
+  "content_sha256": "sha256:6b4f7d5c51891e45702cce77df6b85bf367d991e7e48584294a63e130983e72c",
+  "created_at": "2026-08-06T02:19:01.542876+00:00",
+  "evidence_refs": [
+    {
+      "citation": "[Getting Started in Technical Analysis，PDF 第 271 页]",
+      "kind": "pdf_page",
+      "locator": "270",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f.pdf.json",
+      "source_sha256": "d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f"
+    }
+  ],
+  "limitations": [
+    "平台稳定仍不替代真正的样本外验证。"
+  ],
+  "publication": "published",
+  "research_artifacts": [],
+  "review": {
+    "comment": "已逐页核对定义、确认条件与限制；仅作为可复验规则起点，统计结论不得直接外推至 A 股。",
+    "decision": "publish",
+    "reviewed_at": "2026-08-06T02:19:01.542876+00:00",
+    "reviewer": "Codex Knowledge QA"
+  },
+  "schema_version": "knowledge-card/v1",
+  "source_case_id": null,
+  "status": "published",
+  "title": "选择参数平台而非单点最优"
+}

@@ -1,0 +1,31 @@
+{
+  "card_id": "kc_605b7134cac5490791a7ab40e7529630",
+  "claim": "两者具有位于价格区间上端的小实体、至少约为实体两倍的长下影线，以及很短或没有的上影线。相同外形必须结合此前趋势解释：下跌后为潜在看涨的锤子线，上涨后为潜在看跌的上吊线；上吊线还需要后续看跌验证。",
+  "content_sha256": "sha256:07dead320084312ab9faaec99cf56db21143fd1c4f6454c103207e6243e30bce",
+  "created_at": "2026-08-05T14:53:55.044877+00:00",
+  "evidence_refs": [
+    {
+      "citation": "[日本蜡烛图技术（“K线之父”史蒂夫·尼森畅销30年炒股“圣经”！全新修订超20万字，中国知名金融学者丁圣元倾情翻译。），章节 伞形线]",
+      "kind": "epub_chapter",
+      "locator": "OEBPS/Text/part0019.xhtml",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\57ab30fd44b05b8c6013643628a9cac9de7289ebc4b33c16f06a76e6ee0dfde8.epub.json",
+      "source_sha256": "57ab30fd44b05b8c6013643628a9cac9de7289ebc4b33c16f06a76e6ee0dfde8"
+    }
+  ],
+  "limitations": [
+    "形态只表示潜在线索，不保证反转。",
+    "必须等待本周期收盘后识别，并结合趋势、位置、风险报偿和失效价位。"
+  ],
+  "publication": "published",
+  "research_artifacts": [],
+  "review": {
+    "comment": "已核验伞形线章节：形态比例、趋势区分、上吊线后续验证及风险限制一致。",
+    "decision": "publish",
+    "reviewed_at": "2026-08-05T14:58:26.955513+00:00",
+    "reviewer": "codex-content-reviewer-2026-08-05"
+  },
+  "schema_version": "knowledge-card/v1",
+  "source_case_id": null,
+  "status": "published",
+  "title": "锤子线与上吊线"
+}

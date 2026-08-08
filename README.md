@@ -22,13 +22,15 @@
 - FastAPI + Pydantic；
 - LangGraph 管理研究案例状态机；
 - Prefect 管理定时与批处理；
-- PostgreSQL + pgvector 为权威库，Redis 只作缓存/信号；
-- MinIO + Parquet 保存数据快照和产物；
+- 当前阶段以 JSON/JSONL/Parquet 为文件型权威存储，不要求 SQL；达到多人并发与容量门槛后再迁移 PostgreSQL + pgvector；
+- 当前产物使用本地文件和 Parquet；MinIO 是对象存储扩展位，不是单机前置条件；
 - AKShare/Tushare 数据适配；
 - vectorbt 主回测，Backtrader 可选复核；
+- skfolio Walk-forward/Purge 验证，statsmodels FDR 多重检验；
 - LlamaIndex 只服务证据检索与知识更新；
+- Wiki Answer Agent 可使用 DeepSeek Anthropic 兼容 API；模型仅根据已审校卡片组织回答，无证据时拒答，失败时降级为证据摘录；
 - Streamlit 先交付内部研究台，Next.js 后续产品化；
-- MLflow 记录实验；Qdrant、Celery、DVC 按指标再引入。
+- 实验 manifest 已保留接口；MLflow、Qdrant、Celery、DVC 按容量或治理指标再引入。
 
 ## MVP 范围
 
@@ -51,6 +53,33 @@ python scripts\run_team.py --limit 20 --start 2020-01-01 --end 2026-07-24 --oos-
 ```
 
 详见 `docs/FILE_AGENT_RUNTIME.md`。系统目前只生成草稿和 QA 门禁，绝不自动发布规则。
+
+本机 API、研究台和自动 Job Worker：
+
+```powershell
+python -m pip install -e ".[research,orchestration,ui,knowledge]"
+powershell -ExecutionPolicy Bypass -File scripts\start_local_stack.ps1
+```
+
+启用 Wiki 模型回答时使用隐藏输入，不把密钥写入文件：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\start_local_stack.ps1 -PromptForWikiApiKey
+```
+
+详见 `docs/OPERATIONS_RUNBOOK.md`、`docs/IMPLEMENTATION_STATUS.md` 与 `docs/FRAMEWORK_COMPLETION_AUDIT.md`。
+
+策略测试准备已通过首个全量 Campaign 的 14/14 门禁；证据和允许/禁止事项见 `docs/STRATEGY_TEST_READINESS.md`。这表示框架可以开始受控测试，不表示锤子线或任何策略已经有效。
+
+## 回测与验证状态（重要）
+
+当前里程碑已按要求冻结策略验证，不继续搜索参数、扩大形态或生成收益结论；已有防未来函数模块与测试保留为框架安全门禁。
+
+- 信号在 T 日收盘确认，买入资格仅使用 T+1 开盘前可见字段；不会以 T+1 收盘、全天成交量或成交额筛掉开盘订单。
+- 当前运行产出 `walk_forward_validation.json`，其 purge 间隔至少等于最长持有周期；候选统计使用 FDR 校正后的 p 值。
+- `data/research_cases_full` 的既有全市场结果是探索性/验证性证据，**不是**未见过的最终锁箱；修改规则后必须以新的、未查看时间段做最终复核。
+- 见 `docs/VALIDATION_AND_ENGINE_REFACTOR.md`。
+- 若要取得可发布级别的股票池证据，使用 `--universe-manifest data/universes/a_share_history.jsonl --universe-as-of YYYY-MM-DD`；不提供清单时 QA 会标记为 `passed_with_limitations`，不能进入批准流程。
 
 ## 不可绕过的门禁
 

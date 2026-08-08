@@ -1,0 +1,37 @@
+{
+  "card_id": "kc_a92376e0cd0447928f0908c29534451b",
+  "claim": "回测必须计入佣金之外的滑点，并禁止在涨跌停或其他不可成交状态假设理想成交；高换手系统对这些假设尤其敏感。",
+  "content_sha256": "sha256:90eed9b6d5f388d7391dc7da4117314575b6fe7be8bce0d52ef3af58aa96ae3a",
+  "created_at": "2026-08-06T02:19:01.532874+00:00",
+  "evidence_refs": [
+    {
+      "citation": "[Getting Started in Technical Analysis，PDF 第 269 页]",
+      "kind": "pdf_page",
+      "locator": "268",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f.pdf.json",
+      "source_sha256": "d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f"
+    },
+    {
+      "citation": "[Getting Started in Technical Analysis，PDF 第 270 页]",
+      "kind": "pdf_page",
+      "locator": "269",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f.pdf.json",
+      "source_sha256": "d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f"
+    }
+  ],
+  "limitations": [
+    "成本和成交规则应冻结在实验协议中。"
+  ],
+  "publication": "published",
+  "research_artifacts": [],
+  "review": {
+    "comment": "已逐页核对定义、确认条件与限制；仅作为可复验规则起点，统计结论不得直接外推至 A 股。",
+    "decision": "publish",
+    "reviewed_at": "2026-08-06T02:19:01.532874+00:00",
+    "reviewer": "Codex Knowledge QA"
+  },
+  "schema_version": "knowledge-card/v1",
+  "source_case_id": null,
+  "status": "published",
+  "title": "回测必须使用可实现成交与完整成本"
+}

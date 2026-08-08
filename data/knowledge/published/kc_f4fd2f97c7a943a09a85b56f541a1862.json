@@ -1,0 +1,37 @@
+{
+  "card_id": "kc_f4fd2f97c7a943a09a85b56f541a1862",
+  "claim": "形态研究不能只报告平均涨跌幅，应同时报告不同收益阈值下的失败率、突破后回抽或反抽、持有期和样本量；失败率会随目标阈值变化。",
+  "content_sha256": "sha256:b4d302ae982311402b64f164626a6ab3ec4b4b1a42cfb5a2a66f51f389d98b25",
+  "created_at": "2026-08-06T02:19:01.630441+00:00",
+  "evidence_refs": [
+    {
+      "citation": "[Encyclopedia of Chart Patterns，PDF 第 10 页]",
+      "kind": "pdf_page",
+      "locator": "9",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\a92c020b93d09d758ddde33a5ad1de906ae4e05b9334bdd80f428e7ce99973b0.pdf.json",
+      "source_sha256": "a92c020b93d09d758ddde33a5ad1de906ae4e05b9334bdd80f428e7ce99973b0"
+    },
+    {
+      "citation": "[Encyclopedia of Chart Patterns，PDF 第 31 页]",
+      "kind": "pdf_page",
+      "locator": "30",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\a92c020b93d09d758ddde33a5ad1de906ae4e05b9334bdd80f428e7ce99973b0.pdf.json",
+      "source_sha256": "a92c020b93d09d758ddde33a5ad1de906ae4e05b9334bdd80f428e7ce99973b0"
+    }
+  ],
+  "limitations": [
+    "必须按市场状态、流动性和时期重新分层。"
+  ],
+  "publication": "published",
+  "research_artifacts": [],
+  "review": {
+    "comment": "已逐页核对定义、确认条件与限制；仅作为可复验规则起点，统计结论不得直接外推至 A 股。",
+    "decision": "publish",
+    "reviewed_at": "2026-08-06T02:19:01.635442+00:00",
+    "reviewer": "Codex Knowledge QA"
+  },
+  "schema_version": "knowledge-card/v1",
+  "source_case_id": null,
+  "status": "published",
+  "title": "形态失败率必须按阈值完整报告"
+}

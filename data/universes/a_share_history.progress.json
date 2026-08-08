@@ -1,0 +1,13 @@
+{
+  "status": "completed",
+  "current_status": null,
+  "completed_statuses": [
+    "L",
+    "D",
+    "P",
+    "G"
+  ],
+  "records": 5875,
+  "started_at": "2026-08-05T02:42:14.891282+00:00",
+  "updated_at": "2026-08-05T02:42:19.161337+00:00"
+}

@@ -46,7 +46,7 @@ def get_case(root: Path, case_id: str) -> dict:
     if not case:
         raise FileNotFoundError(case_id)
     artifacts = {}
-    for name in ("qa_review.json", "hypothesis_draft.json", "statistics_out_of_sample.json", "knowledge_card_draft.json", "approval_request.json", "approval.json", "rule_publication.json"):
+    for name in ("case_state.json", "qa_review.json", "hypothesis_draft.json", "statistics_out_of_sample.json", "knowledge_card_draft.json", "hypothesis_approval_request.json", "hypothesis_approval.json", "rule_approval_request.json", "rule_approval.json", "approval_request.json", "approval.json", "rule_publication.json"):
         value = _read(directory / name)
         if value is not None:
             artifacts[name.removesuffix(".json")] = value

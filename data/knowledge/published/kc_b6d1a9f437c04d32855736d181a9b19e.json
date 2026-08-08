@@ -1,0 +1,38 @@
+{
+  "card_id": "kc_b6d1a9f437c04d32855736d181a9b19e",
+  "claim": "测试期过短会遗漏不同市场状态，过长又可能混入已失去代表性的制度环境。应同时报告完整期间和多个子期间表现，以检查时间稳定性。",
+  "content_sha256": "sha256:9ad4b0575275b58db075449b1cdb1172b06c0fcd6f607cb9f524484060b409ee",
+  "created_at": "2026-08-06T02:19:01.519023+00:00",
+  "evidence_refs": [
+    {
+      "citation": "[Getting Started in Technical Analysis，PDF 第 267 页]",
+      "kind": "pdf_page",
+      "locator": "266",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f.pdf.json",
+      "source_sha256": "d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f"
+    },
+    {
+      "citation": "[Getting Started in Technical Analysis，PDF 第 268 页]",
+      "kind": "pdf_page",
+      "locator": "267",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f.pdf.json",
+      "source_sha256": "d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f"
+    }
+  ],
+  "limitations": [
+    "具体年数不是跨市场通用常数。",
+    "市场制度变化需要单独标注。"
+  ],
+  "publication": "published",
+  "research_artifacts": [],
+  "review": {
+    "comment": "已逐页核对定义、确认条件与限制；仅作为可复验规则起点，统计结论不得直接外推至 A 股。",
+    "decision": "publish",
+    "reviewed_at": "2026-08-06T02:19:01.519023+00:00",
+    "reviewer": "Codex Knowledge QA"
+  },
+  "schema_version": "knowledge-card/v1",
+  "source_case_id": null,
+  "status": "published",
+  "title": "回测期间必须覆盖多种市场状态"
+}

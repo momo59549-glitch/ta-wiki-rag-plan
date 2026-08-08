@@ -1,0 +1,44 @@
+{
+  "card_id": "kc_7428027d7c384638b2f0241dcfd808d8",
+  "claim": "单个精心挑选的历史图表无法证明策略有效。候选规则必须跨标的、跨时间和跨市场状态检验，并报告全部样本而不是仅展示成功案例。",
+  "content_sha256": "sha256:1d225cf629637bc2f9015bd04b8e0238b907053f20aa9c7e4ce8163284791feb",
+  "created_at": "2026-08-06T02:19:01.498216+00:00",
+  "evidence_refs": [
+    {
+      "citation": "[Getting Started in Technical Analysis，PDF 第 263 页]",
+      "kind": "pdf_page",
+      "locator": "262",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f.pdf.json",
+      "source_sha256": "d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f"
+    },
+    {
+      "citation": "[Getting Started in Technical Analysis，PDF 第 264 页]",
+      "kind": "pdf_page",
+      "locator": "263",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f.pdf.json",
+      "source_sha256": "d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f"
+    },
+    {
+      "citation": "[Getting Started in Technical Analysis，PDF 第 265 页]",
+      "kind": "pdf_page",
+      "locator": "264",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f.pdf.json",
+      "source_sha256": "d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f"
+    }
+  ],
+  "limitations": [
+    "必须保留失败样本和未成交样本。"
+  ],
+  "publication": "published",
+  "research_artifacts": [],
+  "review": {
+    "comment": "已逐页核对定义、确认条件与限制；仅作为可复验规则起点，统计结论不得直接外推至 A 股。",
+    "decision": "publish",
+    "reviewed_at": "2026-08-06T02:19:01.498216+00:00",
+    "reviewer": "Codex Knowledge QA"
+  },
+  "schema_version": "knowledge-card/v1",
+  "source_case_id": null,
+  "status": "published",
+  "title": "拒绝孤立的优选历史案例"
+}

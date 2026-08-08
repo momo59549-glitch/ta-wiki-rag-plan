@@ -1,0 +1,38 @@
+{
+  "card_id": "kc_868de4f9e70a4df49dce8273b1841fc4",
+  "claim": "旗形和三角旗是趋势中的窄幅、短期整理结构；顺原趋势突破才构成持续候选信号，向相反方向显著突破则否定持续解释，并可将形态另一端作为近似风险参考。",
+  "content_sha256": "sha256:dfb4874ecab3bdedf0fb6849423292ba0ca1f117bb93b1f2e86f855a3a86af44",
+  "created_at": "2026-08-06T02:19:01.427475+00:00",
+  "evidence_refs": [
+    {
+      "citation": "[Getting Started in Technical Analysis，PDF 第 97 页]",
+      "kind": "pdf_page",
+      "locator": "96",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f.pdf.json",
+      "source_sha256": "d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f"
+    },
+    {
+      "citation": "[Getting Started in Technical Analysis，PDF 第 101 页]",
+      "kind": "pdf_page",
+      "locator": "100",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f.pdf.json",
+      "source_sha256": "d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f"
+    }
+  ],
+  "limitations": [
+    "持续期、窄幅程度和显著突破阈值必须量化。",
+    "风险参考不等于保证成交的止损价。"
+  ],
+  "publication": "published",
+  "research_artifacts": [],
+  "review": {
+    "comment": "已逐页核对定义、确认条件与限制；仅作为可复验规则起点，统计结论不得直接外推至 A 股。",
+    "decision": "publish",
+    "reviewed_at": "2026-08-06T02:19:01.427475+00:00",
+    "reviewer": "Codex Knowledge QA"
+  },
+  "schema_version": "knowledge-card/v1",
+  "source_case_id": null,
+  "status": "published",
+  "title": "旗形与三角旗的持续及失效条件"
+}

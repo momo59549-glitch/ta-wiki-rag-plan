@@ -1,0 +1,13 @@
+{
+  "manifest": "data\\universes\\a_share_history.jsonl",
+  "dataset_dirs": [
+    "H:\\股票模型\\Model\\data\\trend_cache",
+    "H:\\股票模型\\Model\\data\\tushare_daily_cache"
+  ],
+  "as_of": "2026-08-04",
+  "universe_symbols": 5536,
+  "price_files": 5874,
+  "missing_price_symbols": [],
+  "coverage_ratio": 1.0,
+  "status": "complete"
+}

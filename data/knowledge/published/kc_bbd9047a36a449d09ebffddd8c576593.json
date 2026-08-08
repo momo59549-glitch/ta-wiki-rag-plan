@@ -1,0 +1,31 @@
+{
+  "card_id": "kc_bbd9047a36a449d09ebffddd8c576593",
+  "claim": "上升趋势应表现为相继抬高的相对高点和相对低点；下降趋势则相反。趋势标签必须由已经完成的摆动点确认，不能使用尚未完成的未来高低点。",
+  "content_sha256": "sha256:6b5912d62113c92ce3e19820196b1c721be84d635a2f8563b5c38cdff1002de5",
+  "created_at": "2026-08-06T02:19:01.387346+00:00",
+  "evidence_refs": [
+    {
+      "citation": "[Getting Started in Technical Analysis，PDF 第 43 页]",
+      "kind": "pdf_page",
+      "locator": "42",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f.pdf.json",
+      "source_sha256": "d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f"
+    }
+  ],
+  "limitations": [
+    "摆动点窗口必须预先固定。",
+    "该定义描述结构，不单独构成买卖指令。"
+  ],
+  "publication": "published",
+  "research_artifacts": [],
+  "review": {
+    "comment": "已逐页核对定义、确认条件与限制；仅作为可复验规则起点，统计结论不得直接外推至 A 股。",
+    "decision": "publish",
+    "reviewed_at": "2026-08-06T02:19:01.387346+00:00",
+    "reviewer": "Codex Knowledge QA"
+  },
+  "schema_version": "knowledge-card/v1",
+  "source_case_id": null,
+  "status": "published",
+  "title": "趋势的高低点结构定义"
+}

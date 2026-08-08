@@ -13,19 +13,21 @@
 
 ## 2. P0 Backlog
 
-- [ ] ADR：Agent 编排、业务真相、双回测引擎边界
-- [ ] Research Case 状态机与非法转移测试
-- [ ] 核心表、Alembic、Outbox
-- [ ] DatasetSnapshot 和质量报告
-- [ ] AKShare/Tushare adapter 契约
-- [ ] DSL → vectorbt adapter
-- [ ] Observation 唯一键和 OutcomeProtocol
-- [ ] LangGraph checkpoint/interrupt
-- [ ] Hypothesis/Rule 两个审批 API
-- [ ] Experiment manifest 和 MLflow 链接
-- [ ] future leak、事件幂等、审批绕过测试
-- [ ] Streamlit case timeline
-- [ ] Compose、备份与恢复 runbook
+- [x] ADR：Agent 编排、业务真相、双回测引擎边界
+- [x] Research Case 状态机与非法转移测试
+- [x] 文件型 Job/Event/Outbox/Dead-letter（SQL/Alembic 按门槛延期）
+- [x] DatasetSnapshot 和质量报告
+- [x] AKShare/Tushare adapter 契约及增量覆盖层
+- [x] DSL → vectorbt adapter
+- [x] Observation 唯一键和 OutcomeProtocol
+- [x] LangGraph checkpoint/interrupt 适配
+- [x] Hypothesis/Rule 两个审批 API
+- [x] Experiment manifest（MLflow 按门槛延期）
+- [x] future leak、事件幂等、审批绕过测试
+- [x] Streamlit case timeline
+- [x] Compose、备份与恢复 runbook（Docker 实机验收待环境具备）
+
+当前收口项：Job payload 契约、Worker 租约心跳、端到端启动烟雾测试、审计/恢复演练和文档一致性。策略验证不在当前工作流中继续执行。
 
 ## 3. P1 / P2
 
@@ -50,4 +52,3 @@ P2：Backtrader 复核、Next.js、Qdrant 压测决策、Celery/Kafka 容量决�
 ## 5. 扩展门槛
 
 Qdrant、Celery、Kafka、Kubernetes 必须由容量或 SLO 指标触发并记录 ADR。“以后可能需要”不是引入理由。
-

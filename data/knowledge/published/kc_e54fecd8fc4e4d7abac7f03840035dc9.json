@@ -1,0 +1,30 @@
+{
+  "card_id": "kc_e54fecd8fc4e4d7abac7f03840035dc9",
+  "claim": "历史优化几乎必然高估未来表现。优化只可用于确定合理参数区域，最终评价必须来自未参与选择的样本外或锁箱数据。",
+  "content_sha256": "sha256:40c7811de550a5bcef4f3a387032a5c6bb478dcc2cdfa2ec219cd6a0036a0aad",
+  "created_at": "2026-08-06T02:19:01.547876+00:00",
+  "evidence_refs": [
+    {
+      "citation": "[Getting Started in Technical Analysis，PDF 第 272 页]",
+      "kind": "pdf_page",
+      "locator": "271",
+      "manifest_path": "H:\\股票模型\\ta-wiki-rag-plan\\data\\manifests\\d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f.pdf.json",
+      "source_sha256": "d52c1791985faac088834b47646533ef353f8012fc1d6417caabc13086a0f94f"
+    }
+  ],
+  "limitations": [
+    "任何查看锁箱结果后的修改都必须启动新版本和新锁箱。"
+  ],
+  "publication": "published",
+  "research_artifacts": [],
+  "review": {
+    "comment": "已逐页核对定义、确认条件与限制；仅作为可复验规则起点，统计结论不得直接外推至 A 股。",
+    "decision": "publish",
+    "reviewed_at": "2026-08-06T02:19:01.552876+00:00",
+    "reviewer": "Codex Knowledge QA"
+  },
+  "schema_version": "knowledge-card/v1",
+  "source_case_id": null,
+  "status": "published",
+  "title": "优化结果不得作为最终业绩估计"
+}
