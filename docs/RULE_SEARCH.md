@@ -88,6 +88,17 @@ python scripts/run_rule_search.py `
 当前状态：`campaign_20260808T032005Z`（协议 `protocol_a666a614…`）已派生，
 14/14 门禁通过，`rsi_oversold` 的全市场冻结执行已在后台运行。
 
+### 冻结裁决（2026-08-08，`rsi_oversold`）
+
+全市场冻结执行已完成（1,292,548 条样本外 Outcome），QA 为 `passed_with_limitations`：
+派生 Campaign 后工作树代码变更导致 `code_snapshot_bound=false`，框架正确阻断审批路径。
+
+统计裁决：**拒绝发布**。样本外净超额强依赖市场状态——仅 `bearish 5/10/20日`
+为正（+0.28% / +0.62% / +2.38%），`bullish 10/20日` 显著为负（-0.38% / -1.55%），
+`1日/bearish` 亦为负。这与筛选轮结论一致：`20日/bearish +2.38%` 是熊市反弹共性
+效应，不是独立规则信号。假设草稿只选显著为正的分组、忽略显著为负分组，属结构性盲区。
+完整裁决记录：`data/strategy_test_executions/protocol_a666a614…/adjudication.json`。
+
 ## 晋升路径（未自动执行）
 
 1. 人工从候选清单挑选 1–3 条（建议先看非 `20日/bearish` 或跨周期一致的候选）；
