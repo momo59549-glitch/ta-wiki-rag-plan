@@ -37,6 +37,7 @@ def main() -> int:
     parser.add_argument("--from-campaign", type=Path, required=True)
     parser.add_argument("--model-data", type=Path, default=Path(r"H:\股票模型\Model\data"))
     parser.add_argument("--output-root", type=Path, default=Path("data/strategy_test_campaigns"))
+    parser.add_argument("--rule", default=None, help="替换源协议的规则 id（默认沿用源协议规则）")
     args = parser.parse_args()
 
     source_campaign = args.from_campaign.resolve()
@@ -83,7 +84,8 @@ def main() -> int:
         skip_untradeable=bool(analysis.get("skip_untradeable", True)),
     )
     code = build_code_snapshot(REPOSITORY_ROOT, campaign / "code_snapshot.json")
-    rule = compile_rule(get_rule(old_protocol["rule"]["id"]))
+    rule_id = args.rule or old_protocol["rule"]["id"]
+    rule = compile_rule(get_rule(rule_id))
     protocol = build_experiment_protocol(
         rule,
         config,
@@ -117,6 +119,9 @@ def main() -> int:
         "reused_dataset_snapshot_id": old_protocol["dataset_snapshot_id"],
         "new_code_snapshot_id": code["code_snapshot_id"],
         "new_protocol_id": protocol["protocol_id"],
+        "rule_id": rule_id,
+        "rule_version": rule.definition.version,
+        "rule_semantic_hash": rule.semantic_hash,
         "strategy_executed": False,
     }
     (campaign / "campaign_derivation.json").write_text(json.dumps(derivation, ensure_ascii=False, indent=2), encoding="utf-8")

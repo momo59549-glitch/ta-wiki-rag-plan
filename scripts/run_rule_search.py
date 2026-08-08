@@ -30,6 +30,9 @@ def main() -> int:
     parser.add_argument("--slippage-bps", type=float, default=5.0)
     parser.add_argument("--regime-window", type=int, default=60)
     parser.add_argument("--min-signal-amount", type=float, default=None)
+    parser.add_argument("--stress-multipliers", type=str, default="2,3")
+    parser.add_argument("--min-horizons", type=int, default=2)
+    parser.add_argument("--dedup-jaccard", type=float, default=0.85)
     args = parser.parse_args()
 
     horizons = tuple(int(item) for item in args.horizons.split(",") if item.strip())
@@ -44,6 +47,9 @@ def main() -> int:
         market_regime_window=args.regime_window,
         min_signal_amount=args.min_signal_amount,
         min_out_of_sample_observations=args.min_samples,
+        cost_stress_multipliers=tuple(float(item) for item in args.stress_multipliers.split(",") if item.strip()),
+        require_multiple_horizons=args.min_horizons,
+        dedup_jaccard=args.dedup_jaccard,
     )
     active, universe_meta = load_point_in_time_universe(args.universe_manifest, args.end)
     symbols = active[: args.symbol_limit]
@@ -71,13 +77,15 @@ def main() -> int:
         f"- 开发股票池：{summary['loaded_symbols']} 只载入，{summary['skipped_symbols']} 只跳过",
         f"- 研究期：`{args.start}` → `{args.end}`，验证期：`{args.oos_start}` 起",
         f"- 最终锁箱：`{args.lockbox_start}` 起（本轮未读取）",
+        f"- 筛选口径：2×/3× 成本压力 + 至少 {args.min_horizons} 个周期 + 相关性去重（Jaccard {args.dedup_jaccard}）",
         "", "## 通过筛选的候选（按样本外平均净超额排序）", "",
-        "| 规则 | 参数 | 周期 | 市场状态 | 样本外均值 | 样本 | FDR p | 信号数 |", "|---|---:|---:|---:|---:|---:|---:|---:|",
+        "| 规则 | 参数 | 最佳周期 | 市场状态 | 样本外均值 | 样本 | FDR p | 通过周期数 | 信号数 |", "|---|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for item in summary["best"]:
         group = item["best_group"]
         parameters = "; ".join(f"{k}={v}" for k, v in item["definition"]["parameters"].items()) or "-"
-        lines.append(f"| {item['rule_id']}@{item['version']} | {parameters} | {group['horizon_bars']} | {group['market_regime']} | {group['mean_net_excess_return']:.4%} | {group['sample_size']} | {group['adjusted_p_value']:.4g} | {item['signals']} |")
+        passing_horizons = len({entry["horizon_bars"] for entry in item["passing_groups"]})
+        lines.append(f"| {item['rule_id']}@{item['version']} | {parameters} | {group['horizon_bars']} | {group['market_regime']} | {group['mean_net_excess_return']:.4%} | {group['sample_size']} | {group['adjusted_p_value']:.4g} | {passing_horizons} | {item['signals']} |")
     lines.extend([
         "", "## 说明", "",
         "- 统计为描述性汇总；FDR-BH 对同一轮全部候选、全部分组统一校正。",
@@ -90,7 +98,8 @@ def main() -> int:
     print(f"完成：{summary['candidates_total']} 个候选，通过 {summary['passed_screen']} 个；报告: {args.output_root / 'report.md'}")
     for item in summary["best"]:
         group = item["best_group"]
-        print(f"  {item['rule_id']}@{item['version']} {group['horizon_bars']}日/{group['market_regime']} 均值 {group['mean_net_excess_return']:.4%} FDR {group['adjusted_p_value']:.4g}")
+        passing_horizons = len({entry["horizon_bars"] for entry in item["passing_groups"]})
+        print(f"  {item['rule_id']}@{item['version']} {group['horizon_bars']}日/{group['market_regime']} 均值 {group['mean_net_excess_return']:.4%} FDR {group['adjusted_p_value']:.4g} 通过周期 {passing_horizons}")
     return 0
 
 

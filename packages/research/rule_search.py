@@ -50,6 +50,9 @@ class SearchConfig:
     skip_untradeable: bool = True
     min_out_of_sample_observations: int = 300
     limit_tolerance: float = 0.001
+    cost_stress_multipliers: tuple[float, ...] = (2.0, 3.0)
+    require_multiple_horizons: int = 2
+    dedup_jaccard: float = 0.85
 
     def __post_init__(self) -> None:
         if not self.horizons or any(item < 1 for item in self.horizons):
@@ -64,6 +67,12 @@ class SearchConfig:
             raise ValueError("交易成本不能为负")
         if self.market_regime_window < 2:
             raise ValueError("市场状态窗口至少为 2")
+        if not self.cost_stress_multipliers or any(item < 1.0 for item in self.cost_stress_multipliers):
+            raise ValueError("成本压力倍数必须 >= 1")
+        if self.require_multiple_horizons < 1:
+            raise ValueError("require_multiple_horizons 至少为 1")
+        if not 0.0 <= self.dedup_jaccard <= 1.0:
+            raise ValueError("dedup_jaccard 必须在 [0, 1]")
 
 
 # ---------------------------------------------------------------------------
@@ -582,13 +591,49 @@ def screen_candidates(
             for value in values
         )
         statistics = summarize_outcomes(rows)
+        stress_statistics: dict[str, Any] = {}
+        for multiplier in config.cost_stress_multipliers:
+            extra_cost = (multiplier - 1.0) * total_cost
+            stress_rows = (
+                {"horizon_bars": h, "market_regime": regime, "net_excess_return": value - extra_cost}
+                for (h, regime), values in grouped[rule.semantic_hash].items()
+                for value in values
+            )
+            stress_statistics[str(multiplier)] = summarize_outcomes(stress_rows)
         results[rule.semantic_hash] = {
             "definition": asdict(definition),
             "semantic_hash": rule.semantic_hash,
             "signals": signal_counts[rule.semantic_hash],
             "statistics": statistics,
+            "stress_statistics": stress_statistics,
         }
-    _apply_cross_candidate_fdr(results, config.min_out_of_sample_observations)
+    _apply_cross_candidate_fdr(results, config.min_out_of_sample_observations, min_horizons=config.require_multiple_horizons)
+    for multiplier in config.cost_stress_multipliers:
+        _apply_cross_candidate_fdr(results, config.min_out_of_sample_observations, stress_key=str(multiplier))
+    if config.dedup_jaccard > 0.0:
+        passing_hashes = [
+            semantic_hash
+            for semantic_hash, record in results.items()
+            if record.get("status") == "passed_screen"
+        ]
+        if passing_hashes:
+            dedup = _deduplicate_candidates(
+                source,
+                symbols,
+                compiled,
+                definitions,
+                passing_hashes,
+                results,
+                config,
+                memberships,
+                needed_indicators,
+                config.dedup_jaccard,
+            )
+            for semantic_hash in passing_hashes:
+                results[semantic_hash]["dedup_cluster"] = dedup["clusters"].get(semantic_hash)
+                if semantic_hash not in dedup["kept"]:
+                    results[semantic_hash]["status"] = "rejected"
+                    results[semantic_hash]["rejection_reason"] = "duplicate_of_kept_candidate"
     output_root.mkdir(parents=True, exist_ok=True)
     candidates_dir = output_root / "candidates"
     candidates_dir.mkdir(parents=True, exist_ok=True)
@@ -601,6 +646,11 @@ def screen_candidates(
         "schema_version": "rule-search-round/v1",
         "candidates_total": len(ledger),
         "passed_screen": sum(1 for item in ledger if item["status"] == "passed_screen"),
+        "screen_criteria": {
+            "cost_stress_multipliers": list(config.cost_stress_multipliers),
+            "require_multiple_horizons": config.require_multiple_horizons,
+            "dedup_jaccard": config.dedup_jaccard,
+        },
         "loaded_symbols": loaded,
         "skipped_symbols": skipped,
         "candidates": ledger,
@@ -612,7 +662,7 @@ def screen_candidates(
         "skipped_symbols": skipped,
         "candidates_total": len(ledger),
         "passed_screen": sum(1 for item in ledger if item["status"] == "passed_screen"),
-        "best": sorted([item for item in ledger if item["best_group"]], key=lambda item: item["best_group"]["mean_net_excess_return"], reverse=True)[:10],
+        "best": sorted([item for item in ledger if item["status"] == "passed_screen" and item["best_group"]], key=lambda item: item["best_group"]["mean_net_excess_return"], reverse=True)[:10],
     }
 
 
@@ -633,10 +683,11 @@ def _base_columns(frame: pd.DataFrame) -> dict[str, pd.Series]:
     }
 
 
-def _apply_cross_candidate_fdr(results: dict[str, Any], min_samples: int) -> None:
+def _apply_cross_candidate_fdr(results: dict[str, Any], min_samples: int, *, stress_key: str | None = None, min_horizons: int = 1) -> None:
     all_groups: list[tuple[str, dict[str, Any]]] = []
+    stats_key = "statistics" if stress_key is None else "stress_statistics"
     for semantic_hash, record in results.items():
-        for group in record["statistics"].get("groups", []):
+        for group in record[stats_key].get("groups", []):
             if group.get("t_statistic") is not None:
                 all_groups.append((semantic_hash, group))
     raw = [2.0 * (1.0 - NormalDist().cdf(abs(float(group["t_statistic"])))) for _, group in all_groups]
@@ -649,27 +700,135 @@ def _apply_cross_candidate_fdr(results: dict[str, Any], min_samples: int) -> Non
         group["raw_p_value"] = float(raw_value)
         group["adjusted_p_value"] = float(adjusted_value)
         group["multiple_testing_reject"] = bool(reject)
+    if stress_key is not None:
+        return
     for semantic_hash, record in results.items():
-        best = None
+        passing: list[dict[str, Any]] = []
         for group in record["statistics"].get("groups", []):
-            ci = group.get("confidence_interval") or {}
-            passing = (
-                group.get("sample_size", 0) >= min_samples
-                and (group.get("mean_return") or 0.0) > 0
-                and ci.get("lower") is not None
-                and ci["lower"] > 0
-                and bool(group.get("multiple_testing_reject", False))
-            )
-            if passing and (best is None or group["mean_return"] > best["mean_net_excess_return"]):
-                best = {
-                    "horizon_bars": group["horizon_bars"],
-                    "market_regime": group["market_regime"],
-                    "mean_net_excess_return": group["mean_return"],
-                    "sample_size": group["sample_size"],
-                    "adjusted_p_value": group["adjusted_p_value"],
-                }
-        record["best_group"] = best
-        record["status"] = "passed_screen" if best else "rejected"
+            if not _group_passes(group, min_samples):
+                continue
+            survived = True
+            for multiplier, stress in record.get("stress_statistics", {}).items():
+                match = next(
+                    (item for item in stress.get("groups", []) if item.get("horizon_bars") == group.get("horizon_bars") and item.get("market_regime") == group.get("market_regime")),
+                    None,
+                )
+                if match is None or not _group_passes(match, min_samples):
+                    survived = False
+                    break
+            if survived:
+                passing.append(group)
+        record["passing_groups"] = [
+            {
+                "horizon_bars": group["horizon_bars"],
+                "market_regime": group["market_regime"],
+                "mean_net_excess_return": group["mean_return"],
+                "sample_size": group["sample_size"],
+                "adjusted_p_value": group["adjusted_p_value"],
+            }
+            for group in passing
+        ]
+        best = max(passing, key=lambda item: item["mean_return"]) if passing else None
+        record["best_group"] = (
+            {
+                "horizon_bars": best["horizon_bars"],
+                "market_regime": best["market_regime"],
+                "mean_net_excess_return": best["mean_return"],
+                "sample_size": best["sample_size"],
+                "adjusted_p_value": best["adjusted_p_value"],
+            }
+            if best
+            else None
+        )
+        distinct_horizons = len({item["horizon_bars"] for item in passing})
+        if passing and distinct_horizons >= min_horizons:
+            record["status"] = "passed_screen"
+        else:
+            record["status"] = "rejected"
+            record["rejection_reason"] = "insufficient_multiple_horizons" if passing else "no_passing_group"
+
+
+def _group_passes(group: dict[str, Any], min_samples: int) -> bool:
+    ci = group.get("confidence_interval") or {}
+    return (
+        group.get("sample_size", 0) >= min_samples
+        and (group.get("mean_return") or 0.0) > 0
+        and ci.get("lower") is not None
+        and ci["lower"] > 0
+        and bool(group.get("multiple_testing_reject", False))
+    )
+
+
+def _deduplicate_candidates(
+    source: LocalParquetMarketData,
+    symbols: list[str],
+    compiled: list[Any],
+    definitions: list[RuleDefinition],
+    passing_hashes: list[str],
+    results: dict[str, Any],
+    config: SearchConfig,
+    memberships: dict[str, Any],
+    needed_indicators: set[str],
+    jaccard_threshold: float,
+) -> dict[str, Any]:
+    by_hash = {rule.semantic_hash: (rule, definition) for rule, definition in zip(compiled, definitions)}
+    signals: dict[str, list[np.ndarray]] = {semantic_hash: [] for semantic_hash in passing_hashes}
+    max_horizon = max(config.horizons)
+    sampled = 0
+    for symbol in sorted(set(symbols)):
+        if sampled >= 30:
+            break
+        try:
+            series = source.load(symbol, config.start, config.end)
+        except (FileNotFoundError, ValueError):
+            continue
+        if len(series) <= max(rule.max_lookback for rule, _ in by_hash.values()) + max_horizon + 1:
+            continue
+        sampled += 1
+        frame = candles_to_frame(series)
+        columns = compute_indicators(frame, needs=needed_indicators)
+        columns.update(_base_columns(frame))
+        length = len(series)
+        index_range = np.arange(length)
+        membership = np.array([active_on(memberships, symbol, item.timestamp.date()) for item in series], dtype=bool)
+        amount_ok = np.ones(length, dtype=bool)
+        for semantic_hash in passing_hashes:
+            rule, definition = by_hash[semantic_hash]
+            signal = vectorized_evaluate(rule.normalized_expression, columns, definition.parameters)
+            signal = np.array(signal.to_numpy(dtype=bool), copy=True)
+            signal &= index_range >= rule.max_lookback
+            signal &= membership
+            signal &= amount_ok
+            signals[semantic_hash].append(signal)
+    order = sorted(
+        passing_hashes,
+        key=lambda semantic_hash: (results[semantic_hash].get("best_group") or {}).get("mean_net_excess_return", 0.0),
+        reverse=True,
+    )
+    clusters: dict[str, int] = {}
+    kept: list[str] = []
+    for semantic_hash in order:
+        best_similarity = 0.0
+        best_representative = None
+        for representative in kept:
+            similarity = _signal_jaccard(signals[semantic_hash], signals[representative])
+            if similarity > best_similarity:
+                best_similarity = similarity
+                best_representative = representative
+        if best_representative is not None and best_similarity >= jaccard_threshold:
+            clusters[semantic_hash] = clusters[best_representative]
+        else:
+            clusters[semantic_hash] = len(kept)
+            kept.append(semantic_hash)
+    return {"kept": set(kept), "clusters": clusters}
+
+
+def _signal_jaccard(left: list[np.ndarray], right: list[np.ndarray]) -> float:
+    intersection = union = 0
+    for a, b in zip(left, right):
+        intersection += int(np.logical_and(a, b).sum())
+        union += int(np.logical_or(a, b).sum())
+    return intersection / union if union else 1.0
 
 
 def _ledger_record(definition: RuleDefinition, record: dict[str, Any]) -> dict[str, Any]:
@@ -681,6 +840,10 @@ def _ledger_record(definition: RuleDefinition, record: dict[str, Any]) -> dict[s
         "signals": record["signals"],
         "outcomes_oos": record["statistics"]["outcomes_received"] - record["statistics"]["outcomes_excluded"],
         "best_group": record.get("best_group"),
+        "passing_groups": record.get("passing_groups", []),
+        "stress_survived": bool(record.get("passing_groups")),
+        "dedup_cluster": record.get("dedup_cluster"),
+        "rejection_reason": record.get("rejection_reason"),
         "status": record["status"],
     }
 
@@ -717,6 +880,11 @@ def build_search_protocol(
         "universe_manifest": str(universe_manifest),
         "symbols": sorted(set(symbols)),
         "multiple_testing": {"method": "fdr_bh", "alpha": 0.05, "scope": "all_candidates_all_groups"},
+        "screen_criteria": {
+            "cost_stress_multipliers": list(config.cost_stress_multipliers),
+            "require_multiple_horizons": config.require_multiple_horizons,
+            "dedup_jaccard": config.dedup_jaccard,
+        },
         "publication": "blocked_until_human_approval_and_final_lockbox",
     }
     search_id = "search_" + sha256(json.dumps(identity, ensure_ascii=False, sort_keys=True, separators=(",", ":"), default=str).encode("utf-8")).hexdigest()[:24]
