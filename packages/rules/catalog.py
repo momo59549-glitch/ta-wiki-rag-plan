@@ -141,3 +141,13 @@ def get_rule(rule_id: str) -> RuleDefinition:
         return _RULES[rule_id]
     except KeyError as exc:
         raise KeyError(f"未知规则: {rule_id}; 可用: {sorted(_RULES)}") from exc
+
+
+def catalog_rules() -> tuple[RuleDefinition, ...]:
+    """Return the registered rules for read-only equivalence auditing.
+
+    This does not promote, publish, or otherwise mutate the catalog.  It lets
+    discovery reject a renamed copy of a rule that is already under formal
+    research rather than consuming another candidate trial.
+    """
+    return tuple(_RULES[key] for key in sorted(_RULES))

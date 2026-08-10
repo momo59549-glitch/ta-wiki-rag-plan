@@ -1,0 +1,466 @@
+{
+  "schema_version": "auto-discovery-logic-dedup-audit/v1",
+  "source_registry": "H:\\股票模型\\ta-wiki-rag-plan\\data\\auto_discovery\\g_20260809_01\\regime_candidate_registry.json",
+  "output_registry": "H:\\股票模型\\ta-wiki-rag-plan\\data\\auto_discovery\\g_20260809_01\\regime_candidate_registry.lifecycle_01_dedup.json",
+  "as_of": "2026-08-09",
+  "history_index": {
+    "schema_version": "historical-trial-logic-index/v1",
+    "catalog_references": [
+      {
+        "source_kind": "catalog",
+        "source_id": "breakout_60d@1.0.0",
+        "disposition": "registered_catalog_rule",
+        "rule_logic_hash": "sha256:d3976a0e4fdd1073188905fdfb76fe49f892aaeeb807975be298e06bda99367f",
+        "rule_semantic_hash": "sha256:9e0354f438df551ad13ae2a059c65151859e28b4d5ad60592cb3cfd511a14679",
+        "definition": {
+          "id": "breakout_60d",
+          "version": "1.0.0",
+          "name_zh": "60 日新高突破（自动搜索候选）",
+          "expression": {
+            "gt": [
+              {
+                "metric": {
+                  "name": "close",
+                  "offset": 0
+                }
+              },
+              {
+                "metric": {
+                  "name": "max_high",
+                  "offset": -1,
+                  "window": 60
+                }
+              }
+            ]
+          },
+          "parameters": {
+            "window": 60.0
+          },
+          "warmup_bars": 70,
+          "observed_at": "bar_close",
+          "executable_from": "next_bar_open"
+        },
+        "metadata": {}
+      },
+      {
+        "source_kind": "catalog",
+        "source_id": "donchian_main@1.0.0",
+        "disposition": "registered_catalog_rule",
+        "rule_logic_hash": "sha256:84eed5e7120b6646b75b804c3410b8906874ff9300b29c7a5a114ec03363fa3e",
+        "rule_semantic_hash": "sha256:4afd7a76cb1eb8869a8533eb5850496ffdc37cb9c594717d0fb6583f8dbf9d24",
+        "definition": {
+          "id": "donchian_main",
+          "version": "1.0.0",
+          "name_zh": "Donchian 趋势跟踪入场（Model 主策略）",
+          "expression": {
+            "all": [
+              {
+                "gte": [
+                  {
+                    "metric": {
+                      "name": "close",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "mul": [
+                      {
+                        "metric": {
+                          "name": "max_high",
+                          "offset": 0,
+                          "window": 20
+                        }
+                      },
+                      {
+                        "param": "breakout_threshold"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "gt": [
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": 0,
+                      "window": 20
+                    }
+                  },
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": 0,
+                      "window": 60
+                    }
+                  }
+                ]
+              },
+              {
+                "gt": [
+                  {
+                    "metric": {
+                      "name": "close",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": 0,
+                      "window": 20
+                    }
+                  }
+                ]
+              },
+              {
+                "gt": [
+                  {
+                    "metric": {
+                      "name": "close",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": 0,
+                      "window": 200
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "parameters": {
+            "breakout_threshold": 0.97
+          },
+          "warmup_bars": 210,
+          "observed_at": "bar_close",
+          "executable_from": "next_bar_open"
+        },
+        "metadata": {}
+      },
+      {
+        "source_kind": "catalog",
+        "source_id": "hammer@1.0.0",
+        "disposition": "registered_catalog_rule",
+        "rule_logic_hash": "sha256:0b2338fd265da87d140d6086d6f50fe59781c1c9c1f6d08a879b12be7e27f57d",
+        "rule_semantic_hash": "sha256:0cb3281cb8829d69b375e7af756eeddfed73eb82247c302d05b9b1a0bdfb86e6",
+        "definition": {
+          "id": "hammer",
+          "version": "1.0.0",
+          "name_zh": "锤子线（工程近似）",
+          "expression": {
+            "all": [
+              {
+                "gte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "lower_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "body",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "min_lower_shadow_body"
+                  }
+                ]
+              },
+              {
+                "lte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "upper_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "range",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "max_upper_shadow_range"
+                  }
+                ]
+              },
+              {
+                "context": {
+                  "name": "lower_close_count",
+                  "window": 5,
+                  "min_count": 3
+                }
+              }
+            ]
+          },
+          "parameters": {
+            "min_lower_shadow_body": 2.0,
+            "max_upper_shadow_range": 0.15
+          },
+          "warmup_bars": 5,
+          "observed_at": "bar_close",
+          "executable_from": "next_bar_open"
+        },
+        "metadata": {}
+      },
+      {
+        "source_kind": "catalog",
+        "source_id": "meanrev_rsi@1.0.0",
+        "disposition": "registered_catalog_rule",
+        "rule_logic_hash": "sha256:973e1c8d73f1eefcaff5858447c2ac55bf719b6b9c7600cc0eaef5cc205bfe73",
+        "rule_semantic_hash": "sha256:95da564307030518a3a48bda48bd138265c3042df73dc75e0c96b72e9738bf5d",
+        "definition": {
+          "id": "meanrev_rsi",
+          "version": "1.0.0",
+          "name_zh": "RSI 超卖反弹入场（Model meanrev_config）",
+          "expression": {
+            "all": [
+              {
+                "lt": [
+                  {
+                    "metric": {
+                      "name": "rsi",
+                      "offset": 0,
+                      "window": 14
+                    }
+                  },
+                  30.0
+                ]
+              },
+              {
+                "lt": [
+                  {
+                    "metric": {
+                      "name": "close",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": 0,
+                      "window": 20
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "parameters": {},
+          "warmup_bars": 30,
+          "observed_at": "bar_close",
+          "executable_from": "next_bar_open"
+        },
+        "metadata": {}
+      },
+      {
+        "source_kind": "catalog",
+        "source_id": "momentum_breakout@1.0.0",
+        "disposition": "registered_catalog_rule",
+        "rule_logic_hash": "sha256:a26e13ff88ec2ef4d98f171ad1e1a9eb0811d4b9ffd151b2985c5970c27a0f58",
+        "rule_semantic_hash": "sha256:1b31b1745c11971bb4c1efdfe229bc3bb309cfdbec9f2d285f7928a314fc946e",
+        "definition": {
+          "id": "momentum_breakout",
+          "version": "1.0.0",
+          "name_zh": "动量突破入场（Model momentum_config）",
+          "expression": {
+            "all": [
+              {
+                "gt": [
+                  {
+                    "metric": {
+                      "name": "close",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "mul": [
+                      {
+                        "metric": {
+                          "name": "max_high",
+                          "offset": 0,
+                          "window": 20
+                        }
+                      },
+                      {
+                        "param": "breakout_threshold"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "gt": [
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": 0,
+                      "window": 5
+                    }
+                  },
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": 0,
+                      "window": 20
+                    }
+                  }
+                ]
+              },
+              {
+                "lt": [
+                  {
+                    "metric": {
+                      "name": "rsi",
+                      "offset": 0,
+                      "window": 14
+                    }
+                  },
+                  70.0
+                ]
+              },
+              {
+                "gt": [
+                  {
+                    "metric": {
+                      "name": "volume_ratio",
+                      "offset": 0,
+                      "window": 20
+                    }
+                  },
+                  1.2
+                ]
+              }
+            ]
+          },
+          "parameters": {
+            "breakout_threshold": 0.95
+          },
+          "warmup_bars": 40,
+          "observed_at": "bar_close",
+          "executable_from": "next_bar_open"
+        },
+        "metadata": {}
+      },
+      {
+        "source_kind": "catalog",
+        "source_id": "rsi_oversold@1.0.0",
+        "disposition": "registered_catalog_rule",
+        "rule_logic_hash": "sha256:9bfda4d439b266f4065d7b6fd398ce28800fa905d59e36acda682358adcc9035",
+        "rule_semantic_hash": "sha256:4406f7e4b40747c4803066ddcaf519e1f3ed5f313296385435403ffc4ec42bc1",
+        "definition": {
+          "id": "rsi_oversold",
+          "version": "1.0.0",
+          "name_zh": "RSI(14) 超卖（自动搜索候选）",
+          "expression": {
+            "lt": [
+              {
+                "metric": {
+                  "name": "rsi",
+                  "offset": 0,
+                  "window": 14
+                }
+              },
+              {
+                "param": "threshold"
+              }
+            ]
+          },
+          "parameters": {
+            "threshold": 30.0
+          },
+          "warmup_bars": 20,
+          "observed_at": "bar_close",
+          "executable_from": "next_bar_open"
+        },
+        "metadata": {}
+      }
+    ],
+    "historical_trial_references": [
+      {
+        "source_kind": "frozen_campaign_adjudication",
+        "source_id": "protocol_a666a614eadf34fcfc2b3e61",
+        "disposition": "reject_publication",
+        "rule_logic_hash": "sha256:9bfda4d439b266f4065d7b6fd398ce28800fa905d59e36acda682358adcc9035",
+        "rule_semantic_hash": "sha256:4406f7e4b40747c4803066ddcaf519e1f3ed5f313296385435403ffc4ec42bc1",
+        "definition": {
+          "id": "rsi_oversold",
+          "version": "1.0.0",
+          "name_zh": "RSI(14) 超卖（自动搜索候选）",
+          "expression": {
+            "lt": [
+              {
+                "metric": {
+                  "name": "rsi",
+                  "offset": 0,
+                  "window": 14
+                }
+              },
+              {
+                "param": "threshold"
+              }
+            ]
+          },
+          "parameters": {
+            "threshold": 30.0
+          },
+          "warmup_bars": 20,
+          "observed_at": "bar_close",
+          "executable_from": "next_bar_open"
+        },
+        "metadata": {
+          "campaign": "campaign_20260808T032005Z",
+          "protocol_id": "protocol_a666a614eadf34fcfc2b3e61",
+          "case_id": "case_20260808T032048Z_3e3fad3e",
+          "qa_status": "passed_with_limitations",
+          "adjudication_path": "data/strategy_test_executions/protocol_a666a614eadf34fcfc2b3e61/adjudication.json"
+        }
+      }
+    ],
+    "errors": [],
+    "market_or_lockbox_data_read": false
+  },
+  "matches": [
+    {
+      "rule_semantic_hash": "sha256:949a3006541e58f275ea50788d04e8bebbaf7f6406bbd8e1b7ba929385a4475a",
+      "rule_logic_hash": "sha256:d3976a0e4fdd1073188905fdfb76fe49f892aaeeb807975be298e06bda99367f",
+      "status": "catalog_duplicate",
+      "catalog_match_count": 1,
+      "historical_trial_match_count": 0
+    },
+    {
+      "rule_semantic_hash": "sha256:b9c2e4b16d594c46ce5915eb18387700a895ef25b46193551f8f9f230d15ce2a",
+      "rule_logic_hash": "sha256:9bfda4d439b266f4065d7b6fd398ce28800fa905d59e36acda682358adcc9035",
+      "status": "historical_duplicate",
+      "catalog_match_count": 1,
+      "historical_trial_match_count": 1
+    }
+  ],
+  "automatic_campaign_execution": false,
+  "publication": "blocked_until_frozen_campaign_final_lockbox_and_human_approval"
+}

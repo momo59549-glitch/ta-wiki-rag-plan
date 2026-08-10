@@ -2,17 +2,119 @@
 from __future__ import annotations
 
 from datetime import date, datetime, timezone
+from dataclasses import asdict
 from hashlib import sha256
 import json
 import os
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any, Iterable, Mapping
 
-from packages.rule_dsl import CompiledRule
+from packages.contracts import RuleDefinition
+from packages.rule_dsl import CompiledRule, compile_rule, rule_definition_hash, rule_logic_hash
 
 
 def _iso(value: date | None) -> str | None:
     return value.isoformat() if value else None
+
+
+def _hash_identity(identity: Mapping[str, Any]) -> str:
+    return "sha256:" + sha256(
+        json.dumps(identity, ensure_ascii=False, sort_keys=True, separators=(",", ":"), default=str).encode("utf-8")
+    ).hexdigest()
+
+
+def _protocol_identity(payload: Mapping[str, Any]) -> dict[str, Any]:
+    """Return exactly the immutable portion used for a protocol hash."""
+    fields = (
+        "schema_version",
+        "status",
+        "rule",
+        "dataset_snapshot_id",
+        "universe_manifest",
+        "symbols",
+        "periods",
+        "outcomes",
+        "validation",
+        "execution",
+        "analysis",
+        "code_version",
+        "publication",
+    )
+    identity = {field: payload.get(field) for field in fields}
+    if "promotion" in payload:
+        identity["promotion"] = payload["promotion"]
+    return identity
+
+
+def _definition_from_payload(payload: Any) -> RuleDefinition:
+    if not isinstance(payload, Mapping):
+        raise ValueError("协议 rule.definition 必须是对象")
+    allowed = {"id", "version", "name_zh", "expression", "parameters", "warmup_bars", "observed_at", "executable_from"}
+    if set(payload) - allowed:
+        raise ValueError("协议 rule.definition 含不支持字段")
+    required = {"id", "version", "name_zh", "expression"}
+    if not required <= set(payload):
+        raise ValueError("协议 rule.definition 缺少必填字段")
+    return RuleDefinition(
+        id=str(payload["id"]),
+        version=str(payload["version"]),
+        name_zh=str(payload["name_zh"]),
+        expression=dict(payload["expression"]),
+        parameters=dict(payload.get("parameters", {})),
+        warmup_bars=int(payload.get("warmup_bars", 0)),
+        observed_at=str(payload.get("observed_at", "bar_close")),
+        executable_from=str(payload.get("executable_from", "next_bar_open")),
+    )
+
+
+def verify_experiment_protocol(payload: Mapping[str, Any]) -> dict[str, Any]:
+    """Verify an immutable protocol before readiness or execution.
+
+    Legacy catalog-reference protocols remain readable for historical records,
+    but a protocol carrying a full definition must prove every definition hash.
+    New auto-discovery promotions require the latter form.
+    """
+    failures: list[str] = []
+    if payload.get("schema_version") != "experiment-protocol/v1":
+        failures.append("schema_version")
+    identity = _protocol_identity(payload)
+    expected_hash = _hash_identity(identity)
+    expected_id = "protocol_" + expected_hash.removeprefix("sha256:")[:24]
+    if payload.get("protocol_hash") != expected_hash:
+        failures.append("protocol_hash")
+    if payload.get("protocol_id") != expected_id:
+        failures.append("protocol_id")
+
+    definition_status = "legacy_catalog_reference"
+    rule_payload = payload.get("rule")
+    if not isinstance(rule_payload, Mapping):
+        failures.append("rule")
+    elif "definition" in rule_payload:
+        definition_status = "full_definition_bound"
+        try:
+            definition = _definition_from_payload(rule_payload["definition"])
+            compiled = compile_rule(definition)
+            if rule_payload.get("id") != definition.id or rule_payload.get("version") != definition.version:
+                failures.append("rule_identity")
+            if rule_payload.get("parameters") != definition.parameters:
+                failures.append("rule_parameters")
+            if rule_payload.get("semantic_hash") != compiled.semantic_hash:
+                failures.append("rule_semantic_hash")
+            if rule_payload.get("definition_hash") != rule_definition_hash(definition):
+                failures.append("rule_definition_hash")
+            if rule_payload.get("logic_hash") != rule_logic_hash(definition):
+                failures.append("rule_logic_hash")
+        except (TypeError, ValueError) as exc:
+            failures.append(f"rule_definition:{exc}")
+    return {
+        "status": "valid" if not failures else "invalid",
+        "protocol_id": payload.get("protocol_id"),
+        "protocol_hash": payload.get("protocol_hash"),
+        "expected_protocol_hash": expected_hash,
+        "expected_protocol_id": expected_id,
+        "definition_status": definition_status,
+        "failures": failures,
+    }
 
 
 def build_experiment_protocol(
@@ -25,6 +127,7 @@ def build_experiment_protocol(
     minimum_oos_observations: int,
     max_candidate_trials: int = 20,
     code_snapshot_id: str | None = None,
+    promotion: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     if max_candidate_trials < 1:
         raise ValueError("max_candidate_trials 必须为正整数")
@@ -51,7 +154,15 @@ def build_experiment_protocol(
     identity = {
         "schema_version": "experiment-protocol/v1",
         "status": "preregistered",
-        "rule": {"id": rule.definition.id, "version": rule.definition.version, "semantic_hash": rule.semantic_hash, "parameters": dict(rule.definition.parameters)},
+        "rule": {
+            "id": rule.definition.id,
+            "version": rule.definition.version,
+            "semantic_hash": rule.semantic_hash,
+            "logic_hash": rule_logic_hash(rule.definition),
+            "definition_hash": rule_definition_hash(rule.definition),
+            "parameters": dict(rule.definition.parameters),
+            "definition": asdict(rule.definition),
+        },
         "dataset_snapshot_id": dataset_snapshot_id,
         "universe_manifest": str(pipeline_config.universe_manifest) if pipeline_config.universe_manifest else None,
         "symbols": sorted(set(symbols)),
@@ -76,7 +187,9 @@ def build_experiment_protocol(
         "code_version": code_snapshot_id or os.environ.get("TA_CODE_VERSION", "working-tree-recorded-at-runtime"),
         "publication": "blocked_until_validation_lockbox_and_human_approval",
     }
-    protocol_hash = "sha256:" + sha256(json.dumps(identity, ensure_ascii=False, sort_keys=True, separators=(",", ":"), default=str).encode("utf-8")).hexdigest()
+    if promotion is not None:
+        identity["promotion"] = dict(promotion)
+    protocol_hash = _hash_identity(identity)
     payload = {
         **identity,
         "protocol_id": "protocol_" + protocol_hash.removeprefix("sha256:")[:24],

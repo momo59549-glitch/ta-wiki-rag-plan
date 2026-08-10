@@ -1,0 +1,62 @@
+{
+  "schema_version": "auto-discovery-promotion-receipt/v1",
+  "status": "selected_for_frozen_campaign_research_only",
+  "source": {
+    "kind": "auto_discovery",
+    "registry_id": "regime_registry_47b2f6a9b37ad23834350157",
+    "registry_origin_hash": "sha256:47b2f6a9b37ad23834350157843b05871bc6cc660a16f7808f62e0df250e7f2f",
+    "registry_state_hash": "sha256:c5126416b1f641a8d54010154ca65b63431edd70b10a2ead38a5b68c162457c1",
+    "registry_lifecycle_revision": 1,
+    "auto_discovery_protocol_id": "auto_discovery_f561454d671551a0accb712d",
+    "auto_discovery_protocol_hash": "sha256:f561454d671551a0accb712d6c4acdb1ac6bd312b552c6bfea7a47b2b0bbad6d",
+    "source_search_id": "search_30fc855615c0e7d8bd526d0e",
+    "source_rule_semantic_hash": "sha256:019d9e350829a346fd3c53100e8873c8e47e3de2ca3bdf8b6c61da907554d2b1",
+    "source_discovery_semantic_hash": "sha256:56086758d367f9e67b6ddfe66e62d0a1a73c4e68135df3c61510899e31a63201",
+    "source_rule_logic_hash": "sha256:8d862e3a9b1e7230129da22b3ccc30bd40e9fafe633b3f3a22a8261fe3604270"
+  },
+  "selected_definition": {
+    "id": "auto_rsi_oversold",
+    "version": "g_20260809_01.0023",
+    "name_zh": "自动发现 rsi_oversold",
+    "expression": {
+      "lt": [
+        {
+          "metric": {
+            "name": "rsi",
+            "offset": 0,
+            "window": 7
+          }
+        },
+        {
+          "param": "threshold"
+        }
+      ]
+    },
+    "parameters": {
+      "threshold": 25.0,
+      "window": 7.0
+    },
+    "warmup_bars": 0,
+    "observed_at": "bar_close",
+    "executable_from": "next_bar_open"
+  },
+  "selected_definition_hash": "sha256:f69999bf24c3dff39f9c724d63f18a3cb993952c9d55435fedc400091002a08c",
+  "selected_rule_semantic_hash": "sha256:019d9e350829a346fd3c53100e8873c8e47e3de2ca3bdf8b6c61da907554d2b1",
+  "selected_rule_logic_hash": "sha256:8d862e3a9b1e7230129da22b3ccc30bd40e9fafe633b3f3a22a8261fe3604270",
+  "selection": {
+    "status": "explicit_human_research_selection",
+    "selector": "user-delegated-research-review",
+    "rationale": "Preregistered representative of RSI oversold family; four screened horizons passed; selected before any frozen-campaign result is observed.",
+    "market_regime": "bearish",
+    "as_of": "2026-08-09"
+  },
+  "approval": {
+    "status": "not_approved",
+    "automatic_approval": false,
+    "campaign_research_authorized_by_explicit_selection": true
+  },
+  "publication": "blocked_until_frozen_campaign_final_lockbox_and_human_approval",
+  "receipt_hash": "sha256:ba4692a65261ef9e0ea7dd50307f740ebb25335eb84dd59733fc7c0fcd7c7f2e",
+  "receipt_id": "promotion_ba4692a65261ef9e0ea7dd50",
+  "created_at": "2026-08-09T04:49:28.402034+00:00"
+}

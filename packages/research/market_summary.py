@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from .statistics import summarize_outcomes
+from .run_artifacts import iter_run_rows
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -20,7 +21,6 @@ def _read_jsonl(path: Path) -> list[dict[str, Any]]:
 def aggregate_market_cases(cases_root: Path) -> dict[str, Any]:
     """Aggregate OOS outcomes only; never create a publication decision."""
     cases: list[dict[str, Any]] = []
-    outcomes: list[dict[str, Any]] = []
     qa_statuses: Counter[str] = Counter()
     rules: set[tuple[str, str, str]] = set()
     data_snapshots: set[str] = set()
@@ -35,15 +35,16 @@ def aggregate_market_cases(cases_root: Path) -> dict[str, Any]:
         data_snapshots.add(str(case.get("dataset_snapshot_id")))
         qa_statuses[str(qa.get("status", "unknown"))] += 1
         research_dir = case_dir / str(case["research_run"])
-        case_outcomes = _read_jsonl(research_dir / "outcomes.jsonl")
-        oos = [item for item in case_outcomes if item.get("sample_split") == "out_of_sample"]
-        outcomes.extend(oos)
+        outcomes_total = outcomes_oos = 0
+        for item in iter_run_rows(research_dir, "outcomes"):
+            outcomes_total += 1
+            outcomes_oos += int(item.get("sample_split") == "out_of_sample")
         cases.append({
             "case_id": case.get("case_id", case_dir.name),
             "qa_status": qa.get("status", "unknown"),
             "state": case.get("state", "unknown"),
-            "outcomes_total": len(case_outcomes),
-            "outcomes_out_of_sample": len(oos),
+            "outcomes_total": outcomes_total,
+            "outcomes_out_of_sample": outcomes_oos,
         })
     if not cases:
         raise ValueError(f"没有可汇总的案例: {cases_root}")
@@ -57,8 +58,13 @@ def aggregate_market_cases(cases_root: Path) -> dict[str, Any]:
         "qa_status_counts": dict(sorted(qa_statuses.items())),
         "rule": {"id": next(iter(rules))[0], "version": next(iter(rules))[1], "semantic_hash": next(iter(rules))[2]},
         "dataset_snapshots": sorted(data_snapshots),
-        "outcomes_out_of_sample": len(outcomes),
-        "statistics_out_of_sample": summarize_outcomes(outcomes),
+        "outcomes_out_of_sample": sum(item["outcomes_out_of_sample"] for item in cases),
+        "statistics_out_of_sample": summarize_outcomes(
+            item
+            for case_dir in sorted(path for path in cases_root.iterdir() if path.is_dir() and (path / "case.json").is_file())
+            for item in iter_run_rows(case_dir / str(_read_json(case_dir / "case.json")["research_run"]), "outcomes")
+            if item.get("sample_split") == "out_of_sample"
+        ),
         "evidence_stage": "exploratory_or_validation; final_lockbox_required",
         "publication": "blocked_until_human_approval",
         "limitations": [

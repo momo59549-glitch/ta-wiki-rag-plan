@@ -6,7 +6,7 @@ import unittest
 import numpy as np
 import pandas as pd
 
-from packages.contracts import Candle
+from packages.contracts import Candle, RuleDefinition
 from packages.market_data import LocalParquetMarketData
 from packages.research.indicators import candles_to_frame, compute_indicators
 from packages.research.rule_search import (
@@ -67,21 +67,23 @@ class VectorizedConformanceTests(unittest.TestCase):
     def test_vectorized_matches_engine_with_indicators(self):
         frame = _random_frame(rows=300, seed=11)
         candles = _candles(frame)
-        definitions = [
-            item
-            for item in build_search_space()
-            if item.id in {
-                "hammer", "engulfing", "ma_cross", "rsi_level", "breakout",
-                "macd_cross", "bollinger", "doji", "volume_surge", "ma_slope",
-            }
-        ][:12]
-        self.assertGreaterEqual(len(definitions), 10)
+        definitions = []
+        seen_families = set()
+        for item in build_search_space():
+            if item.id not in seen_families:
+                definitions.append(item)
+                seen_families.add(item.id)
+        self.assertGreaterEqual(len(definitions), 20)
         columns = _base_columns(frame)
         for definition in definitions:
             rule = compile_rule(definition)
             indicators = compute_indicators(frame, needs=rule.required_indicators)
             columns.update(indicators)
-            vectorized = vectorized_evaluate(rule.normalized_expression, columns, definition.parameters).to_numpy(dtype=bool)
+            vectorized = vectorized_evaluate(rule.normalized_expression, columns, definition.parameters).to_numpy(dtype=bool, copy=True)
+            # The screening path applies the compiler's warmup gate and never
+            # emits the final bar because it has no next-session entry.
+            vectorized[:rule.max_lookback] = False
+            vectorized[-1] = False
             engine = np.zeros(len(candles), dtype=bool)
             for index in range(rule.max_lookback, len(candles) - 1):
                 result = evaluate(candles, index, rule, indicators={key: indicators[key].tolist() for key in rule.required_indicators})
@@ -90,6 +92,20 @@ class VectorizedConformanceTests(unittest.TestCase):
                 np.array_equal(vectorized[: len(engine)], engine),
                 msg=f"{definition.id}@{definition.version} 向量化与引擎结果不一致",
             )
+
+    def test_vectorized_matches_engine_for_nary_multiplication(self):
+        frame = _random_frame(rows=20, seed=19)
+        candles = _candles(frame)
+        definition = RuleDefinition(
+            id="nary_mul",
+            version="test",
+            name_zh="三元乘法",
+            expression={"gt": [{"mul": [2.0, 3.0, 4.0]}, 10.0]},
+        )
+        rule = compile_rule(definition)
+        vectorized = vectorized_evaluate(rule.normalized_expression, _base_columns(frame), definition.parameters)
+        self.assertTrue(vectorized.all())
+        self.assertTrue(evaluate(candles, 0, rule).matched)
 
     def test_windowed_fallback_matches_precomputed_for_sma_roc(self):
         frame = _random_frame(rows=120, seed=3)
@@ -121,6 +137,66 @@ class SearchSpaceTests(unittest.TestCase):
 
 
 class ScreenEndToEndTests(unittest.TestCase):
+    def test_horizon_one_exit_price_matches_pipeline_entry_day_close(self):
+        with TemporaryDirectory() as temp:
+            root = Path(temp)
+            trend = root / "trend_cache"
+            benchmark = root / "etf_cache"
+            trend.mkdir()
+            benchmark.mkdir()
+            dates = pd.date_range("2020-01-01", periods=5, name="date")
+            stock = pd.DataFrame(
+                {
+                    "open": [10.0, 10.0, 10.0, 10.0, 10.0],
+                    "high": [10.5, 11.5, 12.5, 100.5, 10.5],
+                    "low": [9.5, 9.5, 9.5, 9.5, 9.5],
+                    "close": [10.0, 11.0, 12.0, 100.0, 10.0],
+                    "volume": [1000.0] * 5,
+                    "amount": [1_000_000.0] * 5,
+                },
+                index=dates,
+            )
+            stock.to_parquet(trend / "000001.parquet")
+            pd.DataFrame(
+                {
+                    "open": [100.0] * 5,
+                    "high": [100.0] * 5,
+                    "low": [100.0] * 5,
+                    "close": [100.0] * 5,
+                    "volume": [1000.0] * 5,
+                    "amount": [1_000_000.0] * 5,
+                },
+                index=dates,
+            ).to_parquet(benchmark / "000001.parquet")
+            manifest = root / "universe.jsonl"
+            manifest.write_text(json.dumps({"symbol": "000001", "active_from": "2020-01-01", "source": "test"}) + "\n", encoding="utf-8")
+            definition = RuleDefinition(
+                id="single_event",
+                version="test",
+                name_zh="单次事件",
+                expression={"eq": [{"metric": {"name": "close", "offset": 0}}, 11.0]},
+            )
+            output = root / "screen"
+            config = SearchConfig(
+                horizons=(1,),
+                start=pd.Timestamp("2020-01-01").date(),
+                end=pd.Timestamp("2020-01-05").date(),
+                out_of_sample_start=pd.Timestamp("2020-01-02").date(),
+                lockbox_start=pd.Timestamp("2020-01-10").date(),
+                benchmark_symbol="000001",
+                commission_bps_per_side=0.0,
+                slippage_bps_per_side=0.0,
+                skip_untradeable=False,
+                min_out_of_sample_observations=1,
+            )
+            screen_candidates(LocalParquetMarketData(root), ["000001"], [definition], config, output, universe_manifest=manifest)
+            semantic_hash = compile_rule(definition).semantic_hash
+            record = json.loads((output / "candidates" / f"{semantic_hash.removeprefix('sha256:')[:16]}.json").read_text(encoding="utf-8"))
+            group = next(item for item in record["statistics"]["groups"] if item["horizon_bars"] == 1)
+            # T=2020-01-02, entry=2020-01-03 open 10, one-bar exit is that
+            # same 2020-01-03 close 12, not the following close 100.
+            self.assertAlmostEqual(group["mean_return"], 0.20)
+
     def test_screen_writes_round_and_applies_cross_candidate_fdr(self):
         with TemporaryDirectory() as temp:
             root = Path(temp)

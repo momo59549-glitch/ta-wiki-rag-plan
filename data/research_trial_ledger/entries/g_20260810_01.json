@@ -1,0 +1,34 @@
+{
+  "artifact_references": {
+    "candidate_space": "H:\\股票模型\\ta-wiki-rag-plan\\data\\gen2_discovery\\g_20260810_01\\candidate_space.json",
+    "protocol": "H:\\股票模型\\ta-wiki-rag-plan\\data\\gen2_discovery\\g_20260810_01\\gen2_protocol.json"
+  },
+  "candidate_budget": 8,
+  "candidate_semantic_ids": [
+    "sha256:26d54e070fdb14140223f354af80e2469d19c2c599c6d646f72e05af476fc704",
+    "sha256:6a58abc6718e5934c29a66913af2b96373b64f4923848bf95bc27adc3a0bac06",
+    "sha256:74ea0b145d18d4f6a837b5a1d5e1ed22cdbb17b4fb787e565f1bf9d1c8fa2f80",
+    "sha256:884da13ce2b1494261a12261576ecd65a07ca450d158f05f9f16e8cedd381a53",
+    "sha256:95ad77b2d57127fbbc0afad97d9bcbbb39a48b7eb5728299cbad37e273d1c350",
+    "sha256:aef69740d5040098493db5317d7c4f87deb57f792ee39fde8817730b5efa4e14",
+    "sha256:b853c96f1892116eb0985354752eb8b8f14a207be9bf81f40f12dd28a4888c79",
+    "sha256:bca7dff70e0c8897e03f499405796958c876f28ae1d06a538b1ded6c25b51693"
+  ],
+  "elimination_reason": null,
+  "entry_hash": "sha256:078628b55e71557a15cb56ebacb96d8f2290ae4d229c2fc27480f287bf2be260",
+  "final_lockbox_read": false,
+  "generation_id": "g_20260810_01",
+  "parent_generation_id": "g_20260809_01",
+  "period_roles": {
+    "final_lockbox_read": false,
+    "final_lockbox_start": "2027-09-01",
+    "parent_research_end": "2026-07-10",
+    "planned_fresh_oos": true,
+    "research_end": "2027-08-31",
+    "research_start": "2026-05-01",
+    "validation_start": "2026-09-01"
+  },
+  "recorded_at": "2026-08-10T15:07:54.862689+00:00",
+  "schema_version": "global-research-trial-ledger-entry/v1",
+  "status": "preregistered_no_screen_run"
+}

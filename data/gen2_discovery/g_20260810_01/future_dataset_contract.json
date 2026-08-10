@@ -1,0 +1,14 @@
+{
+  "schema_version": "gen2-future-dataset-contract/v1",
+  "status": "future_not_arrived",
+  "asset_dataset_id": "cn_a_share_adjusted_daily_ohlcv_future_v1",
+  "benchmark_dataset_id": "csi300_adjusted_daily_future_v1",
+  "calendar_id": "cn_a_share_trading_calendar_future_v1",
+  "price_fields": ["open", "high", "low", "close", "volume"],
+  "metadata": {
+    "adjustment": "adjusted_ohlc",
+    "execution_required_fields": ["open", "high", "low", "close", "prev_close", "volume", "amount", "is_st"],
+    "benchmark_alignment": "exact_date_no_forward_fill",
+    "source_revision_manifest": "not_created_until_future_data_arrives"
+  }
+}

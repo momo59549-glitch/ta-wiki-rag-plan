@@ -23,3 +23,7 @@ data/runtime/
 data/batch_checkpoints/*.log
 data/universes/*.log
 data/rule_search/
+
+# Rebuildable candidate-comparison panels/staging; retain small audit records.
+data/candidate_comparisons/*/oos_panel*/
+data/candidate_comparisons/*/comparison_result.staging/

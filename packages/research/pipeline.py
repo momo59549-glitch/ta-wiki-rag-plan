@@ -3,16 +3,24 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass
 from datetime import date, datetime, timezone
 from hashlib import sha256
+import json
 from pathlib import Path
 from uuid import uuid4
 
 from packages.contracts import Candle
 from packages.market_data import LocalParquetMarketData, active_on, load_universe_memberships
 from packages.research.json_store import write_json, write_jsonl
+from packages.research.run_artifacts import (
+    build_checkpoint,
+    canonical_hash,
+    load_commits,
+    verify_checkpoint,
+    write_batch,
+)
 from packages.research.execution import ExecutionConfig, assess_execution
 from packages.research.indicators import candles_to_frame, compute_indicators
 from packages.research.models import Observation, Outcome, ResearchRun
-from packages.rule_dsl import CompiledRule
+from packages.rule_dsl import CompiledRule, rule_definition_hash
 from packages.rule_engine import evaluate
 
 
@@ -122,7 +130,25 @@ class FileResearchPipeline:
             tuple(f"entry:{reason}" for reason in entry_check.reason_codes) + tuple(f"exit:{reason}" for reason in exit_check.reason_codes),
         )
 
-    def run(self, symbols: list[str], rule: CompiledRule, config: PipelineConfig = PipelineConfig(), *, dataset_snapshot_id: str | None = None, dataset_snapshot_manifest: str | None = None, experiment_protocol_id: str | None = None) -> Path:
+    def run(
+        self,
+        symbols: list[str],
+        rule: CompiledRule,
+        config: PipelineConfig = PipelineConfig(),
+        *,
+        dataset_snapshot_id: str | None = None,
+        dataset_snapshot_manifest: str | None = None,
+        experiment_protocol_id: str | None = None,
+        experiment_protocol_hash: str | None = None,
+        code_snapshot_id: str | None = None,
+        case_id: str | None = None,
+        run_id: str | None = None,
+        batch_size: int = 25,
+        resume: bool = False,
+        fault_injector=None,
+    ) -> Path:
+        if batch_size < 1:
+            raise ValueError("batch_size must be positive")
         symbols = sorted(set(symbols))
         memberships = load_universe_memberships(Path(config.universe_manifest)) if config.universe_manifest else None
         benchmark_by_time: dict[datetime, Candle] = {}
@@ -142,87 +168,137 @@ class FileResearchPipeline:
         snapshot_id = dataset_snapshot_id or self.source.snapshot_id(symbols)
         if benchmark_id and dataset_snapshot_id is None:
             snapshot_id = "sha256:" + sha256(f"{snapshot_id}|{benchmark_id}".encode()).hexdigest()
-        run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "_" + uuid4().hex[:8]
+        run_id = run_id or datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "_" + uuid4().hex[:8]
         run_dir = self.output_root / run_id
         started_at = datetime.now(timezone.utc)
         progress_path = run_dir / "progress.json"
-        observations: list[Observation] = []
-        outcomes: list[Outcome] = []
-        skipped: list[str] = []
-        loaded = 0
-        progress_every = max(1, len(symbols) // 100)
+        identity = {
+            "schema_version": "research-execution-identity/v1",
+            "case_id": case_id,
+            "run_id": run_id,
+            "experiment_protocol_id": experiment_protocol_id,
+            "experiment_protocol_hash": experiment_protocol_hash,
+            "code_snapshot_id": code_snapshot_id,
+            "dataset_snapshot_id": snapshot_id,
+            "dataset_snapshot_manifest": dataset_snapshot_manifest,
+            "rule_id": rule.definition.id,
+            "rule_version": rule.definition.version,
+            "rule_semantic_hash": rule.semantic_hash,
+            "rule_definition_hash": rule_definition_hash(rule.definition),
+            "symbols": symbols,
+            "pipeline_config_hash": canonical_hash(asdict(config)),
+            "batch_size": batch_size,
+        }
+        identity_hash = canonical_hash(identity)
+        checkpoint_path = run_dir / "checkpoint.json"
+        if resume:
+            checkpoint, commits = verify_checkpoint(run_dir, identity)
+            if checkpoint["status"] == "completed":
+                raise ValueError("research run is already completed; resume is not allowed")
+            started_at = datetime.fromisoformat(str(checkpoint["started_at"]))
+        else:
+            if run_dir.exists():
+                raise FileExistsError(f"research run already exists: {run_dir}")
+            commits = []
+            write_json(checkpoint_path, build_checkpoint(identity, commits, status="running", started_at=started_at))
         write_json(progress_path, {
-            "schema_version": "research-progress/v1",
+            "schema_version": "research-progress/v2",
             "run_id": run_id,
             "status": "running",
             "started_at": started_at,
             "updated_at": started_at,
             "symbols_total": len(symbols),
-            "symbols_processed": 0,
-            "symbols_loaded": 0,
-            "observations": 0,
-            "outcomes": 0,
-            "percent": 0.0,
+            "symbols_processed": sum(len(item["symbols"]) for item in commits),
+            "symbols_loaded": sum(int(item["loaded_symbols"]) for item in commits),
+            "observations": sum(int(item["observations"]["count"]) for item in commits),
+            "outcomes": sum(int(item["outcomes"]["count"]) for item in commits),
+            "percent": round(sum(len(item["symbols"]) for item in commits) / len(symbols) * 100, 2) if symbols else 100.0,
             "current_symbol": None,
+            "committed_batches": len(commits),
+            "resumed": resume,
         })
-        for position, symbol in enumerate(symbols, start=1):
-            try:
-                series = self.source.load(symbol, config.start, config.end)
-            except (FileNotFoundError, ValueError):
-                skipped.append(symbol)
-                series = []
-            if series and len(series) <= rule.max_lookback + max(config.horizons):
-                skipped.append(symbol)
-                series = []
-            if series:
-                loaded += 1
-                indicators = None
-                if rule.required_indicators:
-                    columns = compute_indicators(candles_to_frame(series), needs=rule.required_indicators)
-                    indicators = {key: columns[key].tolist() for key in rule.required_indicators}
-                for index in range(rule.max_lookback, len(series) - 1):
-                    result = evaluate(series, index, rule, indicators=indicators)
-                    if result.status != "matched" or result.executable_from is None:
+        try:
+            for batch_index, start in enumerate(range(0, len(symbols), batch_size)):
+                if batch_index < len(commits):
+                    continue
+                batch_symbols = symbols[start:start + batch_size]
+                observations: list[Observation] = []
+                outcomes: list[Outcome] = []
+                skipped: list[str] = []
+                loaded = 0
+                for symbol in batch_symbols:
+                    try:
+                        series = self.source.load(symbol, config.start, config.end)
+                    except (FileNotFoundError, ValueError):
+                        skipped.append(symbol)
+                        series = []
+                    if series and len(series) <= rule.max_lookback + max(config.horizons):
+                        skipped.append(symbol)
+                        series = []
+                    if not series:
                         continue
-                    # Membership must be true on the actual observation date, not
-                    # merely on the run's end date.  This prevents delisted names
-                    # and future listings from leaking into historical samples.
-                    if memberships is not None and not active_on(memberships, symbol, result.observed_at.date()):
-                        continue
-                    if config.min_signal_amount is not None and (series[index].amount is None or series[index].amount < config.min_signal_amount):
-                        continue
-                    observation = Observation(
-                        self._observation_id(symbol, result.observed_at, result.semantic_hash, snapshot_id),
-                        symbol, result.observed_at, result.executable_from,
-                        rule.definition.id, rule.definition.version, result.semantic_hash,
-                        snapshot_id, tuple(asdict(item) for item in result.conditions),
-                    )
-                    observations.append(observation)
-                    for horizon in config.horizons:
-                        outcome = self._outcome(observation, series, index, horizon, benchmark_by_time, regime_by_time, config)
-                        if outcome:
-                            outcomes.append(outcome)
-            if position == len(symbols) or position % progress_every == 0:
+                    loaded += 1
+                    indicators = None
+                    if rule.required_indicators:
+                        columns = compute_indicators(candles_to_frame(series), needs=rule.required_indicators)
+                        indicators = {key: columns[key].tolist() for key in rule.required_indicators}
+                    for index in range(rule.max_lookback, len(series) - 1):
+                        result = evaluate(series, index, rule, indicators=indicators)
+                        if result.status != "matched" or result.executable_from is None:
+                            continue
+                        if memberships is not None and not active_on(memberships, symbol, result.observed_at.date()):
+                            continue
+                        if config.min_signal_amount is not None and (series[index].amount is None or series[index].amount < config.min_signal_amount):
+                            continue
+                        observation = Observation(
+                            self._observation_id(symbol, result.observed_at, result.semantic_hash, snapshot_id),
+                            symbol, result.observed_at, result.executable_from,
+                            rule.definition.id, rule.definition.version, result.semantic_hash,
+                            snapshot_id, tuple(asdict(item) for item in result.conditions),
+                        )
+                        observations.append(observation)
+                        for horizon in config.horizons:
+                            outcome = self._outcome(observation, series, index, horizon, benchmark_by_time, regime_by_time, config)
+                            if outcome:
+                                outcomes.append(outcome)
+                commit = write_batch(
+                    run_dir, batch_index, batch_symbols, observations, outcomes, identity_hash,
+                    loaded_symbols=loaded, skipped_symbols=skipped, fault_injector=fault_injector,
+                )
+                commits.append(commit)
+                checkpoint = build_checkpoint(identity, commits, status="running", started_at=started_at)
+                write_json(checkpoint_path, checkpoint)
+                if fault_injector:
+                    fault_injector("after_checkpoint", batch_index)
+                processed = int(checkpoint["symbols_processed"])
                 write_json(progress_path, {
-                    "schema_version": "research-progress/v1",
-                    "run_id": run_id,
-                    "status": "running",
-                    "started_at": started_at,
-                    "updated_at": datetime.now(timezone.utc),
-                    "symbols_total": len(symbols),
-                    "symbols_processed": position,
-                    "symbols_loaded": loaded,
-                    "observations": len(observations),
-                    "outcomes": len(outcomes),
-                    "percent": round(position / len(symbols) * 100, 2) if symbols else 100.0,
-                    "current_symbol": symbol,
+                    "schema_version": "research-progress/v2", "run_id": run_id, "status": "running",
+                    "started_at": started_at, "updated_at": datetime.now(timezone.utc),
+                    "symbols_total": len(symbols), "symbols_processed": processed,
+                    "symbols_loaded": checkpoint["symbols_loaded"], "observations": checkpoint["observations"],
+                    "outcomes": checkpoint["outcomes"],
+                    "percent": round(processed / len(symbols) * 100, 2) if symbols else 100.0,
+                    "current_symbol": batch_symbols[-1] if batch_symbols else None,
+                    "committed_batches": len(commits), "resumed": resume,
                 })
+        except BaseException:
+            current = build_checkpoint(identity, load_commits(run_dir, identity_hash), status="interrupted", started_at=started_at)
+            write_json(checkpoint_path, current)
+            write_json(progress_path, {
+                "schema_version": "research-progress/v2", "run_id": run_id, "status": "interrupted",
+                "started_at": started_at, "updated_at": datetime.now(timezone.utc),
+                "symbols_total": len(symbols), "symbols_processed": current["symbols_processed"],
+                "symbols_loaded": current["symbols_loaded"], "observations": current["observations"],
+                "outcomes": current["outcomes"],
+                "percent": round(int(current["symbols_processed"]) / len(symbols) * 100, 2) if symbols else 100.0,
+                "current_symbol": None, "committed_batches": current["committed_batches"], "resumed": resume,
+            })
+            raise
+        checkpoint = build_checkpoint(identity, commits, status="running", started_at=started_at)
         summary = ResearchRun(
             run_id, datetime.now(timezone.utc), snapshot_id, rule.semantic_hash,
-            len(symbols), loaded, len(observations), len(outcomes), tuple(skipped),
+            len(symbols), int(checkpoint["symbols_loaded"]), int(checkpoint["observations"]), int(checkpoint["outcomes"]), tuple(checkpoint["skipped_symbols"]),
         )
-        write_jsonl(run_dir / "observations.jsonl", observations)
-        write_jsonl(run_dir / "outcomes.jsonl", outcomes)
         write_json(run_dir / "run.json", summary)
         write_json(run_dir / "config.json", {
             "horizons": config.horizons,
@@ -236,6 +312,10 @@ class FileResearchPipeline:
             "benchmark_snapshot_id": benchmark_id,
             "dataset_snapshot_manifest": dataset_snapshot_manifest,
             "experiment_protocol_id": experiment_protocol_id,
+            "experiment_protocol_hash": experiment_protocol_hash,
+            "code_snapshot_id": code_snapshot_id,
+            "artifact_format": "research-sharded-run/v1",
+            "batch_size": batch_size,
             "commission_bps_per_side": config.commission_bps_per_side,
             "slippage_bps_per_side": config.slippage_bps_per_side,
             "out_of_sample_start": config.out_of_sample_start,
@@ -252,27 +332,63 @@ class FileResearchPipeline:
             "rule": asdict(rule.definition),
         })
         (run_dir / "report.md").write_text(
-            self._report(summary, rule, config, outcomes),
+            self._report(summary, rule, config, iter_run_rows_after_commit(run_dir, commits, "outcomes")),
             encoding="utf-8",
         )
+        # Compatibility views are streamed only after every batch is committed;
+        # they are never resume authorities and do not grow process memory.
+        write_jsonl(run_dir / "observations.jsonl", iter_run_rows_after_commit(run_dir, commits, "observations"))
+        write_jsonl(run_dir / "outcomes.jsonl", iter_run_rows_after_commit(run_dir, commits, "outcomes"))
+        write_json(run_dir / "artifact_manifest.json", {
+            "schema_version": "research-artifact-manifest/v1",
+            "execution_identity": identity,
+            "execution_identity_hash": identity_hash,
+            "committed_batches": len(commits),
+            "observations": summary.observations,
+            "outcomes": summary.outcomes,
+            "commit_hashes": [item["commit_hash"] for item in commits],
+        })
+        write_json(checkpoint_path, build_checkpoint(identity, commits, status="completed", started_at=started_at))
         write_json(progress_path, {
-            "schema_version": "research-progress/v1",
+            "schema_version": "research-progress/v2",
             "run_id": run_id,
             "status": "completed",
             "started_at": started_at,
             "updated_at": datetime.now(timezone.utc),
             "symbols_total": len(symbols),
             "symbols_processed": len(symbols),
-            "symbols_loaded": loaded,
-            "observations": len(observations),
-            "outcomes": len(outcomes),
+            "symbols_loaded": summary.symbols_loaded,
+            "observations": summary.observations,
+            "outcomes": summary.outcomes,
             "percent": 100.0,
             "current_symbol": None,
+            "committed_batches": len(commits),
+            "resumed": resume,
         })
         return run_dir
 
     @staticmethod
-    def _report(summary: ResearchRun, rule: CompiledRule, config: PipelineConfig, outcomes: list[Outcome]) -> str:
+    def _report(summary: ResearchRun, rule: CompiledRule, config: PipelineConfig, outcomes) -> str:
+        aggregates: dict[tuple[str, int], dict[str, float]] = {}
+        regime_aggregates: dict[str, list[float]] = {"bullish": [0.0, 0.0], "bearish": [0.0, 0.0], "unknown": [0.0, 0.0]}
+        for item in outcomes:
+            split = item["sample_split"] if isinstance(item, dict) else item.sample_split
+            horizon = int(item["horizon_bars"] if isinstance(item, dict) else item.horizon_bars)
+            values = item if isinstance(item, dict) else asdict(item)
+            for section in ("all", split):
+                bucket = aggregates.setdefault((section, horizon), {"count": 0.0, "wins": 0.0, "net": 0.0, "bench_sum": 0.0, "bench_n": 0.0, "excess_sum": 0.0, "excess_n": 0.0, "mfe": 0.0, "mae": 0.0})
+                bucket["count"] += 1
+                bucket["wins"] += float(values["net_return"] > 0)
+                bucket["net"] += float(values["net_return"])
+                bucket["mfe"] += float(values["mfe"])
+                bucket["mae"] += float(values["mae"])
+                if values.get("benchmark_return") is not None:
+                    bucket["bench_sum"] += float(values["benchmark_return"]); bucket["bench_n"] += 1
+                if values.get("net_excess_return") is not None:
+                    bucket["excess_sum"] += float(values["net_excess_return"]); bucket["excess_n"] += 1
+            if split == "out_of_sample" and horizon == 3 and values.get("net_excess_return") is not None:
+                regime = str(values.get("market_regime", "unknown")); target = regime_aggregates.setdefault(regime, [0.0, 0.0])
+                target[0] += 1; target[1] += float(values["net_excess_return"])
         lines = [
             f"# 研究运行 {summary.run_id}", "",
             "## 可复现身份", "",
@@ -285,29 +401,26 @@ class FileResearchPipeline:
             f"- Outcome：{summary.outcomes}", "",
             f"- 单边佣金/滑点：{config.commission_bps_per_side:.1f}/{config.slippage_bps_per_side:.1f} bps", "",
         ]
-        sections = [("全样本", outcomes), ("样本内", [item for item in outcomes if item.sample_split == "in_sample"])]
+        sections = [("全样本", "all"), ("样本内", "in_sample")]
         if config.out_of_sample_start:
-            sections.append(("样本外", [item for item in outcomes if item.sample_split == "out_of_sample"]))
-        for title, section_outcomes in sections:
+            sections.append(("样本外", "out_of_sample"))
+        for title, section in sections:
             lines.extend([f"## {title}分周期结果", "", "| 周期 | 样本 | 胜率 | 平均净收益 | 平均基准 | 平均净超额 | 平均 MFE | 平均 MAE |", "|---:|---:|---:|---:|---:|---:|---:|---:|"])
             for horizon in config.horizons:
-                group = [item for item in section_outcomes if item.horizon_bars == horizon]
+                group = aggregates.get((section, horizon))
                 if not group:
                     lines.append(f"| {horizon} | 0 | - | - | - | - | - | - |")
                     continue
-                count = len(group)
-                benchmark_group = [item.benchmark_return for item in group if item.benchmark_return is not None]
-                net_excess_group = [item.net_excess_return for item in group if item.net_excess_return is not None]
-                benchmark_text = f"{sum(benchmark_group) / len(benchmark_group):.2%}" if benchmark_group else "-"
-                net_excess_text = f"{sum(net_excess_group) / len(net_excess_group):.2%}" if net_excess_group else "-"
-                lines.append(f"| {horizon} | {count} | {sum(item.net_return > 0 for item in group) / count:.2%} | {sum(item.net_return for item in group) / count:.2%} | {benchmark_text} | {net_excess_text} | {sum(item.mfe for item in group) / count:.2%} | {sum(item.mae for item in group) / count:.2%} |")
+                count = int(group["count"])
+                benchmark_text = f"{group['bench_sum'] / group['bench_n']:.2%}" if group["bench_n"] else "-"
+                net_excess_text = f"{group['excess_sum'] / group['excess_n']:.2%}" if group["excess_n"] else "-"
+                lines.append(f"| {horizon} | {count} | {group['wins'] / count:.2%} | {group['net'] / count:.2%} | {benchmark_text} | {net_excess_text} | {group['mfe'] / count:.2%} | {group['mae'] / count:.2%} |")
             lines.append("")
         if config.out_of_sample_start:
             lines.extend(["## 样本外市场状态（平均净超额）", "", "| 市场状态 | 3 日样本 | 3 日平均净超额 |", "|---|---:|---:|"])
-            group = [item for item in outcomes if item.sample_split == "out_of_sample" and item.horizon_bars == 3]
             for regime in ("bullish", "bearish", "unknown"):
-                values = [item.net_excess_return for item in group if item.market_regime == regime and item.net_excess_return is not None]
-                lines.append(f"| {regime} | {len(values)} | {sum(values) / len(values):.2%} |" if values else f"| {regime} | 0 | - |")
+                count, total = regime_aggregates[regime]
+                lines.append(f"| {regime} | {int(count)} | {total / count:.2%} |" if count else f"| {regime} | 0 | - |")
             lines.append("")
         lines.extend([
             "", "## 限制", "",
@@ -320,3 +433,13 @@ class FileResearchPipeline:
             "",
         ])
         return "\n".join(lines)
+
+
+def iter_run_rows_after_commit(run_dir: Path, commits: list[dict], kind: str):
+    """Stream validated in-process commits before the final manifest exists."""
+    for commit in commits:
+        path = run_dir / commit[kind]["path"]
+        with path.open("r", encoding="utf-8") as handle:
+            for line in handle:
+                if line.strip():
+                    yield json.loads(line)

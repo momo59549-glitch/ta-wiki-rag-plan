@@ -1,0 +1,3673 @@
+{
+  "analysis": {
+    "benchmark_dataset": "etf_cache",
+    "benchmark_symbol": "000001",
+    "market_regime_window": 60,
+    "min_signal_amount": null,
+    "skip_untradeable": true
+  },
+  "candidates": [
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "gte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "lower_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "body",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "min_lower_shadow_body"
+              }
+            ]
+          },
+          {
+            "lte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "upper_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "range",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "max_upper_shadow_range"
+              }
+            ]
+          },
+          {
+            "context": {
+              "min_count": 3,
+              "name": "lower_close_count",
+              "window": 5
+            }
+          }
+        ]
+      },
+      "id": "auto_hammer_context",
+      "name_zh": "自动发现 hammer_context",
+      "observed_at": "bar_close",
+      "parameters": {
+        "max_upper_shadow_range": 0.2,
+        "min_lower_shadow_body": 2.0
+      },
+      "version": "g_20260809_01.0001",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "gte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "upper_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "body",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "min_upper_shadow_body"
+              }
+            ]
+          },
+          {
+            "lte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "lower_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "range",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "max_lower_shadow_range"
+              }
+            ]
+          }
+        ]
+      },
+      "id": "auto_shooting_star",
+      "name_zh": "自动发现 shooting_star",
+      "observed_at": "bar_close",
+      "parameters": {
+        "max_lower_shadow_range": 0.1,
+        "min_upper_shadow_body": 2.5
+      },
+      "version": "g_20260809_01.0002",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "lte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "body",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "range",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "max_body_range"
+              }
+            ]
+          },
+          {
+            "context": {
+              "min_count": 3,
+              "name": "lower_close_count",
+              "window": 5
+            }
+          }
+        ]
+      },
+      "id": "auto_doji_after_decline",
+      "name_zh": "自动发现 doji_after_decline",
+      "observed_at": "bar_close",
+      "parameters": {
+        "max_body_range": 0.05
+      },
+      "version": "g_20260809_01.0003",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "gt": [
+          {
+            "metric": {
+              "name": "sma",
+              "offset": 0,
+              "window": 60
+            }
+          },
+          {
+            "metric": {
+              "name": "sma",
+              "offset": -5,
+              "window": 60
+            }
+          }
+        ]
+      },
+      "id": "auto_sma_rising",
+      "name_zh": "自动发现 sma_rising",
+      "observed_at": "bar_close",
+      "parameters": {
+        "window": 60.0
+      },
+      "version": "g_20260809_01.0004",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "gt": [
+              {
+                "metric": {
+                  "name": "volume_ratio",
+                  "offset": 0,
+                  "window": 20
+                }
+              },
+              {
+                "param": "multiple"
+              }
+            ]
+          },
+          {
+            "eq": [
+              {
+                "metric": {
+                  "name": "is_bearish",
+                  "offset": 0
+                }
+              },
+              true
+            ]
+          }
+        ]
+      },
+      "id": "auto_volume_surge_down",
+      "name_zh": "自动发现 volume_surge_down",
+      "observed_at": "bar_close",
+      "parameters": {
+        "multiple": 3.0
+      },
+      "version": "g_20260809_01.0005",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "gt": [
+              {
+                "metric": {
+                  "name": "volume_ratio",
+                  "offset": 0,
+                  "window": 20
+                }
+              },
+              {
+                "param": "multiple"
+              }
+            ]
+          },
+          {
+            "eq": [
+              {
+                "metric": {
+                  "name": "is_bearish",
+                  "offset": 0
+                }
+              },
+              true
+            ]
+          }
+        ]
+      },
+      "id": "auto_volume_surge_down",
+      "name_zh": "自动发现 volume_surge_down",
+      "observed_at": "bar_close",
+      "parameters": {
+        "multiple": 2.0
+      },
+      "version": "g_20260809_01.0006",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "lt": [
+              {
+                "metric": {
+                  "name": "rsi",
+                  "offset": 0,
+                  "window": 14
+                }
+              },
+              {
+                "param": "rsi_threshold"
+              }
+            ]
+          },
+          {
+            "lt": [
+              {
+                "metric": {
+                  "name": "close",
+                  "offset": 0
+                }
+              },
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": 0,
+                  "window": 20
+                }
+              }
+            ]
+          },
+          {
+            "context": {
+              "min_count": 3,
+              "name": "lower_close_count",
+              "window": 5
+            }
+          }
+        ]
+      },
+      "id": "auto_combo_rsi_trend",
+      "name_zh": "自动发现 combo_rsi_trend",
+      "observed_at": "bar_close",
+      "parameters": {
+        "rsi_threshold": 30.0,
+        "rsi_window": 14.0,
+        "trend_window": 20.0
+      },
+      "version": "g_20260809_01.0007",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "gte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "lower_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "body",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "min_lower_shadow_body"
+              }
+            ]
+          },
+          {
+            "lte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "upper_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "range",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "max_upper_shadow_range"
+              }
+            ]
+          }
+        ]
+      },
+      "id": "auto_hammer",
+      "name_zh": "自动发现 hammer",
+      "observed_at": "bar_close",
+      "parameters": {
+        "max_upper_shadow_range": 0.1,
+        "min_lower_shadow_body": 2.5
+      },
+      "version": "g_20260809_01.0008",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "lt": [
+          {
+            "metric": {
+              "name": "rsi",
+              "offset": 0,
+              "window": 7
+            }
+          },
+          {
+            "param": "threshold"
+          }
+        ]
+      },
+      "id": "auto_rsi_oversold",
+      "name_zh": "自动发现 rsi_oversold",
+      "observed_at": "bar_close",
+      "parameters": {
+        "threshold": 35.0,
+        "window": 7.0
+      },
+      "version": "g_20260809_01.0009",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "gte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "upper_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "body",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "min_upper_shadow_body"
+              }
+            ]
+          },
+          {
+            "lte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "lower_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "range",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "max_lower_shadow_range"
+              }
+            ]
+          },
+          {
+            "context": {
+              "min_count": 3,
+              "name": "higher_close_count",
+              "window": 5
+            }
+          }
+        ]
+      },
+      "id": "auto_shooting_star_context",
+      "name_zh": "自动发现 shooting_star_context",
+      "observed_at": "bar_close",
+      "parameters": {
+        "max_lower_shadow_range": 0.2,
+        "min_upper_shadow_body": 1.5
+      },
+      "version": "g_20260809_01.0010",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "gt": [
+          {
+            "metric": {
+              "name": "rsi",
+              "offset": 0,
+              "window": 7
+            }
+          },
+          {
+            "param": "threshold"
+          }
+        ]
+      },
+      "id": "auto_rsi_overbought",
+      "name_zh": "自动发现 rsi_overbought",
+      "observed_at": "bar_close",
+      "parameters": {
+        "threshold": 75.0,
+        "window": 7.0
+      },
+      "version": "g_20260809_01.0011",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "lt": [
+          {
+            "metric": {
+              "name": "close",
+              "offset": 0
+            }
+          },
+          {
+            "metric": {
+              "name": "min_low",
+              "offset": -1,
+              "window": 20
+            }
+          }
+        ]
+      },
+      "id": "auto_breakout_low",
+      "name_zh": "自动发现 breakout_low",
+      "observed_at": "bar_close",
+      "parameters": {
+        "window": 20.0
+      },
+      "version": "g_20260809_01.0012",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "lte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "body",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "range",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "max_body_range"
+              }
+            ]
+          },
+          {
+            "context": {
+              "min_count": 3,
+              "name": "lower_close_count",
+              "window": 5
+            }
+          }
+        ]
+      },
+      "id": "auto_doji_after_decline",
+      "name_zh": "自动发现 doji_after_decline",
+      "observed_at": "bar_close",
+      "parameters": {
+        "max_body_range": 0.15
+      },
+      "version": "g_20260809_01.0013",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "lt": [
+          {
+            "metric": {
+              "name": "rsi",
+              "offset": 0,
+              "window": 14
+            }
+          },
+          {
+            "param": "threshold"
+          }
+        ]
+      },
+      "id": "auto_rsi_oversold",
+      "name_zh": "自动发现 rsi_oversold",
+      "observed_at": "bar_close",
+      "parameters": {
+        "threshold": 25.0,
+        "window": 14.0
+      },
+      "version": "g_20260809_01.0014",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "lt": [
+          {
+            "metric": {
+              "name": "roc",
+              "offset": 0,
+              "window": 20
+            }
+          },
+          {
+            "param": "threshold"
+          }
+        ]
+      },
+      "id": "auto_roc_negative",
+      "name_zh": "自动发现 roc_negative",
+      "observed_at": "bar_close",
+      "parameters": {
+        "threshold": -0.03,
+        "window": 20.0
+      },
+      "version": "g_20260809_01.0015",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "gte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "upper_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "body",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "min_upper_shadow_body"
+              }
+            ]
+          },
+          {
+            "lte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "lower_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "range",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "max_lower_shadow_range"
+              }
+            ]
+          },
+          {
+            "context": {
+              "min_count": 3,
+              "name": "higher_close_count",
+              "window": 5
+            }
+          }
+        ]
+      },
+      "id": "auto_shooting_star_context",
+      "name_zh": "自动发现 shooting_star_context",
+      "observed_at": "bar_close",
+      "parameters": {
+        "max_lower_shadow_range": 0.1,
+        "min_upper_shadow_body": 1.5
+      },
+      "version": "g_20260809_01.0016",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "gt": [
+              {
+                "metric": {
+                  "name": "volume_ratio",
+                  "offset": 0,
+                  "window": 20
+                }
+              },
+              {
+                "param": "multiple"
+              }
+            ]
+          },
+          {
+            "eq": [
+              {
+                "metric": {
+                  "name": "is_bullish",
+                  "offset": 0
+                }
+              },
+              true
+            ]
+          }
+        ]
+      },
+      "id": "auto_volume_surge_up",
+      "name_zh": "自动发现 volume_surge_up",
+      "observed_at": "bar_close",
+      "parameters": {
+        "multiple": 2.0
+      },
+      "version": "g_20260809_01.0017",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "gt": [
+          {
+            "metric": {
+              "name": "sma",
+              "offset": 0,
+              "window": 10
+            }
+          },
+          {
+            "metric": {
+              "name": "sma",
+              "offset": -5,
+              "window": 10
+            }
+          }
+        ]
+      },
+      "id": "auto_sma_rising",
+      "name_zh": "自动发现 sma_rising",
+      "observed_at": "bar_close",
+      "parameters": {
+        "window": 10.0
+      },
+      "version": "g_20260809_01.0018",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "lt": [
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": 0,
+                  "window": 20
+                }
+              },
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": 0,
+                  "window": 60
+                }
+              }
+            ]
+          },
+          {
+            "gte": [
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": -1,
+                  "window": 20
+                }
+              },
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": -1,
+                  "window": 60
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "id": "auto_ma_cross_down",
+      "name_zh": "自动发现 ma_cross_down",
+      "observed_at": "bar_close",
+      "parameters": {
+        "fast": 20.0,
+        "slow": 60.0
+      },
+      "version": "g_20260809_01.0019",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "gt": [
+          {
+            "metric": {
+              "name": "rsi",
+              "offset": 0,
+              "window": 14
+            }
+          },
+          {
+            "param": "threshold"
+          }
+        ]
+      },
+      "id": "auto_rsi_overbought",
+      "name_zh": "自动发现 rsi_overbought",
+      "observed_at": "bar_close",
+      "parameters": {
+        "threshold": 65.0,
+        "window": 14.0
+      },
+      "version": "g_20260809_01.0020",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "gt": [
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": 0,
+                  "window": 5
+                }
+              },
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": 0,
+                  "window": 20
+                }
+              }
+            ]
+          },
+          {
+            "lte": [
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": -1,
+                  "window": 5
+                }
+              },
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": -1,
+                  "window": 20
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "id": "auto_ma_cross_up",
+      "name_zh": "自动发现 ma_cross_up",
+      "observed_at": "bar_close",
+      "parameters": {
+        "fast": 5.0,
+        "slow": 20.0
+      },
+      "version": "g_20260809_01.0021",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "gt": [
+          {
+            "metric": {
+              "name": "sma",
+              "offset": 0,
+              "window": 20
+            }
+          },
+          {
+            "metric": {
+              "name": "sma",
+              "offset": -5,
+              "window": 20
+            }
+          }
+        ]
+      },
+      "id": "auto_sma_rising",
+      "name_zh": "自动发现 sma_rising",
+      "observed_at": "bar_close",
+      "parameters": {
+        "window": 20.0
+      },
+      "version": "g_20260809_01.0022",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "lt": [
+          {
+            "metric": {
+              "name": "rsi",
+              "offset": 0,
+              "window": 7
+            }
+          },
+          {
+            "param": "threshold"
+          }
+        ]
+      },
+      "id": "auto_rsi_oversold",
+      "name_zh": "自动发现 rsi_oversold",
+      "observed_at": "bar_close",
+      "parameters": {
+        "threshold": 25.0,
+        "window": 7.0
+      },
+      "version": "g_20260809_01.0023",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "gt": [
+          {
+            "metric": {
+              "name": "roc",
+              "offset": 0,
+              "window": 10
+            }
+          },
+          {
+            "param": "threshold"
+          }
+        ]
+      },
+      "id": "auto_roc_positive",
+      "name_zh": "自动发现 roc_positive",
+      "observed_at": "bar_close",
+      "parameters": {
+        "threshold": 0.03,
+        "window": 10.0
+      },
+      "version": "g_20260809_01.0024",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "lt": [
+          {
+            "metric": {
+              "name": "rsi",
+              "offset": 0,
+              "window": 21
+            }
+          },
+          {
+            "param": "threshold"
+          }
+        ]
+      },
+      "id": "auto_rsi_oversold",
+      "name_zh": "自动发现 rsi_oversold",
+      "observed_at": "bar_close",
+      "parameters": {
+        "threshold": 30.0,
+        "window": 21.0
+      },
+      "version": "g_20260809_01.0025",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "gt": [
+          {
+            "metric": {
+              "name": "rsi",
+              "offset": 0,
+              "window": 14
+            }
+          },
+          {
+            "param": "threshold"
+          }
+        ]
+      },
+      "id": "auto_rsi_overbought",
+      "name_zh": "自动发现 rsi_overbought",
+      "observed_at": "bar_close",
+      "parameters": {
+        "threshold": 70.0,
+        "window": 14.0
+      },
+      "version": "g_20260809_01.0026",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "lt": [
+          {
+            "metric": {
+              "name": "rsi",
+              "offset": 0,
+              "window": 14
+            }
+          },
+          {
+            "param": "threshold"
+          }
+        ]
+      },
+      "id": "auto_rsi_oversold",
+      "name_zh": "自动发现 rsi_oversold",
+      "observed_at": "bar_close",
+      "parameters": {
+        "threshold": 30.0,
+        "window": 14.0
+      },
+      "version": "g_20260809_01.0027",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "lt": [
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": 0,
+                  "window": 5
+                }
+              },
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": 0,
+                  "window": 20
+                }
+              }
+            ]
+          },
+          {
+            "gte": [
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": -1,
+                  "window": 5
+                }
+              },
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": -1,
+                  "window": 20
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "id": "auto_ma_cross_down",
+      "name_zh": "自动发现 ma_cross_down",
+      "observed_at": "bar_close",
+      "parameters": {
+        "fast": 5.0,
+        "slow": 20.0
+      },
+      "version": "g_20260809_01.0028",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "gt": [
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": 0,
+                  "window": 10
+                }
+              },
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": 0,
+                  "window": 20
+                }
+              }
+            ]
+          },
+          {
+            "lte": [
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": -1,
+                  "window": 10
+                }
+              },
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": -1,
+                  "window": 20
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "id": "auto_ma_cross_up",
+      "name_zh": "自动发现 ma_cross_up",
+      "observed_at": "bar_close",
+      "parameters": {
+        "fast": 10.0,
+        "slow": 20.0
+      },
+      "version": "g_20260809_01.0029",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "gt": [
+              {
+                "metric": {
+                  "name": "close",
+                  "offset": 0
+                }
+              },
+              {
+                "metric": {
+                  "name": "max_high",
+                  "offset": -1,
+                  "window": 20
+                }
+              }
+            ]
+          },
+          {
+            "gt": [
+              {
+                "metric": {
+                  "name": "volume_ratio",
+                  "offset": 0,
+                  "window": 20
+                }
+              },
+              {
+                "param": "multiple"
+              }
+            ]
+          },
+          {
+            "eq": [
+              {
+                "metric": {
+                  "name": "is_bullish",
+                  "offset": 0
+                }
+              },
+              true
+            ]
+          }
+        ]
+      },
+      "id": "auto_combo_breakout_volume",
+      "name_zh": "自动发现 combo_breakout_volume",
+      "observed_at": "bar_close",
+      "parameters": {
+        "breakout_window": 20.0,
+        "multiple": 2.0
+      },
+      "version": "g_20260809_01.0030",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "gt": [
+          {
+            "metric": {
+              "name": "close",
+              "offset": 0
+            }
+          },
+          {
+            "metric": {
+              "name": "max_high",
+              "offset": -1,
+              "window": 20
+            }
+          }
+        ]
+      },
+      "id": "auto_breakout_high",
+      "name_zh": "自动发现 breakout_high",
+      "observed_at": "bar_close",
+      "parameters": {
+        "window": 20.0
+      },
+      "version": "g_20260809_01.0031",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "gte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "lower_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "body",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "min_lower_shadow_body"
+              }
+            ]
+          },
+          {
+            "lte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "upper_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "range",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "max_upper_shadow_range"
+              }
+            ]
+          },
+          {
+            "context": {
+              "min_count": 3,
+              "name": "lower_close_count",
+              "window": 5
+            }
+          }
+        ]
+      },
+      "id": "auto_hammer_context",
+      "name_zh": "自动发现 hammer_context",
+      "observed_at": "bar_close",
+      "parameters": {
+        "max_upper_shadow_range": 0.2,
+        "min_lower_shadow_body": 2.5
+      },
+      "version": "g_20260809_01.0032",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "gte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "lower_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "body",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "min_lower_shadow_body"
+              }
+            ]
+          },
+          {
+            "lte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "upper_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "range",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "max_upper_shadow_range"
+              }
+            ]
+          },
+          {
+            "lt": [
+              {
+                "metric": {
+                  "name": "close",
+                  "offset": 0
+                }
+              },
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": 0,
+                  "window": 20
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "id": "auto_combo_hammer_trend",
+      "name_zh": "自动发现 combo_hammer_trend",
+      "observed_at": "bar_close",
+      "parameters": {
+        "ma_window": 20.0,
+        "max_upper_shadow_range": 0.2,
+        "min_lower_shadow_body": 1.5
+      },
+      "version": "g_20260809_01.0033",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "lt": [
+          {
+            "metric": {
+              "name": "sma",
+              "offset": 0,
+              "window": 60
+            }
+          },
+          {
+            "metric": {
+              "name": "sma",
+              "offset": -5,
+              "window": 60
+            }
+          }
+        ]
+      },
+      "id": "auto_sma_falling",
+      "name_zh": "自动发现 sma_falling",
+      "observed_at": "bar_close",
+      "parameters": {
+        "window": 60.0
+      },
+      "version": "g_20260809_01.0034",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "gte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "upper_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "body",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "min_upper_shadow_body"
+              }
+            ]
+          },
+          {
+            "lte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "lower_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "range",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "max_lower_shadow_range"
+              }
+            ]
+          }
+        ]
+      },
+      "id": "auto_shooting_star",
+      "name_zh": "自动发现 shooting_star",
+      "observed_at": "bar_close",
+      "parameters": {
+        "max_lower_shadow_range": 0.1,
+        "min_upper_shadow_body": 1.5
+      },
+      "version": "g_20260809_01.0035",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "gt": [
+          {
+            "metric": {
+              "name": "rsi",
+              "offset": 0,
+              "window": 21
+            }
+          },
+          {
+            "param": "threshold"
+          }
+        ]
+      },
+      "id": "auto_rsi_overbought",
+      "name_zh": "自动发现 rsi_overbought",
+      "observed_at": "bar_close",
+      "parameters": {
+        "threshold": 70.0,
+        "window": 21.0
+      },
+      "version": "g_20260809_01.0036",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "lt": [
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": 0,
+                  "window": 5
+                }
+              },
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": 0,
+                  "window": 60
+                }
+              }
+            ]
+          },
+          {
+            "gte": [
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": -1,
+                  "window": 5
+                }
+              },
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": -1,
+                  "window": 60
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "id": "auto_ma_cross_down",
+      "name_zh": "自动发现 ma_cross_down",
+      "observed_at": "bar_close",
+      "parameters": {
+        "fast": 5.0,
+        "slow": 60.0
+      },
+      "version": "g_20260809_01.0037",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "lt": [
+          {
+            "metric": {
+              "name": "roc",
+              "offset": 0,
+              "window": 10
+            }
+          },
+          {
+            "param": "threshold"
+          }
+        ]
+      },
+      "id": "auto_roc_negative",
+      "name_zh": "自动发现 roc_negative",
+      "observed_at": "bar_close",
+      "parameters": {
+        "threshold": -0.05,
+        "window": 10.0
+      },
+      "version": "g_20260809_01.0038",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "gt": [
+              {
+                "metric": {
+                  "name": "volume_ratio",
+                  "offset": 0,
+                  "window": 20
+                }
+              },
+              {
+                "param": "multiple"
+              }
+            ]
+          },
+          {
+            "eq": [
+              {
+                "metric": {
+                  "name": "is_bullish",
+                  "offset": 0
+                }
+              },
+              true
+            ]
+          }
+        ]
+      },
+      "id": "auto_volume_surge_up",
+      "name_zh": "自动发现 volume_surge_up",
+      "observed_at": "bar_close",
+      "parameters": {
+        "multiple": 1.5
+      },
+      "version": "g_20260809_01.0039",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "lt": [
+          {
+            "metric": {
+              "name": "rsi",
+              "offset": 0,
+              "window": 21
+            }
+          },
+          {
+            "param": "threshold"
+          }
+        ]
+      },
+      "id": "auto_rsi_oversold",
+      "name_zh": "自动发现 rsi_oversold",
+      "observed_at": "bar_close",
+      "parameters": {
+        "threshold": 25.0,
+        "window": 21.0
+      },
+      "version": "g_20260809_01.0040",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "lt": [
+          {
+            "metric": {
+              "name": "close",
+              "offset": 0
+            }
+          },
+          {
+            "metric": {
+              "name": "sma",
+              "offset": 0,
+              "window": 60
+            }
+          }
+        ]
+      },
+      "id": "auto_price_below_sma",
+      "name_zh": "自动发现 price_below_sma",
+      "observed_at": "bar_close",
+      "parameters": {
+        "window": 60.0
+      },
+      "version": "g_20260809_01.0041",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "gt": [
+              {
+                "metric": {
+                  "name": "close",
+                  "offset": 0
+                }
+              },
+              {
+                "metric": {
+                  "name": "max_high",
+                  "offset": -1,
+                  "window": 60
+                }
+              }
+            ]
+          },
+          {
+            "gt": [
+              {
+                "metric": {
+                  "name": "volume_ratio",
+                  "offset": 0,
+                  "window": 20
+                }
+              },
+              {
+                "param": "multiple"
+              }
+            ]
+          },
+          {
+            "eq": [
+              {
+                "metric": {
+                  "name": "is_bullish",
+                  "offset": 0
+                }
+              },
+              true
+            ]
+          }
+        ]
+      },
+      "id": "auto_combo_breakout_volume",
+      "name_zh": "自动发现 combo_breakout_volume",
+      "observed_at": "bar_close",
+      "parameters": {
+        "breakout_window": 60.0,
+        "multiple": 2.0
+      },
+      "version": "g_20260809_01.0042",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "gte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "upper_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "body",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "min_upper_shadow_body"
+              }
+            ]
+          },
+          {
+            "lte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "lower_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "range",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "max_lower_shadow_range"
+              }
+            ]
+          }
+        ]
+      },
+      "id": "auto_shooting_star",
+      "name_zh": "自动发现 shooting_star",
+      "observed_at": "bar_close",
+      "parameters": {
+        "max_lower_shadow_range": 0.2,
+        "min_upper_shadow_body": 2.0
+      },
+      "version": "g_20260809_01.0043",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "eq": [
+              {
+                "metric": {
+                  "name": "is_bullish",
+                  "offset": 0
+                }
+              },
+              true
+            ]
+          },
+          {
+            "eq": [
+              {
+                "metric": {
+                  "name": "is_bearish",
+                  "offset": -1
+                }
+              },
+              true
+            ]
+          },
+          {
+            "context": {
+              "min_count": 3,
+              "name": "lower_close_count",
+              "window": 5
+            }
+          }
+        ]
+      },
+      "id": "auto_two_candle_reversal_context_bullish",
+      "name_zh": "自动发现 two_candle_reversal_context_bullish",
+      "observed_at": "bar_close",
+      "parameters": {},
+      "version": "g_20260809_01.0044",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "gt": [
+          {
+            "metric": {
+              "name": "rsi",
+              "offset": 0,
+              "window": 14
+            }
+          },
+          {
+            "param": "threshold"
+          }
+        ]
+      },
+      "id": "auto_rsi_overbought",
+      "name_zh": "自动发现 rsi_overbought",
+      "observed_at": "bar_close",
+      "parameters": {
+        "threshold": 75.0,
+        "window": 14.0
+      },
+      "version": "g_20260809_01.0045",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "gte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "upper_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "body",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "min_upper_shadow_body"
+              }
+            ]
+          },
+          {
+            "lte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "lower_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "range",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "max_lower_shadow_range"
+              }
+            ]
+          },
+          {
+            "context": {
+              "min_count": 3,
+              "name": "higher_close_count",
+              "window": 5
+            }
+          }
+        ]
+      },
+      "id": "auto_shooting_star_context",
+      "name_zh": "自动发现 shooting_star_context",
+      "observed_at": "bar_close",
+      "parameters": {
+        "max_lower_shadow_range": 0.2,
+        "min_upper_shadow_body": 2.0
+      },
+      "version": "g_20260809_01.0046",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "gte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "lower_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "body",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "min_lower_shadow_body"
+              }
+            ]
+          },
+          {
+            "lte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "upper_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "range",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "max_upper_shadow_range"
+              }
+            ]
+          },
+          {
+            "lt": [
+              {
+                "metric": {
+                  "name": "close",
+                  "offset": 0
+                }
+              },
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": 0,
+                  "window": 60
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "id": "auto_combo_hammer_trend",
+      "name_zh": "自动发现 combo_hammer_trend",
+      "observed_at": "bar_close",
+      "parameters": {
+        "ma_window": 60.0,
+        "max_upper_shadow_range": 0.2,
+        "min_lower_shadow_body": 2.0
+      },
+      "version": "g_20260809_01.0047",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "lt": [
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": 0,
+                  "window": 10
+                }
+              },
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": 0,
+                  "window": 60
+                }
+              }
+            ]
+          },
+          {
+            "gte": [
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": -1,
+                  "window": 10
+                }
+              },
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": -1,
+                  "window": 60
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "id": "auto_ma_cross_down",
+      "name_zh": "自动发现 ma_cross_down",
+      "observed_at": "bar_close",
+      "parameters": {
+        "fast": 10.0,
+        "slow": 60.0
+      },
+      "version": "g_20260809_01.0048",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "gte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "upper_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "body",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "min_upper_shadow_body"
+              }
+            ]
+          },
+          {
+            "lte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "lower_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "range",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "max_lower_shadow_range"
+              }
+            ]
+          }
+        ]
+      },
+      "id": "auto_shooting_star",
+      "name_zh": "自动发现 shooting_star",
+      "observed_at": "bar_close",
+      "parameters": {
+        "max_lower_shadow_range": 0.2,
+        "min_upper_shadow_body": 1.5
+      },
+      "version": "g_20260809_01.0049",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "gt": [
+          {
+            "metric": {
+              "name": "roc",
+              "offset": 0,
+              "window": 20
+            }
+          },
+          {
+            "param": "threshold"
+          }
+        ]
+      },
+      "id": "auto_roc_positive",
+      "name_zh": "自动发现 roc_positive",
+      "observed_at": "bar_close",
+      "parameters": {
+        "threshold": 0.03,
+        "window": 20.0
+      },
+      "version": "g_20260809_01.0050",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "lt": [
+          {
+            "metric": {
+              "name": "roc",
+              "offset": 0,
+              "window": 20
+            }
+          },
+          {
+            "param": "threshold"
+          }
+        ]
+      },
+      "id": "auto_roc_negative",
+      "name_zh": "自动发现 roc_negative",
+      "observed_at": "bar_close",
+      "parameters": {
+        "threshold": -0.05,
+        "window": 20.0
+      },
+      "version": "g_20260809_01.0051",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "gte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "lower_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "body",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "min_lower_shadow_body"
+              }
+            ]
+          },
+          {
+            "lte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "upper_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "range",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "max_upper_shadow_range"
+              }
+            ]
+          }
+        ]
+      },
+      "id": "auto_hammer",
+      "name_zh": "自动发现 hammer",
+      "observed_at": "bar_close",
+      "parameters": {
+        "max_upper_shadow_range": 0.1,
+        "min_lower_shadow_body": 1.5
+      },
+      "version": "g_20260809_01.0052",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "lte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "body",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "range",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "max_body_range"
+              }
+            ]
+          },
+          {
+            "context": {
+              "min_count": 3,
+              "name": "lower_close_count",
+              "window": 5
+            }
+          }
+        ]
+      },
+      "id": "auto_doji_after_decline",
+      "name_zh": "自动发现 doji_after_decline",
+      "observed_at": "bar_close",
+      "parameters": {
+        "max_body_range": 0.1
+      },
+      "version": "g_20260809_01.0053",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "gt": [
+          {
+            "metric": {
+              "name": "close",
+              "offset": 0
+            }
+          },
+          {
+            "metric": {
+              "name": "max_high",
+              "offset": -1,
+              "window": 60
+            }
+          }
+        ]
+      },
+      "id": "auto_breakout_high",
+      "name_zh": "自动发现 breakout_high",
+      "observed_at": "bar_close",
+      "parameters": {
+        "window": 60.0
+      },
+      "version": "g_20260809_01.0054",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "lt": [
+          {
+            "metric": {
+              "name": "roc",
+              "offset": 0,
+              "window": 5
+            }
+          },
+          {
+            "param": "threshold"
+          }
+        ]
+      },
+      "id": "auto_roc_negative",
+      "name_zh": "自动发现 roc_negative",
+      "observed_at": "bar_close",
+      "parameters": {
+        "threshold": -0.05,
+        "window": 5.0
+      },
+      "version": "g_20260809_01.0055",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "gt": [
+              {
+                "metric": {
+                  "name": "close",
+                  "offset": 0
+                }
+              },
+              {
+                "metric": {
+                  "name": "max_high",
+                  "offset": -1,
+                  "window": 20
+                }
+              }
+            ]
+          },
+          {
+            "gt": [
+              {
+                "metric": {
+                  "name": "volume_ratio",
+                  "offset": 0,
+                  "window": 20
+                }
+              },
+              {
+                "param": "multiple"
+              }
+            ]
+          },
+          {
+            "eq": [
+              {
+                "metric": {
+                  "name": "is_bullish",
+                  "offset": 0
+                }
+              },
+              true
+            ]
+          }
+        ]
+      },
+      "id": "auto_combo_breakout_volume",
+      "name_zh": "自动发现 combo_breakout_volume",
+      "observed_at": "bar_close",
+      "parameters": {
+        "breakout_window": 20.0,
+        "multiple": 1.5
+      },
+      "version": "g_20260809_01.0056",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "gte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "upper_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "body",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "min_upper_shadow_body"
+              }
+            ]
+          },
+          {
+            "lte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "lower_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "range",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "max_lower_shadow_range"
+              }
+            ]
+          }
+        ]
+      },
+      "id": "auto_shooting_star",
+      "name_zh": "自动发现 shooting_star",
+      "observed_at": "bar_close",
+      "parameters": {
+        "max_lower_shadow_range": 0.2,
+        "min_upper_shadow_body": 2.5
+      },
+      "version": "g_20260809_01.0057",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "lt": [
+          {
+            "metric": {
+              "name": "rsi",
+              "offset": 0,
+              "window": 21
+            }
+          },
+          {
+            "param": "threshold"
+          }
+        ]
+      },
+      "id": "auto_rsi_oversold",
+      "name_zh": "自动发现 rsi_oversold",
+      "observed_at": "bar_close",
+      "parameters": {
+        "threshold": 35.0,
+        "window": 21.0
+      },
+      "version": "g_20260809_01.0058",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "lt": [
+          {
+            "metric": {
+              "name": "close",
+              "offset": 0
+            }
+          },
+          {
+            "metric": {
+              "name": "min_low",
+              "offset": -1,
+              "window": 60
+            }
+          }
+        ]
+      },
+      "id": "auto_breakout_low",
+      "name_zh": "自动发现 breakout_low",
+      "observed_at": "bar_close",
+      "parameters": {
+        "window": 60.0
+      },
+      "version": "g_20260809_01.0059",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "lt": [
+          {
+            "metric": {
+              "name": "sma",
+              "offset": 0,
+              "window": 10
+            }
+          },
+          {
+            "metric": {
+              "name": "sma",
+              "offset": -5,
+              "window": 10
+            }
+          }
+        ]
+      },
+      "id": "auto_sma_falling",
+      "name_zh": "自动发现 sma_falling",
+      "observed_at": "bar_close",
+      "parameters": {
+        "window": 10.0
+      },
+      "version": "g_20260809_01.0060",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "gte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "upper_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "body",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "min_upper_shadow_body"
+              }
+            ]
+          },
+          {
+            "lte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "lower_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "range",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "max_lower_shadow_range"
+              }
+            ]
+          }
+        ]
+      },
+      "id": "auto_shooting_star",
+      "name_zh": "自动发现 shooting_star",
+      "observed_at": "bar_close",
+      "parameters": {
+        "max_lower_shadow_range": 0.1,
+        "min_upper_shadow_body": 2.0
+      },
+      "version": "g_20260809_01.0061",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "gt": [
+          {
+            "metric": {
+              "name": "close",
+              "offset": 0
+            }
+          },
+          {
+            "metric": {
+              "name": "sma",
+              "offset": 0,
+              "window": 20
+            }
+          }
+        ]
+      },
+      "id": "auto_price_above_sma",
+      "name_zh": "自动发现 price_above_sma",
+      "observed_at": "bar_close",
+      "parameters": {
+        "window": 20.0
+      },
+      "version": "g_20260809_01.0062",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "gte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "lower_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "body",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "min_lower_shadow_body"
+              }
+            ]
+          },
+          {
+            "lte": [
+              {
+                "safe_div": [
+                  {
+                    "metric": {
+                      "name": "upper_shadow",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "max": [
+                      {
+                        "metric": {
+                          "name": "range",
+                          "offset": 0
+                        }
+                      },
+                      0.01
+                    ]
+                  }
+                ]
+              },
+              {
+                "param": "max_upper_shadow_range"
+              }
+            ]
+          },
+          {
+            "context": {
+              "min_count": 3,
+              "name": "lower_close_count",
+              "window": 5
+            }
+          }
+        ]
+      },
+      "id": "auto_hammer_context",
+      "name_zh": "自动发现 hammer_context",
+      "observed_at": "bar_close",
+      "parameters": {
+        "max_upper_shadow_range": 0.1,
+        "min_lower_shadow_body": 2.5
+      },
+      "version": "g_20260809_01.0063",
+      "warmup_bars": 0
+    },
+    {
+      "executable_from": "next_bar_open",
+      "expression": {
+        "all": [
+          {
+            "gt": [
+              {
+                "metric": {
+                  "name": "volume_ratio",
+                  "offset": 0,
+                  "window": 20
+                }
+              },
+              {
+                "param": "multiple"
+              }
+            ]
+          },
+          {
+            "eq": [
+              {
+                "metric": {
+                  "name": "is_bullish",
+                  "offset": 0
+                }
+              },
+              true
+            ]
+          }
+        ]
+      },
+      "id": "auto_volume_surge_up",
+      "name_zh": "自动发现 volume_surge_up",
+      "observed_at": "bar_close",
+      "parameters": {
+        "multiple": 3.0
+      },
+      "version": "g_20260809_01.0064",
+      "warmup_bars": 0
+    }
+  ],
+  "created_at": "2026-08-09T04:02:18.660786+00:00",
+  "data_snapshot": {
+    "benchmark": {
+      "dataset": "etf_cache",
+      "snapshot_id": "sha256:4616a235ec2b071fc71e71734c76175fa7039becc7cc5f095bafe40c59be5522",
+      "symbol": "000001"
+    },
+    "primary": {
+      "dataset": "trend_cache",
+      "snapshot_id": "sha256:919eeacf4b305e1c4200d04e8a810d55194df910aa0c4075bbada41de8046030",
+      "symbols_available": [
+        "000001",
+        "000002",
+        "000004",
+        "000006",
+        "000007",
+        "000008",
+        "000009",
+        "000010",
+        "000011",
+        "000012",
+        "000014",
+        "000016",
+        "000017",
+        "000019",
+        "000020",
+        "000021",
+        "000025",
+        "000026",
+        "000027",
+        "000028",
+        "000029",
+        "000030",
+        "000031",
+        "000032",
+        "000034",
+        "000035",
+        "000036",
+        "000037",
+        "000039",
+        "000042",
+        "000045",
+        "000048",
+        "000049",
+        "000050",
+        "000055",
+        "000056",
+        "000058",
+        "000059",
+        "000060",
+        "000061",
+        "000062",
+        "000063",
+        "000065",
+        "000066",
+        "000068",
+        "000069",
+        "000070",
+        "000078",
+        "000088",
+        "000089",
+        "000090",
+        "000096",
+        "000099",
+        "000100",
+        "000151",
+        "000153",
+        "000155",
+        "000156",
+        "000157",
+        "000158",
+        "000159",
+        "000166",
+        "000301",
+        "000333",
+        "000338",
+        "000400",
+        "000401",
+        "000402",
+        "000403",
+        "000404",
+        "000407",
+        "000408",
+        "000409",
+        "000410",
+        "000411",
+        "000415",
+        "000417",
+        "000419",
+        "000420",
+        "000421",
+        "000422",
+        "000423",
+        "000425",
+        "000426",
+        "000428",
+        "000429",
+        "000430",
+        "000488",
+        "000498",
+        "000501",
+        "000503",
+        "000504",
+        "000505",
+        "000506",
+        "000507",
+        "000509",
+        "000510",
+        "000513",
+        "000514",
+        "000516",
+        "000517",
+        "000518",
+        "000519",
+        "000520",
+        "000521",
+        "000523",
+        "000524",
+        "000525",
+        "000526",
+        "000528",
+        "000529",
+        "000530",
+        "000531",
+        "000532",
+        "000533",
+        "000534",
+        "000536",
+        "000537",
+        "000538",
+        "000539",
+        "000541",
+        "000543",
+        "000544",
+        "000545",
+        "000546",
+        "000547",
+        "000548",
+        "000550",
+        "000551",
+        "000552",
+        "000553",
+        "000554",
+        "000555",
+        "000557",
+        "000558",
+        "000559",
+        "000560",
+        "000561",
+        "000563",
+        "000564",
+        "000565",
+        "000566",
+        "000567",
+        "000568",
+        "000570",
+        "000571",
+        "000572",
+        "000573",
+        "000576",
+        "000581",
+        "000582",
+        "000586",
+        "000589",
+        "000590",
+        "000591",
+        "000592",
+        "000593",
+        "000595",
+        "000596",
+        "000597",
+        "000598",
+        "000599",
+        "000600",
+        "000601",
+        "000603",
+        "000605",
+        "000607",
+        "000608",
+        "000609",
+        "000610",
+        "000612",
+        "000615",
+        "000617",
+        "000619",
+        "000620",
+        "000623",
+        "000625",
+        "000626",
+        "000628",
+        "000629",
+        "000630",
+        "000631",
+        "000632",
+        "000633",
+        "000635",
+        "000636",
+        "000637",
+        "000639",
+        "000650",
+        "000651",
+        "000652",
+        "000655",
+        "000656",
+        "000657",
+        "000659",
+        "000661",
+        "000663",
+        "000665",
+        "000668",
+        "000669",
+        "000670",
+        "000672",
+        "000676",
+        "000677",
+        "000678",
+        "000679",
+        "000680",
+        "000681",
+        "000682",
+        "000683",
+        "000685",
+        "000686",
+        "000688",
+        "000690",
+        "000691",
+        "000692",
+        "000695",
+        "000697",
+        "000698",
+        "000700",
+        "000701",
+        "000702",
+        "000703",
+        "000705",
+        "000707",
+        "000708",
+        "000709",
+        "000710",
+        "000711",
+        "000712",
+        "000713",
+        "000715",
+        "000716",
+        "000717",
+        "000718",
+        "000719",
+        "000720",
+        "000721",
+        "000722",
+        "000723",
+        "000725",
+        "000726",
+        "000727",
+        "000728",
+        "000729",
+        "000731",
+        "000733",
+        "000735",
+        "000736",
+        "000737",
+        "000738",
+        "000739",
+        "000750",
+        "000751",
+        "000752",
+        "000753",
+        "000755",
+        "000756",
+        "000757",
+        "000758",
+        "000759",
+        "000761",
+        "000762",
+        "000766",
+        "000767",
+        "000768",
+        "000776",
+        "000777",
+        "000778",
+        "000779",
+        "000782",
+        "000783",
+        "000785",
+        "000786",
+        "000788",
+        "000789",
+        "000790",
+        "000791",
+        "000792",
+        "000793",
+        "000795",
+        "000796",
+        "000797",
+        "000798",
+        "000799",
+        "000800",
+        "000801",
+        "000802",
+        "000803",
+        "000807",
+        "000809",
+        "000810",
+        "000811",
+        "000812",
+        "000813",
+        "000815",
+        "000816",
+        "000818",
+        "000819",
+        "000820"
+      ],
+      "symbols_missing": []
+    },
+    "schema_version": "rule-search-data-snapshot/v1",
+    "universe_manifest": {
+      "path": "data\\universes\\a_share_history.jsonl",
+      "sha256": "sha256:e6d68ac34a9b47824f2a44f133118612518e9ad4548674e62275f9b60a68dcbf"
+    }
+  },
+  "execution": {
+    "base_cost_bps_per_side": {
+      "commission": 3.0,
+      "slippage": 5.0
+    },
+    "entry": "next_session_open",
+    "exit": "fixed_horizon_close"
+  },
+  "multiple_testing": {
+    "alpha": 0.05,
+    "method": "fdr_bh",
+    "scope": "all_candidates_all_groups"
+  },
+  "outcomes": {
+    "horizons": [
+      1,
+      3,
+      5,
+      10,
+      20
+    ],
+    "minimum_oos_observations": 300,
+    "primary_metric": "mean_net_excess_return"
+  },
+  "periods": {
+    "final_lockbox_start": "2026-09-01",
+    "research_end": "2026-07-10",
+    "research_start": "2015-01-05",
+    "validation_start": "2025-01-01"
+  },
+  "publication": "blocked_until_human_approval_and_final_lockbox",
+  "schema_version": "rule-search-protocol/v1",
+  "screen_criteria": {
+    "cost_stress_multipliers": [
+      2.0,
+      3.0
+    ],
+    "dedup_jaccard": 0.85,
+    "require_both_regimes": false,
+    "require_multiple_horizons": 2
+  },
+  "search_id": "search_30fc855615c0e7d8bd526d0e",
+  "space": {
+    "candidates": 64,
+    "families": {
+      "auto_breakout_high": 2,
+      "auto_breakout_low": 2,
+      "auto_combo_breakout_volume": 3,
+      "auto_combo_hammer_trend": 2,
+      "auto_combo_rsi_trend": 1,
+      "auto_doji_after_decline": 3,
+      "auto_hammer": 2,
+      "auto_hammer_context": 3,
+      "auto_ma_cross_down": 4,
+      "auto_ma_cross_up": 2,
+      "auto_price_above_sma": 1,
+      "auto_price_below_sma": 1,
+      "auto_roc_negative": 4,
+      "auto_roc_positive": 2,
+      "auto_rsi_overbought": 5,
+      "auto_rsi_oversold": 7,
+      "auto_shooting_star": 6,
+      "auto_shooting_star_context": 3,
+      "auto_sma_falling": 2,
+      "auto_sma_rising": 3,
+      "auto_two_candle_reversal_context_bullish": 1,
+      "auto_volume_surge_down": 2,
+      "auto_volume_surge_up": 3
+    },
+    "supported_metrics": [
+      "body",
+      "boll_lower",
+      "boll_upper",
+      "close",
+      "ema",
+      "high",
+      "is_bearish",
+      "is_bullish",
+      "low",
+      "lower_shadow",
+      "macd_dea",
+      "macd_dif",
+      "macd_hist",
+      "max_high",
+      "min_low",
+      "open",
+      "range",
+      "roc",
+      "rsi",
+      "sma",
+      "upper_shadow",
+      "volume_ratio"
+    ]
+  },
+  "status": "preregistered",
+  "symbols": [
+    "000001",
+    "000002",
+    "000004",
+    "000006",
+    "000007",
+    "000008",
+    "000009",
+    "000010",
+    "000011",
+    "000012",
+    "000014",
+    "000016",
+    "000017",
+    "000019",
+    "000020",
+    "000021",
+    "000025",
+    "000026",
+    "000027",
+    "000028",
+    "000029",
+    "000030",
+    "000031",
+    "000032",
+    "000034",
+    "000035",
+    "000036",
+    "000037",
+    "000039",
+    "000042",
+    "000045",
+    "000048",
+    "000049",
+    "000050",
+    "000055",
+    "000056",
+    "000058",
+    "000059",
+    "000060",
+    "000061",
+    "000062",
+    "000063",
+    "000065",
+    "000066",
+    "000068",
+    "000069",
+    "000070",
+    "000078",
+    "000088",
+    "000089",
+    "000090",
+    "000096",
+    "000099",
+    "000100",
+    "000151",
+    "000153",
+    "000155",
+    "000156",
+    "000157",
+    "000158",
+    "000159",
+    "000166",
+    "000301",
+    "000333",
+    "000338",
+    "000400",
+    "000401",
+    "000402",
+    "000403",
+    "000404",
+    "000407",
+    "000408",
+    "000409",
+    "000410",
+    "000411",
+    "000415",
+    "000417",
+    "000419",
+    "000420",
+    "000421",
+    "000422",
+    "000423",
+    "000425",
+    "000426",
+    "000428",
+    "000429",
+    "000430",
+    "000488",
+    "000498",
+    "000501",
+    "000503",
+    "000504",
+    "000505",
+    "000506",
+    "000507",
+    "000509",
+    "000510",
+    "000513",
+    "000514",
+    "000516",
+    "000517",
+    "000518",
+    "000519",
+    "000520",
+    "000521",
+    "000523",
+    "000524",
+    "000525",
+    "000526",
+    "000528",
+    "000529",
+    "000530",
+    "000531",
+    "000532",
+    "000533",
+    "000534",
+    "000536",
+    "000537",
+    "000538",
+    "000539",
+    "000541",
+    "000543",
+    "000544",
+    "000545",
+    "000546",
+    "000547",
+    "000548",
+    "000550",
+    "000551",
+    "000552",
+    "000553",
+    "000554",
+    "000555",
+    "000557",
+    "000558",
+    "000559",
+    "000560",
+    "000561",
+    "000563",
+    "000564",
+    "000565",
+    "000566",
+    "000567",
+    "000568",
+    "000570",
+    "000571",
+    "000572",
+    "000573",
+    "000576",
+    "000581",
+    "000582",
+    "000586",
+    "000589",
+    "000590",
+    "000591",
+    "000592",
+    "000593",
+    "000595",
+    "000596",
+    "000597",
+    "000598",
+    "000599",
+    "000600",
+    "000601",
+    "000603",
+    "000605",
+    "000607",
+    "000608",
+    "000609",
+    "000610",
+    "000612",
+    "000615",
+    "000617",
+    "000619",
+    "000620",
+    "000623",
+    "000625",
+    "000626",
+    "000628",
+    "000629",
+    "000630",
+    "000631",
+    "000632",
+    "000633",
+    "000635",
+    "000636",
+    "000637",
+    "000639",
+    "000650",
+    "000651",
+    "000652",
+    "000655",
+    "000656",
+    "000657",
+    "000659",
+    "000661",
+    "000663",
+    "000665",
+    "000668",
+    "000669",
+    "000670",
+    "000672",
+    "000676",
+    "000677",
+    "000678",
+    "000679",
+    "000680",
+    "000681",
+    "000682",
+    "000683",
+    "000685",
+    "000686",
+    "000688",
+    "000690",
+    "000691",
+    "000692",
+    "000695",
+    "000697",
+    "000698",
+    "000700",
+    "000701",
+    "000702",
+    "000703",
+    "000705",
+    "000707",
+    "000708",
+    "000709",
+    "000710",
+    "000711",
+    "000712",
+    "000713",
+    "000715",
+    "000716",
+    "000717",
+    "000718",
+    "000719",
+    "000720",
+    "000721",
+    "000722",
+    "000723",
+    "000725",
+    "000726",
+    "000727",
+    "000728",
+    "000729",
+    "000731",
+    "000733",
+    "000735",
+    "000736",
+    "000737",
+    "000738",
+    "000739",
+    "000750",
+    "000751",
+    "000752",
+    "000753",
+    "000755",
+    "000756",
+    "000757",
+    "000758",
+    "000759",
+    "000761",
+    "000762",
+    "000766",
+    "000767",
+    "000768",
+    "000776",
+    "000777",
+    "000778",
+    "000779",
+    "000782",
+    "000783",
+    "000785",
+    "000786",
+    "000788",
+    "000789",
+    "000790",
+    "000791",
+    "000792",
+    "000793",
+    "000795",
+    "000796",
+    "000797",
+    "000798",
+    "000799",
+    "000800",
+    "000801",
+    "000802",
+    "000803",
+    "000807",
+    "000809",
+    "000810",
+    "000811",
+    "000812",
+    "000813",
+    "000815",
+    "000816",
+    "000818",
+    "000819",
+    "000820"
+  ],
+  "universe_manifest": "data\\universes\\a_share_history.jsonl"
+}

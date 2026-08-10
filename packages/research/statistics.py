@@ -6,9 +6,8 @@ produce trading signals, recommendations, or publication decisions.
 
 from __future__ import annotations
 
-from collections import defaultdict
 from math import isfinite, sqrt
-from statistics import NormalDist, mean, stdev
+from statistics import NormalDist
 from typing import Any, Iterable, Mapping
 
 
@@ -32,7 +31,9 @@ def summarize_outcomes(
     if not 0.0 < confidence_level < 1.0:
         raise ValueError("confidence_level must be between 0 and 1")
 
-    grouped: dict[tuple[int, str], list[float]] = defaultdict(list)
+    # Welford accumulators keep memory proportional to the number of reporting
+    # groups rather than the number of full-market outcomes.
+    grouped: dict[tuple[int, str], dict[str, float]] = {}
     received = excluded = 0
     for outcome in outcomes:
         received += 1
@@ -48,11 +49,15 @@ def summarize_outcomes(
             excluded += 1
             continue
         regime = str(outcome.get("market_regime") or "unknown")
-        grouped[(horizon, regime)].append(value)
+        accumulator = grouped.setdefault((horizon, regime), {"count": 0.0, "mean": 0.0, "m2": 0.0})
+        accumulator["count"] += 1
+        delta = value - accumulator["mean"]
+        accumulator["mean"] += delta / accumulator["count"]
+        accumulator["m2"] += delta * (value - accumulator["mean"])
 
     groups = [
-        _group_summary(horizon, regime, values, confidence_level)
-        for (horizon, regime), values in sorted(grouped.items())
+        _group_summary(horizon, regime, accumulator, confidence_level)
+        for (horizon, regime), accumulator in sorted(grouped.items())
     ]
     _apply_multiple_testing(groups)
     return {
@@ -72,10 +77,10 @@ def summarize_outcomes(
 
 
 def _group_summary(
-    horizon_bars: int, market_regime: str, values: list[float], confidence_level: float
+    horizon_bars: int, market_regime: str, accumulator: Mapping[str, float], confidence_level: float
 ) -> dict[str, Any]:
-    count = len(values)
-    average = mean(values)
+    count = int(accumulator["count"])
+    average = float(accumulator["mean"])
     if count < 2:
         return {
             "horizon_bars": horizon_bars,
@@ -89,7 +94,7 @@ def _group_summary(
             "evidence_status": "insufficient_sample",
         }
 
-    sample_stddev = stdev(values)
+    sample_stddev = sqrt(float(accumulator["m2"]) / (count - 1))
     standard_error = sample_stddev / sqrt(count)
     # A zero-variance group is exactly estimated under this simple model.
     t_statistic = average / standard_error if standard_error else None

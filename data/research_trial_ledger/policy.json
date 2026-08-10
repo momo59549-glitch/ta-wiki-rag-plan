@@ -1,0 +1,9 @@
+{
+  "append_only_entries": "entries/<generation_id>.json",
+  "final_lockbox_consumption": "forbidden",
+  "global_trial_budget": 256,
+  "legacy_inventory_hash": "sha256:7f926a53de2353e3033dd525221636582ebbfeb9d13b102a569a84f9bb1115c6",
+  "legacy_trial_count": 206,
+  "policy_hash": "sha256:402bf03c8bf26b916df95bb2db27e8588563bf9c034e422c978e3b0ee717adf2",
+  "schema_version": "global-research-trial-ledger-policy/v1"
+}

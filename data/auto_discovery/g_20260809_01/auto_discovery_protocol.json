@@ -1,0 +1,4561 @@
+{
+  "auto_discovery_protocol_id": "auto_discovery_f561454d671551a0accb712d",
+  "campaign_promotion": "eligible_only_requires_separate_frozen_campaign_and_human_approval",
+  "candidate_space": {
+    "candidate_budget": 64,
+    "candidates": [
+      {
+        "ast_nodes": 19,
+        "conditions": 3,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "gte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "lower_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "body",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "min_lower_shadow_body"
+                  }
+                ]
+              },
+              {
+                "lte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "upper_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "range",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "max_upper_shadow_range"
+                  }
+                ]
+              },
+              {
+                "context": {
+                  "min_count": 3,
+                  "name": "lower_close_count",
+                  "window": 5
+                }
+              }
+            ]
+          },
+          "id": "auto_hammer_context",
+          "name_zh": "自动发现 hammer_context",
+          "observed_at": "bar_close",
+          "parameters": {
+            "max_upper_shadow_range": 0.2,
+            "min_lower_shadow_body": 2.0
+          },
+          "version": "g_20260809_01.0001",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:1a0395291f3354224c6b2256f0554476d3bf3dad545586fa602eedf4fdc44ee9",
+        "max_lookback": 5,
+        "metric_offsets": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "required_indicators": [
+          "lower_close_count:5"
+        ],
+        "rule_semantic_hash": "sha256:fc72ac5efb0c2d90a350cc5d4257ec32a3e41ef30550349ee47ea73fee5aee44"
+      },
+      {
+        "ast_nodes": 17,
+        "conditions": 2,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "gte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "upper_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "body",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "min_upper_shadow_body"
+                  }
+                ]
+              },
+              {
+                "lte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "lower_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "range",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "max_lower_shadow_range"
+                  }
+                ]
+              }
+            ]
+          },
+          "id": "auto_shooting_star",
+          "name_zh": "自动发现 shooting_star",
+          "observed_at": "bar_close",
+          "parameters": {
+            "max_lower_shadow_range": 0.1,
+            "min_upper_shadow_body": 2.5
+          },
+          "version": "g_20260809_01.0002",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:7cbd528c664f055dc826dc289db01de8b97e89a73f4abdee45d6bd2791fae464",
+        "max_lookback": 0,
+        "metric_offsets": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "required_indicators": [],
+        "rule_semantic_hash": "sha256:f5f156a20ab653edab8cb2c4a340a64188051b37227a7c598efdcd28f0912239"
+      },
+      {
+        "ast_nodes": 11,
+        "conditions": 2,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "lte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "body",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "range",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "max_body_range"
+                  }
+                ]
+              },
+              {
+                "context": {
+                  "min_count": 3,
+                  "name": "lower_close_count",
+                  "window": 5
+                }
+              }
+            ]
+          },
+          "id": "auto_doji_after_decline",
+          "name_zh": "自动发现 doji_after_decline",
+          "observed_at": "bar_close",
+          "parameters": {
+            "max_body_range": 0.05
+          },
+          "version": "g_20260809_01.0003",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:0902bec7091b382619898bf19e84b5e4b9bbcd321afad1c503aba0212b83bb9d",
+        "max_lookback": 5,
+        "metric_offsets": [
+          0,
+          0
+        ],
+        "required_indicators": [
+          "lower_close_count:5"
+        ],
+        "rule_semantic_hash": "sha256:c5aa439243c24133815e4eb84121bdd111c87ae0b781489d557217ad86c86d16"
+      },
+      {
+        "ast_nodes": 5,
+        "conditions": 1,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "gt": [
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": 0,
+                  "window": 60
+                }
+              },
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": -5,
+                  "window": 60
+                }
+              }
+            ]
+          },
+          "id": "auto_sma_rising",
+          "name_zh": "自动发现 sma_rising",
+          "observed_at": "bar_close",
+          "parameters": {
+            "window": 60.0
+          },
+          "version": "g_20260809_01.0004",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:1ced846f400ce8f34f0e13eb7ee7079bc9f23d39b957d5a8944712483b01c9a6",
+        "max_lookback": 64,
+        "metric_offsets": [
+          0,
+          -5
+        ],
+        "required_indicators": [
+          "sma:60"
+        ],
+        "rule_semantic_hash": "sha256:8825dc6694efb7bac5f15c45da0667ce329459e41c2ff284f0ca9ff5da1e4118"
+      },
+      {
+        "ast_nodes": 8,
+        "conditions": 2,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "gt": [
+                  {
+                    "metric": {
+                      "name": "volume_ratio",
+                      "offset": 0,
+                      "window": 20
+                    }
+                  },
+                  {
+                    "param": "multiple"
+                  }
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "metric": {
+                      "name": "is_bearish",
+                      "offset": 0
+                    }
+                  },
+                  true
+                ]
+              }
+            ]
+          },
+          "id": "auto_volume_surge_down",
+          "name_zh": "自动发现 volume_surge_down",
+          "observed_at": "bar_close",
+          "parameters": {
+            "multiple": 3.0
+          },
+          "version": "g_20260809_01.0005",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:a835f21707f1201d19bfab646f73f9b164247dc4bb00a231879e7d42c1efe5ad",
+        "max_lookback": 19,
+        "metric_offsets": [
+          0,
+          0
+        ],
+        "required_indicators": [
+          "volume_ratio:20"
+        ],
+        "rule_semantic_hash": "sha256:de8f8d8aa60bd7a4a879e5170582078c6d8f928915b19b0db78f2d559423405e"
+      },
+      {
+        "ast_nodes": 8,
+        "conditions": 2,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "gt": [
+                  {
+                    "metric": {
+                      "name": "volume_ratio",
+                      "offset": 0,
+                      "window": 20
+                    }
+                  },
+                  {
+                    "param": "multiple"
+                  }
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "metric": {
+                      "name": "is_bearish",
+                      "offset": 0
+                    }
+                  },
+                  true
+                ]
+              }
+            ]
+          },
+          "id": "auto_volume_surge_down",
+          "name_zh": "自动发现 volume_surge_down",
+          "observed_at": "bar_close",
+          "parameters": {
+            "multiple": 2.0
+          },
+          "version": "g_20260809_01.0006",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:f715345cbf0e30e74c557bfd557057d346eb24809b1c6f8a9b200ee960f8a408",
+        "max_lookback": 19,
+        "metric_offsets": [
+          0,
+          0
+        ],
+        "required_indicators": [
+          "volume_ratio:20"
+        ],
+        "rule_semantic_hash": "sha256:52a94909947ed54280370b5c56cc254301e0bba0d75bacda0079bcce1f436d1a"
+      },
+      {
+        "ast_nodes": 12,
+        "conditions": 3,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "lt": [
+                  {
+                    "metric": {
+                      "name": "rsi",
+                      "offset": 0,
+                      "window": 14
+                    }
+                  },
+                  {
+                    "param": "rsi_threshold"
+                  }
+                ]
+              },
+              {
+                "lt": [
+                  {
+                    "metric": {
+                      "name": "close",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": 0,
+                      "window": 20
+                    }
+                  }
+                ]
+              },
+              {
+                "context": {
+                  "min_count": 3,
+                  "name": "lower_close_count",
+                  "window": 5
+                }
+              }
+            ]
+          },
+          "id": "auto_combo_rsi_trend",
+          "name_zh": "自动发现 combo_rsi_trend",
+          "observed_at": "bar_close",
+          "parameters": {
+            "rsi_threshold": 30.0,
+            "rsi_window": 14.0,
+            "trend_window": 20.0
+          },
+          "version": "g_20260809_01.0007",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:ac48284dc603d378b306fc22c03edfeb6e60b9bdfb4077f35a226e1c8a71ea41",
+        "max_lookback": 19,
+        "metric_offsets": [
+          0,
+          0,
+          0
+        ],
+        "required_indicators": [
+          "lower_close_count:5",
+          "rsi:14",
+          "sma:20"
+        ],
+        "rule_semantic_hash": "sha256:4508d8a29f5e65795079a9258cf431b30876b73de0736f1d7a54773bce9af854"
+      },
+      {
+        "ast_nodes": 17,
+        "conditions": 2,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "gte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "lower_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "body",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "min_lower_shadow_body"
+                  }
+                ]
+              },
+              {
+                "lte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "upper_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "range",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "max_upper_shadow_range"
+                  }
+                ]
+              }
+            ]
+          },
+          "id": "auto_hammer",
+          "name_zh": "自动发现 hammer",
+          "observed_at": "bar_close",
+          "parameters": {
+            "max_upper_shadow_range": 0.1,
+            "min_lower_shadow_body": 2.5
+          },
+          "version": "g_20260809_01.0008",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:26ca367a02efd9ab429fcd1865156137b88e26c8858f5702e60f8024f0889ff9",
+        "max_lookback": 0,
+        "metric_offsets": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "required_indicators": [],
+        "rule_semantic_hash": "sha256:beb1167c61973cc2c706a8e1f315f4cabf314b69fe0506889a20b124df89f90a"
+      },
+      {
+        "ast_nodes": 4,
+        "conditions": 1,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "lt": [
+              {
+                "metric": {
+                  "name": "rsi",
+                  "offset": 0,
+                  "window": 7
+                }
+              },
+              {
+                "param": "threshold"
+              }
+            ]
+          },
+          "id": "auto_rsi_oversold",
+          "name_zh": "自动发现 rsi_oversold",
+          "observed_at": "bar_close",
+          "parameters": {
+            "threshold": 35.0,
+            "window": 7.0
+          },
+          "version": "g_20260809_01.0009",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:3ff917d6e72921b52a9613a604daf0c8e65dac139acfe4365fe924809bf4b2a7",
+        "max_lookback": 6,
+        "metric_offsets": [
+          0
+        ],
+        "required_indicators": [
+          "rsi:7"
+        ],
+        "rule_semantic_hash": "sha256:5c37be6440903095b8b517ee21f084a955b476f16cd1b57ca7819144cc626b04"
+      },
+      {
+        "ast_nodes": 19,
+        "conditions": 3,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "gte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "upper_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "body",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "min_upper_shadow_body"
+                  }
+                ]
+              },
+              {
+                "lte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "lower_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "range",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "max_lower_shadow_range"
+                  }
+                ]
+              },
+              {
+                "context": {
+                  "min_count": 3,
+                  "name": "higher_close_count",
+                  "window": 5
+                }
+              }
+            ]
+          },
+          "id": "auto_shooting_star_context",
+          "name_zh": "自动发现 shooting_star_context",
+          "observed_at": "bar_close",
+          "parameters": {
+            "max_lower_shadow_range": 0.2,
+            "min_upper_shadow_body": 1.5
+          },
+          "version": "g_20260809_01.0010",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:74f2f75aa56b0e10342bb5aed9f5802909c75b5aeeb15f564ca08dfc0b762cf9",
+        "max_lookback": 5,
+        "metric_offsets": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "required_indicators": [
+          "higher_close_count:5"
+        ],
+        "rule_semantic_hash": "sha256:77883beaf51427cfdfe61098216f7b0de6db5affbffbab27b9d1879ea281302f"
+      },
+      {
+        "ast_nodes": 4,
+        "conditions": 1,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "gt": [
+              {
+                "metric": {
+                  "name": "rsi",
+                  "offset": 0,
+                  "window": 7
+                }
+              },
+              {
+                "param": "threshold"
+              }
+            ]
+          },
+          "id": "auto_rsi_overbought",
+          "name_zh": "自动发现 rsi_overbought",
+          "observed_at": "bar_close",
+          "parameters": {
+            "threshold": 75.0,
+            "window": 7.0
+          },
+          "version": "g_20260809_01.0011",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:753de346d01de071d85750b1685871617e3cdf1d3dbacc9bdd2a5f1d5c0d686a",
+        "max_lookback": 6,
+        "metric_offsets": [
+          0
+        ],
+        "required_indicators": [
+          "rsi:7"
+        ],
+        "rule_semantic_hash": "sha256:600131de49f8910e3ebb2a4b18a6767b11296483df87bd373155ea824180e1ab"
+      },
+      {
+        "ast_nodes": 5,
+        "conditions": 1,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "lt": [
+              {
+                "metric": {
+                  "name": "close",
+                  "offset": 0
+                }
+              },
+              {
+                "metric": {
+                  "name": "min_low",
+                  "offset": -1,
+                  "window": 20
+                }
+              }
+            ]
+          },
+          "id": "auto_breakout_low",
+          "name_zh": "自动发现 breakout_low",
+          "observed_at": "bar_close",
+          "parameters": {
+            "window": 20.0
+          },
+          "version": "g_20260809_01.0012",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:3fb7f122a9450adeca87d0c87c2cf172a2798ca6f66ef56cd115e0fb9d3104f0",
+        "max_lookback": 20,
+        "metric_offsets": [
+          0,
+          -1
+        ],
+        "required_indicators": [
+          "min_low:20"
+        ],
+        "rule_semantic_hash": "sha256:954e32a4f9df85828679fe3db83fae1158379fb6bb8a4be7ca37bab883dbda3e"
+      },
+      {
+        "ast_nodes": 11,
+        "conditions": 2,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "lte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "body",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "range",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "max_body_range"
+                  }
+                ]
+              },
+              {
+                "context": {
+                  "min_count": 3,
+                  "name": "lower_close_count",
+                  "window": 5
+                }
+              }
+            ]
+          },
+          "id": "auto_doji_after_decline",
+          "name_zh": "自动发现 doji_after_decline",
+          "observed_at": "bar_close",
+          "parameters": {
+            "max_body_range": 0.15
+          },
+          "version": "g_20260809_01.0013",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:7cc88d1f645692d57e479eb8728ae624b55eed7f5915ac2fc6fe79adcd7d3bee",
+        "max_lookback": 5,
+        "metric_offsets": [
+          0,
+          0
+        ],
+        "required_indicators": [
+          "lower_close_count:5"
+        ],
+        "rule_semantic_hash": "sha256:56a1a87f879ff5c2df752f88d0cf369edab564f5254f1a56a948473867fc9d5e"
+      },
+      {
+        "ast_nodes": 4,
+        "conditions": 1,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "lt": [
+              {
+                "metric": {
+                  "name": "rsi",
+                  "offset": 0,
+                  "window": 14
+                }
+              },
+              {
+                "param": "threshold"
+              }
+            ]
+          },
+          "id": "auto_rsi_oversold",
+          "name_zh": "自动发现 rsi_oversold",
+          "observed_at": "bar_close",
+          "parameters": {
+            "threshold": 25.0,
+            "window": 14.0
+          },
+          "version": "g_20260809_01.0014",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:1f072b35b2bb31eaaeb3bec4867e40aced17335df7436892b201b9729bd72c18",
+        "max_lookback": 13,
+        "metric_offsets": [
+          0
+        ],
+        "required_indicators": [
+          "rsi:14"
+        ],
+        "rule_semantic_hash": "sha256:a5d8c2c5d777fff952ef4a07e1d7ac4f46363b8a8724b4faae50ac5aed085e91"
+      },
+      {
+        "ast_nodes": 4,
+        "conditions": 1,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "lt": [
+              {
+                "metric": {
+                  "name": "roc",
+                  "offset": 0,
+                  "window": 20
+                }
+              },
+              {
+                "param": "threshold"
+              }
+            ]
+          },
+          "id": "auto_roc_negative",
+          "name_zh": "自动发现 roc_negative",
+          "observed_at": "bar_close",
+          "parameters": {
+            "threshold": -0.03,
+            "window": 20.0
+          },
+          "version": "g_20260809_01.0015",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:eb6a326c0d09d8909b899a94fa78559ead2a5e3c1b92bce1daa2dc61eb0d7fa5",
+        "max_lookback": 19,
+        "metric_offsets": [
+          0
+        ],
+        "required_indicators": [
+          "roc:20"
+        ],
+        "rule_semantic_hash": "sha256:15f6191b0670cde964da480594bd2be699539269bfcac5c8b579c89bd8f26b07"
+      },
+      {
+        "ast_nodes": 19,
+        "conditions": 3,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "gte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "upper_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "body",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "min_upper_shadow_body"
+                  }
+                ]
+              },
+              {
+                "lte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "lower_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "range",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "max_lower_shadow_range"
+                  }
+                ]
+              },
+              {
+                "context": {
+                  "min_count": 3,
+                  "name": "higher_close_count",
+                  "window": 5
+                }
+              }
+            ]
+          },
+          "id": "auto_shooting_star_context",
+          "name_zh": "自动发现 shooting_star_context",
+          "observed_at": "bar_close",
+          "parameters": {
+            "max_lower_shadow_range": 0.1,
+            "min_upper_shadow_body": 1.5
+          },
+          "version": "g_20260809_01.0016",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:3a8bf276fb9a2ca267365048d01abf6c357c83f26d2124e5743d56b74ce7dd6d",
+        "max_lookback": 5,
+        "metric_offsets": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "required_indicators": [
+          "higher_close_count:5"
+        ],
+        "rule_semantic_hash": "sha256:fa41a11f935b4aced0a2a0b894ab96931722cf638923ac65d192ec6fb540fe41"
+      },
+      {
+        "ast_nodes": 8,
+        "conditions": 2,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "gt": [
+                  {
+                    "metric": {
+                      "name": "volume_ratio",
+                      "offset": 0,
+                      "window": 20
+                    }
+                  },
+                  {
+                    "param": "multiple"
+                  }
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "metric": {
+                      "name": "is_bullish",
+                      "offset": 0
+                    }
+                  },
+                  true
+                ]
+              }
+            ]
+          },
+          "id": "auto_volume_surge_up",
+          "name_zh": "自动发现 volume_surge_up",
+          "observed_at": "bar_close",
+          "parameters": {
+            "multiple": 2.0
+          },
+          "version": "g_20260809_01.0017",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:6c8fbe6164da3e87b27da2559b0e82852cdac0cb9ea5385b46fb70f034da5c17",
+        "max_lookback": 19,
+        "metric_offsets": [
+          0,
+          0
+        ],
+        "required_indicators": [
+          "volume_ratio:20"
+        ],
+        "rule_semantic_hash": "sha256:b632f362aabad54c9bdd8884d458acbeddc41dda9bd95b299bfcbb671691c614"
+      },
+      {
+        "ast_nodes": 5,
+        "conditions": 1,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "gt": [
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": 0,
+                  "window": 10
+                }
+              },
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": -5,
+                  "window": 10
+                }
+              }
+            ]
+          },
+          "id": "auto_sma_rising",
+          "name_zh": "自动发现 sma_rising",
+          "observed_at": "bar_close",
+          "parameters": {
+            "window": 10.0
+          },
+          "version": "g_20260809_01.0018",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:f587d18a80b34af5098055951296cece70c7a08110b12976699728de2b5426a9",
+        "max_lookback": 14,
+        "metric_offsets": [
+          0,
+          -5
+        ],
+        "required_indicators": [
+          "sma:10"
+        ],
+        "rule_semantic_hash": "sha256:17eb437d517ce005c5b76516050fe696c6af43f5d70c994056effba9901359e3"
+      },
+      {
+        "ast_nodes": 11,
+        "conditions": 2,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "lt": [
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": 0,
+                      "window": 20
+                    }
+                  },
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": 0,
+                      "window": 60
+                    }
+                  }
+                ]
+              },
+              {
+                "gte": [
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": -1,
+                      "window": 20
+                    }
+                  },
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": -1,
+                      "window": 60
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "id": "auto_ma_cross_down",
+          "name_zh": "自动发现 ma_cross_down",
+          "observed_at": "bar_close",
+          "parameters": {
+            "fast": 20.0,
+            "slow": 60.0
+          },
+          "version": "g_20260809_01.0019",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:0c0875d7d523ea40436dfea27f86c64d253d203c58fece2d5b81c04e6d68be4d",
+        "max_lookback": 60,
+        "metric_offsets": [
+          0,
+          0,
+          -1,
+          -1
+        ],
+        "required_indicators": [
+          "sma:20",
+          "sma:60"
+        ],
+        "rule_semantic_hash": "sha256:436c7bca2812eb4e45ce9494b6b62ce6042e057efa8fbff39a80ad7bbf216b30"
+      },
+      {
+        "ast_nodes": 4,
+        "conditions": 1,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "gt": [
+              {
+                "metric": {
+                  "name": "rsi",
+                  "offset": 0,
+                  "window": 14
+                }
+              },
+              {
+                "param": "threshold"
+              }
+            ]
+          },
+          "id": "auto_rsi_overbought",
+          "name_zh": "自动发现 rsi_overbought",
+          "observed_at": "bar_close",
+          "parameters": {
+            "threshold": 65.0,
+            "window": 14.0
+          },
+          "version": "g_20260809_01.0020",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:3e26e7833972794bfd689820979fad569f5949c808708b5d436870da24c94c7f",
+        "max_lookback": 13,
+        "metric_offsets": [
+          0
+        ],
+        "required_indicators": [
+          "rsi:14"
+        ],
+        "rule_semantic_hash": "sha256:d5163e829c432ddcfc6debab58fb65c3574832633c97a5c65fc934c6f251dfa2"
+      },
+      {
+        "ast_nodes": 11,
+        "conditions": 2,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "gt": [
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": 0,
+                      "window": 5
+                    }
+                  },
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": 0,
+                      "window": 20
+                    }
+                  }
+                ]
+              },
+              {
+                "lte": [
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": -1,
+                      "window": 5
+                    }
+                  },
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": -1,
+                      "window": 20
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "id": "auto_ma_cross_up",
+          "name_zh": "自动发现 ma_cross_up",
+          "observed_at": "bar_close",
+          "parameters": {
+            "fast": 5.0,
+            "slow": 20.0
+          },
+          "version": "g_20260809_01.0021",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:ab6dfe63dace6c41c764299ebec73469dcee90b46e5f96fbc8c1c22555d506d8",
+        "max_lookback": 20,
+        "metric_offsets": [
+          0,
+          0,
+          -1,
+          -1
+        ],
+        "required_indicators": [
+          "sma:20",
+          "sma:5"
+        ],
+        "rule_semantic_hash": "sha256:e142dd868c5f541279c0e7dd1c1f26ff883a98cd64f497d132155108930d6de8"
+      },
+      {
+        "ast_nodes": 5,
+        "conditions": 1,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "gt": [
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": 0,
+                  "window": 20
+                }
+              },
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": -5,
+                  "window": 20
+                }
+              }
+            ]
+          },
+          "id": "auto_sma_rising",
+          "name_zh": "自动发现 sma_rising",
+          "observed_at": "bar_close",
+          "parameters": {
+            "window": 20.0
+          },
+          "version": "g_20260809_01.0022",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:5b9ef0520d56025fe81d6a0148f14068951858a7f12a0e259dbb29aa07616bcd",
+        "max_lookback": 24,
+        "metric_offsets": [
+          0,
+          -5
+        ],
+        "required_indicators": [
+          "sma:20"
+        ],
+        "rule_semantic_hash": "sha256:2ec570c31884d2b30e28d4c80f3af20f87677b85bfb9bc2542b73621d2208254"
+      },
+      {
+        "ast_nodes": 4,
+        "conditions": 1,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "lt": [
+              {
+                "metric": {
+                  "name": "rsi",
+                  "offset": 0,
+                  "window": 7
+                }
+              },
+              {
+                "param": "threshold"
+              }
+            ]
+          },
+          "id": "auto_rsi_oversold",
+          "name_zh": "自动发现 rsi_oversold",
+          "observed_at": "bar_close",
+          "parameters": {
+            "threshold": 25.0,
+            "window": 7.0
+          },
+          "version": "g_20260809_01.0023",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:56086758d367f9e67b6ddfe66e62d0a1a73c4e68135df3c61510899e31a63201",
+        "max_lookback": 6,
+        "metric_offsets": [
+          0
+        ],
+        "required_indicators": [
+          "rsi:7"
+        ],
+        "rule_semantic_hash": "sha256:019d9e350829a346fd3c53100e8873c8e47e3de2ca3bdf8b6c61da907554d2b1"
+      },
+      {
+        "ast_nodes": 4,
+        "conditions": 1,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "gt": [
+              {
+                "metric": {
+                  "name": "roc",
+                  "offset": 0,
+                  "window": 10
+                }
+              },
+              {
+                "param": "threshold"
+              }
+            ]
+          },
+          "id": "auto_roc_positive",
+          "name_zh": "自动发现 roc_positive",
+          "observed_at": "bar_close",
+          "parameters": {
+            "threshold": 0.03,
+            "window": 10.0
+          },
+          "version": "g_20260809_01.0024",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:88865633e7b81b6a65c853bc5870fee5ed9df4a3c26150dcbecc83667acbcc3b",
+        "max_lookback": 9,
+        "metric_offsets": [
+          0
+        ],
+        "required_indicators": [
+          "roc:10"
+        ],
+        "rule_semantic_hash": "sha256:6aa87e59b77232d4cb79d07392c37ba2f13a6904fff56bfdb767b62546b86db2"
+      },
+      {
+        "ast_nodes": 4,
+        "conditions": 1,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "lt": [
+              {
+                "metric": {
+                  "name": "rsi",
+                  "offset": 0,
+                  "window": 21
+                }
+              },
+              {
+                "param": "threshold"
+              }
+            ]
+          },
+          "id": "auto_rsi_oversold",
+          "name_zh": "自动发现 rsi_oversold",
+          "observed_at": "bar_close",
+          "parameters": {
+            "threshold": 30.0,
+            "window": 21.0
+          },
+          "version": "g_20260809_01.0025",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:ef2b2e6542923d21116508af56990f4a884de5ff24fc3464b07bebaa4e6c257d",
+        "max_lookback": 20,
+        "metric_offsets": [
+          0
+        ],
+        "required_indicators": [
+          "rsi:21"
+        ],
+        "rule_semantic_hash": "sha256:538a1385f4c1bef1692d273d4b046f2594e663ab2a61d4ff0143e6c142a9bedd"
+      },
+      {
+        "ast_nodes": 4,
+        "conditions": 1,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "gt": [
+              {
+                "metric": {
+                  "name": "rsi",
+                  "offset": 0,
+                  "window": 14
+                }
+              },
+              {
+                "param": "threshold"
+              }
+            ]
+          },
+          "id": "auto_rsi_overbought",
+          "name_zh": "自动发现 rsi_overbought",
+          "observed_at": "bar_close",
+          "parameters": {
+            "threshold": 70.0,
+            "window": 14.0
+          },
+          "version": "g_20260809_01.0026",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:1282dd36a6bc7e24959cd350537f46e4821506e110a9b7b8652096f9877e054b",
+        "max_lookback": 13,
+        "metric_offsets": [
+          0
+        ],
+        "required_indicators": [
+          "rsi:14"
+        ],
+        "rule_semantic_hash": "sha256:e2ce0cac5b9c22d25c826733c2050342ac80221478f472a7069d72581ceae64b"
+      },
+      {
+        "ast_nodes": 4,
+        "conditions": 1,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "lt": [
+              {
+                "metric": {
+                  "name": "rsi",
+                  "offset": 0,
+                  "window": 14
+                }
+              },
+              {
+                "param": "threshold"
+              }
+            ]
+          },
+          "id": "auto_rsi_oversold",
+          "name_zh": "自动发现 rsi_oversold",
+          "observed_at": "bar_close",
+          "parameters": {
+            "threshold": 30.0,
+            "window": 14.0
+          },
+          "version": "g_20260809_01.0027",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:446ccb0698440574f7926c6e109e49b26b119ee0c7768cf3ba8b19537f9b7f00",
+        "max_lookback": 13,
+        "metric_offsets": [
+          0
+        ],
+        "required_indicators": [
+          "rsi:14"
+        ],
+        "rule_semantic_hash": "sha256:b9c2e4b16d594c46ce5915eb18387700a895ef25b46193551f8f9f230d15ce2a"
+      },
+      {
+        "ast_nodes": 11,
+        "conditions": 2,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "lt": [
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": 0,
+                      "window": 5
+                    }
+                  },
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": 0,
+                      "window": 20
+                    }
+                  }
+                ]
+              },
+              {
+                "gte": [
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": -1,
+                      "window": 5
+                    }
+                  },
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": -1,
+                      "window": 20
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "id": "auto_ma_cross_down",
+          "name_zh": "自动发现 ma_cross_down",
+          "observed_at": "bar_close",
+          "parameters": {
+            "fast": 5.0,
+            "slow": 20.0
+          },
+          "version": "g_20260809_01.0028",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:c1c3fb0f688cc4663496732c69341d2301884f99b1513c9617e31d479d88c44a",
+        "max_lookback": 20,
+        "metric_offsets": [
+          0,
+          0,
+          -1,
+          -1
+        ],
+        "required_indicators": [
+          "sma:20",
+          "sma:5"
+        ],
+        "rule_semantic_hash": "sha256:97081368da248d317270e03cf24ab4f797fc0b71489d59ead9a3d243e4ccbaa7"
+      },
+      {
+        "ast_nodes": 11,
+        "conditions": 2,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "gt": [
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": 0,
+                      "window": 10
+                    }
+                  },
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": 0,
+                      "window": 20
+                    }
+                  }
+                ]
+              },
+              {
+                "lte": [
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": -1,
+                      "window": 10
+                    }
+                  },
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": -1,
+                      "window": 20
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "id": "auto_ma_cross_up",
+          "name_zh": "自动发现 ma_cross_up",
+          "observed_at": "bar_close",
+          "parameters": {
+            "fast": 10.0,
+            "slow": 20.0
+          },
+          "version": "g_20260809_01.0029",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:6cda062aee328e63dd6e9617af0377021029e02088e4b7e90a2189eae17bc8c0",
+        "max_lookback": 20,
+        "metric_offsets": [
+          0,
+          0,
+          -1,
+          -1
+        ],
+        "required_indicators": [
+          "sma:10",
+          "sma:20"
+        ],
+        "rule_semantic_hash": "sha256:f092afdc790895bd838440433b3b90450b84fa39aab2d255d3c4f8df326fc3d6"
+      },
+      {
+        "ast_nodes": 13,
+        "conditions": 3,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "gt": [
+                  {
+                    "metric": {
+                      "name": "close",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "metric": {
+                      "name": "max_high",
+                      "offset": -1,
+                      "window": 20
+                    }
+                  }
+                ]
+              },
+              {
+                "gt": [
+                  {
+                    "metric": {
+                      "name": "volume_ratio",
+                      "offset": 0,
+                      "window": 20
+                    }
+                  },
+                  {
+                    "param": "multiple"
+                  }
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "metric": {
+                      "name": "is_bullish",
+                      "offset": 0
+                    }
+                  },
+                  true
+                ]
+              }
+            ]
+          },
+          "id": "auto_combo_breakout_volume",
+          "name_zh": "自动发现 combo_breakout_volume",
+          "observed_at": "bar_close",
+          "parameters": {
+            "breakout_window": 20.0,
+            "multiple": 2.0
+          },
+          "version": "g_20260809_01.0030",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:51343d662709e598d85dc4553e737304e4ccba8ae3bd9da1d5d2706fc02ba9ab",
+        "max_lookback": 20,
+        "metric_offsets": [
+          0,
+          -1,
+          0,
+          0
+        ],
+        "required_indicators": [
+          "max_high:20",
+          "volume_ratio:20"
+        ],
+        "rule_semantic_hash": "sha256:fc15c713a88a1b5d02f402e96f28a57197d8018a1137734e74c8b1f965fa2809"
+      },
+      {
+        "ast_nodes": 5,
+        "conditions": 1,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "gt": [
+              {
+                "metric": {
+                  "name": "close",
+                  "offset": 0
+                }
+              },
+              {
+                "metric": {
+                  "name": "max_high",
+                  "offset": -1,
+                  "window": 20
+                }
+              }
+            ]
+          },
+          "id": "auto_breakout_high",
+          "name_zh": "自动发现 breakout_high",
+          "observed_at": "bar_close",
+          "parameters": {
+            "window": 20.0
+          },
+          "version": "g_20260809_01.0031",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:a74a6422cd86092115f7d33f83b28d07c19fbee8a9293a50853703a823e54c84",
+        "max_lookback": 20,
+        "metric_offsets": [
+          0,
+          -1
+        ],
+        "required_indicators": [
+          "max_high:20"
+        ],
+        "rule_semantic_hash": "sha256:977d1d36c87e68f70a1750fcba12e59c2842cf6e819c6edc770d217569e69eeb"
+      },
+      {
+        "ast_nodes": 19,
+        "conditions": 3,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "gte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "lower_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "body",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "min_lower_shadow_body"
+                  }
+                ]
+              },
+              {
+                "lte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "upper_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "range",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "max_upper_shadow_range"
+                  }
+                ]
+              },
+              {
+                "context": {
+                  "min_count": 3,
+                  "name": "lower_close_count",
+                  "window": 5
+                }
+              }
+            ]
+          },
+          "id": "auto_hammer_context",
+          "name_zh": "自动发现 hammer_context",
+          "observed_at": "bar_close",
+          "parameters": {
+            "max_upper_shadow_range": 0.2,
+            "min_lower_shadow_body": 2.5
+          },
+          "version": "g_20260809_01.0032",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:afbb8286bc6b78e18586ad42445a74ab2bc7bd5f53ec5a8f6fd5a81fa8a426e8",
+        "max_lookback": 5,
+        "metric_offsets": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "required_indicators": [
+          "lower_close_count:5"
+        ],
+        "rule_semantic_hash": "sha256:c6df0c20204c85ca4c082e77bd99558bc6cb459708af4ca7c63940ea5aa8e204"
+      },
+      {
+        "ast_nodes": 22,
+        "conditions": 3,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "gte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "lower_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "body",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "min_lower_shadow_body"
+                  }
+                ]
+              },
+              {
+                "lte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "upper_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "range",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "max_upper_shadow_range"
+                  }
+                ]
+              },
+              {
+                "lt": [
+                  {
+                    "metric": {
+                      "name": "close",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": 0,
+                      "window": 20
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "id": "auto_combo_hammer_trend",
+          "name_zh": "自动发现 combo_hammer_trend",
+          "observed_at": "bar_close",
+          "parameters": {
+            "ma_window": 20.0,
+            "max_upper_shadow_range": 0.2,
+            "min_lower_shadow_body": 1.5
+          },
+          "version": "g_20260809_01.0033",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:dc86f7a29231ec8e63ac3b97a6f0d042c2a368a50b1a97a5e54c281dde6566b8",
+        "max_lookback": 19,
+        "metric_offsets": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "required_indicators": [
+          "sma:20"
+        ],
+        "rule_semantic_hash": "sha256:61586958b0b6100145fe732022aecc10fdb8dc1a5f2c875135f962caf645c59f"
+      },
+      {
+        "ast_nodes": 5,
+        "conditions": 1,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "lt": [
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": 0,
+                  "window": 60
+                }
+              },
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": -5,
+                  "window": 60
+                }
+              }
+            ]
+          },
+          "id": "auto_sma_falling",
+          "name_zh": "自动发现 sma_falling",
+          "observed_at": "bar_close",
+          "parameters": {
+            "window": 60.0
+          },
+          "version": "g_20260809_01.0034",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:75ae5a41aee742cb2e3d6a851603adfd7f346e3facd7044098f298da9ae5830c",
+        "max_lookback": 64,
+        "metric_offsets": [
+          0,
+          -5
+        ],
+        "required_indicators": [
+          "sma:60"
+        ],
+        "rule_semantic_hash": "sha256:cfb59cf7bef44ae4e373ec5850a1fde8430e77601d9d7e61e0323d942dd5874e"
+      },
+      {
+        "ast_nodes": 17,
+        "conditions": 2,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "gte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "upper_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "body",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "min_upper_shadow_body"
+                  }
+                ]
+              },
+              {
+                "lte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "lower_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "range",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "max_lower_shadow_range"
+                  }
+                ]
+              }
+            ]
+          },
+          "id": "auto_shooting_star",
+          "name_zh": "自动发现 shooting_star",
+          "observed_at": "bar_close",
+          "parameters": {
+            "max_lower_shadow_range": 0.1,
+            "min_upper_shadow_body": 1.5
+          },
+          "version": "g_20260809_01.0035",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:4f3ab2e200ec4691f3fbbcfd4b4b23df381991a47e6efe4a13ab838a721dcd2d",
+        "max_lookback": 0,
+        "metric_offsets": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "required_indicators": [],
+        "rule_semantic_hash": "sha256:0b36291a064a8c0ff0e1b34475385178de64fc4fd2ac751dd49858df088f9ea7"
+      },
+      {
+        "ast_nodes": 4,
+        "conditions": 1,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "gt": [
+              {
+                "metric": {
+                  "name": "rsi",
+                  "offset": 0,
+                  "window": 21
+                }
+              },
+              {
+                "param": "threshold"
+              }
+            ]
+          },
+          "id": "auto_rsi_overbought",
+          "name_zh": "自动发现 rsi_overbought",
+          "observed_at": "bar_close",
+          "parameters": {
+            "threshold": 70.0,
+            "window": 21.0
+          },
+          "version": "g_20260809_01.0036",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:c0d6d6c01b01ac4d57bbd43c0489ed8cc27d56fae093a32bb089f9d222825681",
+        "max_lookback": 20,
+        "metric_offsets": [
+          0
+        ],
+        "required_indicators": [
+          "rsi:21"
+        ],
+        "rule_semantic_hash": "sha256:0ce2839a9b3c60416faa9b40656569313e7fff678b35924da4b63dab5930fd1c"
+      },
+      {
+        "ast_nodes": 11,
+        "conditions": 2,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "lt": [
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": 0,
+                      "window": 5
+                    }
+                  },
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": 0,
+                      "window": 60
+                    }
+                  }
+                ]
+              },
+              {
+                "gte": [
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": -1,
+                      "window": 5
+                    }
+                  },
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": -1,
+                      "window": 60
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "id": "auto_ma_cross_down",
+          "name_zh": "自动发现 ma_cross_down",
+          "observed_at": "bar_close",
+          "parameters": {
+            "fast": 5.0,
+            "slow": 60.0
+          },
+          "version": "g_20260809_01.0037",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:15c4d2cbd8bfead8a80e6ff19a50e5aee3d912aac3a7f674460a7cb5f3b8e596",
+        "max_lookback": 60,
+        "metric_offsets": [
+          0,
+          0,
+          -1,
+          -1
+        ],
+        "required_indicators": [
+          "sma:5",
+          "sma:60"
+        ],
+        "rule_semantic_hash": "sha256:e45e70063929f2b1d8404a6ef871d363f0124924645a9ee7f1302bf31430b9f1"
+      },
+      {
+        "ast_nodes": 4,
+        "conditions": 1,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "lt": [
+              {
+                "metric": {
+                  "name": "roc",
+                  "offset": 0,
+                  "window": 10
+                }
+              },
+              {
+                "param": "threshold"
+              }
+            ]
+          },
+          "id": "auto_roc_negative",
+          "name_zh": "自动发现 roc_negative",
+          "observed_at": "bar_close",
+          "parameters": {
+            "threshold": -0.05,
+            "window": 10.0
+          },
+          "version": "g_20260809_01.0038",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:8deef0afd5f092d199ef52f18bc11d10a09463aa36f1ebe61165de5d88be75e2",
+        "max_lookback": 9,
+        "metric_offsets": [
+          0
+        ],
+        "required_indicators": [
+          "roc:10"
+        ],
+        "rule_semantic_hash": "sha256:42aeee45a1063fb02d527f6afd609f57b78e1eacc7b390782fe78fdc567f3258"
+      },
+      {
+        "ast_nodes": 8,
+        "conditions": 2,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "gt": [
+                  {
+                    "metric": {
+                      "name": "volume_ratio",
+                      "offset": 0,
+                      "window": 20
+                    }
+                  },
+                  {
+                    "param": "multiple"
+                  }
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "metric": {
+                      "name": "is_bullish",
+                      "offset": 0
+                    }
+                  },
+                  true
+                ]
+              }
+            ]
+          },
+          "id": "auto_volume_surge_up",
+          "name_zh": "自动发现 volume_surge_up",
+          "observed_at": "bar_close",
+          "parameters": {
+            "multiple": 1.5
+          },
+          "version": "g_20260809_01.0039",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:b19504230c0897c6a311a6ccae0e09fb9ce8bf3c0758271772551024eb8d69ce",
+        "max_lookback": 19,
+        "metric_offsets": [
+          0,
+          0
+        ],
+        "required_indicators": [
+          "volume_ratio:20"
+        ],
+        "rule_semantic_hash": "sha256:7871e0c5ded6952796a5536ffd0bfa592d9c95646c92f42fa60a460e98bd2b3b"
+      },
+      {
+        "ast_nodes": 4,
+        "conditions": 1,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "lt": [
+              {
+                "metric": {
+                  "name": "rsi",
+                  "offset": 0,
+                  "window": 21
+                }
+              },
+              {
+                "param": "threshold"
+              }
+            ]
+          },
+          "id": "auto_rsi_oversold",
+          "name_zh": "自动发现 rsi_oversold",
+          "observed_at": "bar_close",
+          "parameters": {
+            "threshold": 25.0,
+            "window": 21.0
+          },
+          "version": "g_20260809_01.0040",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:6dda3e767580023c80e872b6bd56818a814c96e2efc6dd8a4b842bf09ea4f3ae",
+        "max_lookback": 20,
+        "metric_offsets": [
+          0
+        ],
+        "required_indicators": [
+          "rsi:21"
+        ],
+        "rule_semantic_hash": "sha256:35e6ae0e617ab273e150b6fdeed522d685e3996a11db26664cbb6c5add658443"
+      },
+      {
+        "ast_nodes": 5,
+        "conditions": 1,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "lt": [
+              {
+                "metric": {
+                  "name": "close",
+                  "offset": 0
+                }
+              },
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": 0,
+                  "window": 60
+                }
+              }
+            ]
+          },
+          "id": "auto_price_below_sma",
+          "name_zh": "自动发现 price_below_sma",
+          "observed_at": "bar_close",
+          "parameters": {
+            "window": 60.0
+          },
+          "version": "g_20260809_01.0041",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:08bbca63df30ff94c245aa5686456ead348f2ddb11a9d09d2bf7c23e0b615b7e",
+        "max_lookback": 59,
+        "metric_offsets": [
+          0,
+          0
+        ],
+        "required_indicators": [
+          "sma:60"
+        ],
+        "rule_semantic_hash": "sha256:133f835dd4a58356a900b9a31982f0b7a30ddf4e0130d49cfd1fde397c55d4b4"
+      },
+      {
+        "ast_nodes": 13,
+        "conditions": 3,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "gt": [
+                  {
+                    "metric": {
+                      "name": "close",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "metric": {
+                      "name": "max_high",
+                      "offset": -1,
+                      "window": 60
+                    }
+                  }
+                ]
+              },
+              {
+                "gt": [
+                  {
+                    "metric": {
+                      "name": "volume_ratio",
+                      "offset": 0,
+                      "window": 20
+                    }
+                  },
+                  {
+                    "param": "multiple"
+                  }
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "metric": {
+                      "name": "is_bullish",
+                      "offset": 0
+                    }
+                  },
+                  true
+                ]
+              }
+            ]
+          },
+          "id": "auto_combo_breakout_volume",
+          "name_zh": "自动发现 combo_breakout_volume",
+          "observed_at": "bar_close",
+          "parameters": {
+            "breakout_window": 60.0,
+            "multiple": 2.0
+          },
+          "version": "g_20260809_01.0042",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:8821425033aff405efec25eb6a52c431a9f3d8f7d5ab94598a9ffaeb6f91552e",
+        "max_lookback": 60,
+        "metric_offsets": [
+          0,
+          -1,
+          0,
+          0
+        ],
+        "required_indicators": [
+          "max_high:60",
+          "volume_ratio:20"
+        ],
+        "rule_semantic_hash": "sha256:60fc90ff4d92f98114126c7bacaade91c8089e1914dd425db451a8464fd5f43d"
+      },
+      {
+        "ast_nodes": 17,
+        "conditions": 2,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "gte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "upper_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "body",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "min_upper_shadow_body"
+                  }
+                ]
+              },
+              {
+                "lte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "lower_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "range",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "max_lower_shadow_range"
+                  }
+                ]
+              }
+            ]
+          },
+          "id": "auto_shooting_star",
+          "name_zh": "自动发现 shooting_star",
+          "observed_at": "bar_close",
+          "parameters": {
+            "max_lower_shadow_range": 0.2,
+            "min_upper_shadow_body": 2.0
+          },
+          "version": "g_20260809_01.0043",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:cff3752efcc5d9f90a1eb10ea560659748f2d2b4bca0f290e3a22ca08d1d6178",
+        "max_lookback": 0,
+        "metric_offsets": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "required_indicators": [],
+        "rule_semantic_hash": "sha256:4710f2cb8c7143818640e638e4d03a34dccc1f666da963df70aa61a2890988c4"
+      },
+      {
+        "ast_nodes": 9,
+        "conditions": 3,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "eq": [
+                  {
+                    "metric": {
+                      "name": "is_bullish",
+                      "offset": 0
+                    }
+                  },
+                  true
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "metric": {
+                      "name": "is_bearish",
+                      "offset": -1
+                    }
+                  },
+                  true
+                ]
+              },
+              {
+                "context": {
+                  "min_count": 3,
+                  "name": "lower_close_count",
+                  "window": 5
+                }
+              }
+            ]
+          },
+          "id": "auto_two_candle_reversal_context_bullish",
+          "name_zh": "自动发现 two_candle_reversal_context_bullish",
+          "observed_at": "bar_close",
+          "parameters": {},
+          "version": "g_20260809_01.0044",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:054059ad0db6cc1f4f720da6dfb409ea4e773193657f505122aec693bd0f3387",
+        "max_lookback": 5,
+        "metric_offsets": [
+          0,
+          -1
+        ],
+        "required_indicators": [
+          "lower_close_count:5"
+        ],
+        "rule_semantic_hash": "sha256:5e2ea6528302a17b8e4f93604ee458b92ef58586729cd40c20bbe4f5b9e5cf0b"
+      },
+      {
+        "ast_nodes": 4,
+        "conditions": 1,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "gt": [
+              {
+                "metric": {
+                  "name": "rsi",
+                  "offset": 0,
+                  "window": 14
+                }
+              },
+              {
+                "param": "threshold"
+              }
+            ]
+          },
+          "id": "auto_rsi_overbought",
+          "name_zh": "自动发现 rsi_overbought",
+          "observed_at": "bar_close",
+          "parameters": {
+            "threshold": 75.0,
+            "window": 14.0
+          },
+          "version": "g_20260809_01.0045",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:20f54683ad6928bfa281e586b0a0086d89fa33508acabf0b6e299a4591bf6806",
+        "max_lookback": 13,
+        "metric_offsets": [
+          0
+        ],
+        "required_indicators": [
+          "rsi:14"
+        ],
+        "rule_semantic_hash": "sha256:c6ac5e03fbcb7cf0f0850e851080505b906a2291f673994b4ee297699d79b28c"
+      },
+      {
+        "ast_nodes": 19,
+        "conditions": 3,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "gte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "upper_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "body",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "min_upper_shadow_body"
+                  }
+                ]
+              },
+              {
+                "lte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "lower_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "range",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "max_lower_shadow_range"
+                  }
+                ]
+              },
+              {
+                "context": {
+                  "min_count": 3,
+                  "name": "higher_close_count",
+                  "window": 5
+                }
+              }
+            ]
+          },
+          "id": "auto_shooting_star_context",
+          "name_zh": "自动发现 shooting_star_context",
+          "observed_at": "bar_close",
+          "parameters": {
+            "max_lower_shadow_range": 0.2,
+            "min_upper_shadow_body": 2.0
+          },
+          "version": "g_20260809_01.0046",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:e7978c6a49b578191982ae08e16cb7de9ed4a5687d3fbb0a6d6d867fcb63d3c7",
+        "max_lookback": 5,
+        "metric_offsets": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "required_indicators": [
+          "higher_close_count:5"
+        ],
+        "rule_semantic_hash": "sha256:a3f69ac64e65fc03bcd472a2ecd42e5f1341aed7c1ee6149330ebd065497153b"
+      },
+      {
+        "ast_nodes": 22,
+        "conditions": 3,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "gte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "lower_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "body",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "min_lower_shadow_body"
+                  }
+                ]
+              },
+              {
+                "lte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "upper_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "range",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "max_upper_shadow_range"
+                  }
+                ]
+              },
+              {
+                "lt": [
+                  {
+                    "metric": {
+                      "name": "close",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": 0,
+                      "window": 60
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "id": "auto_combo_hammer_trend",
+          "name_zh": "自动发现 combo_hammer_trend",
+          "observed_at": "bar_close",
+          "parameters": {
+            "ma_window": 60.0,
+            "max_upper_shadow_range": 0.2,
+            "min_lower_shadow_body": 2.0
+          },
+          "version": "g_20260809_01.0047",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:0aacc6a78ecd1c1d7fef032576591e3e3213710a1a1f0be3c115bf56fdd7af6e",
+        "max_lookback": 59,
+        "metric_offsets": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "required_indicators": [
+          "sma:60"
+        ],
+        "rule_semantic_hash": "sha256:236caf726299011d3623296dcdbe93e4316d7eb5017fd5c6774c92d36783e86a"
+      },
+      {
+        "ast_nodes": 11,
+        "conditions": 2,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "lt": [
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": 0,
+                      "window": 10
+                    }
+                  },
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": 0,
+                      "window": 60
+                    }
+                  }
+                ]
+              },
+              {
+                "gte": [
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": -1,
+                      "window": 10
+                    }
+                  },
+                  {
+                    "metric": {
+                      "name": "sma",
+                      "offset": -1,
+                      "window": 60
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "id": "auto_ma_cross_down",
+          "name_zh": "自动发现 ma_cross_down",
+          "observed_at": "bar_close",
+          "parameters": {
+            "fast": 10.0,
+            "slow": 60.0
+          },
+          "version": "g_20260809_01.0048",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:487da5fdeb8334d6f9f1b589f1deac79feec9338f999e9b2e8ab500a7ffe8f9b",
+        "max_lookback": 60,
+        "metric_offsets": [
+          0,
+          0,
+          -1,
+          -1
+        ],
+        "required_indicators": [
+          "sma:10",
+          "sma:60"
+        ],
+        "rule_semantic_hash": "sha256:15e3a500716bc167bd685bfb68463b92d67607fdc22fbb823023348a95519f52"
+      },
+      {
+        "ast_nodes": 17,
+        "conditions": 2,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "gte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "upper_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "body",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "min_upper_shadow_body"
+                  }
+                ]
+              },
+              {
+                "lte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "lower_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "range",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "max_lower_shadow_range"
+                  }
+                ]
+              }
+            ]
+          },
+          "id": "auto_shooting_star",
+          "name_zh": "自动发现 shooting_star",
+          "observed_at": "bar_close",
+          "parameters": {
+            "max_lower_shadow_range": 0.2,
+            "min_upper_shadow_body": 1.5
+          },
+          "version": "g_20260809_01.0049",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:a07e947234a085f855ca9f7bb0b7c79c66989cdf0cfdedee044f5e197d0236b6",
+        "max_lookback": 0,
+        "metric_offsets": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "required_indicators": [],
+        "rule_semantic_hash": "sha256:13c338c4ac292c3a2f088d692d50d81a4c47e64eb112d28c1e19b09db2c628ca"
+      },
+      {
+        "ast_nodes": 4,
+        "conditions": 1,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "gt": [
+              {
+                "metric": {
+                  "name": "roc",
+                  "offset": 0,
+                  "window": 20
+                }
+              },
+              {
+                "param": "threshold"
+              }
+            ]
+          },
+          "id": "auto_roc_positive",
+          "name_zh": "自动发现 roc_positive",
+          "observed_at": "bar_close",
+          "parameters": {
+            "threshold": 0.03,
+            "window": 20.0
+          },
+          "version": "g_20260809_01.0050",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:fda2d8786f7c66b3c9345a3a8ba68c5a6ee2110d9a9f91436c71ab6babfb1c78",
+        "max_lookback": 19,
+        "metric_offsets": [
+          0
+        ],
+        "required_indicators": [
+          "roc:20"
+        ],
+        "rule_semantic_hash": "sha256:8948e2a8c117e80d378b4207779901763dc55f05d698fff8500dc9cdd45791e3"
+      },
+      {
+        "ast_nodes": 4,
+        "conditions": 1,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "lt": [
+              {
+                "metric": {
+                  "name": "roc",
+                  "offset": 0,
+                  "window": 20
+                }
+              },
+              {
+                "param": "threshold"
+              }
+            ]
+          },
+          "id": "auto_roc_negative",
+          "name_zh": "自动发现 roc_negative",
+          "observed_at": "bar_close",
+          "parameters": {
+            "threshold": -0.05,
+            "window": 20.0
+          },
+          "version": "g_20260809_01.0051",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:17ddcd73f4c36940ac81b3ff6e04ca3b53b6160c96d84929ed339eec449d8027",
+        "max_lookback": 19,
+        "metric_offsets": [
+          0
+        ],
+        "required_indicators": [
+          "roc:20"
+        ],
+        "rule_semantic_hash": "sha256:a4e02af06496a6664be4e605f12d616d8c67e93f87a4344da1a53abdce5f0a6a"
+      },
+      {
+        "ast_nodes": 17,
+        "conditions": 2,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "gte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "lower_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "body",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "min_lower_shadow_body"
+                  }
+                ]
+              },
+              {
+                "lte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "upper_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "range",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "max_upper_shadow_range"
+                  }
+                ]
+              }
+            ]
+          },
+          "id": "auto_hammer",
+          "name_zh": "自动发现 hammer",
+          "observed_at": "bar_close",
+          "parameters": {
+            "max_upper_shadow_range": 0.1,
+            "min_lower_shadow_body": 1.5
+          },
+          "version": "g_20260809_01.0052",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:f40248c873a390adaac4ab2283f25c1153e6a006d38dd2d5e3cb7c34186bb165",
+        "max_lookback": 0,
+        "metric_offsets": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "required_indicators": [],
+        "rule_semantic_hash": "sha256:906b12c598d7ef5106894d5f15e09ff957a35448030ce6da63557b628cefbafa"
+      },
+      {
+        "ast_nodes": 11,
+        "conditions": 2,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "lte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "body",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "range",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "max_body_range"
+                  }
+                ]
+              },
+              {
+                "context": {
+                  "min_count": 3,
+                  "name": "lower_close_count",
+                  "window": 5
+                }
+              }
+            ]
+          },
+          "id": "auto_doji_after_decline",
+          "name_zh": "自动发现 doji_after_decline",
+          "observed_at": "bar_close",
+          "parameters": {
+            "max_body_range": 0.1
+          },
+          "version": "g_20260809_01.0053",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:5651e351d82fc2d508b7442a46b543a76a4ab1912ad475e22cfe56280296eabf",
+        "max_lookback": 5,
+        "metric_offsets": [
+          0,
+          0
+        ],
+        "required_indicators": [
+          "lower_close_count:5"
+        ],
+        "rule_semantic_hash": "sha256:6c3fd06c7f860fbfc242547142733b572fb40dc02a341b07a8a75b15fffa0a75"
+      },
+      {
+        "ast_nodes": 5,
+        "conditions": 1,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "gt": [
+              {
+                "metric": {
+                  "name": "close",
+                  "offset": 0
+                }
+              },
+              {
+                "metric": {
+                  "name": "max_high",
+                  "offset": -1,
+                  "window": 60
+                }
+              }
+            ]
+          },
+          "id": "auto_breakout_high",
+          "name_zh": "自动发现 breakout_high",
+          "observed_at": "bar_close",
+          "parameters": {
+            "window": 60.0
+          },
+          "version": "g_20260809_01.0054",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:6b1c65f24d037ca47821ecff1bcc79f54d2d074b70f4137f43412a34bc477934",
+        "max_lookback": 60,
+        "metric_offsets": [
+          0,
+          -1
+        ],
+        "required_indicators": [
+          "max_high:60"
+        ],
+        "rule_semantic_hash": "sha256:949a3006541e58f275ea50788d04e8bebbaf7f6406bbd8e1b7ba929385a4475a"
+      },
+      {
+        "ast_nodes": 4,
+        "conditions": 1,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "lt": [
+              {
+                "metric": {
+                  "name": "roc",
+                  "offset": 0,
+                  "window": 5
+                }
+              },
+              {
+                "param": "threshold"
+              }
+            ]
+          },
+          "id": "auto_roc_negative",
+          "name_zh": "自动发现 roc_negative",
+          "observed_at": "bar_close",
+          "parameters": {
+            "threshold": -0.05,
+            "window": 5.0
+          },
+          "version": "g_20260809_01.0055",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:28bd21ea8d32e70e0d0a802e8cd0ba0c2f2e65596eda4b584326cc6af17fc866",
+        "max_lookback": 4,
+        "metric_offsets": [
+          0
+        ],
+        "required_indicators": [
+          "roc:5"
+        ],
+        "rule_semantic_hash": "sha256:3788dcf0ac8d10c07d3ddafbdeeb21980efe86ccba456c7738cba0156a2c797c"
+      },
+      {
+        "ast_nodes": 13,
+        "conditions": 3,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "gt": [
+                  {
+                    "metric": {
+                      "name": "close",
+                      "offset": 0
+                    }
+                  },
+                  {
+                    "metric": {
+                      "name": "max_high",
+                      "offset": -1,
+                      "window": 20
+                    }
+                  }
+                ]
+              },
+              {
+                "gt": [
+                  {
+                    "metric": {
+                      "name": "volume_ratio",
+                      "offset": 0,
+                      "window": 20
+                    }
+                  },
+                  {
+                    "param": "multiple"
+                  }
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "metric": {
+                      "name": "is_bullish",
+                      "offset": 0
+                    }
+                  },
+                  true
+                ]
+              }
+            ]
+          },
+          "id": "auto_combo_breakout_volume",
+          "name_zh": "自动发现 combo_breakout_volume",
+          "observed_at": "bar_close",
+          "parameters": {
+            "breakout_window": 20.0,
+            "multiple": 1.5
+          },
+          "version": "g_20260809_01.0056",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:0f8694faf86d19754a56112b1695c93f7ebd4e786ca40079626fb4152006c5b3",
+        "max_lookback": 20,
+        "metric_offsets": [
+          0,
+          -1,
+          0,
+          0
+        ],
+        "required_indicators": [
+          "max_high:20",
+          "volume_ratio:20"
+        ],
+        "rule_semantic_hash": "sha256:c20d4161bb082e9eb8990ad2d5c64a0521440b2682a47f2558e9ebb074f73773"
+      },
+      {
+        "ast_nodes": 17,
+        "conditions": 2,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "gte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "upper_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "body",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "min_upper_shadow_body"
+                  }
+                ]
+              },
+              {
+                "lte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "lower_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "range",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "max_lower_shadow_range"
+                  }
+                ]
+              }
+            ]
+          },
+          "id": "auto_shooting_star",
+          "name_zh": "自动发现 shooting_star",
+          "observed_at": "bar_close",
+          "parameters": {
+            "max_lower_shadow_range": 0.2,
+            "min_upper_shadow_body": 2.5
+          },
+          "version": "g_20260809_01.0057",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:b3a16e0a121a57d1d2d14ebbedd41577b91ee854e5360b98067a00e985da8796",
+        "max_lookback": 0,
+        "metric_offsets": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "required_indicators": [],
+        "rule_semantic_hash": "sha256:ef9d9b8385470f49eb81f0cd9e225425128035d34deb8dd4a33bc720abbc333a"
+      },
+      {
+        "ast_nodes": 4,
+        "conditions": 1,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "lt": [
+              {
+                "metric": {
+                  "name": "rsi",
+                  "offset": 0,
+                  "window": 21
+                }
+              },
+              {
+                "param": "threshold"
+              }
+            ]
+          },
+          "id": "auto_rsi_oversold",
+          "name_zh": "自动发现 rsi_oversold",
+          "observed_at": "bar_close",
+          "parameters": {
+            "threshold": 35.0,
+            "window": 21.0
+          },
+          "version": "g_20260809_01.0058",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:8385b8aedcef7356dabd7ab124532d21c1322b244398d0763f58af00ae65087a",
+        "max_lookback": 20,
+        "metric_offsets": [
+          0
+        ],
+        "required_indicators": [
+          "rsi:21"
+        ],
+        "rule_semantic_hash": "sha256:34e1bcc31f41631b89175aee8677b628d9e42ba41c4834662c547ef234d6efbb"
+      },
+      {
+        "ast_nodes": 5,
+        "conditions": 1,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "lt": [
+              {
+                "metric": {
+                  "name": "close",
+                  "offset": 0
+                }
+              },
+              {
+                "metric": {
+                  "name": "min_low",
+                  "offset": -1,
+                  "window": 60
+                }
+              }
+            ]
+          },
+          "id": "auto_breakout_low",
+          "name_zh": "自动发现 breakout_low",
+          "observed_at": "bar_close",
+          "parameters": {
+            "window": 60.0
+          },
+          "version": "g_20260809_01.0059",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:e140e6405eeed51a5345c5a2a98d3f0809a45294f524b24b4538d2f98b86859c",
+        "max_lookback": 60,
+        "metric_offsets": [
+          0,
+          -1
+        ],
+        "required_indicators": [
+          "min_low:60"
+        ],
+        "rule_semantic_hash": "sha256:ac39db4116ef2e9a0bd1435d1cc1e2d55167b5399c3d5acd12adc9c8a185a0ff"
+      },
+      {
+        "ast_nodes": 5,
+        "conditions": 1,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "lt": [
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": 0,
+                  "window": 10
+                }
+              },
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": -5,
+                  "window": 10
+                }
+              }
+            ]
+          },
+          "id": "auto_sma_falling",
+          "name_zh": "自动发现 sma_falling",
+          "observed_at": "bar_close",
+          "parameters": {
+            "window": 10.0
+          },
+          "version": "g_20260809_01.0060",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:8178fcf3386841d9d9d1e00d51258757576a359491fe7f28709975ee4cf357d8",
+        "max_lookback": 14,
+        "metric_offsets": [
+          0,
+          -5
+        ],
+        "required_indicators": [
+          "sma:10"
+        ],
+        "rule_semantic_hash": "sha256:5d7d399a6d8175eaf17b1429bca729fb025a385de0f2ce7d0bc4a9eff756d165"
+      },
+      {
+        "ast_nodes": 17,
+        "conditions": 2,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "gte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "upper_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "body",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "min_upper_shadow_body"
+                  }
+                ]
+              },
+              {
+                "lte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "lower_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "range",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "max_lower_shadow_range"
+                  }
+                ]
+              }
+            ]
+          },
+          "id": "auto_shooting_star",
+          "name_zh": "自动发现 shooting_star",
+          "observed_at": "bar_close",
+          "parameters": {
+            "max_lower_shadow_range": 0.1,
+            "min_upper_shadow_body": 2.0
+          },
+          "version": "g_20260809_01.0061",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:a01e63a4d265dd285342296169620ec8ddc2b1a7e76d715f92075d2fec0eb32c",
+        "max_lookback": 0,
+        "metric_offsets": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "required_indicators": [],
+        "rule_semantic_hash": "sha256:1067e112670d81ea7f3c91ecadb2ba09d4ddf00554ad8c635bfff8ce9f1a6060"
+      },
+      {
+        "ast_nodes": 5,
+        "conditions": 1,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "gt": [
+              {
+                "metric": {
+                  "name": "close",
+                  "offset": 0
+                }
+              },
+              {
+                "metric": {
+                  "name": "sma",
+                  "offset": 0,
+                  "window": 20
+                }
+              }
+            ]
+          },
+          "id": "auto_price_above_sma",
+          "name_zh": "自动发现 price_above_sma",
+          "observed_at": "bar_close",
+          "parameters": {
+            "window": 20.0
+          },
+          "version": "g_20260809_01.0062",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:f856b077058f9f645896c3ba3a9b19d463bd88e7a96b6628e57b066feffca1fa",
+        "max_lookback": 19,
+        "metric_offsets": [
+          0,
+          0
+        ],
+        "required_indicators": [
+          "sma:20"
+        ],
+        "rule_semantic_hash": "sha256:3dfc9ee2647f098367614e6e82fbea4dc0a7c26f249af11f7ec816c3ae3fd0ae"
+      },
+      {
+        "ast_nodes": 19,
+        "conditions": 3,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "gte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "lower_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "body",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "min_lower_shadow_body"
+                  }
+                ]
+              },
+              {
+                "lte": [
+                  {
+                    "safe_div": [
+                      {
+                        "metric": {
+                          "name": "upper_shadow",
+                          "offset": 0
+                        }
+                      },
+                      {
+                        "max": [
+                          {
+                            "metric": {
+                              "name": "range",
+                              "offset": 0
+                            }
+                          },
+                          0.01
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "param": "max_upper_shadow_range"
+                  }
+                ]
+              },
+              {
+                "context": {
+                  "min_count": 3,
+                  "name": "lower_close_count",
+                  "window": 5
+                }
+              }
+            ]
+          },
+          "id": "auto_hammer_context",
+          "name_zh": "自动发现 hammer_context",
+          "observed_at": "bar_close",
+          "parameters": {
+            "max_upper_shadow_range": 0.1,
+            "min_lower_shadow_body": 2.5
+          },
+          "version": "g_20260809_01.0063",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:0f80935c32f73853d9645941dad782ddf2532f958dc6476d6a6d4a1ffd834c82",
+        "max_lookback": 5,
+        "metric_offsets": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "required_indicators": [
+          "lower_close_count:5"
+        ],
+        "rule_semantic_hash": "sha256:0d49ce7eefd9c812f4cd790914e446397ba7a1d9216bea0d3d69172380f4b345"
+      },
+      {
+        "ast_nodes": 8,
+        "conditions": 2,
+        "definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "all": [
+              {
+                "gt": [
+                  {
+                    "metric": {
+                      "name": "volume_ratio",
+                      "offset": 0,
+                      "window": 20
+                    }
+                  },
+                  {
+                    "param": "multiple"
+                  }
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "metric": {
+                      "name": "is_bullish",
+                      "offset": 0
+                    }
+                  },
+                  true
+                ]
+              }
+            ]
+          },
+          "id": "auto_volume_surge_up",
+          "name_zh": "自动发现 volume_surge_up",
+          "observed_at": "bar_close",
+          "parameters": {
+            "multiple": 3.0
+          },
+          "version": "g_20260809_01.0064",
+          "warmup_bars": 0
+        },
+        "discovery_semantic_hash": "sha256:fd1d592040f034d06f362b24d2bce20957ba1b8561c841a8861721dfa3e00aa3",
+        "max_lookback": 19,
+        "metric_offsets": [
+          0,
+          0
+        ],
+        "required_indicators": [
+          "volume_ratio:20"
+        ],
+        "rule_semantic_hash": "sha256:40e5a22640967f11d29d9da627a34f1d0fce4f24718c73d836c7441cedc85066"
+      }
+    ],
+    "generation_id": "g_20260809_01",
+    "grammar_version": "restricted-ta-grammar/v1",
+    "outcome_blind": true,
+    "schema_version": "auto-discovery-candidate-space/v1",
+    "seed": 20260809
+  },
+  "created_at": "2026-08-09T04:02:18.670786+00:00",
+  "data_snapshot": {
+    "benchmark": {
+      "dataset": "etf_cache",
+      "snapshot_id": "sha256:4616a235ec2b071fc71e71734c76175fa7039becc7cc5f095bafe40c59be5522",
+      "symbol": "000001"
+    },
+    "primary": {
+      "dataset": "trend_cache",
+      "snapshot_id": "sha256:919eeacf4b305e1c4200d04e8a810d55194df910aa0c4075bbada41de8046030",
+      "symbols_available": [
+        "000001",
+        "000002",
+        "000004",
+        "000006",
+        "000007",
+        "000008",
+        "000009",
+        "000010",
+        "000011",
+        "000012",
+        "000014",
+        "000016",
+        "000017",
+        "000019",
+        "000020",
+        "000021",
+        "000025",
+        "000026",
+        "000027",
+        "000028",
+        "000029",
+        "000030",
+        "000031",
+        "000032",
+        "000034",
+        "000035",
+        "000036",
+        "000037",
+        "000039",
+        "000042",
+        "000045",
+        "000048",
+        "000049",
+        "000050",
+        "000055",
+        "000056",
+        "000058",
+        "000059",
+        "000060",
+        "000061",
+        "000062",
+        "000063",
+        "000065",
+        "000066",
+        "000068",
+        "000069",
+        "000070",
+        "000078",
+        "000088",
+        "000089",
+        "000090",
+        "000096",
+        "000099",
+        "000100",
+        "000151",
+        "000153",
+        "000155",
+        "000156",
+        "000157",
+        "000158",
+        "000159",
+        "000166",
+        "000301",
+        "000333",
+        "000338",
+        "000400",
+        "000401",
+        "000402",
+        "000403",
+        "000404",
+        "000407",
+        "000408",
+        "000409",
+        "000410",
+        "000411",
+        "000415",
+        "000417",
+        "000419",
+        "000420",
+        "000421",
+        "000422",
+        "000423",
+        "000425",
+        "000426",
+        "000428",
+        "000429",
+        "000430",
+        "000488",
+        "000498",
+        "000501",
+        "000503",
+        "000504",
+        "000505",
+        "000506",
+        "000507",
+        "000509",
+        "000510",
+        "000513",
+        "000514",
+        "000516",
+        "000517",
+        "000518",
+        "000519",
+        "000520",
+        "000521",
+        "000523",
+        "000524",
+        "000525",
+        "000526",
+        "000528",
+        "000529",
+        "000530",
+        "000531",
+        "000532",
+        "000533",
+        "000534",
+        "000536",
+        "000537",
+        "000538",
+        "000539",
+        "000541",
+        "000543",
+        "000544",
+        "000545",
+        "000546",
+        "000547",
+        "000548",
+        "000550",
+        "000551",
+        "000552",
+        "000553",
+        "000554",
+        "000555",
+        "000557",
+        "000558",
+        "000559",
+        "000560",
+        "000561",
+        "000563",
+        "000564",
+        "000565",
+        "000566",
+        "000567",
+        "000568",
+        "000570",
+        "000571",
+        "000572",
+        "000573",
+        "000576",
+        "000581",
+        "000582",
+        "000586",
+        "000589",
+        "000590",
+        "000591",
+        "000592",
+        "000593",
+        "000595",
+        "000596",
+        "000597",
+        "000598",
+        "000599",
+        "000600",
+        "000601",
+        "000603",
+        "000605",
+        "000607",
+        "000608",
+        "000609",
+        "000610",
+        "000612",
+        "000615",
+        "000617",
+        "000619",
+        "000620",
+        "000623",
+        "000625",
+        "000626",
+        "000628",
+        "000629",
+        "000630",
+        "000631",
+        "000632",
+        "000633",
+        "000635",
+        "000636",
+        "000637",
+        "000639",
+        "000650",
+        "000651",
+        "000652",
+        "000655",
+        "000656",
+        "000657",
+        "000659",
+        "000661",
+        "000663",
+        "000665",
+        "000668",
+        "000669",
+        "000670",
+        "000672",
+        "000676",
+        "000677",
+        "000678",
+        "000679",
+        "000680",
+        "000681",
+        "000682",
+        "000683",
+        "000685",
+        "000686",
+        "000688",
+        "000690",
+        "000691",
+        "000692",
+        "000695",
+        "000697",
+        "000698",
+        "000700",
+        "000701",
+        "000702",
+        "000703",
+        "000705",
+        "000707",
+        "000708",
+        "000709",
+        "000710",
+        "000711",
+        "000712",
+        "000713",
+        "000715",
+        "000716",
+        "000717",
+        "000718",
+        "000719",
+        "000720",
+        "000721",
+        "000722",
+        "000723",
+        "000725",
+        "000726",
+        "000727",
+        "000728",
+        "000729",
+        "000731",
+        "000733",
+        "000735",
+        "000736",
+        "000737",
+        "000738",
+        "000739",
+        "000750",
+        "000751",
+        "000752",
+        "000753",
+        "000755",
+        "000756",
+        "000757",
+        "000758",
+        "000759",
+        "000761",
+        "000762",
+        "000766",
+        "000767",
+        "000768",
+        "000776",
+        "000777",
+        "000778",
+        "000779",
+        "000782",
+        "000783",
+        "000785",
+        "000786",
+        "000788",
+        "000789",
+        "000790",
+        "000791",
+        "000792",
+        "000793",
+        "000795",
+        "000796",
+        "000797",
+        "000798",
+        "000799",
+        "000800",
+        "000801",
+        "000802",
+        "000803",
+        "000807",
+        "000809",
+        "000810",
+        "000811",
+        "000812",
+        "000813",
+        "000815",
+        "000816",
+        "000818",
+        "000819",
+        "000820"
+      ],
+      "symbols_missing": []
+    },
+    "schema_version": "rule-search-data-snapshot/v1",
+    "universe_manifest": {
+      "path": "data\\universes\\a_share_history.jsonl",
+      "sha256": "sha256:e6d68ac34a9b47824f2a44f133118612518e9ad4548674e62275f9b60a68dcbf"
+    }
+  },
+  "generation": {
+    "candidate_budget": 64,
+    "cumulative_candidate_budget": 64,
+    "generation_id": "g_20260809_01",
+    "next_generation_requires_new_validation_window_and_lockbox_boundary": true,
+    "parent_archive_id": null,
+    "parent_generation_id": null,
+    "prior_cumulative_candidate_budget": 0,
+    "same_generation_mutation": "forbidden"
+  },
+  "grammar": {
+    "fixed_candidate_budget": 64,
+    "max_ast_nodes": 24,
+    "max_conditions": 3,
+    "outcome_blind": true,
+    "positive_metric_offsets_forbidden": true,
+    "seed": 20260809,
+    "semantic_hash_deduplication": "definition_logic_independent_of_generated_id_version",
+    "version": "restricted-ta-grammar/v1"
+  },
+  "periods": {
+    "final_lockbox_start": "2026-09-01",
+    "research_end": "2026-07-10",
+    "research_start": "2015-01-05",
+    "validation_start": "2025-01-01"
+  },
+  "protocol_hash": "sha256:f561454d671551a0accb712d6c4acdb1ac6bd312b552c6bfea7a47b2b0bbad6d",
+  "publication": "blocked_until_frozen_campaign_final_lockbox_and_human_approval",
+  "revalidation_policy": {
+    "lockbox_must_remain_unread": true,
+    "max_mean_return_drop": 0.02,
+    "min_mean_net_excess_return": 0.0,
+    "min_observations": 100,
+    "new_oos_window_required": true,
+    "retire_when_ci_lower_nonpositive": true,
+    "revalidation_days": 90
+  },
+  "schema_version": "auto-discovery-protocol/v1",
+  "source_search_protocol_id": "search_30fc855615c0e7d8bd526d0e",
+  "status": "preregistered",
+  "symbols": [
+    "000001",
+    "000002",
+    "000004",
+    "000006",
+    "000007",
+    "000008",
+    "000009",
+    "000010",
+    "000011",
+    "000012",
+    "000014",
+    "000016",
+    "000017",
+    "000019",
+    "000020",
+    "000021",
+    "000025",
+    "000026",
+    "000027",
+    "000028",
+    "000029",
+    "000030",
+    "000031",
+    "000032",
+    "000034",
+    "000035",
+    "000036",
+    "000037",
+    "000039",
+    "000042",
+    "000045",
+    "000048",
+    "000049",
+    "000050",
+    "000055",
+    "000056",
+    "000058",
+    "000059",
+    "000060",
+    "000061",
+    "000062",
+    "000063",
+    "000065",
+    "000066",
+    "000068",
+    "000069",
+    "000070",
+    "000078",
+    "000088",
+    "000089",
+    "000090",
+    "000096",
+    "000099",
+    "000100",
+    "000151",
+    "000153",
+    "000155",
+    "000156",
+    "000157",
+    "000158",
+    "000159",
+    "000166",
+    "000301",
+    "000333",
+    "000338",
+    "000400",
+    "000401",
+    "000402",
+    "000403",
+    "000404",
+    "000407",
+    "000408",
+    "000409",
+    "000410",
+    "000411",
+    "000415",
+    "000417",
+    "000419",
+    "000420",
+    "000421",
+    "000422",
+    "000423",
+    "000425",
+    "000426",
+    "000428",
+    "000429",
+    "000430",
+    "000488",
+    "000498",
+    "000501",
+    "000503",
+    "000504",
+    "000505",
+    "000506",
+    "000507",
+    "000509",
+    "000510",
+    "000513",
+    "000514",
+    "000516",
+    "000517",
+    "000518",
+    "000519",
+    "000520",
+    "000521",
+    "000523",
+    "000524",
+    "000525",
+    "000526",
+    "000528",
+    "000529",
+    "000530",
+    "000531",
+    "000532",
+    "000533",
+    "000534",
+    "000536",
+    "000537",
+    "000538",
+    "000539",
+    "000541",
+    "000543",
+    "000544",
+    "000545",
+    "000546",
+    "000547",
+    "000548",
+    "000550",
+    "000551",
+    "000552",
+    "000553",
+    "000554",
+    "000555",
+    "000557",
+    "000558",
+    "000559",
+    "000560",
+    "000561",
+    "000563",
+    "000564",
+    "000565",
+    "000566",
+    "000567",
+    "000568",
+    "000570",
+    "000571",
+    "000572",
+    "000573",
+    "000576",
+    "000581",
+    "000582",
+    "000586",
+    "000589",
+    "000590",
+    "000591",
+    "000592",
+    "000593",
+    "000595",
+    "000596",
+    "000597",
+    "000598",
+    "000599",
+    "000600",
+    "000601",
+    "000603",
+    "000605",
+    "000607",
+    "000608",
+    "000609",
+    "000610",
+    "000612",
+    "000615",
+    "000617",
+    "000619",
+    "000620",
+    "000623",
+    "000625",
+    "000626",
+    "000628",
+    "000629",
+    "000630",
+    "000631",
+    "000632",
+    "000633",
+    "000635",
+    "000636",
+    "000637",
+    "000639",
+    "000650",
+    "000651",
+    "000652",
+    "000655",
+    "000656",
+    "000657",
+    "000659",
+    "000661",
+    "000663",
+    "000665",
+    "000668",
+    "000669",
+    "000670",
+    "000672",
+    "000676",
+    "000677",
+    "000678",
+    "000679",
+    "000680",
+    "000681",
+    "000682",
+    "000683",
+    "000685",
+    "000686",
+    "000688",
+    "000690",
+    "000691",
+    "000692",
+    "000695",
+    "000697",
+    "000698",
+    "000700",
+    "000701",
+    "000702",
+    "000703",
+    "000705",
+    "000707",
+    "000708",
+    "000709",
+    "000710",
+    "000711",
+    "000712",
+    "000713",
+    "000715",
+    "000716",
+    "000717",
+    "000718",
+    "000719",
+    "000720",
+    "000721",
+    "000722",
+    "000723",
+    "000725",
+    "000726",
+    "000727",
+    "000728",
+    "000729",
+    "000731",
+    "000733",
+    "000735",
+    "000736",
+    "000737",
+    "000738",
+    "000739",
+    "000750",
+    "000751",
+    "000752",
+    "000753",
+    "000755",
+    "000756",
+    "000757",
+    "000758",
+    "000759",
+    "000761",
+    "000762",
+    "000766",
+    "000767",
+    "000768",
+    "000776",
+    "000777",
+    "000778",
+    "000779",
+    "000782",
+    "000783",
+    "000785",
+    "000786",
+    "000788",
+    "000789",
+    "000790",
+    "000791",
+    "000792",
+    "000793",
+    "000795",
+    "000796",
+    "000797",
+    "000798",
+    "000799",
+    "000800",
+    "000801",
+    "000802",
+    "000803",
+    "000807",
+    "000809",
+    "000810",
+    "000811",
+    "000812",
+    "000813",
+    "000815",
+    "000816",
+    "000818",
+    "000819",
+    "000820"
+  ],
+  "universe_manifest": "data\\universes\\a_share_history.jsonl",
+  "validation": {
+    "cost_stress_multipliers": [
+      2.0,
+      3.0
+    ],
+    "dedup_jaccard": 0.85,
+    "minimum_oos_observations": 300,
+    "multi_horizon_required": 2,
+    "multiple_testing": "fdr_bh_all_candidates_all_groups",
+    "out_of_sample_required": true,
+    "point_in_time_universe_required": true
+  }
+}

@@ -1,0 +1,640 @@
+{
+  "candidate_space": {
+    "candidates": [
+      {
+        "base_definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "lt": [
+              {
+                "metric": {
+                  "name": "rsi",
+                  "offset": 0,
+                  "window": 14
+                }
+              },
+              {
+                "param": "threshold"
+              }
+            ]
+          },
+          "id": "gen2_rsi_oversold",
+          "name_zh": "Gen2 RSI 超卖",
+          "observed_at": "bar_close",
+          "parameters": {
+            "threshold": 30.0
+          },
+          "version": "grammar",
+          "warmup_bars": 0
+        },
+        "base_rule_logic_hash": "sha256:9bfda4d439b266f4065d7b6fd398ce28800fa905d59e36acda682358adcc9035",
+        "base_rule_semantic_hash": "sha256:63ca159b6af44dabc097988f80c50ef46a23e0bb053283325a83d32232af96a9",
+        "benchmark_symbol": "000300",
+        "candidate_semantic_id": "sha256:74ea0b145d18d4f6a837b5a1d5e1ed22cdbb17b4fb787e565f1bf9d1c8fa2f80",
+        "composition": "base_rule AND every_context_filter",
+        "context_filters": [
+          {
+            "benchmark_symbol": "000300",
+            "kind": "relative_strength",
+            "operator": "lte",
+            "threshold": 0.0,
+            "window": 20
+          },
+          {
+            "kind": "market_regime",
+            "observed_at": "signal_bar_close",
+            "state": "below_sma",
+            "window": 60
+          },
+          {
+            "kind": "volume_category",
+            "multiple": 1.1,
+            "operator": "gte",
+            "window": 20
+          },
+          {
+            "kind": "realized_volatility",
+            "operator": "lte",
+            "threshold": 0.06,
+            "window": 20
+          }
+        ],
+        "cross_generation_deduplication": {
+          "base_logic_previously_tested_in_gen1": true,
+          "decision": "new_contextual_composite",
+          "exact_candidate_already_tested": false
+        },
+        "evaluation_policy": {
+          "benchmark_alignment": "exact_signal_and_lookback_dates_no_forward_fill",
+          "eligible_execution": "T+1 open",
+          "missing_benchmark_or_history": "filter_false",
+          "signal_confirmed_at": "T close"
+        },
+        "outcome_blind": true,
+        "profile": "bear_reversal"
+      },
+      {
+        "base_definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "lt": [
+              {
+                "metric": {
+                  "name": "rsi",
+                  "offset": 0,
+                  "window": 14
+                }
+              },
+              {
+                "param": "threshold"
+              }
+            ]
+          },
+          "id": "gen2_rsi_oversold",
+          "name_zh": "Gen2 RSI 超卖",
+          "observed_at": "bar_close",
+          "parameters": {
+            "threshold": 30.0
+          },
+          "version": "grammar",
+          "warmup_bars": 0
+        },
+        "base_rule_logic_hash": "sha256:9bfda4d439b266f4065d7b6fd398ce28800fa905d59e36acda682358adcc9035",
+        "base_rule_semantic_hash": "sha256:63ca159b6af44dabc097988f80c50ef46a23e0bb053283325a83d32232af96a9",
+        "benchmark_symbol": "000300",
+        "candidate_semantic_id": "sha256:26d54e070fdb14140223f354af80e2469d19c2c599c6d646f72e05af476fc704",
+        "composition": "base_rule AND every_context_filter",
+        "context_filters": [
+          {
+            "kind": "volume_category",
+            "multiple": 1.0,
+            "operator": "gte",
+            "window": 20
+          },
+          {
+            "kind": "realized_volatility",
+            "operator": "lte",
+            "threshold": 0.03,
+            "window": 20
+          },
+          {
+            "kind": "market_regime",
+            "observed_at": "signal_bar_close",
+            "state": "above_sma",
+            "window": 60
+          },
+          {
+            "benchmark_symbol": "000300",
+            "kind": "relative_strength",
+            "operator": "gte",
+            "threshold": 0.0,
+            "window": 10
+          }
+        ],
+        "cross_generation_deduplication": {
+          "base_logic_previously_tested_in_gen1": true,
+          "decision": "new_contextual_composite",
+          "exact_candidate_already_tested": false
+        },
+        "evaluation_policy": {
+          "benchmark_alignment": "exact_signal_and_lookback_dates_no_forward_fill",
+          "eligible_execution": "T+1 open",
+          "missing_benchmark_or_history": "filter_false",
+          "signal_confirmed_at": "T close"
+        },
+        "outcome_blind": true,
+        "profile": "bull_low_vol"
+      },
+      {
+        "base_definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "lt": [
+              {
+                "metric": {
+                  "name": "roc",
+                  "offset": 0,
+                  "window": 5
+                }
+              },
+              {
+                "param": "threshold"
+              }
+            ]
+          },
+          "id": "gen2_roc_down",
+          "name_zh": "Gen2 短期下跌",
+          "observed_at": "bar_close",
+          "parameters": {
+            "threshold": -0.05
+          },
+          "version": "grammar",
+          "warmup_bars": 0
+        },
+        "base_rule_logic_hash": "sha256:137283851b2433537ffa8a95c998f9ac92367a7d9e32c577977e2144338401a0",
+        "base_rule_semantic_hash": "sha256:dedf115037df6f800ed4d36d33869cdd1c758ba3e9f43441b022e32906c4bf39",
+        "benchmark_symbol": "000300",
+        "candidate_semantic_id": "sha256:bca7dff70e0c8897e03f499405796958c876f28ae1d06a538b1ded6c25b51693",
+        "composition": "base_rule AND every_context_filter",
+        "context_filters": [
+          {
+            "kind": "volume_category",
+            "multiple": 1.0,
+            "operator": "gte",
+            "window": 20
+          },
+          {
+            "kind": "realized_volatility",
+            "operator": "lte",
+            "threshold": 0.03,
+            "window": 20
+          },
+          {
+            "kind": "market_regime",
+            "observed_at": "signal_bar_close",
+            "state": "above_sma",
+            "window": 60
+          },
+          {
+            "benchmark_symbol": "000300",
+            "kind": "relative_strength",
+            "operator": "gte",
+            "threshold": 0.0,
+            "window": 10
+          }
+        ],
+        "cross_generation_deduplication": {
+          "base_logic_previously_tested_in_gen1": true,
+          "decision": "new_contextual_composite",
+          "exact_candidate_already_tested": false
+        },
+        "evaluation_policy": {
+          "benchmark_alignment": "exact_signal_and_lookback_dates_no_forward_fill",
+          "eligible_execution": "T+1 open",
+          "missing_benchmark_or_history": "filter_false",
+          "signal_confirmed_at": "T close"
+        },
+        "outcome_blind": true,
+        "profile": "bull_low_vol"
+      },
+      {
+        "base_definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "lt": [
+              {
+                "metric": {
+                  "name": "roc",
+                  "offset": 0,
+                  "window": 5
+                }
+              },
+              {
+                "param": "threshold"
+              }
+            ]
+          },
+          "id": "gen2_roc_down",
+          "name_zh": "Gen2 短期下跌",
+          "observed_at": "bar_close",
+          "parameters": {
+            "threshold": -0.05
+          },
+          "version": "grammar",
+          "warmup_bars": 0
+        },
+        "base_rule_logic_hash": "sha256:137283851b2433537ffa8a95c998f9ac92367a7d9e32c577977e2144338401a0",
+        "base_rule_semantic_hash": "sha256:dedf115037df6f800ed4d36d33869cdd1c758ba3e9f43441b022e32906c4bf39",
+        "benchmark_symbol": "000300",
+        "candidate_semantic_id": "sha256:b853c96f1892116eb0985354752eb8b8f14a207be9bf81f40f12dd28a4888c79",
+        "composition": "base_rule AND every_context_filter",
+        "context_filters": [
+          {
+            "kind": "volume_category",
+            "multiple": 1.1,
+            "operator": "gte",
+            "window": 20
+          },
+          {
+            "kind": "realized_volatility",
+            "operator": "lte",
+            "threshold": 0.05,
+            "window": 20
+          },
+          {
+            "benchmark_symbol": "000300",
+            "kind": "relative_strength",
+            "operator": "gte",
+            "threshold": 0.02,
+            "window": 20
+          },
+          {
+            "kind": "market_regime",
+            "observed_at": "signal_bar_close",
+            "state": "above_sma",
+            "window": 60
+          }
+        ],
+        "cross_generation_deduplication": {
+          "base_logic_previously_tested_in_gen1": true,
+          "decision": "new_contextual_composite",
+          "exact_candidate_already_tested": false
+        },
+        "evaluation_policy": {
+          "benchmark_alignment": "exact_signal_and_lookback_dates_no_forward_fill",
+          "eligible_execution": "T+1 open",
+          "missing_benchmark_or_history": "filter_false",
+          "signal_confirmed_at": "T close"
+        },
+        "outcome_blind": true,
+        "profile": "bull_continuation"
+      },
+      {
+        "base_definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "lt": [
+              {
+                "metric": {
+                  "name": "close",
+                  "offset": 0
+                }
+              },
+              {
+                "metric": {
+                  "name": "min_low",
+                  "offset": -1,
+                  "window": 20
+                }
+              }
+            ]
+          },
+          "id": "gen2_breakdown",
+          "name_zh": "Gen2 跌破前低",
+          "observed_at": "bar_close",
+          "parameters": {},
+          "version": "grammar",
+          "warmup_bars": 0
+        },
+        "base_rule_logic_hash": "sha256:e56451dedccc8f4506a423ddb2faec0feb05aefe6ed4647d7d00b2444578567a",
+        "base_rule_semantic_hash": "sha256:635fb996690a18174d12712b87b66c20a6595af3090a3432b5a21609d253f68b",
+        "benchmark_symbol": "000300",
+        "candidate_semantic_id": "sha256:884da13ce2b1494261a12261576ecd65a07ca450d158f05f9f16e8cedd381a53",
+        "composition": "base_rule AND every_context_filter",
+        "context_filters": [
+          {
+            "kind": "realized_volatility",
+            "operator": "gte",
+            "threshold": 0.02,
+            "window": 10
+          },
+          {
+            "kind": "market_regime",
+            "observed_at": "signal_bar_close",
+            "state": "below_sma",
+            "window": 60
+          },
+          {
+            "kind": "volume_category",
+            "multiple": 1.2,
+            "operator": "gte",
+            "window": 10
+          },
+          {
+            "benchmark_symbol": "000300",
+            "kind": "relative_strength",
+            "operator": "lte",
+            "threshold": -0.01,
+            "window": 10
+          }
+        ],
+        "cross_generation_deduplication": {
+          "base_logic_previously_tested_in_gen1": true,
+          "decision": "new_contextual_composite",
+          "exact_candidate_already_tested": false
+        },
+        "evaluation_policy": {
+          "benchmark_alignment": "exact_signal_and_lookback_dates_no_forward_fill",
+          "eligible_execution": "T+1 open",
+          "missing_benchmark_or_history": "filter_false",
+          "signal_confirmed_at": "T close"
+        },
+        "outcome_blind": true,
+        "profile": "bear_high_vol"
+      },
+      {
+        "base_definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "lt": [
+              {
+                "metric": {
+                  "name": "close",
+                  "offset": 0
+                }
+              },
+              {
+                "metric": {
+                  "name": "min_low",
+                  "offset": -1,
+                  "window": 20
+                }
+              }
+            ]
+          },
+          "id": "gen2_breakdown",
+          "name_zh": "Gen2 跌破前低",
+          "observed_at": "bar_close",
+          "parameters": {},
+          "version": "grammar",
+          "warmup_bars": 0
+        },
+        "base_rule_logic_hash": "sha256:e56451dedccc8f4506a423ddb2faec0feb05aefe6ed4647d7d00b2444578567a",
+        "base_rule_semantic_hash": "sha256:635fb996690a18174d12712b87b66c20a6595af3090a3432b5a21609d253f68b",
+        "benchmark_symbol": "000300",
+        "candidate_semantic_id": "sha256:95ad77b2d57127fbbc0afad97d9bcbbb39a48b7eb5728299cbad37e273d1c350",
+        "composition": "base_rule AND every_context_filter",
+        "context_filters": [
+          {
+            "kind": "volume_category",
+            "multiple": 1.0,
+            "operator": "gte",
+            "window": 20
+          },
+          {
+            "kind": "realized_volatility",
+            "operator": "lte",
+            "threshold": 0.03,
+            "window": 20
+          },
+          {
+            "kind": "market_regime",
+            "observed_at": "signal_bar_close",
+            "state": "above_sma",
+            "window": 60
+          },
+          {
+            "benchmark_symbol": "000300",
+            "kind": "relative_strength",
+            "operator": "gte",
+            "threshold": 0.0,
+            "window": 10
+          }
+        ],
+        "cross_generation_deduplication": {
+          "base_logic_previously_tested_in_gen1": true,
+          "decision": "new_contextual_composite",
+          "exact_candidate_already_tested": false
+        },
+        "evaluation_policy": {
+          "benchmark_alignment": "exact_signal_and_lookback_dates_no_forward_fill",
+          "eligible_execution": "T+1 open",
+          "missing_benchmark_or_history": "filter_false",
+          "signal_confirmed_at": "T close"
+        },
+        "outcome_blind": true,
+        "profile": "bull_low_vol"
+      },
+      {
+        "base_definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "lt": [
+              {
+                "metric": {
+                  "name": "rsi",
+                  "offset": 0,
+                  "window": 14
+                }
+              },
+              {
+                "param": "threshold"
+              }
+            ]
+          },
+          "id": "gen2_rsi_oversold",
+          "name_zh": "Gen2 RSI 超卖",
+          "observed_at": "bar_close",
+          "parameters": {
+            "threshold": 30.0
+          },
+          "version": "grammar",
+          "warmup_bars": 0
+        },
+        "base_rule_logic_hash": "sha256:9bfda4d439b266f4065d7b6fd398ce28800fa905d59e36acda682358adcc9035",
+        "base_rule_semantic_hash": "sha256:63ca159b6af44dabc097988f80c50ef46a23e0bb053283325a83d32232af96a9",
+        "benchmark_symbol": "000300",
+        "candidate_semantic_id": "sha256:6a58abc6718e5934c29a66913af2b96373b64f4923848bf95bc27adc3a0bac06",
+        "composition": "base_rule AND every_context_filter",
+        "context_filters": [
+          {
+            "kind": "volume_category",
+            "multiple": 1.1,
+            "operator": "gte",
+            "window": 20
+          },
+          {
+            "kind": "realized_volatility",
+            "operator": "lte",
+            "threshold": 0.05,
+            "window": 20
+          },
+          {
+            "benchmark_symbol": "000300",
+            "kind": "relative_strength",
+            "operator": "gte",
+            "threshold": 0.02,
+            "window": 20
+          },
+          {
+            "kind": "market_regime",
+            "observed_at": "signal_bar_close",
+            "state": "above_sma",
+            "window": 60
+          }
+        ],
+        "cross_generation_deduplication": {
+          "base_logic_previously_tested_in_gen1": true,
+          "decision": "new_contextual_composite",
+          "exact_candidate_already_tested": false
+        },
+        "evaluation_policy": {
+          "benchmark_alignment": "exact_signal_and_lookback_dates_no_forward_fill",
+          "eligible_execution": "T+1 open",
+          "missing_benchmark_or_history": "filter_false",
+          "signal_confirmed_at": "T close"
+        },
+        "outcome_blind": true,
+        "profile": "bull_continuation"
+      },
+      {
+        "base_definition": {
+          "executable_from": "next_bar_open",
+          "expression": {
+            "lt": [
+              {
+                "metric": {
+                  "name": "rsi",
+                  "offset": 0,
+                  "window": 14
+                }
+              },
+              {
+                "param": "threshold"
+              }
+            ]
+          },
+          "id": "gen2_rsi_oversold",
+          "name_zh": "Gen2 RSI 超卖",
+          "observed_at": "bar_close",
+          "parameters": {
+            "threshold": 30.0
+          },
+          "version": "grammar",
+          "warmup_bars": 0
+        },
+        "base_rule_logic_hash": "sha256:9bfda4d439b266f4065d7b6fd398ce28800fa905d59e36acda682358adcc9035",
+        "base_rule_semantic_hash": "sha256:63ca159b6af44dabc097988f80c50ef46a23e0bb053283325a83d32232af96a9",
+        "benchmark_symbol": "000300",
+        "candidate_semantic_id": "sha256:aef69740d5040098493db5317d7c4f87deb57f792ee39fde8817730b5efa4e14",
+        "composition": "base_rule AND every_context_filter",
+        "context_filters": [
+          {
+            "kind": "realized_volatility",
+            "operator": "gte",
+            "threshold": 0.02,
+            "window": 10
+          },
+          {
+            "kind": "market_regime",
+            "observed_at": "signal_bar_close",
+            "state": "below_sma",
+            "window": 60
+          },
+          {
+            "kind": "volume_category",
+            "multiple": 1.2,
+            "operator": "gte",
+            "window": 10
+          },
+          {
+            "benchmark_symbol": "000300",
+            "kind": "relative_strength",
+            "operator": "lte",
+            "threshold": -0.01,
+            "window": 10
+          }
+        ],
+        "cross_generation_deduplication": {
+          "base_logic_previously_tested_in_gen1": true,
+          "decision": "new_contextual_composite",
+          "exact_candidate_already_tested": false
+        },
+        "evaluation_policy": {
+          "benchmark_alignment": "exact_signal_and_lookback_dates_no_forward_fill",
+          "eligible_execution": "T+1 open",
+          "missing_benchmark_or_history": "filter_false",
+          "signal_confirmed_at": "T close"
+        },
+        "outcome_blind": true,
+        "profile": "bear_high_vol"
+      }
+    ],
+    "schema_version": "gen2-candidate-space/v1"
+  },
+  "created_at": "2026-08-10T15:07:54.519935+00:00",
+  "generation": {
+    "candidate_budget": 8,
+    "generation_id": "g_20260810_01",
+    "global_ledger_policy_hash": "sha256:402bf03c8bf26b916df95bb2db27e8588563bf9c034e422c978e3b0ee717adf2",
+    "global_trial_budget": 256,
+    "global_used_after_generation": 214,
+    "global_used_before_generation": 206,
+    "parent_generation_id": "g_20260809_01",
+    "parent_protocol_hash": "sha256:f561454d671551a0accb712d6c4acdb1ac6bd312b552c6bfea7a47b2b0bbad6d"
+  },
+  "governance": {
+    "2022_2026_fresh_oos": "forbidden",
+    "approval": "forbidden",
+    "final_lockbox_consumption": "forbidden",
+    "publication": "blocked_until_frozen_campaign_final_lockbox_and_human_approval",
+    "screen_or_backtest_in_this_stage": "forbidden"
+  },
+  "grammar": {
+    "benchmark_symbol": "000300",
+    "cross_series_wrapper_not_rule_dsl": true,
+    "outcome_blind": true,
+    "seed": 20260810,
+    "version": "context-wrapper-grammar/v1"
+  },
+  "parent_closure": {
+    "candidate_ids": [
+      "breakdown",
+      "roc",
+      "rsi"
+    ],
+    "parent_lockbox_start": "2026-09-01",
+    "parent_oos": {
+      "end": "2026-08-04",
+      "start": "2022-01-01"
+    },
+    "read_at_prereg": false,
+    "result_hash": "sha256:e38d07cabb182c5f8de97a1149d0b1ae172638dd7b44daee43dbdea6cf39cebb",
+    "source_result": "comparison_result.json",
+    "transition": "unused_parent_lockbox_reassigned_to_child_validation_after_parent_research_closed"
+  },
+  "periods": {
+    "final_lockbox_read": false,
+    "final_lockbox_start": "2027-09-01",
+    "parent_research_end": "2026-07-10",
+    "planned_fresh_oos": true,
+    "research_end": "2027-08-31",
+    "research_start": "2026-05-01",
+    "validation_start": "2026-09-01"
+  },
+  "preregistered_at": "2026-08-10T15:07:54.518935+00:00",
+  "protocol_hash": "sha256:55b5b42902e1287ebddca68142c8ccd0a37ebf2f574fa0c5107bc8461814f85b",
+  "protocol_id": "gen2_55b5b42902e1287ebddca681",
+  "schema_version": "gen2-discovery-protocol/v1",
+  "status": "preregistered_no_screen_run"
+}

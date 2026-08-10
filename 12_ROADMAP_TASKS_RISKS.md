@@ -9,7 +9,7 @@
 | Phase 2 研究团队 | 4–6 周 | Research/Knowledge/Report、LlamaIndex、MLflow |
 | Phase 3 产品化 | 6–10 周 | Next.js、多人、复杂成交复核、按压测扩展 |
 
-阶段验收以 `MASTER_IMPLEMENTATION_PLAN.md` 第 13–14 节为准；未通过不得扩大股票池、规则数或 Agent 自主权。
+长期阶段目标参考 `MASTER_IMPLEMENTATION_PLAN.md` 第 13–14 节；当前完成度与运行限制以 `docs/IMPLEMENTATION_STATUS.md` 和 `README.md` 为准。未通过门禁不得扩大股票池、规则数或 Agent 自主权。
 
 ## 2. P0 Backlog
 
@@ -28,6 +28,8 @@
 - [x] Compose、备份与恢复 runbook（Docker 实机验收待环境具备）
 
 当前收口项：Job payload 契约、Worker 租约心跳、端到端启动烟雾测试、审计/恢复演练和文档一致性。策略验证不在当前工作流中继续执行。
+
+2026-08-09 研究里程碑：generation `g_20260809_01` 的 RSI、ROC、breakdown 正式比较全部为 `research_eliminated_event`；ROC 的相对第一不代表可交易。锁箱未读，禁止批准和发布。下一研究步骤不是在 2022–2026 上继续调参，而是为 Gen2 建立顺序试验台账、累计预算、父代去重和真正未来的新 OOS。
 
 ## 3. P1 / P2
 
@@ -48,6 +50,8 @@ P2：Backtrader 复核、Next.js、Qdrant 压测决策、Celery/Kafka 容量决�
 | 版权泄露 | entitlement、短引用、审计、签名 URL |
 | 旧数据伪完整 | `legacy_unverifiable` 隔离 |
 | 单引擎偏差 | 关键候选用独立实现复核 |
+| 顺序试验污染 | 每代冻结协议、累计预算与父代；2022–2026 不再复用为新鲜 OOS |
+| 研究产物误删 | 权威 shards/v4 panel/result/staging 默认保留；删除必须单独确认 |
 
 ## 5. 扩展门槛
 

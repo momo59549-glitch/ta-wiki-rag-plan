@@ -1,12 +1,15 @@
 # 交付清单与需求覆盖矩阵
 
-> v2 新增：`MASTER_IMPLEMENTATION_PLAN.md`（当前实施基线）和 `MIGRATION_FROM_CURRENT_PLAN.md`（原地迁移说明）。运行时 Agent、路线图与 Prompt 分别由 `11_MULTI_AI_EXECUTION.md`、`12_ROADMAP_TASKS_RISKS.md`、`13_TEMPLATES.md` 维护。
+> `MASTER_IMPLEMENTATION_PLAN.md` 保留为长期目标架构与历史实施基线；当前运行事实以 `README.md` 和 `docs/IMPLEMENTATION_STATUS.md` 为准。v1 总览与迁移说明已归档到 `docs/archive/plans/`。运行时 Agent、路线图与 Prompt 分别由 `11_MULTI_AI_EXECUTION.md`、`12_ROADMAP_TASKS_RISKS.md`、`13_TEMPLATES.md` 维护。
 
 ## 1. 文档清单
 
 | 文档 | 主要内容 |
 |---|---|
-| `MASTER_PLAN.md` | 总览、目标、架构、技术栈、阶段、成功标准 |
+| `MASTER_IMPLEMENTATION_PLAN.md` | 长期目标架构与历史实施基线；不代表当前 PostgreSQL 已部署 |
+| `docs/archive/plans/MASTER_PLAN.md` | 历史 v1 总览、目标、架构、技术栈、阶段、成功标准 |
+| `docs/archive/plans/MIGRATION_FROM_CURRENT_PLAN.md` | 历史原地迁移说明 |
+| `docs/IMPLEMENTATION_STATUS.md` | 当前实现、运行事实、已知限制与延期项 |
 | `01_PRODUCT_SCOPE.md` | 产品目标、用户、范围、非目标、权限、指标 |
 | `02_ARCHITECTURE_REPOSITORY.md` | 组件、仓库、依赖、环境、CI/CD |
 | `03_BOOK_INGESTION_EVIDENCE.md` | 导入、OCR、页码、版面、证据链 |
@@ -25,7 +28,7 @@
 
 | 要求 | 覆盖位置 | 状态 |
 |---|---|---|
-| 总览版 MASTER_PLAN | `MASTER_PLAN.md` | 完成 |
+| 总览版 MASTER_PLAN | `docs/archive/plans/MASTER_PLAN.md` | 已归档保留 |
 | 产品目标、范围、非目标 | `01_PRODUCT_SCOPE.md` | 完成 |
 | 总体架构、仓库结构 | `02_ARCHITECTURE_REPOSITORY.md` | 完成 |
 | 数据模型 | `03`、`04`、`05` | 完成 |
@@ -44,10 +47,10 @@
 | 里程碑和风险 | `12_ROADMAP_TASKS_RISKS.md` | 完成 |
 | 可复制实施模板 | `13_TEMPLATES.md` | 完成 |
 
-## 3. 自动检查结果
+## 3. 当前交付状态
 
-- Markdown 文件总数：16（含 README、本清单和 13 份主体文档及 MASTER_PLAN）。
-- 主体文本规模：约 5.5 万字符。
-- 要求关键词覆盖：通过。
-- Markdown 内部文件链接：无断链。
-- ZIP 解压完整性：打包后以独立读取方式验证。
+- 2026-08-09：generation `g_20260809_01` 与三候选正式 comparison 已归档；三者均为 `research_eliminated_event`，result hash 为 `sha256:e38d07cabb182c5f8de97a1149d0b1ae172638dd7b44daee43dbdea6cf39cebb`；
+- 锁箱未读，批准与发布禁止；ROC 仅相对第一，不代表可交易；
+- 权威 shards、正式 v4 panel/result/staging 保留，合并 JSONL 为可重建兼容视图；本轮未删除数据；
+- 候选比较相关回归由主代理验证 26/26。完整环境仍可能缺少可选依赖 `pypdf`，因此不声称全套测试无条件全绿；
+- Markdown 相对链接和文件引用在本次整理后重新检查。

@@ -59,12 +59,30 @@ def build_st_timeline(
     """Fetch namechange history for every universe symbol and write an ST timeline."""
     active, meta = load_point_in_time_universe(universe_manifest, date.max)
     symbols = active[:limit] if limit is not None else active
+    # The universe manifest is authoritative for exchange identity.  Inferring
+    # ``.SH``/``.SZ`` from a symbol prefix loses support for BJ and future
+    # exchange codes, and can silently query the wrong security.
+    ts_codes: dict[str, str] = {}
+    for line_number, line in enumerate(universe_manifest.read_text(encoding="utf-8").splitlines(), start=1):
+        if not line.strip():
+            continue
+        try:
+            item = json.loads(line)
+            symbol = str(item["symbol"]).zfill(6)
+            ts_code = str(item.get("ts_code") or "").strip()
+        except (KeyError, TypeError, json.JSONDecodeError) as exc:
+            raise ValueError(f"股票池清单第 {line_number} 行无效") from exc
+        if ts_code:
+            ts_codes[symbol] = ts_code
     output_path.parent.mkdir(parents=True, exist_ok=True)
     temporary = output_path.with_suffix(output_path.suffix + ".tmp")
     failures: dict[str, str] = {}
     rows: list[dict[str, Any]] = []
     for position, symbol in enumerate(symbols, start=1):
-        ts_code = f"{symbol}.SH" if symbol.startswith(("6", "9")) else f"{symbol}.SZ"
+        ts_code = ts_codes.get(symbol)
+        if not ts_code:
+            failures[symbol] = "股票池清单缺少 ts_code，拒绝猜测交易所"
+            continue
         try:
             records = _request(token, "namechange", {"ts_code": ts_code}, timeout_seconds, max_retries)
             for item in records:

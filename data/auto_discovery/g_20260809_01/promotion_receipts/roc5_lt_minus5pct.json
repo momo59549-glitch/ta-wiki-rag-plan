@@ -1,0 +1,62 @@
+{
+  "schema_version": "auto-discovery-promotion-receipt/v1",
+  "status": "selected_for_frozen_campaign_research_only",
+  "source": {
+    "kind": "auto_discovery",
+    "registry_id": "regime_registry_47b2f6a9b37ad23834350157",
+    "registry_origin_hash": "sha256:47b2f6a9b37ad23834350157843b05871bc6cc660a16f7808f62e0df250e7f2f",
+    "registry_state_hash": "sha256:c5126416b1f641a8d54010154ca65b63431edd70b10a2ead38a5b68c162457c1",
+    "registry_lifecycle_revision": 1,
+    "auto_discovery_protocol_id": "auto_discovery_f561454d671551a0accb712d",
+    "auto_discovery_protocol_hash": "sha256:f561454d671551a0accb712d6c4acdb1ac6bd312b552c6bfea7a47b2b0bbad6d",
+    "source_search_id": "search_30fc855615c0e7d8bd526d0e",
+    "source_rule_semantic_hash": "sha256:3788dcf0ac8d10c07d3ddafbdeeb21980efe86ccba456c7738cba0156a2c797c",
+    "source_discovery_semantic_hash": "sha256:28bd21ea8d32e70e0d0a802e8cd0ba0c2f2e65596eda4b584326cc6af17fc866",
+    "source_rule_logic_hash": "sha256:137283851b2433537ffa8a95c998f9ac92367a7d9e32c577977e2144338401a0"
+  },
+  "selected_definition": {
+    "id": "auto_roc_negative",
+    "version": "g_20260809_01.0055",
+    "name_zh": "自动发现 roc_negative",
+    "expression": {
+      "lt": [
+        {
+          "metric": {
+            "name": "roc",
+            "offset": 0,
+            "window": 5
+          }
+        },
+        {
+          "param": "threshold"
+        }
+      ]
+    },
+    "parameters": {
+      "threshold": -0.05,
+      "window": 5.0
+    },
+    "warmup_bars": 0,
+    "observed_at": "bar_close",
+    "executable_from": "next_bar_open"
+  },
+  "selected_definition_hash": "sha256:e9381ecf26dd5a25fa44dd365a55208709f8755d5fd2bde1fb3ca8a496988a12",
+  "selected_rule_semantic_hash": "sha256:3788dcf0ac8d10c07d3ddafbdeeb21980efe86ccba456c7738cba0156a2c797c",
+  "selected_rule_logic_hash": "sha256:137283851b2433537ffa8a95c998f9ac92367a7d9e32c577977e2144338401a0",
+  "selection": {
+    "status": "explicit_human_research_selection",
+    "selector": "user-delegated-research-review",
+    "rationale": "Preregistered representative of short-term downside shock family; four screened horizons passed; selected before any frozen-campaign result is observed.",
+    "market_regime": "bearish",
+    "as_of": "2026-08-09"
+  },
+  "approval": {
+    "status": "not_approved",
+    "automatic_approval": false,
+    "campaign_research_authorized_by_explicit_selection": true
+  },
+  "publication": "blocked_until_frozen_campaign_final_lockbox_and_human_approval",
+  "receipt_hash": "sha256:efc1968214b1c291e6f26be0a9457c5f766010926fb67c58d1e4ae7dee463f14",
+  "receipt_id": "promotion_efc1968214b1c291e6f26be0",
+  "created_at": "2026-08-09T04:49:29.078570+00:00"
+}

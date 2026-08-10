@@ -35,7 +35,7 @@
 ```powershell
 # 1. 构建 ST 时间线（一次性，5,874 只约需 20–40 分钟）
 $env:TUSHARE_TOKEN = "..."   # 或写入 .env，不落盘
-python scripts/build_st_timeline.py --model-data H:\股票模型\Model\data --output data\manifests\st_timeline.jsonl
+python scripts/build_st_timeline.py --output data\manifests\st_timeline.jsonl
 
 # 2. 重新补齐/增量同步，写入真实 is_st
 python scripts/sync_tushare_daily.py --st-manifest data\manifests\st_timeline.jsonl

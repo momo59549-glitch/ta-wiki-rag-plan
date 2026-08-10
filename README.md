@@ -8,14 +8,14 @@
 
 ## 从这里开始
 
-1. `MASTER_IMPLEMENTATION_PLAN.md`：当前唯一实施基线；
-2. `MIGRATION_FROM_CURRENT_PLAN.md`：如何保留并迁移旧方案；
+1. `docs/IMPLEMENTATION_STATUS.md`：当前已运行能力与限制；
+2. `MASTER_IMPLEMENTATION_PLAN.md`：长期目标架构与历史实施基线；
 3. `02_ARCHITECTURE_REPOSITORY.md`：运行架构与仓库边界；
 4. `11_MULTI_AI_EXECUTION.md`：九类 Agent、状态机与审批；
 5. `12_ROADMAP_TASKS_RISKS.md`：阶段、Backlog、风险；
 6. `13_TEMPLATES.md`：Prompt、消息和研究模板。
 
-`MASTER_PLAN.md` 是 v1 历史基线，保留用于追溯，不再作为实施排期来源。
+历史总览与迁移说明已原样归档至 `docs/archive/plans/MASTER_PLAN.md` 和 `docs/archive/plans/MIGRATION_FROM_CURRENT_PLAN.md`。当前无 SQL 文件运行时以本 README 与 `docs/IMPLEMENTATION_STATUS.md` 为准，不把长期目标架构误写成已部署事实。
 
 ## 技术基线
 
@@ -84,6 +84,22 @@ powershell -ExecutionPolicy Bypass -File scripts\start_local_stack.ps1 -PromptFo
 ## 自动规则搜索（受控）
 
 框架新增有界、可审计的自动规则搜索筛选层：预登记 178 个候选（蜡烛形态、均线金叉死叉、MACD、RSI、布林带、动量、突破、放量），使用与正式流水线一致的向量化求值和跨候选 FDR 校正，产出试错台账。**筛选通过不等于规则有效**，任何候选晋升都必须走冻结 Campaign、最终锁箱与人工审批。详见 `docs/RULE_SEARCH.md`。
+
+第一版自动发现可在不先给定策略的前提下，从受限 DSL grammar 生成固定预算的技术规则候选，并将通过筛选的证据登记为状态专属、会到期/可因漂移退役的研究候选。它只生成 `eligible_for_frozen_campaign`，绝不自动发布、下单或保证盈利。运行方式和代次治理见 `docs/AUTO_DISCOVERY.md`：
+
+```powershell
+python scripts\run_auto_discovery.py --generation-id g_20260809_01 `
+  --start 2010-01-01 --end 2023-12-31 --oos-start 2022-01-01 --lockbox-start 2026-09-01 `
+  --candidate-budget 64 --output-root data\auto_discovery\g_20260809_01
+```
+
+2026-08-09 已修复筛选层持有期退出价格与正式流水线的错位，以及 n 元算术 DSL 的向量化差异；此前搜索轮次应在修复后重跑，不得直接沿用作晋升依据。
+
+Generation `g_20260809_01` 派生的 RSI、ROC、breakdown 三候选已完成正式预注册比较，三者最终状态均为 `research_eliminated_event`。ROC 仅在三者内部排序相对第一，不代表通过组合门禁、可交易、获批或可发布。正式结果哈希为 `sha256:e38d07cabb182c5f8de97a1149d0b1ae172638dd7b44daee43dbdea6cf39cebb`；最终锁箱未读，批准和发布仍被禁止。下一步若开展 Gen2，必须按顺序试验治理使用新的未来样本；2022–2026 已被研究流程查看，不再是新鲜 OOS。
+
+本轮没有删除任何数据。权威研究 shards、正式 v4 comparison panel、protocol/result/staging 继续保留；合并 JSONL 只是可由 shards 重建的兼容视图。任何删除或压缩清理都需要用户另行确认，详见 `docs/OPERATIONS_RUNBOOK.md`。
+
+Gen2 当前仅完成预注册骨架：跨代去重、全局 trial budget 和由冻结 benchmark 驱动的 context-wrapper 候选已经可 dry-run；父代研究结束日前已查看的数据不能重标为 fresh OOS，2026-09 后尚未到来的数据只能预注册、到来前不能运行；未读取锁箱、未产生新收益结论。见 `docs/GEN2_DISCOVERY.md`。
 
 ## 不可绕过的门禁
 

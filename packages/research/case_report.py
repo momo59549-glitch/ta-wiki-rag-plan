@@ -4,6 +4,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+from .run_artifacts import iter_run_rows
+
 
 def _read(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
@@ -16,8 +18,7 @@ def render_case_report(case_dir: Path) -> Path:
     stats = _read(case_dir / "statistics_out_of_sample.json")
     agent_runs = [json.loads(line) for line in (case_dir / "agent_runs.jsonl").read_text(encoding="utf-8").splitlines() if line]
     research_dir = case_dir / case["research_run"]
-    outcomes = [json.loads(line) for line in (research_dir / "outcomes.jsonl").read_text(encoding="utf-8").splitlines() if line]
-    excluded = sum(1 for item in outcomes if not item.get("entry_executable", True) or not item.get("exit_executable", True))
+    excluded = sum(1 for item in iter_run_rows(research_dir, "outcomes") if not item.get("entry_executable", True) or not item.get("exit_executable", True))
     lines = [
         f"# 研究案例 {case['case_id']}", "",
         "## 决策", "",

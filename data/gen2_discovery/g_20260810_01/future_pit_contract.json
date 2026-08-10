@@ -1,0 +1,12 @@
+{
+  "schema_version": "gen2-pit-universe-contract/v1",
+  "status": "future_not_arrived",
+  "manifest_id": "cn_a_share_point_in_time_membership_future_v1",
+  "membership_policy": "point_in_time",
+  "metadata": {
+    "membership_visibility": "signal_date_known_only",
+    "st_status_visibility": "signal_date_known_only",
+    "current_universe_backfill": "forbidden",
+    "source_revision_manifest": "not_created_until_future_data_arrives"
+  }
+}

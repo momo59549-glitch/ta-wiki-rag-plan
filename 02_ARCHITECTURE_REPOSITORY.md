@@ -1,6 +1,6 @@
 # 总体架构、技术栈与仓库结构
 
-> v2 架构更新：在既有模块化单体上增加 LangGraph Research Case 状态机与 Prefect 批处理编排；PostgreSQL 仍是唯一业务真相。Agent、研究数据库、消息契约和运行拓扑以 `MASTER_IMPLEMENTATION_PLAN.md` 为准。
+> v2 目标架构：在既有模块化单体上增加 LangGraph Research Case 状态机与 Prefect 批处理编排；PostgreSQL 是达到迁移门槛后的目标业务真相。当前无 SQL 文件运行时以 `README.md` 与 `docs/IMPLEMENTATION_STATUS.md` 为准，长期 Agent、研究数据库、消息契约和拓扑参考 `MASTER_IMPLEMENTATION_PLAN.md`。
 
 ## 1. 架构风格
 

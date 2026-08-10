@@ -4,8 +4,9 @@ from tempfile import TemporaryDirectory
 import unittest
 
 import pandas as pd
+from unittest.mock import patch
 
-from packages.market_data.st_status import audit_is_st
+from packages.market_data.st_status import audit_is_st, build_st_timeline
 from packages.market_data.tushare_daily import _merge_incremental_row
 from packages.market_data.universe import load_universe_memberships
 
@@ -20,6 +21,23 @@ def _timeline(root: Path) -> Path:
 
 
 class STTimelineTests(unittest.TestCase):
+    def test_build_uses_manifest_ts_code_instead_of_prefix_inference(self):
+        with TemporaryDirectory() as temp:
+            root = Path(temp)
+            universe = root / "universe.jsonl"
+            universe.write_text(json.dumps({"symbol": "830001", "ts_code": "830001.BJ", "active_from": "2020-01-01", "source": "test"}) + "\n", encoding="utf-8")
+            output = root / "st.jsonl"
+            requested: list[str] = []
+
+            def fake_request(token, api_name, params, timeout_seconds, max_retries):
+                requested.append(params["ts_code"])
+                return [{"name": "*ST测试", "start_date": "20240101", "end_date": ""}]
+
+            with patch("packages.market_data.st_status._request", side_effect=fake_request):
+                result = build_st_timeline(token="test", universe_manifest=universe, output_path=output)
+            self.assertEqual(requested, ["830001.BJ"])
+            self.assertEqual(result["st_periods"], 1)
+
     def test_merge_incremental_row_uses_timeline(self):
         with TemporaryDirectory() as temp:
             root = Path(temp)

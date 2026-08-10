@@ -95,6 +95,10 @@ Compose 默认只绑定 `127.0.0.1`。需要手机从局域网访问时，应通
 
 ## 备份与恢复
 
+### 研究数据保留与删除门禁
+
+2026-08-09 本轮整理未删除任何数据。必须保留权威研究 shards，以及 `data/candidate_comparisons/g_20260809_01/` 中正式 `oos_panel_v4`、`comparison_protocol.json`、`comparison_code_snapshot.json`、`comparison_result.json` 和 `comparison_result.staging/`。合并 JSONL 只是从 shards 生成的兼容视图，可以重建，但这不等于已授权删除。任何清理、去重、压缩或归档删除操作都必须先列出精确目标、验证可重建性，并取得用户另行确认；不得把失败的旧目录与正式 v4 产物混为一谈。
+
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts\backup_file_mvp.ps1 -Destination "D:\ta-research-backups\20260805"
 ```

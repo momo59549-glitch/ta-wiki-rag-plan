@@ -1,8 +1,9 @@
 # 多 Agent 股票研究团队：主实施计划
 
-> 状态：实施基线 v2.0  
+> 状态：长期目标架构 / 历史实施基线 v2.0
 > 定位：研究与教育系统，不是自动荐股或实盘交易系统  
-> 迁移入口：`MIGRATION_FROM_CURRENT_PLAN.md`
+> 当前运行事实：无 SQL 文件型运行时以 `README.md` 与 `docs/IMPLEMENTATION_STATUS.md` 为准；本文中的 PostgreSQL、pgvector 与相关拓扑是达到迁移门槛后的目标，不代表已经部署或当前唯一真相。
+> 历史迁移说明：`docs/archive/plans/MIGRATION_FROM_CURRENT_PLAN.md`
 
 ## 1. 一句话目标
 
@@ -69,7 +70,7 @@ Data/Scanner   Reviewer   Research   Report/Knowledge
 
 - **LangGraph**：单个研究案例的有状态决策图、条件路由、暂停/恢复、人工审批点。
 - **Prefect**：行情同步、每日扫描、Outcome 到期复核、批量回测、报告生成等定时/批量作业。
-- **PostgreSQL**：研究对象、版本、状态、审计和 Outbox 的唯一真相。
+- **PostgreSQL（目标态）**：达到迁移门槛后的多人运行中承载研究对象、版本、状态、审计和 Outbox；当前文件型运行时仍以 JSON/JSONL/Parquet 工件为权威。
 - **Redis**：短期缓存、限流和可丢失的任务信号，不保存权威研究状态。
 - **MinIO**：原始文件、Parquet、图表、报告和模型产物。
 
@@ -420,4 +421,3 @@ P2：
 - 失败案例和拒绝决定与成功结果同样保留；
 - 新规则只有在预注册回测、QA 和人工批准后发布；
 - 任何报告结论可沿谱系回到 Observation、Outcome、数据快照、规则、代码和证据。
-

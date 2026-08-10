@@ -1,0 +1,606 @@
+{
+  "best_group": {
+    "adjusted_p_value": 7.162774077566307e-10,
+    "horizon_bars": 5,
+    "market_regime": "bearish",
+    "mean_net_excess_return": 0.0078050756842444335,
+    "sample_size": 2208
+  },
+  "definition": {
+    "executable_from": "next_bar_open",
+    "expression": {
+      "lt": [
+        {
+          "metric": {
+            "name": "rsi",
+            "offset": 0,
+            "window": 21
+          }
+        },
+        {
+          "param": "threshold"
+        }
+      ]
+    },
+    "id": "auto_rsi_oversold",
+    "name_zh": "自动发现 rsi_oversold",
+    "observed_at": "bar_close",
+    "parameters": {
+      "threshold": 35.0,
+      "window": 21.0
+    },
+    "version": "g_20260809_01.0058",
+    "warmup_bars": 0
+  },
+  "passing_groups": [
+    {
+      "adjusted_p_value": 7.162774077566307e-10,
+      "horizon_bars": 5,
+      "market_regime": "bearish",
+      "mean_net_excess_return": 0.0078050756842444335,
+      "sample_size": 2208
+    }
+  ],
+  "rejection_reason": "insufficient_multiple_horizons",
+  "search_id": "search_30fc855615c0e7d8bd526d0e",
+  "semantic_hash": "sha256:34e1bcc31f41631b89175aee8677b628d9e42ba41c4834662c547ef234d6efbb",
+  "signals": 46787,
+  "statistics": {
+    "confidence_level": 0.95,
+    "disclaimer": "统计摘要仅用于研究证据评估，不构成投资建议、交易信号或规则发布审批。",
+    "groups": [
+      {
+        "adjusted_p_value": 0.9275630384103656,
+        "confidence_interval": {
+          "lower": -0.0009299334084844823,
+          "upper": 0.0008271503682436637
+        },
+        "evidence_status": "descriptive_only",
+        "horizon_bars": 1,
+        "market_regime": "bearish",
+        "mean_return": -5.139152012040933e-05,
+        "multiple_testing_reject": false,
+        "raw_p_value": 0.908721914192655,
+        "sample_size": 2520,
+        "sample_stddev": 0.022501664890617102,
+        "standard_error": 0.0004482438939153472,
+        "t_statistic": -0.11465079796516947
+      },
+      {
+        "adjusted_p_value": 0.585764501001299,
+        "confidence_interval": {
+          "lower": -0.001445065556846166,
+          "upper": 0.0007271297670466287
+        },
+        "evidence_status": "descriptive_only",
+        "horizon_bars": 1,
+        "market_regime": "bullish",
+        "mean_return": -0.0003589678948997686,
+        "multiple_testing_reject": false,
+        "raw_p_value": 0.5171202235402093,
+        "sample_size": 1977,
+        "sample_stddev": 0.024639059279438113,
+        "standard_error": 0.0005541416426594557,
+        "t_statistic": -0.6477908665679726
+      },
+      {
+        "adjusted_p_value": 1.4816893817145394e-07,
+        "confidence_interval": {
+          "lower": 0.0031860309973702153,
+          "upper": 0.006677593089540496
+        },
+        "evidence_status": "descriptive_only",
+        "horizon_bars": 3,
+        "market_regime": "bearish",
+        "mean_return": 0.0049318120434553555,
+        "multiple_testing_reject": true,
+        "raw_p_value": 3.0791357463755276e-08,
+        "sample_size": 2360,
+        "sample_stddev": 0.043271074984212315,
+        "standard_error": 0.0008907209825566383,
+        "t_statistic": 5.536876463041844
+      },
+      {
+        "adjusted_p_value": 0.009200144314918243,
+        "confidence_interval": {
+          "lower": -0.004985596613335711,
+          "upper": -0.000920008016603256
+        },
+        "evidence_status": "descriptive_only",
+        "horizon_bars": 3,
+        "market_regime": "bullish",
+        "mean_return": -0.0029528023149694837,
+        "multiple_testing_reject": true,
+        "raw_p_value": 0.004413194226062345,
+        "sample_size": 1976,
+        "sample_stddev": 0.04610402191704549,
+        "standard_error": 0.0010371590061861596,
+        "t_statistic": -2.847010243711354
+      },
+      {
+        "adjusted_p_value": 7.162774077566307e-10,
+        "confidence_interval": {
+          "lower": 0.0054355821037995935,
+          "upper": 0.010174569264689274
+        },
+        "evidence_status": "descriptive_only",
+        "horizon_bars": 5,
+        "market_regime": "bearish",
+        "mean_return": 0.0078050756842444335,
+        "multiple_testing_reject": true,
+        "raw_p_value": 1.074416111634946e-10,
+        "sample_size": 2208,
+        "sample_stddev": 0.05680767040985725,
+        "standard_error": 0.0012089475108395375,
+        "t_statistic": 6.456091446703342
+      },
+      {
+        "adjusted_p_value": 1.4634864538209696e-05,
+        "confidence_interval": {
+          "lower": -0.009397395899687777,
+          "upper": -0.0037893621532558105
+        },
+        "evidence_status": "descriptive_only",
+        "horizon_bars": 5,
+        "market_regime": "bullish",
+        "mean_return": -0.006593379026471793,
+        "multiple_testing_reject": true,
+        "raw_p_value": 4.052550440114544e-06,
+        "sample_size": 1983,
+        "sample_stddev": 0.06370798787877253,
+        "standard_error": 0.001430647142158586,
+        "t_statistic": -4.608668924836061
+      },
+      {
+        "adjusted_p_value": 0.004119757210070064,
+        "confidence_interval": {
+          "lower": -0.00916896844778306,
+          "upper": -0.002089347136340201
+        },
+        "evidence_status": "descriptive_only",
+        "horizon_bars": 10,
+        "market_regime": "bearish",
+        "mean_return": -0.005629157792061631,
+        "multiple_testing_reject": true,
+        "raw_p_value": 0.0018281422619685905,
+        "sample_size": 1978,
+        "sample_stddev": 0.08032395512966375,
+        "standard_error": 0.0018060590315143571,
+        "t_statistic": -3.116818273288473
+      },
+      {
+        "adjusted_p_value": 1.339250800494042e-07,
+        "confidence_interval": {
+          "lower": -0.01677475596881326,
+          "upper": -0.008025790885681172
+        },
+        "evidence_status": "descriptive_only",
+        "horizon_bars": 10,
+        "market_regime": "bullish",
+        "mean_return": -0.012400273427247217,
+        "multiple_testing_reject": true,
+        "raw_p_value": 2.7622047760189616e-08,
+        "sample_size": 1812,
+        "sample_stddev": 0.09500745688661968,
+        "standard_error": 0.002231919859788958,
+        "t_statistic": -5.555877543210597
+      },
+      {
+        "adjusted_p_value": 0.05633872977936619,
+        "confidence_interval": {
+          "lower": -0.011956498596647033,
+          "upper": -0.0005145701428679343
+        },
+        "evidence_status": "descriptive_only",
+        "horizon_bars": 20,
+        "market_regime": "bearish",
+        "mean_return": -0.006235534369757483,
+        "multiple_testing_reject": false,
+        "raw_p_value": 0.03265885741897634,
+        "sample_size": 1790,
+        "sample_stddev": 0.12349451151398601,
+        "standard_error": 0.002918912935143598,
+        "t_statistic": -2.1362522652463842
+      },
+      {
+        "adjusted_p_value": 0.0,
+        "confidence_interval": {
+          "lower": -0.05187624917024594,
+          "upper": -0.04043566938915277
+        },
+        "evidence_status": "descriptive_only",
+        "horizon_bars": 20,
+        "market_regime": "bullish",
+        "mean_return": -0.04615595927969936,
+        "multiple_testing_reject": true,
+        "raw_p_value": 0.0,
+        "sample_size": 1268,
+        "sample_stddev": 0.1039272831319899,
+        "standard_error": 0.0029185688796669242,
+        "t_statistic": -15.814586251932766
+      }
+    ],
+    "multiple_testing": {
+      "alpha": 0.05,
+      "engine": "statsmodels.stats.multitest.multipletests",
+      "method": "fdr_bh",
+      "note": "对同一份统计摘要中所有有效分组统一校正；这不是独立性假设的替代品。"
+    },
+    "outcomes_excluded": 0,
+    "outcomes_received": 19872,
+    "return_field": "net_excess_return"
+  },
+  "status": "rejected",
+  "stress_statistics": {
+    "2.0": {
+      "confidence_level": 0.95,
+      "disclaimer": "统计摘要仅用于研究证据评估，不构成投资建议、交易信号或规则发布审批。",
+      "groups": [
+        {
+          "adjusted_p_value": 0.00028684948929158516,
+          "confidence_interval": {
+            "lower": -0.0025299334084844826,
+            "upper": -0.0007728496317563365
+          },
+          "evidence_status": "descriptive_only",
+          "horizon_bars": 1,
+          "market_regime": "bearish",
+          "mean_return": -0.0016513915201204095,
+          "multiple_testing_reject": true,
+          "raw_p_value": 0.00022947959143326813,
+          "sample_size": 2520,
+          "sample_stddev": 0.022501664890617102,
+          "standard_error": 0.0004482438939153472,
+          "t_statistic": -3.6841361199496494
+        },
+        {
+          "adjusted_p_value": 0.000452844728587001,
+          "confidence_interval": {
+            "lower": -0.003045065556846166,
+            "upper": -0.0008728702329533714
+          },
+          "evidence_status": "descriptive_only",
+          "horizon_bars": 1,
+          "market_regime": "bullish",
+          "mean_return": -0.0019589678948997687,
+          "multiple_testing_reject": true,
+          "raw_p_value": 0.0004075602557283009,
+          "sample_size": 1977,
+          "sample_stddev": 0.024639059279438113,
+          "standard_error": 0.0005541416426594557,
+          "t_statistic": -3.535139293084386
+        },
+        {
+          "adjusted_p_value": 0.00026228136716044403,
+          "confidence_interval": {
+            "lower": 0.0015860309973702153,
+            "upper": 0.005077593089540496
+          },
+          "evidence_status": "descriptive_only",
+          "horizon_bars": 3,
+          "market_regime": "bearish",
+          "mean_return": 0.0033318120434553556,
+          "multiple_testing_reject": true,
+          "raw_p_value": 0.00018359695701231082,
+          "sample_size": 2360,
+          "sample_stddev": 0.043271074984212315,
+          "standard_error": 0.0008907209825566383,
+          "t_statistic": 3.7405788217675626
+        },
+        {
+          "adjusted_p_value": 2.270289550398985e-05,
+          "confidence_interval": {
+            "lower": -0.006585596613335711,
+            "upper": -0.002520008016603256
+          },
+          "evidence_status": "descriptive_only",
+          "horizon_bars": 3,
+          "market_regime": "bullish",
+          "mean_return": -0.0045528023149694835,
+          "multiple_testing_reject": true,
+          "raw_p_value": 1.1351447751994925e-05,
+          "sample_size": 1976,
+          "sample_stddev": 0.04610402191704549,
+          "standard_error": 0.0010371590061861596,
+          "t_statistic": -4.389685947684189
+        },
+        {
+          "adjusted_p_value": 7.143174957091603e-07,
+          "confidence_interval": {
+            "lower": 0.003835582103799594,
+            "upper": 0.008574569264689273
+          },
+          "evidence_status": "descriptive_only",
+          "horizon_bars": 5,
+          "market_regime": "bearish",
+          "mean_return": 0.006205075684244434,
+          "multiple_testing_reject": true,
+          "raw_p_value": 2.857269982836641e-07,
+          "sample_size": 2208,
+          "sample_stddev": 0.05680767040985725,
+          "standard_error": 0.0012089475108395375,
+          "t_statistic": 5.132626212973797
+        },
+        {
+          "adjusted_p_value": 3.4065238037802224e-08,
+          "confidence_interval": {
+            "lower": -0.010997395899687776,
+            "upper": -0.005389362153255809
+          },
+          "evidence_status": "descriptive_only",
+          "horizon_bars": 5,
+          "market_regime": "bullish",
+          "mean_return": -0.008193379026471792,
+          "multiple_testing_reject": true,
+          "raw_p_value": 1.0219571411340667e-08,
+          "sample_size": 1983,
+          "sample_stddev": 0.06370798787877253,
+          "standard_error": 0.001430647142158586,
+          "t_statistic": -5.727043926505508
+        },
+        {
+          "adjusted_p_value": 0.00010436174629443093,
+          "confidence_interval": {
+            "lower": -0.010768968447783061,
+            "upper": -0.003689347136340201
+          },
+          "evidence_status": "descriptive_only",
+          "horizon_bars": 10,
+          "market_regime": "bearish",
+          "mean_return": -0.007229157792061631,
+          "multiple_testing_reject": true,
+          "raw_p_value": 6.261704777665855e-05,
+          "sample_size": 1978,
+          "sample_stddev": 0.08032395512966375,
+          "standard_error": 0.0018060590315143571,
+          "t_statistic": -4.002725085901581
+        },
+        {
+          "adjusted_p_value": 1.7736412338820173e-09,
+          "confidence_interval": {
+            "lower": -0.018374755968813262,
+            "upper": -0.009625790885681173
+          },
+          "evidence_status": "descriptive_only",
+          "horizon_bars": 10,
+          "market_regime": "bullish",
+          "mean_return": -0.014000273427247217,
+          "multiple_testing_reject": true,
+          "raw_p_value": 3.5472824677640347e-10,
+          "sample_size": 1812,
+          "sample_stddev": 0.09500745688661968,
+          "standard_error": 0.002231919859788958,
+          "t_statistic": -6.272749160702854
+        },
+        {
+          "adjusted_p_value": 0.007265978213174984,
+          "confidence_interval": {
+            "lower": -0.013556498596647032,
+            "upper": -0.002114570142867934
+          },
+          "evidence_status": "descriptive_only",
+          "horizon_bars": 20,
+          "market_regime": "bearish",
+          "mean_return": -0.007835534369757483,
+          "multiple_testing_reject": true,
+          "raw_p_value": 0.007265978213174984,
+          "sample_size": 1790,
+          "sample_stddev": 0.12349451151398601,
+          "standard_error": 0.002918912935143598,
+          "t_statistic": -2.6844015370989505
+        },
+        {
+          "adjusted_p_value": 0.0,
+          "confidence_interval": {
+            "lower": -0.05347624917024594,
+            "upper": -0.04203566938915277
+          },
+          "evidence_status": "descriptive_only",
+          "horizon_bars": 20,
+          "market_regime": "bullish",
+          "mean_return": -0.047755959279699355,
+          "multiple_testing_reject": true,
+          "raw_p_value": 0.0,
+          "sample_size": 1268,
+          "sample_stddev": 0.1039272831319899,
+          "standard_error": 0.0029185688796669242,
+          "t_statistic": -16.362800142359294
+        }
+      ],
+      "multiple_testing": {
+        "alpha": 0.05,
+        "engine": "statsmodels.stats.multitest.multipletests",
+        "method": "fdr_bh",
+        "note": "对同一份统计摘要中所有有效分组统一校正；这不是独立性假设的替代品。"
+      },
+      "outcomes_excluded": 0,
+      "outcomes_received": 19872,
+      "return_field": "net_excess_return"
+    },
+    "3.0": {
+      "confidence_level": 0.95,
+      "disclaimer": "统计摘要仅用于研究证据评估，不构成投资建议、交易信号或规则发布审批。",
+      "groups": [
+        {
+          "adjusted_p_value": 2.029487689014786e-12,
+          "confidence_interval": {
+            "lower": -0.004129933408484483,
+            "upper": -0.0023728496317563363
+          },
+          "evidence_status": "descriptive_only",
+          "horizon_bars": 1,
+          "market_regime": "bearish",
+          "mean_return": -0.0032513915201204096,
+          "multiple_testing_reject": true,
+          "raw_p_value": 4.0589753780295723e-13,
+          "sample_size": 2520,
+          "sample_stddev": 0.022501664890617105,
+          "standard_error": 0.00044824389391534726,
+          "t_statistic": -7.253621441934128
+        },
+        {
+          "adjusted_p_value": 2.681304067664314e-10,
+          "confidence_interval": {
+            "lower": -0.004645065556846167,
+            "upper": -0.0024728702329533717
+          },
+          "evidence_status": "descriptive_only",
+          "horizon_bars": 1,
+          "market_regime": "bullish",
+          "mean_return": -0.003558967894899769,
+          "multiple_testing_reject": true,
+          "raw_p_value": 1.340652033832157e-10,
+          "sample_size": 1977,
+          "sample_stddev": 0.024639059279438113,
+          "standard_error": 0.0005541416426594557,
+          "t_statistic": -6.422487719600801
+        },
+        {
+          "adjusted_p_value": 0.05186155282455207,
+          "confidence_interval": {
+            "lower": -1.3969002629785239e-05,
+            "upper": 0.0034775930895404954
+          },
+          "evidence_status": "descriptive_only",
+          "horizon_bars": 3,
+          "market_regime": "bearish",
+          "mean_return": 0.001731812043455355,
+          "multiple_testing_reject": false,
+          "raw_p_value": 0.05186155282455207,
+          "sample_size": 2360,
+          "sample_stddev": 0.043271074984212315,
+          "standard_error": 0.0008907209825566383,
+          "t_statistic": 1.9442811804932802
+        },
+        {
+          "adjusted_p_value": 4.976799713081922e-09,
+          "confidence_interval": {
+            "lower": -0.008185596613335712,
+            "upper": -0.004120008016603257
+          },
+          "evidence_status": "descriptive_only",
+          "horizon_bars": 3,
+          "market_regime": "bullish",
+          "mean_return": -0.006152802314969484,
+          "multiple_testing_reject": true,
+          "raw_p_value": 2.986079827849153e-09,
+          "sample_size": 1976,
+          "sample_stddev": 0.04610402191704549,
+          "standard_error": 0.0010371590061861596,
+          "t_statistic": -5.932361651657025
+        },
+        {
+          "adjusted_p_value": 0.0001742989436009923,
+          "confidence_interval": {
+            "lower": 0.002235582103799594,
+            "upper": 0.006974569264689274
+          },
+          "evidence_status": "descriptive_only",
+          "horizon_bars": 5,
+          "market_regime": "bearish",
+          "mean_return": 0.004605075684244434,
+          "multiple_testing_reject": true,
+          "raw_p_value": 0.00013943915488079384,
+          "sample_size": 2208,
+          "sample_stddev": 0.05680767040985725,
+          "standard_error": 0.0012089475108395375,
+          "t_statistic": 3.8091609792442522
+        },
+        {
+          "adjusted_p_value": 1.906308444432625e-11,
+          "confidence_interval": {
+            "lower": -0.012597395899687776,
+            "upper": -0.00698936215325581
+          },
+          "evidence_status": "descriptive_only",
+          "horizon_bars": 5,
+          "market_regime": "bullish",
+          "mean_return": -0.009793379026471793,
+          "multiple_testing_reject": true,
+          "raw_p_value": 7.6252337777305e-12,
+          "sample_size": 1983,
+          "sample_stddev": 0.06370798787877253,
+          "standard_error": 0.001430647142158586,
+          "t_statistic": -6.845418928174957
+        },
+        {
+          "adjusted_p_value": 1.4505593656391878e-06,
+          "confidence_interval": {
+            "lower": -0.01236896844778306,
+            "upper": -0.005289347136340201
+          },
+          "evidence_status": "descriptive_only",
+          "horizon_bars": 10,
+          "market_regime": "bearish",
+          "mean_return": -0.00882915779206163,
+          "multiple_testing_reject": true,
+          "raw_p_value": 1.0153915559474314e-06,
+          "sample_size": 1978,
+          "sample_stddev": 0.08032395512966375,
+          "standard_error": 0.0018060590315143571,
+          "t_statistic": -4.888631898514688
+        },
+        {
+          "adjusted_p_value": 9.188205751797796e-12,
+          "confidence_interval": {
+            "lower": -0.019974755968813263,
+            "upper": -0.011225790885681172
+          },
+          "evidence_status": "descriptive_only",
+          "horizon_bars": 10,
+          "market_regime": "bullish",
+          "mean_return": -0.015600273427247216,
+          "multiple_testing_reject": true,
+          "raw_p_value": 2.7564617255393387e-12,
+          "sample_size": 1812,
+          "sample_stddev": 0.09500745688661968,
+          "standard_error": 0.002231919859788958,
+          "t_statistic": -6.98962077819511
+        },
+        {
+          "adjusted_p_value": 0.0013632257282905316,
+          "confidence_interval": {
+            "lower": -0.015156498596647031,
+            "upper": -0.003714570142867933
+          },
+          "evidence_status": "descriptive_only",
+          "horizon_bars": 20,
+          "market_regime": "bearish",
+          "mean_return": -0.009435534369757482,
+          "multiple_testing_reject": true,
+          "raw_p_value": 0.0012269031554614784,
+          "sample_size": 1790,
+          "sample_stddev": 0.12349451151398601,
+          "standard_error": 0.002918912935143598,
+          "t_statistic": -3.2325508089515163
+        },
+        {
+          "adjusted_p_value": 0.0,
+          "confidence_interval": {
+            "lower": -0.055076249170245936,
+            "upper": -0.04363566938915277
+          },
+          "evidence_status": "descriptive_only",
+          "horizon_bars": 20,
+          "market_regime": "bullish",
+          "mean_return": -0.04935595927969935,
+          "multiple_testing_reject": true,
+          "raw_p_value": 0.0,
+          "sample_size": 1268,
+          "sample_stddev": 0.1039272831319899,
+          "standard_error": 0.0029185688796669242,
+          "t_statistic": -16.911014032785822
+        }
+      ],
+      "multiple_testing": {
+        "alpha": 0.05,
+        "engine": "statsmodels.stats.multitest.multipletests",
+        "method": "fdr_bh",
+        "note": "对同一份统计摘要中所有有效分组统一校正；这不是独立性假设的替代品。"
+      },
+      "outcomes_excluded": 0,
+      "outcomes_received": 19872,
+      "return_field": "net_excess_return"
+    }
+  }
+}

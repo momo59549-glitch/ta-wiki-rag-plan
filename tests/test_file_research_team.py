@@ -89,6 +89,15 @@ class FileResearchTeamTests(unittest.TestCase):
             )
             with self.assertRaisesRegex(ValueError, "horizons_bound"):
                 FileResearchTeam._validated_campaign(campaign, ["000001"], rule, TeamConfig(overridden, 2))
+            other_source = LocalParquetMarketData(root / "another_model_data")
+            with self.assertRaisesRegex(ValueError, "execution_source_bound"):
+                FileResearchTeam._validated_campaign(
+                    campaign,
+                    ["000001"],
+                    rule,
+                    team_config,
+                    source=other_source,
+                )
 
 
 if __name__ == "__main__":

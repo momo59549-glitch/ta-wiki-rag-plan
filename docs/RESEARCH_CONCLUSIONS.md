@@ -3,6 +3,10 @@
 归档日期：2026-08-08。本文件是"框架当前搜索空间不存在可发布规则"这一负结论的
 正式存档，包含证据清单与复现方法。结论随证据更新，不随观点变化。
 
+> 复核状态（2026-08-09）：搜索层已修复固定持有期退出价格与 n 元 DSL 向量化口径。下列历史搜索的数值、FDR 和排序需按修复后代码重跑后重新裁决；在重跑完成前，本文件保留为历史审计记录，不能作为任何候选晋升或发布依据。
+
+> 最新正式裁决（2026-08-09）：generation `g_20260809_01` 派生的 RSI、ROC、breakdown 三候选均为 `research_eliminated_event`。ROC 只是在三者内部相对第一，不代表可交易。正式 comparison result hash：`sha256:e38d07cabb182c5f8de97a1149d0b1ae172638dd7b44daee43dbdea6cf39cebb`。最终锁箱未读，禁止批准和发布。
+
 ## 背景
 
 框架定位是多 Agent 研究闭环：Observation → Outcome → Hypothesis → Backtest →
@@ -61,12 +65,13 @@ Rule Version → Knowledge Update。核心资产是可审计的研究数据库�
 最终锁箱保持未读。锁箱开启后的唯一动作：对同一规则空间做一次未看过的样本外
 裁决。按现有证据，预期同样不通过——该预期不作为结论，仅作为决策前置说明。
 
+2022–2026 已被搜索、Campaign 与候选比较使用，不再是下一代的新鲜 OOS。Gen2 必须遵守顺序试验治理，登记父代、累计预算和跨代去重，并使用父代研究结束后真正未查看的未来窗口；不能在已看区间继续调 grammar 后重新命名为样本外。
+
 ## 证据清单
 
-- 搜索轮次：[data/rule_search/round_20260808](H:\股票模型\ta-wiki-rag-plan\data\rule_search\round_20260808)、
-  [round_20260808b](H:\股票模型\ta-wiki-rag-plan\data\rule_search\round_20260808b)、
-  [round_20260808c](H:\股票模型\ta-wiki-rag-plan\data\rule_search\round_20260808c)、
-  [round_20260808d](H:\股票模型\ta-wiki-rag-plan\data\rule_search\round_20260808d)
+- 搜索轮次：`../data/rule_search/round_20260808/`、`../data/rule_search/round_20260808b/`、`../data/rule_search/round_20260808c/`、`../data/rule_search/round_20260808d/`
+- 自动发现：`../data/auto_discovery/g_20260809_01/`
+- 正式三候选比较：`../data/candidate_comparisons/g_20260809_01/comparison_result.json`
 - 审核记录：各轮 `review.json`
 - 冻结裁决：`data/strategy_test_executions/protocol_a666a614…/adjudication.json`
 - 框架代码：`packages/research/rule_search.py`、`packages/rules/catalog.py`
@@ -81,3 +86,5 @@ Rule Version → Knowledge Update。核心资产是可审计的研究数据库�
 
 未来若扩展搜索空间（横截面因子、行业轮动、指数择时等），须先明确"要回答的
 问题"，预登记假设，且锁箱开启前不得反复查看开发集结果。
+
+数据保留：本轮未删除任何数据。权威研究 shards、正式 v4 panel、comparison result/staging 继续保留；合并 JSONL 仅为可重建兼容视图。任何删除必须由用户另行确认。

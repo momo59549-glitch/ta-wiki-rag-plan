@@ -1,6 +1,6 @@
 # 框架实现状态
 
-更新时间：2026-08-05。这里描述“已经运行的代码”，目标架构仍以 `MASTER_IMPLEMENTATION_PLAN.md` 为准。
+更新时间：2026-08-09。这里描述已经运行的代码与正式研究结果；长期目标架构和历史实施基线见 `../MASTER_IMPLEMENTATION_PLAN.md`。两者冲突时，本文件与 `../README.md` 描述当前无 SQL 文件运行时的事实。
 
 ## 已完成
 
@@ -33,6 +33,10 @@
 - 主目录 API/UI/Worker 真实 Job 验收和本地 Prefect Server Flow Run 验收；
 - Tushare 真实单交易日增量验收：2026-08-04，5,529 个覆盖文件，0 失败，检查点不含 Token；
 - README、文件 MVP、Roadmap 和运行手册的当前状态同步。
+- 自动发现 generation `g_20260809_01` 已完成；固定 RSI、ROC、breakdown 三候选经过强分片 Case、正式 v4 panel、代码快照绑定、预注册统计与组合门禁比较，全部为 `research_eliminated_event`；
+- 正式 comparison result hash：`sha256:e38d07cabb182c5f8de97a1149d0b1ae172638dd7b44daee43dbdea6cf39cebb`。ROC 只是三者内部相对第一，不构成正收益、可交易、批准或发布结论；最终锁箱未读；
+- 候选比较相关回归由主代理验证为 26/26。不要据此夸大全套环境状态：完整测试环境仍可能因缺少可选依赖 `pypdf` 而无法全绿；
+- 本轮未删除数据；权威 shards、正式 v4 panel、comparison protocol/result/staging 保留，合并 JSONL 仅为可重建兼容视图。
 
 ## 仍需外部环境
 
@@ -45,6 +49,9 @@
 - MinIO、MLflow、DVC、Qdrant、Celery、Kafka、Next.js、Kubernetes：按容量和协作指标引入，不为技术清单而部署；
 - Docker 实机验收：当前工作站未安装 Docker；
 - 策略验证与参数搜索：按当前要求冻结，不是本轮框架完成条件。
+- Gen2 自动发现：只能按顺序试验治理登记新 generation、父代、累计试验预算和真正未来的新验证窗口；截至父代研究结束日（当前治理口径 2026-08-04）已查看的数据不能再标为 fresh OOS，2026-09 后尚未到来的数据可预注册但到来前不能运行。
+- Gen2 第一阶段：已实现 outcome-blind 预注册骨架（基础 DSL 规则加冻结的 benchmark regime、相对强弱、历史波动率和成交量 context filters）、跨代语义识别、append-only 全局 trial ledger、只读历史 inventory（按 rule logic 去重并冻结 hash）、预算 fail-closed 与 dry-run/fixture 测试；尚未运行任何 Gen2 筛选或正式全市场任务。详见 `GEN2_DISCOVERY.md`。
+- Gen2 Stage2：未来执行/证据 contract 与合成 evaluator 实现中；正式 Gen2 protocol、账本、数据快照与收益筛选均未落盘。
 
 ## 完成口径
 

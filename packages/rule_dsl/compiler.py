@@ -4,6 +4,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from hashlib import sha256
 import json
+import math
 from typing import Any
 
 from packages.contracts import RuleDefinition
@@ -21,6 +22,7 @@ WINDOWED_METRICS = {
     "volume_ratio",
 }
 _CONTEXTS = {"lower_close_count", "higher_close_count"}
+_COMMUTATIVE_ASSOCIATIVE_OPS = {"all", "any", "add", "mul", "min", "max"}
 
 MACD_FAST = 12
 MACD_SLOW = 26
@@ -58,6 +60,51 @@ def _canonical(value: Any) -> Any:
     if isinstance(value, list):
         return [_canonical(item) for item in value]
     return value
+
+
+def _logic_sort_key(value: Any) -> str:
+    """Stable sort key for commutative DSL children."""
+    return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+
+
+def _canonical_logic(node: Any, parameters: dict[str, float]) -> Any:
+    """Canonicalize rule behavior without its display/catalog identity.
+
+    Parameter references are resolved to their frozen values, and the
+    commutative/associative operators are flattened and sorted.  This makes
+    ``rsi_oversold@1`` and an auto-discovery rule with another id/version (or
+    another parameter label) compare by behavior rather than by provenance.
+    ``compile_rule`` remains the syntax authority; callers invoke this only
+    after successful compilation.
+    """
+    if isinstance(node, bool):
+        return node
+    if isinstance(node, (int, float)):
+        number = float(node)
+        if not math.isfinite(number):
+            raise RuleCompileError("规则逻辑哈希不接受非有限数值")
+        return 0.0 if number == 0.0 else number
+    if not isinstance(node, dict) or len(node) != 1:
+        raise RuleCompileError("规则逻辑哈希遇到非法 AST 节点")
+    op, value = next(iter(node.items()))
+    if op == "param":
+        if not isinstance(value, str) or value not in parameters:
+            raise RuleCompileError(f"未知参数: {value}")
+        return _canonical_logic(parameters[value], parameters)
+    if op in {"metric", "context"}:
+        return {op: _canonical(value)}
+
+    children = value if isinstance(value, list) else [value]
+    normalized_children = [_canonical_logic(child, parameters) for child in children]
+    if op in _COMMUTATIVE_ASSOCIATIVE_OPS:
+        flattened: list[Any] = []
+        for child in normalized_children:
+            if isinstance(child, dict) and set(child) == {op} and isinstance(child[op], list):
+                flattened.extend(child[op])
+            else:
+                flattened.append(child)
+        normalized_children = sorted(flattened, key=_logic_sort_key)
+    return {op: normalized_children}
 
 
 def _validate(node: Any, parameters: dict[str, float], required: set[str]) -> int:
@@ -117,3 +164,46 @@ def compile_rule(definition: RuleDefinition) -> CompiledRule:
     payload = {"id": definition.id, "version": definition.version, "parameters": definition.parameters, "expression": normalized}
     semantic_hash = "sha256:" + sha256(json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
     return CompiledRule(definition, normalized, semantic_hash, max(max_lookback, definition.warmup_bars), tuple(sorted(required)))
+
+
+def canonical_rule_logic(definition: RuleDefinition) -> dict[str, Any]:
+    """Return the ID-independent, execution-relevant rule logic signature.
+
+    ``warmup_bars`` is intentionally not part of the *logic* identity: it is
+    an evaluation-start policy rather than a signal condition.  The campaign
+    bridge freezes it separately in a full-definition hash, while this helper
+    can still detect an equivalent catalog signal whose warmup policy differs.
+    """
+    compile_rule(definition)
+    return {
+        "schema_version": "rule-logic/v1",
+        "expression": _canonical_logic(definition.expression, definition.parameters),
+        "observed_at": definition.observed_at,
+        "executable_from": definition.executable_from,
+    }
+
+
+def rule_logic_hash(definition: RuleDefinition) -> str:
+    """Hash canonical behavior independently of id, version, and labels."""
+    payload = canonical_rule_logic(definition)
+    return "sha256:" + sha256(
+        json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+
+
+def rule_definition_hash(definition: RuleDefinition) -> str:
+    """Hash every RuleDefinition field for immutable campaign binding."""
+    payload = {
+        "schema_version": "rule-definition/v1",
+        "id": definition.id,
+        "version": definition.version,
+        "name_zh": definition.name_zh,
+        "expression": _canonical(definition.expression),
+        "parameters": _canonical(definition.parameters),
+        "warmup_bars": definition.warmup_bars,
+        "observed_at": definition.observed_at,
+        "executable_from": definition.executable_from,
+    }
+    return "sha256:" + sha256(
+        json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()

@@ -7,7 +7,14 @@ from pathlib import Path
 
 from packages.market_data import LocalParquetMarketData, load_point_in_time_universe
 from packages.research.json_store import write_json
-from packages.research.rule_search import SearchConfig, build_search_protocol, build_search_space, screen_candidates, search_space_summary
+from packages.research.rule_search import (
+    SearchConfig,
+    build_search_data_snapshot,
+    build_search_protocol,
+    build_search_space,
+    screen_candidates,
+    search_space_summary,
+)
 from packages.rules import get_rule
 
 
@@ -38,6 +45,9 @@ def main() -> int:
     parser.add_argument("--include-rules", type=str, default="", help="逗号分隔的 catalog 规则 id，附加到本轮搜索空间")
     args = parser.parse_args()
 
+    if (args.output_root / "search_protocol.json").exists() or (args.output_root / "round.json").exists() or (args.output_root / "candidates").exists():
+        parser.error(f"该搜索轮次已有预登记或执行记录，拒绝重跑: {args.output_root}")
+
     horizons = tuple(int(item) for item in args.horizons.split(",") if item.strip())
     config = SearchConfig(
         horizons=horizons,
@@ -66,12 +76,17 @@ def main() -> int:
         existing_ids.add(rule_id)
     print(f"搜索空间：{len(definitions)} 个候选，覆盖 {len(search_space_summary(definitions)['families'])} 个规则族" + (f"（含附加规则 {args.include_rules}）" if args.include_rules else ""))
     print(f"开发股票池：{len(symbols)} 只（{universe_meta['as_of']} 点时有效）")
-    protocol = build_search_protocol(definitions, symbols, config, args.output_root, universe_manifest=args.universe_manifest)
-    round_path = args.output_root / "round.json"
-    if round_path.exists():
-        parser.error(f"该搜索轮次已有执行记录，拒绝重跑: {round_path}")
-    print(f"搜索协议：{protocol['search_id']}")
     source = LocalParquetMarketData(args.model_data)
+    data_snapshot = build_search_data_snapshot(source, symbols, config, universe_manifest=args.universe_manifest)
+    protocol = build_search_protocol(
+        definitions,
+        symbols,
+        config,
+        args.output_root,
+        universe_manifest=args.universe_manifest,
+        data_snapshot=data_snapshot,
+    )
+    print(f"搜索协议：{protocol['search_id']}")
     summary = screen_candidates(
         source,
         symbols,
@@ -79,6 +94,7 @@ def main() -> int:
         config,
         args.output_root,
         universe_manifest=args.universe_manifest,
+        search_protocol_id=protocol["search_id"],
     )
     lines = [
         "# 自动规则搜索轮次报告", "",

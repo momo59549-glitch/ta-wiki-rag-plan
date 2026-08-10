@@ -58,6 +58,8 @@ class SearchConfig:
     def __post_init__(self) -> None:
         if not self.horizons or any(item < 1 for item in self.horizons):
             raise ValueError("horizons 必须是正整数")
+        if len(set(self.horizons)) != len(self.horizons):
+            raise ValueError("horizons 不能重复，否则会重复计入同一 Outcome")
         if self.end and self.lockbox_start and self.end >= self.lockbox_start:
             raise ValueError("end 必须早于 lockbox_start，禁止读取最终锁箱")
         if self.start and self.out_of_sample_start and self.start >= self.out_of_sample_start:
@@ -66,6 +68,10 @@ class SearchConfig:
             raise ValueError("验证集起始日期不能晚于研究结束日期")
         if self.commission_bps_per_side < 0 or self.slippage_bps_per_side < 0:
             raise ValueError("交易成本不能为负")
+        if self.min_signal_amount is not None and self.min_signal_amount <= 0:
+            raise ValueError("min_signal_amount 必须为正数")
+        if self.min_out_of_sample_observations < 1:
+            raise ValueError("min_out_of_sample_observations 至少为 1")
         if self.market_regime_window < 2:
             raise ValueError("市场状态窗口至少为 2")
         if not self.cost_stress_multipliers or any(item < 1.0 for item in self.cost_stress_multipliers):
@@ -74,6 +80,33 @@ class SearchConfig:
             raise ValueError("require_multiple_horizons 至少为 1")
         if not 0.0 <= self.dedup_jaccard <= 1.0:
             raise ValueError("dedup_jaccard 必须在 [0, 1]")
+
+
+def _validate_screen_config(config: SearchConfig) -> None:
+    """Require every temporal boundary before a screen can read market data.
+
+    ``SearchConfig`` intentionally retains defaults for compatibility with code
+    that merely serializes a configuration.  A real screen or preregistration,
+    however, must never infer an end date and accidentally consume the lockbox.
+    """
+    missing = [
+        name
+        for name, value in {
+            "start": config.start,
+            "end": config.end,
+            "out_of_sample_start": config.out_of_sample_start,
+            "lockbox_start": config.lockbox_start,
+        }.items()
+        if value is None
+    ]
+    if missing:
+        raise ValueError(f"搜索筛选必须显式冻结时间边界: {', '.join(missing)}")
+    assert config.start is not None
+    assert config.end is not None
+    assert config.out_of_sample_start is not None
+    assert config.lockbox_start is not None
+    if not config.start < config.out_of_sample_start <= config.end < config.lockbox_start:
+        raise ValueError("时间边界必须满足 start < out_of_sample_start <= end < lockbox_start")
 
 
 # ---------------------------------------------------------------------------
@@ -108,11 +141,17 @@ def vectorized_evaluate(expression: dict[str, Any], columns: dict[str, pd.Series
         if op == "not":
             return ~children[0] if not isinstance(children[0], (int, float, bool)) else not children[0]
         if op == "add":
-            return children[0] + children[1]
+            result = children[0]
+            for item in children[1:]:
+                result = result + item
+            return result
         if op == "sub":
             return children[0] - children[1]
         if op == "mul":
-            return children[0] * children[1]
+            result = children[0]
+            for item in children[1:]:
+                result = result * item
+            return result
         if op == "div":
             return children[0] / children[1]
         if op == "safe_div":
@@ -465,11 +504,13 @@ def screen_candidates(
     output_root: Path,
     *,
     universe_manifest: Path | None = None,
+    search_protocol_id: str | None = None,
 ) -> dict[str, Any]:
     if not universe_manifest:
         raise ValueError("搜索筛选必须提供点时股票池 manifest")
-    if config.out_of_sample_start is None:
-        raise ValueError("搜索筛选必须提供验证集起始日期 out_of_sample_start")
+    _validate_screen_config(config)
+    if (output_root / "round.json").exists() or (output_root / "candidates").exists():
+        raise FileExistsError(f"搜索轮次已有执行记录，拒绝覆盖: {output_root}")
     memberships = load_universe_memberships(universe_manifest)
     compiled = [compile_rule(item) for item in definitions]
     needed_indicators: set[str] = set()
@@ -519,9 +560,10 @@ def screen_candidates(
         entry_price = np.full(length, np.nan)
         for j in range(1, length):
             prior = prev_close[j]
+            if open_array[j] > 0:
+                entry_price[j] = open_array[j]
             if open_array[j] > 0 and isfinite(prior) and prior > 0 and open_array[j] / prior - 1.0 < limit[j] - tolerance:
                 valid_entry[j] = True
-                entry_price[j] = open_array[j]
         exit_volume_ok = np.ones(length, dtype=bool)
         if volume_series is not None:
             exit_volume_ok = volume_series.isna().to_numpy() | (volume_series.to_numpy(dtype=float) > 0.0)
@@ -532,7 +574,10 @@ def screen_candidates(
             prior = prev_close[j]
             if close_array[j] > 0 and isfinite(prior) and prior > 0 and close_array[j] / prior - 1.0 > -limit[j] + tolerance:
                 valid_exit[j] = True
-        close_after_h = {h: pd.Series(close_array).shift(-h).to_numpy(dtype=float) for h in config.horizons}
+        # ``h`` bars means next-session open through the close of
+        # ``entry_index + h - 1``.  This exactly matches FileResearchPipeline
+        # and keeps exit price, tradeability check, and benchmark exit aligned.
+        close_at_exit = {h: pd.Series(close_array).shift(-(h - 1)).to_numpy(dtype=float) for h in config.horizons}
         day_dates = [item.timestamp.date() for item in series]
         day_array = np.array(day_dates)
         benchmark_open_at = np.array([benchmark_open.get(day, np.nan) for day in day_dates], dtype=float)
@@ -558,13 +603,15 @@ def screen_candidates(
                 exit_indices = exit_indices[keep]
                 if entry_indices.size == 0:
                     continue
-                entry_ok = valid_entry[entry_indices] & valid_exit[exit_indices] & exit_volume_ok[exit_indices] & exit_amount_ok[exit_indices]
+                entry_ok = np.ones(entry_indices.size, dtype=bool)
+                if config.skip_untradeable:
+                    entry_ok &= valid_entry[entry_indices] & valid_exit[exit_indices] & exit_volume_ok[exit_indices] & exit_amount_ok[exit_indices]
                 entry_indices = entry_indices[entry_ok]
                 exit_indices = exit_indices[entry_ok]
                 if entry_indices.size == 0:
                     continue
                 entry_price_values = entry_price[entry_indices]
-                exit_price_values = close_after_h[h][entry_indices]
+                exit_price_values = close_at_exit[h][entry_indices]
                 entry_ok_final = entry_price_values > 0
                 entry_indices = entry_indices[entry_ok_final]
                 exit_indices = exit_indices[entry_ok_final]
@@ -604,6 +651,7 @@ def screen_candidates(
         results[rule.semantic_hash] = {
             "definition": asdict(definition),
             "semantic_hash": rule.semantic_hash,
+            "search_id": search_protocol_id,
             "signals": signal_counts[rule.semantic_hash],
             "statistics": statistics,
             "stress_statistics": stress_statistics,
@@ -650,6 +698,7 @@ def screen_candidates(
         ledger.append(_ledger_record(definition, record))
     write_json(output_root / "round.json", {
         "schema_version": "rule-search-round/v1",
+        "search_id": search_protocol_id,
         "candidates_total": len(ledger),
         "passed_screen": sum(1 for item in ledger if item["status"] == "passed_screen"),
         "screen_criteria": {
@@ -858,6 +907,7 @@ def _ledger_record(definition: RuleDefinition, record: dict[str, Any]) -> dict[s
         "rule_id": definition.id,
         "version": definition.version,
         "semantic_hash": record["semantic_hash"],
+        "search_id": record.get("search_id"),
         "definition": record["definition"],
         "signals": record["signals"],
         "outcomes_oos": record["statistics"]["outcomes_received"] - record["statistics"]["outcomes_excluded"],
@@ -870,6 +920,54 @@ def _ledger_record(definition: RuleDefinition, record: dict[str, Any]) -> dict[s
     }
 
 
+def build_search_data_snapshot(
+    source: LocalParquetMarketData,
+    symbols: list[str],
+    config: SearchConfig,
+    *,
+    universe_manifest: Path,
+) -> dict[str, Any]:
+    """Bind a search protocol to the exact local inputs available at freeze time.
+
+    Missing requested symbols remain explicit rather than silently falling back
+    to today's file list.  The lightweight Parquet identity deliberately uses
+    the existing ``LocalParquetMarketData.snapshot_id`` implementation.
+    """
+    available: list[str] = []
+    missing: list[str] = []
+    for symbol in sorted(set(symbols)):
+        try:
+            source.source_path(symbol)
+        except (FileNotFoundError, ValueError):
+            missing.append(symbol)
+        else:
+            available.append(symbol)
+    benchmark_source = LocalParquetMarketData(source.root, config.benchmark_dataset)
+    try:
+        benchmark_snapshot_id = benchmark_source.snapshot_id([config.benchmark_symbol])
+    except (FileNotFoundError, ValueError):
+        benchmark_snapshot_id = None
+    manifest_bytes = universe_manifest.read_bytes()
+    return {
+        "schema_version": "rule-search-data-snapshot/v1",
+        "primary": {
+            "dataset": source.dataset,
+            "snapshot_id": source.snapshot_id(available) if available else None,
+            "symbols_available": available,
+            "symbols_missing": missing,
+        },
+        "benchmark": {
+            "dataset": config.benchmark_dataset,
+            "symbol": config.benchmark_symbol,
+            "snapshot_id": benchmark_snapshot_id,
+        },
+        "universe_manifest": {
+            "path": str(universe_manifest),
+            "sha256": "sha256:" + sha256(manifest_bytes).hexdigest(),
+        },
+    }
+
+
 def build_search_protocol(
     definitions: list[RuleDefinition],
     symbols: list[str],
@@ -877,7 +975,12 @@ def build_search_protocol(
     output_root: Path,
     *,
     universe_manifest: Path,
+    data_snapshot: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
+    _validate_screen_config(config)
+    protocol_path = output_root / "search_protocol.json"
+    if protocol_path.exists() or (output_root / "round.json").exists():
+        raise FileExistsError(f"搜索协议或执行记录已存在，拒绝覆盖: {output_root}")
     space = search_space_summary(definitions)
     identity = {
         "schema_version": "rule-search-protocol/v1",
@@ -900,6 +1003,11 @@ def build_search_protocol(
             "skip_untradeable": config.skip_untradeable,
         },
         "universe_manifest": str(universe_manifest),
+        "data_snapshot": data_snapshot or {
+            "schema_version": "rule-search-data-snapshot/v1",
+            "status": "not_bound",
+            "reason": "caller_did_not_provide_data_snapshot",
+        },
         "symbols": sorted(set(symbols)),
         "multiple_testing": {"method": "fdr_bh", "alpha": 0.05, "scope": "all_candidates_all_groups"},
         "screen_criteria": {
@@ -913,5 +1021,5 @@ def build_search_protocol(
     search_id = "search_" + sha256(json.dumps(identity, ensure_ascii=False, sort_keys=True, separators=(",", ":"), default=str).encode("utf-8")).hexdigest()[:24]
     protocol = {**identity, "search_id": search_id, "created_at": datetime.now(timezone.utc).isoformat()}
     output_root.mkdir(parents=True, exist_ok=True)
-    write_json(output_root / "search_protocol.json", protocol)
+    write_json(protocol_path, protocol)
     return protocol

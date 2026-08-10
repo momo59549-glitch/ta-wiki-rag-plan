@@ -1,0 +1,4140 @@
+{
+  "candidates": [
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "gte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "lower_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "body",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "min_lower_shadow_body"
+                }
+              ]
+            },
+            {
+              "lte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "upper_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "range",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "max_upper_shadow_range"
+                }
+              ]
+            },
+            {
+              "context": {
+                "min_count": 3,
+                "name": "lower_close_count",
+                "window": 5
+              }
+            }
+          ]
+        },
+        "id": "auto_hammer_context",
+        "name_zh": "自动发现 hammer_context",
+        "observed_at": "bar_close",
+        "parameters": {
+          "max_upper_shadow_range": 0.2,
+          "min_lower_shadow_body": 2.0
+        },
+        "version": "g_20260809_01.0001",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 8266,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_hammer_context",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:fc72ac5efb0c2d90a350cc5d4257ec32a3e41ef30550349ee47ea73fee5aee44",
+      "signals": 13245,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0001"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "gte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "upper_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "body",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "min_upper_shadow_body"
+                }
+              ]
+            },
+            {
+              "lte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "lower_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "range",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "max_lower_shadow_range"
+                }
+              ]
+            }
+          ]
+        },
+        "id": "auto_shooting_star",
+        "name_zh": "自动发现 shooting_star",
+        "observed_at": "bar_close",
+        "parameters": {
+          "max_lower_shadow_range": 0.1,
+          "min_upper_shadow_body": 2.5
+        },
+        "version": "g_20260809_01.0002",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 12499,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_shooting_star",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:f5f156a20ab653edab8cb2c4a340a64188051b37227a7c598efdcd28f0912239",
+      "signals": 19528,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0002"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "lte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "body",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "range",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "max_body_range"
+                }
+              ]
+            },
+            {
+              "context": {
+                "min_count": 3,
+                "name": "lower_close_count",
+                "window": 5
+              }
+            }
+          ]
+        },
+        "id": "auto_doji_after_decline",
+        "name_zh": "自动发现 doji_after_decline",
+        "observed_at": "bar_close",
+        "parameters": {
+          "max_body_range": 0.05
+        },
+        "version": "g_20260809_01.0003",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 8357,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_doji_after_decline",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:c5aa439243c24133815e4eb84121bdd111c87ae0b781489d557217ad86c86d16",
+      "signals": 13796,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0003"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "gt": [
+            {
+              "metric": {
+                "name": "sma",
+                "offset": 0,
+                "window": 60
+              }
+            },
+            {
+              "metric": {
+                "name": "sma",
+                "offset": -5,
+                "window": 60
+              }
+            }
+          ]
+        },
+        "id": "auto_sma_rising",
+        "name_zh": "自动发现 sma_rising",
+        "observed_at": "bar_close",
+        "parameters": {
+          "window": 60.0
+        },
+        "version": "g_20260809_01.0004",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 258441,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_sma_rising",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:8825dc6694efb7bac5f15c45da0667ce329459e41c2ff284f0ca9ff5da1e4118",
+      "signals": 359637,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0004"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "gt": [
+                {
+                  "metric": {
+                    "name": "volume_ratio",
+                    "offset": 0,
+                    "window": 20
+                  }
+                },
+                {
+                  "param": "multiple"
+                }
+              ]
+            },
+            {
+              "eq": [
+                {
+                  "metric": {
+                    "name": "is_bearish",
+                    "offset": 0
+                  }
+                },
+                true
+              ]
+            }
+          ]
+        },
+        "id": "auto_volume_surge_down",
+        "name_zh": "自动发现 volume_surge_down",
+        "observed_at": "bar_close",
+        "parameters": {
+          "multiple": 3.0
+        },
+        "version": "g_20260809_01.0005",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 5826,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_volume_surge_down",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:de8f8d8aa60bd7a4a879e5170582078c6d8f928915b19b0db78f2d559423405e",
+      "signals": 5162,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0005"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "gt": [
+                {
+                  "metric": {
+                    "name": "volume_ratio",
+                    "offset": 0,
+                    "window": 20
+                  }
+                },
+                {
+                  "param": "multiple"
+                }
+              ]
+            },
+            {
+              "eq": [
+                {
+                  "metric": {
+                    "name": "is_bearish",
+                    "offset": 0
+                  }
+                },
+                true
+              ]
+            }
+          ]
+        },
+        "id": "auto_volume_surge_down",
+        "name_zh": "自动发现 volume_surge_down",
+        "observed_at": "bar_close",
+        "parameters": {
+          "multiple": 2.0
+        },
+        "version": "g_20260809_01.0006",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 13365,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_volume_surge_down",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:52a94909947ed54280370b5c56cc254301e0bba0d75bacda0079bcce1f436d1a",
+      "signals": 15568,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0006"
+    },
+    {
+      "best_group": {
+        "adjusted_p_value": 4.608925853579028e-14,
+        "horizon_bars": 5,
+        "market_regime": "bearish",
+        "mean_net_excess_return": 0.012319523619857683,
+        "sample_size": 1322
+      },
+      "dedup_cluster": 1,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "lt": [
+                {
+                  "metric": {
+                    "name": "rsi",
+                    "offset": 0,
+                    "window": 14
+                  }
+                },
+                {
+                  "param": "rsi_threshold"
+                }
+              ]
+            },
+            {
+              "lt": [
+                {
+                  "metric": {
+                    "name": "close",
+                    "offset": 0
+                  }
+                },
+                {
+                  "metric": {
+                    "name": "sma",
+                    "offset": 0,
+                    "window": 20
+                  }
+                }
+              ]
+            },
+            {
+              "context": {
+                "min_count": 3,
+                "name": "lower_close_count",
+                "window": 5
+              }
+            }
+          ]
+        },
+        "id": "auto_combo_rsi_trend",
+        "name_zh": "自动发现 combo_rsi_trend",
+        "observed_at": "bar_close",
+        "parameters": {
+          "rsi_threshold": 30.0,
+          "rsi_window": 14.0,
+          "trend_window": 20.0
+        },
+        "version": "g_20260809_01.0007",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 11304,
+      "passing_groups": [
+        {
+          "adjusted_p_value": 4.4773925815020014e-14,
+          "horizon_bars": 3,
+          "market_regime": "bearish",
+          "mean_net_excess_return": 0.009019518796367955,
+          "sample_size": 1378
+        },
+        {
+          "adjusted_p_value": 4.608925853579028e-14,
+          "horizon_bars": 5,
+          "market_regime": "bearish",
+          "mean_net_excess_return": 0.012319523619857683,
+          "sample_size": 1322
+        }
+      ],
+      "rejection_reason": null,
+      "rule_id": "auto_combo_rsi_trend",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:4508d8a29f5e65795079a9258cf431b30876b73de0736f1d7a54773bce9af854",
+      "signals": 24873,
+      "status": "passed_screen",
+      "stress_survived": true,
+      "version": "g_20260809_01.0007"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "gte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "lower_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "body",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "min_lower_shadow_body"
+                }
+              ]
+            },
+            {
+              "lte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "upper_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "range",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "max_upper_shadow_range"
+                }
+              ]
+            }
+          ]
+        },
+        "id": "auto_hammer",
+        "name_zh": "自动发现 hammer",
+        "observed_at": "bar_close",
+        "parameters": {
+          "max_upper_shadow_range": 0.1,
+          "min_lower_shadow_body": 2.5
+        },
+        "version": "g_20260809_01.0008",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 9034,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_hammer",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:beb1167c61973cc2c706a8e1f315f4cabf314b69fe0506889a20b124df89f90a",
+      "signals": 15900,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0008"
+    },
+    {
+      "best_group": {
+        "adjusted_p_value": 0.0,
+        "horizon_bars": 5,
+        "market_regime": "bearish",
+        "mean_net_excess_return": 0.0064448016556851555,
+        "sample_size": 8476
+      },
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "lt": [
+            {
+              "metric": {
+                "name": "rsi",
+                "offset": 0,
+                "window": 7
+              }
+            },
+            {
+              "param": "threshold"
+            }
+          ]
+        },
+        "id": "auto_rsi_oversold",
+        "name_zh": "自动发现 rsi_oversold",
+        "observed_at": "bar_close",
+        "parameters": {
+          "threshold": 35.0,
+          "window": 7.0
+        },
+        "version": "g_20260809_01.0009",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 99485,
+      "passing_groups": [
+        {
+          "adjusted_p_value": 0.0,
+          "horizon_bars": 5,
+          "market_regime": "bearish",
+          "mean_net_excess_return": 0.0064448016556851555,
+          "sample_size": 8476
+        }
+      ],
+      "rejection_reason": "insufficient_multiple_horizons",
+      "rule_id": "auto_rsi_oversold",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:5c37be6440903095b8b517ee21f084a955b476f16cd1b57ca7819144cc626b04",
+      "signals": 166956,
+      "status": "rejected",
+      "stress_survived": true,
+      "version": "g_20260809_01.0009"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "gte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "upper_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "body",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "min_upper_shadow_body"
+                }
+              ]
+            },
+            {
+              "lte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "lower_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "range",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "max_lower_shadow_range"
+                }
+              ]
+            },
+            {
+              "context": {
+                "min_count": 3,
+                "name": "higher_close_count",
+                "window": 5
+              }
+            }
+          ]
+        },
+        "id": "auto_shooting_star_context",
+        "name_zh": "自动发现 shooting_star_context",
+        "observed_at": "bar_close",
+        "parameters": {
+          "max_lower_shadow_range": 0.2,
+          "min_upper_shadow_body": 1.5
+        },
+        "version": "g_20260809_01.0010",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 12144,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_shooting_star_context",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:77883beaf51427cfdfe61098216f7b0de6db5affbffbab27b9d1879ea281302f",
+      "signals": 20952,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0010"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "gt": [
+            {
+              "metric": {
+                "name": "rsi",
+                "offset": 0,
+                "window": 7
+              }
+            },
+            {
+              "param": "threshold"
+            }
+          ]
+        },
+        "id": "auto_rsi_overbought",
+        "name_zh": "自动发现 rsi_overbought",
+        "observed_at": "bar_close",
+        "parameters": {
+          "threshold": 75.0,
+          "window": 7.0
+        },
+        "version": "g_20260809_01.0011",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 30647,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_rsi_overbought",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:600131de49f8910e3ebb2a4b18a6767b11296483df87bd373155ea824180e1ab",
+      "signals": 54837,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0011"
+    },
+    {
+      "best_group": {
+        "adjusted_p_value": 0.0,
+        "horizon_bars": 5,
+        "market_regime": "bearish",
+        "mean_net_excess_return": 0.01096016540012034,
+        "sample_size": 2824
+      },
+      "dedup_cluster": 5,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "lt": [
+            {
+              "metric": {
+                "name": "close",
+                "offset": 0
+              }
+            },
+            {
+              "metric": {
+                "name": "min_low",
+                "offset": -1,
+                "window": 20
+              }
+            }
+          ]
+        },
+        "id": "auto_breakout_low",
+        "name_zh": "自动发现 breakout_low",
+        "observed_at": "bar_close",
+        "parameters": {
+          "window": 20.0
+        },
+        "version": "g_20260809_01.0012",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 29197,
+      "passing_groups": [
+        {
+          "adjusted_p_value": 2.7632217501781674e-14,
+          "horizon_bars": 3,
+          "market_regime": "bearish",
+          "mean_net_excess_return": 0.0058217187282263395,
+          "sample_size": 2900
+        },
+        {
+          "adjusted_p_value": 0.0,
+          "horizon_bars": 5,
+          "market_regime": "bearish",
+          "mean_net_excess_return": 0.01096016540012034,
+          "sample_size": 2824
+        },
+        {
+          "adjusted_p_value": 1.1264599765971218e-05,
+          "horizon_bars": 10,
+          "market_regime": "bearish",
+          "mean_net_excess_return": 0.00648791206119231,
+          "sample_size": 2722
+        },
+        {
+          "adjusted_p_value": 0.0006200961281379884,
+          "horizon_bars": 20,
+          "market_regime": "bearish",
+          "mean_net_excess_return": 0.008963274558484394,
+          "sample_size": 2554
+        }
+      ],
+      "rejection_reason": null,
+      "rule_id": "auto_breakout_low",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:954e32a4f9df85828679fe3db83fae1158379fb6bb8a4be7ca37bab883dbda3e",
+      "signals": 45771,
+      "status": "passed_screen",
+      "stress_survived": true,
+      "version": "g_20260809_01.0012"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "lte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "body",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "range",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "max_body_range"
+                }
+              ]
+            },
+            {
+              "context": {
+                "min_count": 3,
+                "name": "lower_close_count",
+                "window": 5
+              }
+            }
+          ]
+        },
+        "id": "auto_doji_after_decline",
+        "name_zh": "自动发现 doji_after_decline",
+        "observed_at": "bar_close",
+        "parameters": {
+          "max_body_range": 0.15
+        },
+        "version": "g_20260809_01.0013",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 21999,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_doji_after_decline",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:56a1a87f879ff5c2df752f88d0cf369edab564f5254f1a56a948473867fc9d5e",
+      "signals": 35631,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0013"
+    },
+    {
+      "best_group": {
+        "adjusted_p_value": 6.905681632135613e-09,
+        "horizon_bars": 5,
+        "market_regime": "bearish",
+        "mean_net_excess_return": 0.016578494956268546,
+        "sample_size": 565
+      },
+      "dedup_cluster": 0,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "lt": [
+            {
+              "metric": {
+                "name": "rsi",
+                "offset": 0,
+                "window": 14
+              }
+            },
+            {
+              "param": "threshold"
+            }
+          ]
+        },
+        "id": "auto_rsi_oversold",
+        "name_zh": "自动发现 rsi_oversold",
+        "observed_at": "bar_close",
+        "parameters": {
+          "threshold": 25.0,
+          "window": 14.0
+        },
+        "version": "g_20260809_01.0014",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 4597,
+      "passing_groups": [
+        {
+          "adjusted_p_value": 1.0000128943724681e-07,
+          "horizon_bars": 3,
+          "market_regime": "bearish",
+          "mean_net_excess_return": 0.010793182344011578,
+          "sample_size": 621
+        },
+        {
+          "adjusted_p_value": 6.905681632135613e-09,
+          "horizon_bars": 5,
+          "market_regime": "bearish",
+          "mean_net_excess_return": 0.016578494956268546,
+          "sample_size": 565
+        }
+      ],
+      "rejection_reason": null,
+      "rule_id": "auto_rsi_oversold",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:a5d8c2c5d777fff952ef4a07e1d7ac4f46363b8a8724b4faae50ac5aed085e91",
+      "signals": 14072,
+      "status": "passed_screen",
+      "stress_survived": true,
+      "version": "g_20260809_01.0014"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "lt": [
+            {
+              "metric": {
+                "name": "roc",
+                "offset": 0,
+                "window": 20
+              }
+            },
+            {
+              "param": "threshold"
+            }
+          ]
+        },
+        "id": "auto_roc_negative",
+        "name_zh": "自动发现 roc_negative",
+        "observed_at": "bar_close",
+        "parameters": {
+          "threshold": -0.03,
+          "window": 20.0
+        },
+        "version": "g_20260809_01.0015",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 187794,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_roc_negative",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:15f6191b0670cde964da480594bd2be699539269bfcac5c8b579c89bd8f26b07",
+      "signals": 309264,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0015"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "gte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "upper_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "body",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "min_upper_shadow_body"
+                }
+              ]
+            },
+            {
+              "lte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "lower_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "range",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "max_lower_shadow_range"
+                }
+              ]
+            },
+            {
+              "context": {
+                "min_count": 3,
+                "name": "higher_close_count",
+                "window": 5
+              }
+            }
+          ]
+        },
+        "id": "auto_shooting_star_context",
+        "name_zh": "自动发现 shooting_star_context",
+        "observed_at": "bar_close",
+        "parameters": {
+          "max_lower_shadow_range": 0.1,
+          "min_upper_shadow_body": 1.5
+        },
+        "version": "g_20260809_01.0016",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 5486,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_shooting_star_context",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:fa41a11f935b4aced0a2a0b894ab96931722cf638923ac65d192ec6fb540fe41",
+      "signals": 9704,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0016"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "gt": [
+                {
+                  "metric": {
+                    "name": "volume_ratio",
+                    "offset": 0,
+                    "window": 20
+                  }
+                },
+                {
+                  "param": "multiple"
+                }
+              ]
+            },
+            {
+              "eq": [
+                {
+                  "metric": {
+                    "name": "is_bullish",
+                    "offset": 0
+                  }
+                },
+                true
+              ]
+            }
+          ]
+        },
+        "id": "auto_volume_surge_up",
+        "name_zh": "自动发现 volume_surge_up",
+        "observed_at": "bar_close",
+        "parameters": {
+          "multiple": 2.0
+        },
+        "version": "g_20260809_01.0017",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 25502,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_volume_surge_up",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:b632f362aabad54c9bdd8884d458acbeddc41dda9bd95b299bfcbb671691c614",
+      "signals": 36042,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0017"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "gt": [
+            {
+              "metric": {
+                "name": "sma",
+                "offset": 0,
+                "window": 10
+              }
+            },
+            {
+              "metric": {
+                "name": "sma",
+                "offset": -5,
+                "window": 10
+              }
+            }
+          ]
+        },
+        "id": "auto_sma_rising",
+        "name_zh": "自动发现 sma_rising",
+        "observed_at": "bar_close",
+        "parameters": {
+          "window": 10.0
+        },
+        "version": "g_20260809_01.0018",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 249759,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_sma_rising",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:17eb437d517ce005c5b76516050fe696c6af43f5d70c994056effba9901359e3",
+      "signals": 391154,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0018"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "lt": [
+                {
+                  "metric": {
+                    "name": "sma",
+                    "offset": 0,
+                    "window": 20
+                  }
+                },
+                {
+                  "metric": {
+                    "name": "sma",
+                    "offset": 0,
+                    "window": 60
+                  }
+                }
+              ]
+            },
+            {
+              "gte": [
+                {
+                  "metric": {
+                    "name": "sma",
+                    "offset": -1,
+                    "window": 20
+                  }
+                },
+                {
+                  "metric": {
+                    "name": "sma",
+                    "offset": -1,
+                    "window": 60
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "id": "auto_ma_cross_down",
+        "name_zh": "自动发现 ma_cross_down",
+        "observed_at": "bar_close",
+        "parameters": {
+          "fast": 20.0,
+          "slow": 60.0
+        },
+        "version": "g_20260809_01.0019",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 5943,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_ma_cross_down",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:436c7bca2812eb4e45ce9494b6b62ce6042e057efa8fbff39a80ad7bbf216b30",
+      "signals": 8201,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0019"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "gt": [
+            {
+              "metric": {
+                "name": "rsi",
+                "offset": 0,
+                "window": 14
+              }
+            },
+            {
+              "param": "threshold"
+            }
+          ]
+        },
+        "id": "auto_rsi_overbought",
+        "name_zh": "自动发现 rsi_overbought",
+        "observed_at": "bar_close",
+        "parameters": {
+          "threshold": 65.0,
+          "window": 14.0
+        },
+        "version": "g_20260809_01.0020",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 43274,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_rsi_overbought",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:d5163e829c432ddcfc6debab58fb65c3574832633c97a5c65fc934c6f251dfa2",
+      "signals": 77011,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0020"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "gt": [
+                {
+                  "metric": {
+                    "name": "sma",
+                    "offset": 0,
+                    "window": 5
+                  }
+                },
+                {
+                  "metric": {
+                    "name": "sma",
+                    "offset": 0,
+                    "window": 20
+                  }
+                }
+              ]
+            },
+            {
+              "lte": [
+                {
+                  "metric": {
+                    "name": "sma",
+                    "offset": -1,
+                    "window": 5
+                  }
+                },
+                {
+                  "metric": {
+                    "name": "sma",
+                    "offset": -1,
+                    "window": 20
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "id": "auto_ma_cross_up",
+        "name_zh": "自动发现 ma_cross_up",
+        "observed_at": "bar_close",
+        "parameters": {
+          "fast": 5.0,
+          "slow": 20.0
+        },
+        "version": "g_20260809_01.0021",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 16600,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_ma_cross_up",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:e142dd868c5f541279c0e7dd1c1f26ff883a98cd64f497d132155108930d6de8",
+      "signals": 24764,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0021"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "gt": [
+            {
+              "metric": {
+                "name": "sma",
+                "offset": 0,
+                "window": 20
+              }
+            },
+            {
+              "metric": {
+                "name": "sma",
+                "offset": -5,
+                "window": 20
+              }
+            }
+          ]
+        },
+        "id": "auto_sma_rising",
+        "name_zh": "自动发现 sma_rising",
+        "observed_at": "bar_close",
+        "parameters": {
+          "window": 20.0
+        },
+        "version": "g_20260809_01.0022",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 249179,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_sma_rising",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:2ec570c31884d2b30e28d4c80f3af20f87677b85bfb9bc2542b73621d2208254",
+      "signals": 384366,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0022"
+    },
+    {
+      "best_group": {
+        "adjusted_p_value": 4.149049143759637e-07,
+        "horizon_bars": 20,
+        "market_regime": "bearish",
+        "mean_net_excess_return": 0.01153709749175916,
+        "sample_size": 3012
+      },
+      "dedup_cluster": 3,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "lt": [
+            {
+              "metric": {
+                "name": "rsi",
+                "offset": 0,
+                "window": 7
+              }
+            },
+            {
+              "param": "threshold"
+            }
+          ]
+        },
+        "id": "auto_rsi_oversold",
+        "name_zh": "自动发现 rsi_oversold",
+        "observed_at": "bar_close",
+        "parameters": {
+          "threshold": 25.0,
+          "window": 7.0
+        },
+        "version": "g_20260809_01.0023",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 31874,
+      "passing_groups": [
+        {
+          "adjusted_p_value": 0.0,
+          "horizon_bars": 3,
+          "market_regime": "bearish",
+          "mean_net_excess_return": 0.006322728805460861,
+          "sample_size": 3468
+        },
+        {
+          "adjusted_p_value": 0.0,
+          "horizon_bars": 5,
+          "market_regime": "bearish",
+          "mean_net_excess_return": 0.010723653048359792,
+          "sample_size": 3368
+        },
+        {
+          "adjusted_p_value": 1.0204405331184234e-06,
+          "horizon_bars": 10,
+          "market_regime": "bearish",
+          "mean_net_excess_return": 0.008063583734515403,
+          "sample_size": 3199
+        },
+        {
+          "adjusted_p_value": 4.149049143759637e-07,
+          "horizon_bars": 20,
+          "market_regime": "bearish",
+          "mean_net_excess_return": 0.01153709749175916,
+          "sample_size": 3012
+        }
+      ],
+      "rejection_reason": null,
+      "rule_id": "auto_rsi_oversold",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:019d9e350829a346fd3c53100e8873c8e47e3de2ca3bdf8b6c61da907554d2b1",
+      "signals": 58932,
+      "status": "passed_screen",
+      "stress_survived": true,
+      "version": "g_20260809_01.0023"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "gt": [
+            {
+              "metric": {
+                "name": "roc",
+                "offset": 0,
+                "window": 10
+              }
+            },
+            {
+              "param": "threshold"
+            }
+          ]
+        },
+        "id": "auto_roc_positive",
+        "name_zh": "自动发现 roc_positive",
+        "observed_at": "bar_close",
+        "parameters": {
+          "threshold": 0.03,
+          "window": 10.0
+        },
+        "version": "g_20260809_01.0024",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 148083,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_roc_positive",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:6aa87e59b77232d4cb79d07392c37ba2f13a6904fff56bfdb767b62546b86db2",
+      "signals": 252964,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0024"
+    },
+    {
+      "best_group": {
+        "adjusted_p_value": 6.673982086718397e-05,
+        "horizon_bars": 5,
+        "market_regime": "bearish",
+        "mean_net_excess_return": 0.011891584275761174,
+        "sample_size": 541
+      },
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "lt": [
+            {
+              "metric": {
+                "name": "rsi",
+                "offset": 0,
+                "window": 21
+              }
+            },
+            {
+              "param": "threshold"
+            }
+          ]
+        },
+        "id": "auto_rsi_oversold",
+        "name_zh": "自动发现 rsi_oversold",
+        "observed_at": "bar_close",
+        "parameters": {
+          "threshold": 30.0,
+          "window": 21.0
+        },
+        "version": "g_20260809_01.0025",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 4776,
+      "passing_groups": [
+        {
+          "adjusted_p_value": 6.673982086718397e-05,
+          "horizon_bars": 5,
+          "market_regime": "bearish",
+          "mean_net_excess_return": 0.011891584275761174,
+          "sample_size": 541
+        }
+      ],
+      "rejection_reason": "insufficient_multiple_horizons",
+      "rule_id": "auto_rsi_oversold",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:538a1385f4c1bef1692d273d4b046f2594e663ab2a61d4ff0143e6c142a9bedd",
+      "signals": 15880,
+      "status": "rejected",
+      "stress_survived": true,
+      "version": "g_20260809_01.0025"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "gt": [
+            {
+              "metric": {
+                "name": "rsi",
+                "offset": 0,
+                "window": 14
+              }
+            },
+            {
+              "param": "threshold"
+            }
+          ]
+        },
+        "id": "auto_rsi_overbought",
+        "name_zh": "自动发现 rsi_overbought",
+        "observed_at": "bar_close",
+        "parameters": {
+          "threshold": 70.0,
+          "window": 14.0
+        },
+        "version": "g_20260809_01.0026",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 20259,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_rsi_overbought",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:e2ce0cac5b9c22d25c826733c2050342ac80221478f472a7069d72581ceae64b",
+      "signals": 39143,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0026"
+    },
+    {
+      "best_group": {
+        "adjusted_p_value": 0.0,
+        "horizon_bars": 5,
+        "market_regime": "bearish",
+        "mean_net_excess_return": 0.010750051438995826,
+        "sample_size": 1961
+      },
+      "dedup_cluster": 6,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "lt": [
+            {
+              "metric": {
+                "name": "rsi",
+                "offset": 0,
+                "window": 14
+              }
+            },
+            {
+              "param": "threshold"
+            }
+          ]
+        },
+        "id": "auto_rsi_oversold",
+        "name_zh": "自动发现 rsi_oversold",
+        "observed_at": "bar_close",
+        "parameters": {
+          "threshold": 30.0,
+          "window": 14.0
+        },
+        "version": "g_20260809_01.0027",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 16598,
+      "passing_groups": [
+        {
+          "adjusted_p_value": 6.731457496674634e-14,
+          "horizon_bars": 3,
+          "market_regime": "bearish",
+          "mean_net_excess_return": 0.0071512515758517855,
+          "sample_size": 2060
+        },
+        {
+          "adjusted_p_value": 0.0,
+          "horizon_bars": 5,
+          "market_regime": "bearish",
+          "mean_net_excess_return": 0.010750051438995826,
+          "sample_size": 1961
+        }
+      ],
+      "rejection_reason": null,
+      "rule_id": "auto_rsi_oversold",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:b9c2e4b16d594c46ce5915eb18387700a895ef25b46193551f8f9f230d15ce2a",
+      "signals": 37148,
+      "status": "passed_screen",
+      "stress_survived": true,
+      "version": "g_20260809_01.0027"
+    },
+    {
+      "best_group": {
+        "adjusted_p_value": 0.00014255504204838427,
+        "horizon_bars": 5,
+        "market_regime": "bearish",
+        "mean_net_excess_return": 0.00910085445962581,
+        "sample_size": 769
+      },
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "lt": [
+                {
+                  "metric": {
+                    "name": "sma",
+                    "offset": 0,
+                    "window": 5
+                  }
+                },
+                {
+                  "metric": {
+                    "name": "sma",
+                    "offset": 0,
+                    "window": 20
+                  }
+                }
+              ]
+            },
+            {
+              "gte": [
+                {
+                  "metric": {
+                    "name": "sma",
+                    "offset": -1,
+                    "window": 5
+                  }
+                },
+                {
+                  "metric": {
+                    "name": "sma",
+                    "offset": -1,
+                    "window": 20
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "id": "auto_ma_cross_down",
+        "name_zh": "自动发现 ma_cross_down",
+        "observed_at": "bar_close",
+        "parameters": {
+          "fast": 5.0,
+          "slow": 20.0
+        },
+        "version": "g_20260809_01.0028",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 16627,
+      "passing_groups": [
+        {
+          "adjusted_p_value": 0.00014255504204838427,
+          "horizon_bars": 5,
+          "market_regime": "bearish",
+          "mean_net_excess_return": 0.00910085445962581,
+          "sample_size": 769
+        }
+      ],
+      "rejection_reason": "insufficient_multiple_horizons",
+      "rule_id": "auto_ma_cross_down",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:97081368da248d317270e03cf24ab4f797fc0b71489d59ead9a3d243e4ccbaa7",
+      "signals": 24944,
+      "status": "rejected",
+      "stress_survived": true,
+      "version": "g_20260809_01.0028"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "gt": [
+                {
+                  "metric": {
+                    "name": "sma",
+                    "offset": 0,
+                    "window": 10
+                  }
+                },
+                {
+                  "metric": {
+                    "name": "sma",
+                    "offset": 0,
+                    "window": 20
+                  }
+                }
+              ]
+            },
+            {
+              "lte": [
+                {
+                  "metric": {
+                    "name": "sma",
+                    "offset": -1,
+                    "window": 10
+                  }
+                },
+                {
+                  "metric": {
+                    "name": "sma",
+                    "offset": -1,
+                    "window": 20
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "id": "auto_ma_cross_up",
+        "name_zh": "自动发现 ma_cross_up",
+        "observed_at": "bar_close",
+        "parameters": {
+          "fast": 10.0,
+          "slow": 20.0
+        },
+        "version": "g_20260809_01.0029",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 14338,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_ma_cross_up",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:f092afdc790895bd838440433b3b90450b84fa39aab2d255d3c4f8df326fc3d6",
+      "signals": 21827,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0029"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "gt": [
+                {
+                  "metric": {
+                    "name": "close",
+                    "offset": 0
+                  }
+                },
+                {
+                  "metric": {
+                    "name": "max_high",
+                    "offset": -1,
+                    "window": 20
+                  }
+                }
+              ]
+            },
+            {
+              "gt": [
+                {
+                  "metric": {
+                    "name": "volume_ratio",
+                    "offset": 0,
+                    "window": 20
+                  }
+                },
+                {
+                  "param": "multiple"
+                }
+              ]
+            },
+            {
+              "eq": [
+                {
+                  "metric": {
+                    "name": "is_bullish",
+                    "offset": 0
+                  }
+                },
+                true
+              ]
+            }
+          ]
+        },
+        "id": "auto_combo_breakout_volume",
+        "name_zh": "自动发现 combo_breakout_volume",
+        "observed_at": "bar_close",
+        "parameters": {
+          "breakout_window": 20.0,
+          "multiple": 2.0
+        },
+        "version": "g_20260809_01.0030",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 11015,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_combo_breakout_volume",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:fc15c713a88a1b5d02f402e96f28a57197d8018a1137734e74c8b1f965fa2809",
+      "signals": 16743,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0030"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "gt": [
+            {
+              "metric": {
+                "name": "close",
+                "offset": 0
+              }
+            },
+            {
+              "metric": {
+                "name": "max_high",
+                "offset": -1,
+                "window": 20
+              }
+            }
+          ]
+        },
+        "id": "auto_breakout_high",
+        "name_zh": "自动发现 breakout_high",
+        "observed_at": "bar_close",
+        "parameters": {
+          "window": 20.0
+        },
+        "version": "g_20260809_01.0031",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 23974,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_breakout_high",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:977d1d36c87e68f70a1750fcba12e59c2842cf6e819c6edc770d217569e69eeb",
+      "signals": 39479,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0031"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "gte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "lower_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "body",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "min_lower_shadow_body"
+                }
+              ]
+            },
+            {
+              "lte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "upper_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "range",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "max_upper_shadow_range"
+                }
+              ]
+            },
+            {
+              "context": {
+                "min_count": 3,
+                "name": "lower_close_count",
+                "window": 5
+              }
+            }
+          ]
+        },
+        "id": "auto_hammer_context",
+        "name_zh": "自动发现 hammer_context",
+        "observed_at": "bar_close",
+        "parameters": {
+          "max_upper_shadow_range": 0.2,
+          "min_lower_shadow_body": 2.5
+        },
+        "version": "g_20260809_01.0032",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 6354,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_hammer_context",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:c6df0c20204c85ca4c082e77bd99558bc6cb459708af4ca7c63940ea5aa8e204",
+      "signals": 10422,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0032"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "gte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "lower_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "body",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "min_lower_shadow_body"
+                }
+              ]
+            },
+            {
+              "lte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "upper_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "range",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "max_upper_shadow_range"
+                }
+              ]
+            },
+            {
+              "lt": [
+                {
+                  "metric": {
+                    "name": "close",
+                    "offset": 0
+                  }
+                },
+                {
+                  "metric": {
+                    "name": "sma",
+                    "offset": 0,
+                    "window": 20
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "id": "auto_combo_hammer_trend",
+        "name_zh": "自动发现 combo_hammer_trend",
+        "observed_at": "bar_close",
+        "parameters": {
+          "ma_window": 20.0,
+          "max_upper_shadow_range": 0.2,
+          "min_lower_shadow_body": 1.5
+        },
+        "version": "g_20260809_01.0033",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 20107,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_combo_hammer_trend",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:61586958b0b6100145fe732022aecc10fdb8dc1a5f2c875135f962caf645c59f",
+      "signals": 31200,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0033"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "lt": [
+            {
+              "metric": {
+                "name": "sma",
+                "offset": 0,
+                "window": 60
+              }
+            },
+            {
+              "metric": {
+                "name": "sma",
+                "offset": -5,
+                "window": 60
+              }
+            }
+          ]
+        },
+        "id": "auto_sma_falling",
+        "name_zh": "自动发现 sma_falling",
+        "observed_at": "bar_close",
+        "parameters": {
+          "window": 60.0
+        },
+        "version": "g_20260809_01.0034",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 250347,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_sma_falling",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:cfb59cf7bef44ae4e373ec5850a1fde8430e77601d9d7e61e0323d942dd5874e",
+      "signals": 424557,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0034"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "gte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "upper_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "body",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "min_upper_shadow_body"
+                }
+              ]
+            },
+            {
+              "lte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "lower_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "range",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "max_lower_shadow_range"
+                }
+              ]
+            }
+          ]
+        },
+        "id": "auto_shooting_star",
+        "name_zh": "自动发现 shooting_star",
+        "observed_at": "bar_close",
+        "parameters": {
+          "max_lower_shadow_range": 0.1,
+          "min_upper_shadow_body": 1.5
+        },
+        "version": "g_20260809_01.0035",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 21734,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_shooting_star",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:0b36291a064a8c0ff0e1b34475385178de64fc4fd2ac751dd49858df088f9ea7",
+      "signals": 34447,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0035"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "gt": [
+            {
+              "metric": {
+                "name": "rsi",
+                "offset": 0,
+                "window": 21
+              }
+            },
+            {
+              "param": "threshold"
+            }
+          ]
+        },
+        "id": "auto_rsi_overbought",
+        "name_zh": "自动发现 rsi_overbought",
+        "observed_at": "bar_close",
+        "parameters": {
+          "threshold": 70.0,
+          "window": 21.0
+        },
+        "version": "g_20260809_01.0036",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 10316,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_rsi_overbought",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:0ce2839a9b3c60416faa9b40656569313e7fff678b35924da4b63dab5930fd1c",
+      "signals": 22232,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0036"
+    },
+    {
+      "best_group": {
+        "adjusted_p_value": 1.372590604085324e-05,
+        "horizon_bars": 5,
+        "market_regime": "bearish",
+        "mean_net_excess_return": 0.010551799104960242,
+        "sample_size": 624
+      },
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "lt": [
+                {
+                  "metric": {
+                    "name": "sma",
+                    "offset": 0,
+                    "window": 5
+                  }
+                },
+                {
+                  "metric": {
+                    "name": "sma",
+                    "offset": 0,
+                    "window": 60
+                  }
+                }
+              ]
+            },
+            {
+              "gte": [
+                {
+                  "metric": {
+                    "name": "sma",
+                    "offset": -1,
+                    "window": 5
+                  }
+                },
+                {
+                  "metric": {
+                    "name": "sma",
+                    "offset": -1,
+                    "window": 60
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "id": "auto_ma_cross_down",
+        "name_zh": "自动发现 ma_cross_down",
+        "observed_at": "bar_close",
+        "parameters": {
+          "fast": 5.0,
+          "slow": 60.0
+        },
+        "version": "g_20260809_01.0037",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 9039,
+      "passing_groups": [
+        {
+          "adjusted_p_value": 1.372590604085324e-05,
+          "horizon_bars": 5,
+          "market_regime": "bearish",
+          "mean_net_excess_return": 0.010551799104960242,
+          "sample_size": 624
+        }
+      ],
+      "rejection_reason": "insufficient_multiple_horizons",
+      "rule_id": "auto_ma_cross_down",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:e45e70063929f2b1d8404a6ef871d363f0124924645a9ee7f1302bf31430b9f1",
+      "signals": 12871,
+      "status": "rejected",
+      "stress_survived": true,
+      "version": "g_20260809_01.0037"
+    },
+    {
+      "best_group": {
+        "adjusted_p_value": 1.571086897062891e-07,
+        "horizon_bars": 20,
+        "market_regime": "bearish",
+        "mean_net_excess_return": 0.007480921163020862,
+        "sample_size": 9362
+      },
+      "dedup_cluster": 7,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "lt": [
+            {
+              "metric": {
+                "name": "roc",
+                "offset": 0,
+                "window": 10
+              }
+            },
+            {
+              "param": "threshold"
+            }
+          ]
+        },
+        "id": "auto_roc_negative",
+        "name_zh": "自动发现 roc_negative",
+        "observed_at": "bar_close",
+        "parameters": {
+          "threshold": -0.05,
+          "window": 10.0
+        },
+        "version": "g_20260809_01.0038",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 107811,
+      "passing_groups": [
+        {
+          "adjusted_p_value": 0.0,
+          "horizon_bars": 5,
+          "market_regime": "bearish",
+          "mean_net_excess_return": 0.005438705768169203,
+          "sample_size": 10137
+        },
+        {
+          "adjusted_p_value": 1.571086897062891e-07,
+          "horizon_bars": 20,
+          "market_regime": "bearish",
+          "mean_net_excess_return": 0.007480921163020862,
+          "sample_size": 9362
+        }
+      ],
+      "rejection_reason": null,
+      "rule_id": "auto_roc_negative",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:42aeee45a1063fb02d527f6afd609f57b78e1eacc7b390782fe78fdc567f3258",
+      "signals": 183329,
+      "status": "passed_screen",
+      "stress_survived": true,
+      "version": "g_20260809_01.0038"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "gt": [
+                {
+                  "metric": {
+                    "name": "volume_ratio",
+                    "offset": 0,
+                    "window": 20
+                  }
+                },
+                {
+                  "param": "multiple"
+                }
+              ]
+            },
+            {
+              "eq": [
+                {
+                  "metric": {
+                    "name": "is_bullish",
+                    "offset": 0
+                  }
+                },
+                true
+              ]
+            }
+          ]
+        },
+        "id": "auto_volume_surge_up",
+        "name_zh": "自动发现 volume_surge_up",
+        "observed_at": "bar_close",
+        "parameters": {
+          "multiple": 1.5
+        },
+        "version": "g_20260809_01.0039",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 48284,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_volume_surge_up",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:7871e0c5ded6952796a5536ffd0bfa592d9c95646c92f42fa60a460e98bd2b3b",
+      "signals": 75660,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0039"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "lt": [
+            {
+              "metric": {
+                "name": "rsi",
+                "offset": 0,
+                "window": 21
+              }
+            },
+            {
+              "param": "threshold"
+            }
+          ]
+        },
+        "id": "auto_rsi_oversold",
+        "name_zh": "自动发现 rsi_oversold",
+        "observed_at": "bar_close",
+        "parameters": {
+          "threshold": 25.0,
+          "window": 21.0
+        },
+        "version": "g_20260809_01.0040",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 845,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_rsi_oversold",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:35e6ae0e617ab273e150b6fdeed522d685e3996a11db26664cbb6c5add658443",
+      "signals": 4735,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0040"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "lt": [
+            {
+              "metric": {
+                "name": "close",
+                "offset": 0
+              }
+            },
+            {
+              "metric": {
+                "name": "sma",
+                "offset": 0,
+                "window": 60
+              }
+            }
+          ]
+        },
+        "id": "auto_price_below_sma",
+        "name_zh": "自动发现 price_below_sma",
+        "observed_at": "bar_close",
+        "parameters": {
+          "window": 60.0
+        },
+        "version": "g_20260809_01.0041",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 268168,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_price_below_sma",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:133f835dd4a58356a900b9a31982f0b7a30ddf4e0130d49cfd1fde397c55d4b4",
+      "signals": 431931,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0041"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "gt": [
+                {
+                  "metric": {
+                    "name": "close",
+                    "offset": 0
+                  }
+                },
+                {
+                  "metric": {
+                    "name": "max_high",
+                    "offset": -1,
+                    "window": 60
+                  }
+                }
+              ]
+            },
+            {
+              "gt": [
+                {
+                  "metric": {
+                    "name": "volume_ratio",
+                    "offset": 0,
+                    "window": 20
+                  }
+                },
+                {
+                  "param": "multiple"
+                }
+              ]
+            },
+            {
+              "eq": [
+                {
+                  "metric": {
+                    "name": "is_bullish",
+                    "offset": 0
+                  }
+                },
+                true
+              ]
+            }
+          ]
+        },
+        "id": "auto_combo_breakout_volume",
+        "name_zh": "自动发现 combo_breakout_volume",
+        "observed_at": "bar_close",
+        "parameters": {
+          "breakout_window": 60.0,
+          "multiple": 2.0
+        },
+        "version": "g_20260809_01.0042",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 5454,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_combo_breakout_volume",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:60fc90ff4d92f98114126c7bacaade91c8089e1914dd425db451a8464fd5f43d",
+      "signals": 7739,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0042"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "gte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "upper_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "body",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "min_upper_shadow_body"
+                }
+              ]
+            },
+            {
+              "lte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "lower_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "range",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "max_lower_shadow_range"
+                }
+              ]
+            }
+          ]
+        },
+        "id": "auto_shooting_star",
+        "name_zh": "自动发现 shooting_star",
+        "observed_at": "bar_close",
+        "parameters": {
+          "max_lower_shadow_range": 0.2,
+          "min_upper_shadow_body": 2.0
+        },
+        "version": "g_20260809_01.0043",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 35067,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_shooting_star",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:4710f2cb8c7143818640e638e4d03a34dccc1f666da963df70aa61a2890988c4",
+      "signals": 54743,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0043"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "eq": [
+                {
+                  "metric": {
+                    "name": "is_bullish",
+                    "offset": 0
+                  }
+                },
+                true
+              ]
+            },
+            {
+              "eq": [
+                {
+                  "metric": {
+                    "name": "is_bearish",
+                    "offset": -1
+                  }
+                },
+                true
+              ]
+            },
+            {
+              "context": {
+                "min_count": 3,
+                "name": "lower_close_count",
+                "window": 5
+              }
+            }
+          ]
+        },
+        "id": "auto_two_candle_reversal_context_bullish",
+        "name_zh": "自动发现 two_candle_reversal_context_bullish",
+        "observed_at": "bar_close",
+        "parameters": {},
+        "version": "g_20260809_01.0044",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 52030,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_two_candle_reversal_context_bullish",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:5e2ea6528302a17b8e4f93604ee458b92ef58586729cd40c20bbe4f5b9e5cf0b",
+      "signals": 82303,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0044"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "gt": [
+            {
+              "metric": {
+                "name": "rsi",
+                "offset": 0,
+                "window": 14
+              }
+            },
+            {
+              "param": "threshold"
+            }
+          ]
+        },
+        "id": "auto_rsi_overbought",
+        "name_zh": "自动发现 rsi_overbought",
+        "observed_at": "bar_close",
+        "parameters": {
+          "threshold": 75.0,
+          "window": 14.0
+        },
+        "version": "g_20260809_01.0045",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 8705,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_rsi_overbought",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:c6ac5e03fbcb7cf0f0850e851080505b906a2291f673994b4ee297699d79b28c",
+      "signals": 18208,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0045"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "gte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "upper_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "body",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "min_upper_shadow_body"
+                }
+              ]
+            },
+            {
+              "lte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "lower_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "range",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "max_lower_shadow_range"
+                }
+              ]
+            },
+            {
+              "context": {
+                "min_count": 3,
+                "name": "higher_close_count",
+                "window": 5
+              }
+            }
+          ]
+        },
+        "id": "auto_shooting_star_context",
+        "name_zh": "自动发现 shooting_star_context",
+        "observed_at": "bar_close",
+        "parameters": {
+          "max_lower_shadow_range": 0.2,
+          "min_upper_shadow_body": 2.0
+        },
+        "version": "g_20260809_01.0046",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 9189,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_shooting_star_context",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:a3f69ac64e65fc03bcd472a2ecd42e5f1341aed7c1ee6149330ebd065497153b",
+      "signals": 15803,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0046"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "gte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "lower_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "body",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "min_lower_shadow_body"
+                }
+              ]
+            },
+            {
+              "lte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "upper_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "range",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "max_upper_shadow_range"
+                }
+              ]
+            },
+            {
+              "lt": [
+                {
+                  "metric": {
+                    "name": "close",
+                    "offset": 0
+                  }
+                },
+                {
+                  "metric": {
+                    "name": "sma",
+                    "offset": 0,
+                    "window": 60
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "id": "auto_combo_hammer_trend",
+        "name_zh": "自动发现 combo_hammer_trend",
+        "observed_at": "bar_close",
+        "parameters": {
+          "ma_window": 60.0,
+          "max_upper_shadow_range": 0.2,
+          "min_lower_shadow_body": 2.0
+        },
+        "version": "g_20260809_01.0047",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 15049,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_combo_hammer_trend",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:236caf726299011d3623296dcdbe93e4316d7eb5017fd5c6774c92d36783e86a",
+      "signals": 24503,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0047"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "lt": [
+                {
+                  "metric": {
+                    "name": "sma",
+                    "offset": 0,
+                    "window": 10
+                  }
+                },
+                {
+                  "metric": {
+                    "name": "sma",
+                    "offset": 0,
+                    "window": 60
+                  }
+                }
+              ]
+            },
+            {
+              "gte": [
+                {
+                  "metric": {
+                    "name": "sma",
+                    "offset": -1,
+                    "window": 10
+                  }
+                },
+                {
+                  "metric": {
+                    "name": "sma",
+                    "offset": -1,
+                    "window": 60
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "id": "auto_ma_cross_down",
+        "name_zh": "自动发现 ma_cross_down",
+        "observed_at": "bar_close",
+        "parameters": {
+          "fast": 10.0,
+          "slow": 60.0
+        },
+        "version": "g_20260809_01.0048",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 6904,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_ma_cross_down",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:15e3a500716bc167bd685bfb68463b92d67607fdc22fbb823023348a95519f52",
+      "signals": 9886,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0048"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "gte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "upper_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "body",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "min_upper_shadow_body"
+                }
+              ]
+            },
+            {
+              "lte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "lower_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "range",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "max_lower_shadow_range"
+                }
+              ]
+            }
+          ]
+        },
+        "id": "auto_shooting_star",
+        "name_zh": "自动发现 shooting_star",
+        "observed_at": "bar_close",
+        "parameters": {
+          "max_lower_shadow_range": 0.2,
+          "min_upper_shadow_body": 1.5
+        },
+        "version": "g_20260809_01.0049",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 45770,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_shooting_star",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:13c338c4ac292c3a2f088d692d50d81a4c47e64eb112d28c1e19b09db2c628ca",
+      "signals": 71937,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0049"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "gt": [
+            {
+              "metric": {
+                "name": "roc",
+                "offset": 0,
+                "window": 20
+              }
+            },
+            {
+              "param": "threshold"
+            }
+          ]
+        },
+        "id": "auto_roc_positive",
+        "name_zh": "自动发现 roc_positive",
+        "observed_at": "bar_close",
+        "parameters": {
+          "threshold": 0.03,
+          "window": 20.0
+        },
+        "version": "g_20260809_01.0050",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 176023,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_roc_positive",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:8948e2a8c117e80d378b4207779901763dc55f05d698fff8500dc9cdd45791e3",
+      "signals": 288634,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0050"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "lt": [
+            {
+              "metric": {
+                "name": "roc",
+                "offset": 0,
+                "window": 20
+              }
+            },
+            {
+              "param": "threshold"
+            }
+          ]
+        },
+        "id": "auto_roc_negative",
+        "name_zh": "自动发现 roc_negative",
+        "observed_at": "bar_close",
+        "parameters": {
+          "threshold": -0.05,
+          "window": 20.0
+        },
+        "version": "g_20260809_01.0051",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 145342,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_roc_negative",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:a4e02af06496a6664be4e605f12d616d8c67e93f87a4344da1a53abdce5f0a6a",
+      "signals": 245143,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0051"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "gte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "lower_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "body",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "min_lower_shadow_body"
+                }
+              ]
+            },
+            {
+              "lte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "upper_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "range",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "max_upper_shadow_range"
+                }
+              ]
+            }
+          ]
+        },
+        "id": "auto_hammer",
+        "name_zh": "自动发现 hammer",
+        "observed_at": "bar_close",
+        "parameters": {
+          "max_upper_shadow_range": 0.1,
+          "min_lower_shadow_body": 1.5
+        },
+        "version": "g_20260809_01.0052",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 16731,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_hammer",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:906b12c598d7ef5106894d5f15e09ff957a35448030ce6da63557b628cefbafa",
+      "signals": 28367,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0052"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "lte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "body",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "range",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "max_body_range"
+                }
+              ]
+            },
+            {
+              "context": {
+                "min_count": 3,
+                "name": "lower_close_count",
+                "window": 5
+              }
+            }
+          ]
+        },
+        "id": "auto_doji_after_decline",
+        "name_zh": "自动发现 doji_after_decline",
+        "observed_at": "bar_close",
+        "parameters": {
+          "max_body_range": 0.1
+        },
+        "version": "g_20260809_01.0053",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 14644,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_doji_after_decline",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:6c3fd06c7f860fbfc242547142733b572fb40dc02a341b07a8a75b15fffa0a75",
+      "signals": 23916,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0053"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "gt": [
+            {
+              "metric": {
+                "name": "close",
+                "offset": 0
+              }
+            },
+            {
+              "metric": {
+                "name": "max_high",
+                "offset": -1,
+                "window": 60
+              }
+            }
+          ]
+        },
+        "id": "auto_breakout_high",
+        "name_zh": "自动发现 breakout_high",
+        "observed_at": "bar_close",
+        "parameters": {
+          "window": 60.0
+        },
+        "version": "g_20260809_01.0054",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 12016,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_breakout_high",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:949a3006541e58f275ea50788d04e8bebbaf7f6406bbd8e1b7ba929385a4475a",
+      "signals": 19004,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0054"
+    },
+    {
+      "best_group": {
+        "adjusted_p_value": 5.770064919690614e-09,
+        "horizon_bars": 20,
+        "market_regime": "bearish",
+        "mean_net_excess_return": 0.011156894456704139,
+        "sample_size": 6007
+      },
+      "dedup_cluster": 4,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "lt": [
+            {
+              "metric": {
+                "name": "roc",
+                "offset": 0,
+                "window": 5
+              }
+            },
+            {
+              "param": "threshold"
+            }
+          ]
+        },
+        "id": "auto_roc_negative",
+        "name_zh": "自动发现 roc_negative",
+        "observed_at": "bar_close",
+        "parameters": {
+          "threshold": -0.05,
+          "window": 5.0
+        },
+        "version": "g_20260809_01.0055",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 70663,
+      "passing_groups": [
+        {
+          "adjusted_p_value": 0.0,
+          "horizon_bars": 3,
+          "market_regime": "bearish",
+          "mean_net_excess_return": 0.006636086429585866,
+          "sample_size": 6678
+        },
+        {
+          "adjusted_p_value": 0.0,
+          "horizon_bars": 5,
+          "market_regime": "bearish",
+          "mean_net_excess_return": 0.010393670212496337,
+          "sample_size": 6536
+        },
+        {
+          "adjusted_p_value": 2.0290259616264366e-07,
+          "horizon_bars": 10,
+          "market_regime": "bearish",
+          "mean_net_excess_return": 0.006275177210309219,
+          "sample_size": 6273
+        },
+        {
+          "adjusted_p_value": 5.770064919690614e-09,
+          "horizon_bars": 20,
+          "market_regime": "bearish",
+          "mean_net_excess_return": 0.011156894456704139,
+          "sample_size": 6007
+        }
+      ],
+      "rejection_reason": null,
+      "rule_id": "auto_roc_negative",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:3788dcf0ac8d10c07d3ddafbdeeb21980efe86ccba456c7738cba0156a2c797c",
+      "signals": 123582,
+      "status": "passed_screen",
+      "stress_survived": true,
+      "version": "g_20260809_01.0055"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "gt": [
+                {
+                  "metric": {
+                    "name": "close",
+                    "offset": 0
+                  }
+                },
+                {
+                  "metric": {
+                    "name": "max_high",
+                    "offset": -1,
+                    "window": 20
+                  }
+                }
+              ]
+            },
+            {
+              "gt": [
+                {
+                  "metric": {
+                    "name": "volume_ratio",
+                    "offset": 0,
+                    "window": 20
+                  }
+                },
+                {
+                  "param": "multiple"
+                }
+              ]
+            },
+            {
+              "eq": [
+                {
+                  "metric": {
+                    "name": "is_bullish",
+                    "offset": 0
+                  }
+                },
+                true
+              ]
+            }
+          ]
+        },
+        "id": "auto_combo_breakout_volume",
+        "name_zh": "自动发现 combo_breakout_volume",
+        "observed_at": "bar_close",
+        "parameters": {
+          "breakout_window": 20.0,
+          "multiple": 1.5
+        },
+        "version": "g_20260809_01.0056",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 16038,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_combo_breakout_volume",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:c20d4161bb082e9eb8990ad2d5c64a0521440b2682a47f2558e9ebb074f73773",
+      "signals": 25675,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0056"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "gte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "upper_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "body",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "min_upper_shadow_body"
+                }
+              ]
+            },
+            {
+              "lte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "lower_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "range",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "max_lower_shadow_range"
+                }
+              ]
+            }
+          ]
+        },
+        "id": "auto_shooting_star",
+        "name_zh": "自动发现 shooting_star",
+        "observed_at": "bar_close",
+        "parameters": {
+          "max_lower_shadow_range": 0.2,
+          "min_upper_shadow_body": 2.5
+        },
+        "version": "g_20260809_01.0057",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 27766,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_shooting_star",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:ef9d9b8385470f49eb81f0cd9e225425128035d34deb8dd4a33bc720abbc333a",
+      "signals": 43361,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0057"
+    },
+    {
+      "best_group": {
+        "adjusted_p_value": 7.162774077566307e-10,
+        "horizon_bars": 5,
+        "market_regime": "bearish",
+        "mean_net_excess_return": 0.0078050756842444335,
+        "sample_size": 2208
+      },
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "lt": [
+            {
+              "metric": {
+                "name": "rsi",
+                "offset": 0,
+                "window": 21
+              }
+            },
+            {
+              "param": "threshold"
+            }
+          ]
+        },
+        "id": "auto_rsi_oversold",
+        "name_zh": "自动发现 rsi_oversold",
+        "observed_at": "bar_close",
+        "parameters": {
+          "threshold": 35.0,
+          "window": 21.0
+        },
+        "version": "g_20260809_01.0058",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 19872,
+      "passing_groups": [
+        {
+          "adjusted_p_value": 7.162774077566307e-10,
+          "horizon_bars": 5,
+          "market_regime": "bearish",
+          "mean_net_excess_return": 0.0078050756842444335,
+          "sample_size": 2208
+        }
+      ],
+      "rejection_reason": "insufficient_multiple_horizons",
+      "rule_id": "auto_rsi_oversold",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:34e1bcc31f41631b89175aee8677b628d9e42ba41c4834662c547ef234d6efbb",
+      "signals": 46787,
+      "status": "rejected",
+      "stress_survived": true,
+      "version": "g_20260809_01.0058"
+    },
+    {
+      "best_group": {
+        "adjusted_p_value": 0.0,
+        "horizon_bars": 5,
+        "market_regime": "bearish",
+        "mean_net_excess_return": 0.011822187823113015,
+        "sample_size": 1601
+      },
+      "dedup_cluster": 2,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "lt": [
+            {
+              "metric": {
+                "name": "close",
+                "offset": 0
+              }
+            },
+            {
+              "metric": {
+                "name": "min_low",
+                "offset": -1,
+                "window": 60
+              }
+            }
+          ]
+        },
+        "id": "auto_breakout_low",
+        "name_zh": "自动发现 breakout_low",
+        "observed_at": "bar_close",
+        "parameters": {
+          "window": 60.0
+        },
+        "version": "g_20260809_01.0059",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 14445,
+      "passing_groups": [
+        {
+          "adjusted_p_value": 8.694535435765386e-09,
+          "horizon_bars": 3,
+          "market_regime": "bearish",
+          "mean_net_excess_return": 0.005721727576826075,
+          "sample_size": 1668
+        },
+        {
+          "adjusted_p_value": 0.0,
+          "horizon_bars": 5,
+          "market_regime": "bearish",
+          "mean_net_excess_return": 0.011822187823113015,
+          "sample_size": 1601
+        }
+      ],
+      "rejection_reason": null,
+      "rule_id": "auto_breakout_low",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:ac39db4116ef2e9a0bd1435d1cc1e2d55167b5399c3d5acd12adc9c8a185a0ff",
+      "signals": 23647,
+      "status": "passed_screen",
+      "stress_survived": true,
+      "version": "g_20260809_01.0059"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "lt": [
+            {
+              "metric": {
+                "name": "sma",
+                "offset": 0,
+                "window": 10
+              }
+            },
+            {
+              "metric": {
+                "name": "sma",
+                "offset": -5,
+                "window": 10
+              }
+            }
+          ]
+        },
+        "id": "auto_sma_falling",
+        "name_zh": "自动发现 sma_falling",
+        "observed_at": "bar_close",
+        "parameters": {
+          "window": 10.0
+        },
+        "version": "g_20260809_01.0060",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 258328,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_sma_falling",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:5d7d399a6d8175eaf17b1429bca729fb025a385de0f2ce7d0bc4a9eff756d165",
+      "signals": 407199,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0060"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "gte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "upper_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "body",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "min_upper_shadow_body"
+                }
+              ]
+            },
+            {
+              "lte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "lower_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "range",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "max_lower_shadow_range"
+                }
+              ]
+            }
+          ]
+        },
+        "id": "auto_shooting_star",
+        "name_zh": "自动发现 shooting_star",
+        "observed_at": "bar_close",
+        "parameters": {
+          "max_lower_shadow_range": 0.1,
+          "min_upper_shadow_body": 2.0
+        },
+        "version": "g_20260809_01.0061",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 16290,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_shooting_star",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:1067e112670d81ea7f3c91ecadb2ba09d4ddf00554ad8c635bfff8ce9f1a6060",
+      "signals": 25576,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0061"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "gt": [
+            {
+              "metric": {
+                "name": "close",
+                "offset": 0
+              }
+            },
+            {
+              "metric": {
+                "name": "sma",
+                "offset": 0,
+                "window": 20
+              }
+            }
+          ]
+        },
+        "id": "auto_price_above_sma",
+        "name_zh": "自动发现 price_above_sma",
+        "observed_at": "bar_close",
+        "parameters": {
+          "window": 20.0
+        },
+        "version": "g_20260809_01.0062",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 241711,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_price_above_sma",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:3dfc9ee2647f098367614e6e82fbea4dc0a7c26f249af11f7ec816c3ae3fd0ae",
+      "signals": 383167,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0062"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "gte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "lower_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "body",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "min_lower_shadow_body"
+                }
+              ]
+            },
+            {
+              "lte": [
+                {
+                  "safe_div": [
+                    {
+                      "metric": {
+                        "name": "upper_shadow",
+                        "offset": 0
+                      }
+                    },
+                    {
+                      "max": [
+                        {
+                          "metric": {
+                            "name": "range",
+                            "offset": 0
+                          }
+                        },
+                        0.01
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "param": "max_upper_shadow_range"
+                }
+              ]
+            },
+            {
+              "context": {
+                "min_count": 3,
+                "name": "lower_close_count",
+                "window": 5
+              }
+            }
+          ]
+        },
+        "id": "auto_hammer_context",
+        "name_zh": "自动发现 hammer_context",
+        "observed_at": "bar_close",
+        "parameters": {
+          "max_upper_shadow_range": 0.1,
+          "min_lower_shadow_body": 2.5
+        },
+        "version": "g_20260809_01.0063",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 2737,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_hammer_context",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:0d49ce7eefd9c812f4cd790914e446397ba7a1d9216bea0d3d69172380f4b345",
+      "signals": 4756,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0063"
+    },
+    {
+      "best_group": null,
+      "dedup_cluster": null,
+      "definition": {
+        "executable_from": "next_bar_open",
+        "expression": {
+          "all": [
+            {
+              "gt": [
+                {
+                  "metric": {
+                    "name": "volume_ratio",
+                    "offset": 0,
+                    "window": 20
+                  }
+                },
+                {
+                  "param": "multiple"
+                }
+              ]
+            },
+            {
+              "eq": [
+                {
+                  "metric": {
+                    "name": "is_bullish",
+                    "offset": 0
+                  }
+                },
+                true
+              ]
+            }
+          ]
+        },
+        "id": "auto_volume_surge_up",
+        "name_zh": "自动发现 volume_surge_up",
+        "observed_at": "bar_close",
+        "parameters": {
+          "multiple": 3.0
+        },
+        "version": "g_20260809_01.0064",
+        "warmup_bars": 0
+      },
+      "outcomes_oos": 11204,
+      "passing_groups": [],
+      "rejection_reason": "no_passing_group",
+      "rule_id": "auto_volume_surge_up",
+      "search_id": "search_30fc855615c0e7d8bd526d0e",
+      "semantic_hash": "sha256:40e5a22640967f11d29d9da627a34f1d0fce4f24718c73d836c7441cedc85066",
+      "signals": 11310,
+      "status": "rejected",
+      "stress_survived": false,
+      "version": "g_20260809_01.0064"
+    }
+  ],
+  "candidates_total": 64,
+  "disclaimer": "搜索筛选仅用于研究证据评估，不构成投资建议、交易信号或规则发布审批。",
+  "loaded_symbols": 300,
+  "passed_screen": 8,
+  "schema_version": "rule-search-round/v1",
+  "screen_criteria": {
+    "cost_stress_multipliers": [
+      2.0,
+      3.0
+    ],
+    "dedup_jaccard": 0.85,
+    "require_both_regimes": false,
+    "require_multiple_horizons": 2
+  },
+  "search_id": "search_30fc855615c0e7d8bd526d0e",
+  "skipped_symbols": 0
+}
