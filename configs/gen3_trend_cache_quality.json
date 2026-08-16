@@ -1,0 +1,10 @@
+{
+  "source_id": "trend_cache_adjusted",
+  "root": "H:\\股票模型\\Model\\data\\trend_cache",
+  "date_column": "date",
+  "open_column": "open",
+  "high_column": "high",
+  "low_column": "low",
+  "close_column": "close",
+  "volume_column": "volume"
+}

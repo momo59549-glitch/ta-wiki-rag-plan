@@ -23,6 +23,16 @@ data/runtime/
 data/batch_checkpoints/*.log
 data/universes/*.log
 data/rule_search/
+data/gen3_quality_runs/
+data/gen3_market_content_runs/
+data/gen3_mainboard_runs/
+data/gen3_tradability_probe/
+data/gen3_tradability_audits/
+data/vectorbt_spikes/
+data/vectorbt_screens/
+data/qlib_spikes/
+data/survivorship_gap_overlays/
+mlruns/
 
 # Rebuildable candidate-comparison panels/staging; retain small audit records.
 data/candidate_comparisons/*/oos_panel*/
